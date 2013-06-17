@@ -14,7 +14,7 @@
 - Git (duh)
 
 # Installation
-To install you can either copy the files you√'d like to use to their destinations (or symlink). Or you may use the install.sh script.
+To install you can either copy the files you'd like to use to their destinations (or symlink). Or you may use the install.sh script.
 
 The install.sh script symlinks all files from the dotfiles directory to the correct destinations which means that they'll be under version control should you wish to make any changes.
 
