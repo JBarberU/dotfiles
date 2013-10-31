@@ -40,6 +40,12 @@ myScratchpads = let
     , NS "Mail" 
     "chromium --app=https://mail.google.com"
     (appName =? "mail.google.com") full 
+    , NS "Calendar" 
+    "chromium --app=https://calendar.google.com"
+    (appName =? "calendar.google.com") full 
+    , NS "Notes" 
+    "chromium --app=https://keep.google.com"
+    (appName =? "keep.google.com") full 
     , NS "BottomTerminal"
     "gnome-terminal --disable-factory --name BottomTerminal"
     (appName =? "BottomTerminal") bottom 
@@ -73,11 +79,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((shiftMask .|. modm, xK_p), spawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~shots/'")
 
 	-- Spawn chromium
-	, ((modm, xK_c), namedScratchpadAction myScratchpads "Chromium")
+	, ((modm, xK_c), namedScratchpadAction myScratchpads "Calendar")
+	, ((modm, xK_n), namedScratchpadAction myScratchpads "Notes")
 	, ((modm, xK_m), namedScratchpadAction myScratchpads "Mail")
+	, ((modm, xK_g), namedScratchpadAction myScratchpads "Chromium")
 
 	-- Spawn gnome-control-center
-	, ((modm, xK_g), spawn "gnome-control-center")
+	, ((modm .|. shiftMask, xK_g), spawn "gnome-control-center")
 	
 	-- Terminate application
 	, ((modm .|. shiftMask, xK_c     ), kill)
