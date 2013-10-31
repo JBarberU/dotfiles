@@ -24,7 +24,7 @@ myFocusedBorderColor = "purple"
 
 myFocusFollowsMouse = False
 
-myWorkspaces = ["1. vim","2. term","3. web"] ++ map show [4..9]
+myWorkspaces = map show [1..9]
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	-- Launch a terminal
