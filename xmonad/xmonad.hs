@@ -48,7 +48,7 @@ myScratchpads = let
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	-- Launch a terminal
 	[ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-	, ((modm .|. shiftMask, xK_t), namedScratchpadAction myScratchpads "BottomTerminal")
+	, ((modm, xK_t), namedScratchpadAction myScratchpads "BottomTerminal")
 
 	-- Launch dmenu (all)
     , ((modm .|. shiftMask,		xK_space ), spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\"")
@@ -101,7 +101,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm,               xK_l     ), sendMessage Expand)
 	
 	-- Push window back into tiling
-	, ((modm,               xK_t     ), withFocused $ windows . W.sink)
+	, ((modm .|. shiftMask, xK_t), withFocused $ windows . W.sink)
 
 	-- toggle the status bar gap (used with avoidStruts from Hooks.ManageDocks)
 	, ((modm , xK_b ), sendMessage ToggleStruts)
