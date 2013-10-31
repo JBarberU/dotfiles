@@ -9,7 +9,7 @@ set incsearch
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-"set expandtab "Makes vim substitute tab character with spaces"
+set expandtab "Makes vim substitute tab character with spaces"
 set smartindent
 set autoindent
 set showbreak=...
@@ -28,11 +28,12 @@ set nowb
 
 "============ Page width ============"
 " This creates an invisible colorcolumn
-" set textwidth=80
-" hi ColorColumn ctermbg=None
+set textwidth=80
+hi ColorColumn ctermbg=None
 " Text that spans over 80 characters will
 " turn red
-" hi ColorColumn ctermfg=Red
+hi ColorColumn ctermbg=Red
+hi ColorColumn ctermfg=Blue
 " execute "set colorcolumn=" . join(range(81,335), ',')
 
 "============ Auto completion ============"
