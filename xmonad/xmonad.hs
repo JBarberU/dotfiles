@@ -109,7 +109,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 		| (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
 		, (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-myLayoutHook = avoidStruts (smartBorders (tiled ||| Mirror tiled) ||| noBorders(Full))
+myLayoutHook = avoidStruts (smartBorders (tiled ||| Mirror tiled) ||| noBorders Full)
                 where
                     tiled   =   Tall nmaster delta ratio
                     nmaster =   1       -- Number of windows in the master panel
@@ -122,7 +122,7 @@ myLayout = avoidStruts (
 	noBorders (fullscreenFull Full))
 
 myStartupHook = do
-	setWMName "LG3D"
+    setWMName "LG3D"
 
 main = do
     xmproc <- spawnPipe "xmobar"
