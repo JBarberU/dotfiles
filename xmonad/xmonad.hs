@@ -11,7 +11,9 @@ import XMonad.Hooks.SetWMName
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 import System.Exit
+import XMonad.Util.NamedScratchpad
 
+myTerminal :: String
 myTerminal = "gnome-terminal"
 
 myModMask = mod4Mask -- Rebind Mod to the windows key
@@ -26,10 +28,28 @@ myFocusFollowsMouse = False
 
 myWorkspaces = map show [1..9]
 
+myScratchpads = let 
+    reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
+    full = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
+    top = customFloating $ W.RationalRect 0.025 0.05 0.95 0.45
+    bottom = customFloating $ W.RationalRect 0.2 0.7 0.60 0.3
+    in [
+    NS "Chromium" 
+    "chromium "
+    (appName =? "myChromium") full 
+    , NS "Mail" 
+    "chromium --app=https://mail.google.com"
+    (appName =? "mail.google.com") full 
+    , NS "BottomTerminal"
+    "gnome-terminal --disable-factory --name BottomTerminal"
+    (appName =? "BottomTerminal") bottom 
+                                              ]
+
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	-- Launch a terminal
 	[ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-	
+	, ((modm .|. shiftMask, xK_t), namedScratchpadAction myScratchpads "BottomTerminal")
+
 	-- Launch dmenu (all)
     , ((modm .|. shiftMask,		xK_space ), spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\"")
     , ((modm,					xK_space ), spawn "exe=`cat ~/.dmenu_favourites | dmenu -b ` && eval \"exec $exe\"")
@@ -53,7 +73,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((shiftMask .|. modm, xK_p), spawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~shots/'")
 
 	-- Spawn chromium
-	, ((modm, xK_c), spawn "chromium")
+	, ((modm, xK_c), namedScratchpadAction myScratchpads "Chromium")
+	, ((modm, xK_m), namedScratchpadAction myScratchpads "Mail")
 
 	-- Spawn gnome-control-center
 	, ((modm, xK_g), spawn "gnome-control-center")
@@ -70,9 +91,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	-- Move focus to previous
 	, ((modm .|. shiftMask,	xK_Tab   ), windows W.focusUp)
 	
-	-- Move focus to master
-	, ((modm,               xK_m     ), windows W.focusMaster  )
-
 	-- Swap the focused window and the master window
 	, ((modm,               xK_Return), windows W.swapMaster)
 
@@ -124,10 +142,14 @@ myLayout = avoidStruts (
 myStartupHook = do
     setWMName "LG3D"
 
+myManageHook = manageDocks
+            <+> manageHook defaultConfig
+            <+> namedScratchpadManageHook myScratchpads
+
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ defaultConfig {
-        manageHook = manageDocks <+> manageHook defaultConfig,
+        manageHook = myManageHook,
         layoutHook = myLayoutHook, 
       	logHook = dynamicLogWithPP xmobarPP {
 		      ppOutput = hPutStrLn xmproc,
