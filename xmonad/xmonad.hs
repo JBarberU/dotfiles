@@ -46,6 +46,9 @@ myScratchpads = let
     , NS "Notes" 
     "chromium --app=https://keep.google.com"
     (appName =? "keep.google.com") full 
+    , NS "Spotify"
+    "chromium --app=https://play.spotify.com"
+    (appName =? "play.spotify.com") full 
     , NS "BottomTerminal"
     "gnome-terminal --disable-factory --name BottomTerminal"
     (appName =? "BottomTerminal") bottom 
@@ -83,6 +86,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm, xK_n), namedScratchpadAction myScratchpads "Notes")
 	, ((modm, xK_m), namedScratchpadAction myScratchpads "Mail")
 	, ((modm, xK_g), namedScratchpadAction myScratchpads "Chromium")
+	, ((modm, xK_s), namedScratchpadAction myScratchpads "Spotify")
 
 	-- Spawn gnome-control-center
 	, ((modm .|. shiftMask, xK_g), spawn "gnome-control-center")
