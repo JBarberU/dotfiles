@@ -43,6 +43,9 @@ myScratchpads = let
     , NS "Calendar" 
     "chromium --app=https://calendar.google.com"
     (appName =? "calendar.google.com") full 
+    , NS "Trello" 
+    "chromium --app=https://trello.com"
+    (appName =? "trello.com") full 
     , NS "Notes" 
     "chromium --app=https://keep.google.com"
     (appName =? "keep.google.com") full 
@@ -83,7 +86,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 	-- Spawn chromium
 	, ((modm, xK_c), namedScratchpadAction myScratchpads "Calendar")
-	, ((modm, xK_n), namedScratchpadAction myScratchpads "Notes")
+	, ((modm, xK_n), namedScratchpadAction myScratchpads "Trello")
 	, ((modm, xK_m), namedScratchpadAction myScratchpads "Mail")
 	, ((modm, xK_g), namedScratchpadAction myScratchpads "Chromium")
 	, ((modm, xK_s), namedScratchpadAction myScratchpads "Spotify")
