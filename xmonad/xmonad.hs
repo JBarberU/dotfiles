@@ -124,7 +124,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm .|. shiftMask, xK_l), spawn "xlock")
 
 	-- Quit xmonad
-	, ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+	, ((modm .|. shiftMask, xK_q     ), io exitSuccess)
 	
 	-- Restart xmonad
 	, ((modm              , xK_q     ), restart "xmonad" True)
@@ -154,8 +154,7 @@ myLayout = avoidStruts (
 	Mirror (Tall 1 (3/100) (1/2)) |||
 	noBorders (fullscreenFull Full))
 
-myStartupHook = do
-    setWMName "LG3D"
+myStartupHook = setWMName "LG3D"
 
 myManageHook = manageDocks
             <+> manageHook defaultConfig
