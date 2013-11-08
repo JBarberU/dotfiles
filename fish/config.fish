@@ -1,0 +1,1 @@
+/home/barber/dotfiles/fish/config.fish
