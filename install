@@ -1,0 +1,141 @@
+#!/bin/bash
+
+LOCAL_PATH=$(pwd)
+
+function fix_dependency {
+    if [ -z "$1" ]; then
+        echo "Something went wrong, I can't install nothing, can I??"; 
+    else
+        SECOND=$2
+        if [ !$2 ]; then
+            SECOND=$1
+        fi
+
+        hash $1 2>/dev/null || sudo apt-get install $SECOND;
+    fi
+}
+
+function backup_if_needed {
+    if [ -f $1 ]; then
+        if [ $2 ]; then
+		    echo "Backing up old $2";
+        else
+		    echo "Backing up old file: $1";
+        fi
+
+		mv $1 $1.BACKUP
+	fi
+}
+
+function create_link {
+    if [ -n "$1$2" ]; then
+        $3 ln -s $1 $2
+    fi
+}
+
+function print_start {
+   echo "Installing [$1]";
+}
+
+function print_done {
+   echo "Done with [$1]"; 
+}
+
+function install_fish {
+    print_start fish
+    fix_dependency fish
+    backup_if_needed $HOME/.config/fish/config.fish
+	create_link $LOCAL_PATH/fish/config.fish $HOME/.config/fish/config.fish
+    print_done fish
+}
+
+function install_git {
+	echo "Installing git...";
+
+    fix_dependency git
+    backup_if_needed $HOME/.gitconfig gitconfig
+	create_link $LOCAL_PATH/git/gitconfig $HOME/.gitconfig
+}
+
+function install_vim {
+
+	echo "Installing vim...";
+
+	backup_if_needed $HOME/.vimrc vimrc
+	backup_if_needed $HOME/.vim "vim folder"
+	create_link $LOCAL_PATH/vim/vimrc $HOME/.vimrc
+	create_link $LOCAL_PATH/vim/vim $HOME/.vim
+}
+
+HELP=false
+
+LAPTOP=false
+DESKTOP=false
+
+XMONAD=false
+VIM=false
+GIT=false
+FISH=false
+
+ALL=false
+
+while getopts ldaxvgfh option
+do
+        case "${option}"
+        in
+                l) LAPTOP=true;;
+                d) DESKTOP=true;;
+                a) ALL=true;;
+				x) XMONAD=true;;
+				v) VIM=true;;
+				g) GIT=true;;
+				f) FISH=true;;
+				h) HELP=true;;
+        esac
+done
+
+if ($ALL); then
+	XMONAD=true;
+	VIM=true;
+	GIT=true;
+	FISH=true;
+fi
+
+if ($HELP); then
+	echo "Options:";
+	echo "
+	\ta - All the following will be installed (-l or -d must also be provided as it's a requisite for xmonad)\n
+	\tl - Laptop configuration of xmobar \n
+	\td - Desktop configuration of xmobar\n
+	\tx - Xmonad is installed. Has to be used together with either -l or -d.\n
+	\tg - Gitconfig is installed \n
+	\tv - Vim configuration and plugins are installed \n
+	\tf - oh-my-fish is installed, and .config/fish/config.fish is installed\n"
+else
+
+	if ($LAPTOP && $DESKTOP); then
+		echo "You can't install both the laptop and desktop version!";
+	elif ($XMONAD && !($LAPTOP) && !($DESKTOP)); then
+		echo "You must install either the laptop or desktop version!";
+	else
+		if ($XMONAD); then
+			install_xmonad_common;
+			if ($LAPTOP); then
+				install_xmonad_laptop;
+			elif ($DESKTOP); then
+				install_xmonad_desktop;
+			fi
+		fi
+		if ($VIM); then
+			install_vim;
+		fi
+		if ($GIT); then
+			install_git;
+		fi
+		if ($ZSH); then
+			install_fish;
+		fi
+	
+		echo "Done!"
+	fi
+fi
