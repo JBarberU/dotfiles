@@ -1,9 +1,12 @@
 [submodule "vim/vim/bundle/nerdtree"]
 	path = vim/vim/bundle/nerdtree
 	url = https://github.com:scrooloose/nerdtree.git
-[submodule "vim/vim/bundle/YouCompleteMe"]
-	path = vim/vim/bundle/YouCompleteMe
-	url = git@github.com:Valloric/YouCompleteMe.git
 [submodule "vim/vim/bundle/vim-easymotion"]
 	path = vim/vim/bundle/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
+[submodule "vim/vim/bundle/clang_complete"]
+	path = vim/vim/bundle/clang_complete
+	url = git@github.com:Rip-Rip/clang_complete.git
+[submodule "vim/vim/bundle/ctrlp"]
+	path = vim/vim/bundle/ctrlp
+	url = git@github.com:kien/ctrlp.vim.git
