@@ -7,7 +7,5 @@
 oh-my-zsh/cache/
 
 # Vim plugins
-vim/vim/.VimballRecord
-vim/vim/bin
-vim/vim/doc
-vim/vim/plugin
+vim/vim/
+zsh/oh-my-zsh
