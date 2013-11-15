@@ -10,3 +10,12 @@
 [submodule "vim/vim/bundle/ctrlp"]
 	path = vim/vim/bundle/ctrlp
 	url = git@github.com:kien/ctrlp.vim.git
+[submodule "vim/vim/bundle/vimproc.vim"]
+	path = vim/vim/bundle/vimproc.vim
+	url = git@github.com:Shougo/vimproc.vim.git
+[submodule "vim/vim/bundle/ghcmod-vim"]
+	path = vim/vim/bundle/ghcmod-vim
+	url = git@github.com:eagletmt/ghcmod-vim.git
+[submodule "zsh/oh-my-zsh"]
+	path = zsh/oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh.git
