@@ -34,8 +34,8 @@ myWorkspaces = map show [1..9]
 myScratchpads = let 
     reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
     full = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
-    top = customFloating $ W.RationalRect 0.025 0.05 0.95 0.45
-    bottom = customFloating $ W.RationalRect 0.2 0.7 0.60 0.3
+    top = customFloating $ W.RationalRect 0.0 0.0 1.0 0.3
+    bottom = customFloating $ W.RationalRect 0.0 0.7 1.0 1.0
     in [
     NS "Chromium" 
     "chromium "
@@ -58,12 +58,16 @@ myScratchpads = let
     , NS "BottomTerminal"
     (myNamedTerminal ++ "BottomTerminal")
     (appName =? "BottomTerminal") bottom 
+    , NS "TopTerminal"
+    (myNamedTerminal ++ "TopTerminal")
+    (appName =? "TopTerminal") top 
                                               ]
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	-- Launch a terminal
 	[ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 	, ((modm, xK_t), namedScratchpadAction myScratchpads "BottomTerminal")
+	, ((modm .|. shiftMask, xK_t), namedScratchpadAction myScratchpads "TopTerminal")
 
 	-- Launch dmenu (all)
     , ((modm .|. shiftMask,		xK_space ), spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\"")
@@ -119,7 +123,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm,               xK_l     ), sendMessage Expand)
 	
 	-- Push window back into tiling
-	, ((modm .|. shiftMask, xK_t), withFocused $ windows . W.sink)
+	--, ((modm .|. shiftMask, xK_t), withFocused $ windows . W.sink)
 
 	-- toggle the status bar gap (used with avoidStruts from Hooks.ManageDocks)
 	, ((modm , xK_b ), sendMessage ToggleStruts)
