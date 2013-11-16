@@ -14,7 +14,10 @@ import System.Exit
 import XMonad.Util.NamedScratchpad
 
 myTerminal :: String
-myTerminal = "gnome-terminal"
+myTerminal = "xterm"
+
+myNamedTerminal :: String
+myNamedTerminal = myTerminal ++ " -name "
 
 myModMask = mod4Mask -- Rebind Mod to the windows key
 
@@ -53,7 +56,7 @@ myScratchpads = let
     "skype"
     (appName =? "skype") full 
     , NS "BottomTerminal"
-    "gnome-terminal --disable-factory --name BottomTerminal"
+    (myNamedTerminal ++ "BottomTerminal")
     (appName =? "BottomTerminal") bottom 
                                               ]
 

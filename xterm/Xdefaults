@@ -1,0 +1,6 @@
+XTerm*background: black
+XTerm*foreground: white
+XTerm*font:       *-fixed-*-*-*-13-*
+XTerm*visualBell: true
+XTerm*scrollBar:  false
+
