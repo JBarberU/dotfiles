@@ -18,6 +18,8 @@ alias jl="jobs -l"
 alias cls="clear & ls"
 alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo \"Copied public key to clipboard...\""
 alias natti="sudo shutdown -h now"
+alias slay="sudo kill"
+alias murder="sudo kill"
 alias dvorak="setxkbmap \"se(svdvorak)\""
 alias se="setxkbmap se"
 
