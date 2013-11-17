@@ -17,6 +17,7 @@ alias natti="sudo shutdown -h now"
 alias dvorak="setxkbmap \"se(svdvorak)\""
 alias se="setxkbmap se"
 alias j="jump"
+alias ag="sudo apt-get"
 
 source $HOME/.aliases
 source $HOME/.paths
