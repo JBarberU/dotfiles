@@ -34,8 +34,8 @@ myWorkspaces = map show [1..9]
 myScratchpads = let 
     reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
     full = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
-    top = customFloating $ W.RationalRect 0.0 0.0 1.0 0.3
-    bottom = customFloating $ W.RationalRect 0.0 0.7 1.0 1.0
+    top = customFloating $ W.RationalRect 0.0 0.0 1.0 0.5
+    bottom = customFloating $ W.RationalRect 0.0 0.7 1.0 0.3
     in [
     NS "Chromium" 
     "chromium "
