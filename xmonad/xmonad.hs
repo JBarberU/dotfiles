@@ -14,7 +14,7 @@ import System.Exit
 import XMonad.Util.NamedScratchpad
 
 myTerminal :: String
-myTerminal = "xterm"
+myTerminal = "rxvt-unicode"
 
 myNamedTerminal :: String
 myNamedTerminal = myTerminal ++ " -name "
