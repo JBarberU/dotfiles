@@ -6,16 +6,16 @@
 	url = https://github.com/Lokaltog/vim-easymotion.git
 [submodule "vim/vim/bundle/clang_complete"]
 	path = vim/vim/bundle/clang_complete
-	url = git@github.com:Rip-Rip/clang_complete.git
+	url = https://github.com/Rip-Rip/clang_complete.git
 [submodule "vim/vim/bundle/ctrlp"]
 	path = vim/vim/bundle/ctrlp
-	url = git@github.com:kien/ctrlp.vim.git
+	url = https://github.com/kien/ctrlp.vim.git
 [submodule "vim/vim/bundle/vimproc.vim"]
 	path = vim/vim/bundle/vimproc.vim
-	url = git@github.com:Shougo/vimproc.vim.git
+	url = https://github.com/Shougo/vimproc.vim.git
 [submodule "vim/vim/bundle/ghcmod-vim"]
 	path = vim/vim/bundle/ghcmod-vim
-	url = git@github.com:eagletmt/ghcmod-vim.git
+	url = https://github.com/eagletmt/ghcmod-vim.git
 [submodule "zsh/oh-my-zsh"]
 	path = zsh/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
