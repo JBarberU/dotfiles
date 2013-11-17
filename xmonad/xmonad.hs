@@ -61,6 +61,9 @@ myScratchpads = let
     , NS "TopTerminal"
     (myNamedTerminal ++ "TopTerminal")
     (appName =? "TopTerminal") top 
+    , NS "IrssiTerminal"
+    (myNamedTerminal ++ "IrssiTerminal \"irssi\"")
+    (appName =? "IrssiTerminal") full 
                                               ]
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -68,6 +71,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	[ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 	, ((modm, xK_t), namedScratchpadAction myScratchpads "BottomTerminal")
 	, ((modm .|. shiftMask, xK_t), namedScratchpadAction myScratchpads "TopTerminal")
+	, ((modm, xK_i), namedScratchpadAction myScratchpads "IrssiTerminal")
 
 	-- Launch dmenu (all)
     , ((modm .|. shiftMask,		xK_space ), spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\"")
