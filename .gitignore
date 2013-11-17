@@ -6,6 +6,5 @@
 # 
 oh-my-zsh/cache/
 
-# Vim plugins
-vim/vim/
-zsh/oh-my-zsh
+# Irssi, only track the example file
+irssi/config
