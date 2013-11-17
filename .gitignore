@@ -8,3 +8,9 @@ oh-my-zsh/cache/
 
 # Irssi, only track the example file
 irssi/config
+
+# clang_complete binaries
+vim/vim/.VimballRecord
+vim/vim/bin/
+vim/vim/doc/
+vim/vim/plugin/
