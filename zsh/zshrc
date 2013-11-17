@@ -12,22 +12,11 @@ ZSH_THEME="gianu"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias gs="git status"
-alias gpom="git push origin master"
-alias gp="git pull origin master"
-alias jl="jobs -l"
-alias cls="clear & ls"
 alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo \"Copied public key to clipboard...\""
 alias natti="sudo shutdown -h now"
-alias slay="sudo kill"
-alias murder="sudo kill"
 alias dvorak="setxkbmap \"se(svdvorak)\""
 alias se="setxkbmap se"
-
-# Job queue
-alias qpush="echo \"cd \`pwd\` && git push\" >> ~/.doqueue && echo \"Added git push to queue...\""
-alias qlist="cat ~/.doqueue"
-alias qclear="echo \"\" > ~/.doqueue"
-alias qrun=". ~/.doqueue"
+alias j="jump"
 
 source $HOME/.aliases
 source $HOME/.paths
