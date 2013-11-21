@@ -1,12 +1,12 @@
-*background:  black
-*transparent: true
-*tintColor:   royalRed
+URxvt*background: black
+URxvt*transparent: true
+URxvt*tintColor:   royalRed
+URxvt*foreground:  white
+URxvt*scrollBar:   false
+URxvt*saveLines:   10000
+URxvt*color4:      royalBlue
+URxvt*color12:     royalBlue
+
 *font:        xft:DejaVu Sans Mono:pixelsize=16:antialias=true:hinting=true
 *boldFont:    xft:DejaVu Sans Mono:bold:pixelsize=16:antialias=true:hinting=true
-*foreground:  white
-*scrollBar:   false
-*saveLines:   10000
 
-
-*color4:      royalBlue
-*color12:     royalBlue
