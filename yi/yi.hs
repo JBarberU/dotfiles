@@ -14,6 +14,14 @@ main = yi $ defaultVimConfig {
     configCheckExternalChangesObsessively = False
 }
 
+prefIndent m = m {
+    modeIndentSettings = IndentSettings
+        {
+            expandTabs = True,
+            shiftWidth = 2,
+            tabSize = 2
+        }}
+        
 defaultSearchKeymap :: Keymap
 defaultSearchKeymap = do
     Event (KASCII c) [] <- anyEvent
