@@ -93,8 +93,8 @@ map <right> <nop>
 let mapleader=","
 nmap <silent> ,/ :nohlsearch<CR>
 
-map ,s :w<CR>
-map ,q :q<CR>
+"map ,s :w<CR>
+"map ,q :q<CR>
 
 "== w!! to sudo write =="
 cmap w!! w !sudo tee % >/dev/null
