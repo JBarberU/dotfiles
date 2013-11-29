@@ -75,9 +75,14 @@ map <right> <nop>
 let mapleader=","
 nmap <silent> ,/ :nohlsearch<CR>
 
-"map ,s :w<CR>
-"map ,q :q<CR>
+map ,s :w<CR>
+map ,q :q<CR>
+map ,e :e 
+imap öö <Esc><Esc>
 
 "== w!! to sudo write =="
-cmap w!! w !sudo tee % >/dev/null
+command! W execute ':silent w !sudo tee % >/dev/null' | edit!
+
+set statusline=%F%=\ [%Y,%{&ff}%R%M]\ [L=%04l/%04L\ (%p%%)\ c=%04v]
+set laststatus=2
 
