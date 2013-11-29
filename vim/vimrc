@@ -4,7 +4,6 @@ set hlsearch
 set showmatch
 set incsearch
 
-
 "============ Tab width ============"
 set tabstop=2
 set shiftwidth=2
@@ -26,16 +25,6 @@ set nowb
 " nmap j gj
 " nmap k gk 
 
-"============ Page width ============"
-" This creates an invisible colorcolumn
-set textwidth=80
-hi ColorColumn ctermbg=None
-" Text that spans over 80 characters will
-" turn red
-hi ColorColumn ctermbg=Red
-hi ColorColumn ctermfg=Blue
-" execute "set colorcolumn=" . join(range(81,335), ',')
-
 "============ Auto completion ============"
 set wildmenu
 set wildmode=list:longest,full
@@ -55,34 +44,27 @@ call pathogen#helptags()
 set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 filetype plugin indent on
  
-" Nerdtree
-" autocmd vimenter * NERDTree 
-let NERDTreeShowBookmarks=1
-let NERDTreeChDirMode=0
-let NERDTreeQuitOnOpen=1
-let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
-let NERDTreeKeepTreeInNewTab=1
-let g:nerdtree_tabs_open_on_gui_startup=0
-autocmd vimenter * if !argc() | NERDTree | endif
-map <C-n> :NERDTreeToggle<CR>
-
 "========== Theme ============"
 if has('unnamedplus')
 	set clipboard=unnamedplus
 else
 	set clipboard=unnamed
 endif
-"========== Theme ============"
+
 set number
 syntax enable
 set background=dark
 colorscheme delek 
 set t_Co=16
 
+"============ Page width ============"
+set textwidth=80
+hi ColorColumn ctermbg=None
+hi ColorColumn ctermfg=Red
+execute "set colorcolumn=" . join(range(81,200), ',')
+
 "========== Map ============"
-map Q <Nop>
+command Q q
 
 "== Unmap arrow keys =="
 map <up>	<nop>
