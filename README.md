@@ -5,6 +5,7 @@ downloading them with apt. If you feel uncertain, look at it and install
 manually.
 
 For more info try:
-   $ ./install -h
+
+    $ ./install -h
 
 
