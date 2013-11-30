@@ -25,20 +25,14 @@ function backup_if_needed {
     
     if [ -e $1 ]; then
         if ( $NO_BACKUP ); then
-            CMD="rm -r $1"
+            CMD="$3 rm -r $1"
         else 
-            CMD="mv $1{,.BACKUP}"
+            CMD="$3 rm $.BACKUP && $3 mv $1 $1.BACKUP"
             if [ $2 ]; then
 		            echo "Backing up old $2";
             else
 		            echo "Backing up old file: $1";
             fi
-        fi
-
-		    if [ $3 ]; then
-            sudo $CMD
-        else
-            $CMD
         fi
 	  fi
 }
@@ -57,14 +51,12 @@ function test_link {
 }
 
 function create_link {
-    CMD="ln -s"
+    CMD="ln -fsn"
     echo "Creating link from $1 to $2"
     if [ $2 ]; then
         if [ $3 ];then
-            echo "$3 $CMD $1 $2"
             $3 $CMD $1 $2
         else
-            echo "$CMD $1 $2"
             $CMD $1 $2
         fi
     fi
@@ -255,15 +247,6 @@ else
     fi
     if ($YI); then
       install_yi;
-    fi
-    if ( ! $NO_BACKUP); then
-      echo "
-There is currently an issue when symlinking folders within this script.
-You might want do a:
-
-   $ git rese --hard
-
-after the installation."
     fi
 	fi
 fi
