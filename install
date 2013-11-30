@@ -25,7 +25,7 @@ function backup_if_needed {
     
     if [ -e $1 ]; then
         if ( $NO_BACKUP ); then
-            CMD="rm $1"
+            CMD="rm -r $1"
         else 
             CMD="mv $1 $1.BACKUP"
             if [ $2 ]; then
@@ -130,16 +130,25 @@ function install_xmonad_desktop {
 
 function install_xorg {
   print_start xorg
+  backup_if_needed $HOME/.Xresources .Xresources
+  create_link $LOCAL_PATH/xorg/Xresources $HOME/.Xresources 
   print_done xorg
 }
 
 function install_irssi {
   print_start irssi
+  if [ ! -e $LOCAL_PATH/irssi/config ]; then
+    cp $LOCAL_PATH/irssi/config{.example,}
+  fi
+  backup_if_needed $HOME/.irssi .irssi
+  create_link $LOCAL_PATH/irssi $HOME/.irssi
   print_done irssi
 }
 
 function install_yi {
   print_start yi
+  backup_if_needed $HOME/.config/yi .config/yi
+  create_link $LOCAL_PATH/yi $HOME/.config/yi
   print_done yi
 }
 
@@ -153,10 +162,13 @@ XMONAD=false
 VIM=false
 GIT=false
 ZSH=false
+XORG=false
+IRSSI=false
+YI=false
 
 ALL=false
 
-while getopts ldaxvgzh! option
+while getopts ldaxvgztiyh! option
 do
   case "${option}"
   in
@@ -165,10 +177,13 @@ do
     a) ALL=true;;
 	  x) XMONAD=true;;
 		v) VIM=true;;
-		g) GIT=true;;
-		z) ZSH=true;;
-	  h) HELP=true;;
-	  !) NO_BACKUP=true;;
+    g) GIT=true;;
+    z) ZSH=true;;
+    t) XORG=true;;
+    i) IRSSI=true;;
+    y) YI=true;;
+    h) HELP=true;;
+    !) NO_BACKUP=true;;
   esac
 done
 
@@ -177,10 +192,11 @@ if ($ALL); then
 	VIM=true;
 	GIT=true;
 	ZSH=true;
+  XORG=true;
+  IRSSI=true;
+  YI=true;
 fi
 
-BOLD="\033[1m"
-NORMAL="\033[0m"
 if ($HELP); then
 	echo -e "$BOLD
 Options:$NORMAL
@@ -189,9 +205,12 @@ Options:$NORMAL
     d) Installs desktop specific stuff (xmobarrc mainly)
     g) Intalls gitconfig
     h) Shows this help page
+    i) Installs irssi config
     l) Installs laptop specific stuff (xmobarrc mainly)
+    t) Installs Xorg resources, mainly used by URxvt
     v) Installs vimrc and plugins
     x) Installs xmonad base, has to be followed by one of -l or -d
+    y) Installs yi config
     z) Installs zshrc and oh-my-zsh
     !) Skip backup of conflicting files (use with caution)
 $BOLD
@@ -225,6 +244,15 @@ else
 		if ($ZSH); then
 			install_zsh;
 		fi
+    if ($XORG); then
+      install_xorg;
+    fi
+    if ($IRSSI); then
+      install_irssi;
+    fi
+    if ($YI); then
+      install_yi;
+    fi
 	fi
 fi
 
