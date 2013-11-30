@@ -6,7 +6,7 @@
 #	name = RepoPusher
 #	email = user@server
 [core]
-	editor = yi
+	editor = vim
 	excludesfile = /Users/Barber/.gitignore
 	
 [alias]
