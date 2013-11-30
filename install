@@ -10,166 +10,166 @@ BLUE="\033[34m"
 LOCAL_PATH=$(pwd)
 
 function info_message {
-  echo -e $BLUE"Info: " $NORMAL"$1" 
+echo -e $BLUE"Info: " $NORMAL"$1" 
 }
 
 function warning_message {
-  echo -e $YELLOW"Warning: " $NORMAL"$1" 
+echo -e $YELLOW"Warning: " $NORMAL"$1" 
 }
 
 function error_message {
-  echo -e $RED"Error: " $NORMAL"$1" 
+echo -e $RED"Error: " $NORMAL"$1" 
 }
 
 function fix_dependency {
-    if [ -z "$1" ]; then
-        echo "Something went wrong, I can't install nothing, can I??"; 
-    else
-        SECOND=$2
-        if [ !$2 ]; then
-            SECOND=$1
-        fi
+if [ -z "$1" ]; then
+  echo "Something went wrong, I can't install nothing, can I??"; 
+else
+  SECOND=$2
+  if [ !$2 ]; then
+    SECOND=$1
+  fi
 
-        hash $1 2>/dev/null || sudo apt-get install $SECOND;
-    fi
+  hash $1 2>/dev/null || sudo apt-get install $SECOND;
+fi
 }
 
 function backup_if_needed {
-    
-    if [ -e $1 ]; then
-        if ( $NO_BACKUP ); then
-            CMD="$3 rm -r $1"
-        else 
-            CMD="$3 rm $.BACKUP && $3 mv $1 $1.BACKUP"
-            if [ $2 ]; then
-		            echo "Backing up old $2";
-            else
-		            echo "Backing up old file: $1";
-            fi
-        fi
-	  fi
+
+if [ -e $1 ]; then
+  if ( $NO_BACKUP ); then
+    CMD="$3 rm -r $1"
+  else 
+    CMD="$3 rm $.BACKUP && $3 mv $1 $1.BACKUP"
+    if [ $2 ]; then
+      echo "Backing up old $2";
+    else
+      echo "Backing up old file: $1";
+    fi
+  fi
+fi
 }
 
 function remove_if_needed {
-    if [ -e $1 ]; then
-        echo "Removing: $1"
-        sudo rm -r $1
-    fi
+if [ -e $1 ]; then
+  echo "Removing: $1"
+  sudo rm -r $1
+fi
 }
 
 function create_link {
-    CMD="ln -fsn"
-    echo "Creating link from $1 to $2"
-    if [ $2 ]; then
-        $3 $CMD $1 $2
-    fi
+CMD="ln -fsn"
+echo "Creating link from $1 to $2"
+if [ $2 ]; then
+  $3 $CMD $1 $2
+fi
 }
 
 function print_start {
-   echo -e $GREEN"Installing "$NORMAL"["$YELLOW$1$NORMAL"]";
+echo -e $GREEN"Installing "$NORMAL"["$YELLOW$1$NORMAL"]";
 }
 
 function print_done {
-   #echo "Done with [$1]!"; 
-   echo  
+#echo "Done with [$1]!"; 
+echo  
 }
 
 function install_git {
-  print_start git
-  fix_dependency git
-  backup_if_needed $HOME/.gitconfig gitconfig
-	create_link $LOCAL_PATH/git/gitconfig $HOME/.gitconfig
-  print_done git
+print_start git
+fix_dependency git
+backup_if_needed $HOME/.gitconfig gitconfig
+create_link $LOCAL_PATH/git/gitconfig $HOME/.gitconfig
+print_done git
 }
 
 function install_vim {
-  print_start vim
-  fix_dependency vim
-	backup_if_needed $HOME/.vimrc .vimrc
-	backup_if_needed $HOME/.vim .vim
-	create_link $LOCAL_PATH/vim/vimrc $HOME/.vimrc
-	create_link $LOCAL_PATH/vim/vim $HOME/.vim
-  print_done vim
+print_start vim
+fix_dependency vim
+backup_if_needed $HOME/.vimrc .vimrc
+backup_if_needed $HOME/.vim .vim
+create_link $LOCAL_PATH/vim/vimrc $HOME/.vimrc
+create_link $LOCAL_PATH/vim/vim $HOME/.vim
+print_done vim
 }
 
 function install_zsh {
-  print_start zsh
-  fix_dependency zsh
-  backup_if_needed $HOME/.zshrc .zshrc
-  backup_if_needed $HOME/.oh-my-zsh .oh-my-zsh
-  create_link $LOCAL_PATH/zsh/zshrc $HOME/.zshrc
-  create_link $LOCAL_PATH/zsh/oh-my-zsh $HOME/.oh-my-zsh
-  print_done zsh
+print_start zsh
+fix_dependency zsh
+backup_if_needed $HOME/.zshrc .zshrc
+backup_if_needed $HOME/.oh-my-zsh .oh-my-zsh
+create_link $LOCAL_PATH/zsh/zshrc $HOME/.zshrc
+create_link $LOCAL_PATH/zsh/oh-my-zsh $HOME/.oh-my-zsh
+print_done zsh
 }
 
 function install_xmonad_base {
-  print_start xmonad
-  fix_dependency xmonad
-  fix_dependency xmobar
-  fix_dependency dmenu
+print_start xmonad
+fix_dependency xmonad
+fix_dependency xmobar
+fix_dependency dmenu
 
-  remove_if_needed /usr/share/xsessions/xmonad.desktop
-  remove_if_needed /usr/local/bin/xmonad-startup
-  
-  backup_if_needed $HOME/.xmonad .xmonad
-  create_link $LOCAL_PATH/xmonad $HOME/.xmonad
-  create_link $LOCAL_PATH/xmonad/xmonad.desktop /usr/share/xsessions/xmonad.desktop sudo 
-  create_link $LOCAL_PATH/xmonad/xmonad-startup /usr/local/bin/xmonad-startup sudo
-  print_done xmonad
+remove_if_needed /usr/share/xsessions/xmonad.desktop
+remove_if_needed /usr/local/bin/xmonad-startup
+
+backup_if_needed $HOME/.xmonad .xmonad
+create_link $LOCAL_PATH/xmonad $HOME/.xmonad
+create_link $LOCAL_PATH/xmonad/xmonad.desktop /usr/share/xsessions/xmonad.desktop sudo 
+create_link $LOCAL_PATH/xmonad/xmonad-startup /usr/local/bin/xmonad-startup sudo
+print_done xmonad
 }
 
 function install_xmonad_laptop {
-  print_start "xmobar laptop"
-  backup_if_needed $HOME/.xmobarrc .xmobarrc
-  create_link $LOCAL_PATH/xmobar/laptop $HOME/.xmobarrc
-  print_done "xmobar laptop"
+print_start "xmobar laptop"
+backup_if_needed $HOME/.xmobarrc .xmobarrc
+create_link $LOCAL_PATH/xmobar/laptop $HOME/.xmobarrc
+print_done "xmobar laptop"
 }
 
 function install_xmonad_desktop {
-  print_start "xmobar desktop"
-  backup_if_needed $HOME/.xmobarrc .xmobarrc
-  create_link $LOCAL_PATH/xmobar/desktop $HOME/.xmobarrc
-  print_done "xmobar desktop"
+print_start "xmobar desktop"
+backup_if_needed $HOME/.xmobarrc .xmobarrc
+create_link $LOCAL_PATH/xmobar/desktop $HOME/.xmobarrc
+print_done "xmobar desktop"
 }
 
 function install_xorg {
-  print_start xorg
-  fix_dependency urxvt rxvt-unicode-256color
-  backup_if_needed $HOME/.Xresources .Xresources
-  create_link $LOCAL_PATH/xorg/Xresources $HOME/.Xresources 
-  print_done xorg
+print_start xorg
+fix_dependency urxvt rxvt-unicode-256color
+backup_if_needed $HOME/.Xresources .Xresources
+create_link $LOCAL_PATH/xorg/Xresources $HOME/.Xresources 
+print_done xorg
 }
 
 function install_irssi {
-  print_start irssi
-  fix_dependency irssi
-  # Since we don't want to version control our real irssi config (which could 
-  # contain your password and what not) we'll begin with copying the example 
-  # config.
-  if [ ! -e $LOCAL_PATH/irssi/config ]; then
-    cp $LOCAL_PATH/irssi/config{.example,}
-  fi
+print_start irssi
+fix_dependency irssi
+# Since we don't want to version control our real irssi config (which could 
+# contain your password and what not) we'll begin with copying the example 
+# config.
+if [ ! -e $LOCAL_PATH/irssi/config ]; then
+  cp $LOCAL_PATH/irssi/config{.example,}
+fi
 
-  backup_if_needed $HOME/.irssi .irssi
-  create_link $LOCAL_PATH/irssi $HOME/.irssi
-  print_done irssi
+backup_if_needed $HOME/.irssi .irssi
+create_link $LOCAL_PATH/irssi $HOME/.irssi
+print_done irssi
 }
 
 function install_yi {
 
-  print_start yi
-  hash yi 2>/dev/null || echo -e "$RED
+print_start yi
+hash yi 2>/dev/null || echo -e "$RED
 ***************************************************************$NORMAL
 
 The yi editor is not available in the main repositaries, 
 you'll have to install it manually (try cabal install).
 $RED
 ***************************************************************$NORMAL
-  "
+"
 
-  backup_if_needed $HOME/.config/yi .config/yi
-  create_link $LOCAL_PATH/yi $HOME/.config/yi
-  print_done yi
+backup_if_needed $HOME/.config/yi .config/yi
+create_link $LOCAL_PATH/yi $HOME/.config/yi
+print_done yi
 }
 
 NO_BACKUP=false
@@ -191,79 +191,79 @@ ALL=false
 while getopts ldaxvgztiyh! option
 do
   case "${option}"
-  in
+    in
     l) LAPTOP=true;;
-    d) DESKTOP=true;;
-    a) ALL=true;;
-	  x) XMONAD=true;;
-		v) VIM=true;;
-    g) GIT=true;;
+  d) DESKTOP=true;;
+a) ALL=true;;
+    x) XMONAD=true;;
+  v) VIM=true;;
+g) GIT=true;;
     z) ZSH=true;;
-    t) XORG=true;;
-    i) IRSSI=true;;
+  t) XORG=true;;
+i) IRSSI=true;;
     y) YI=true;;
-    h) HELP=true;;
-    !) NO_BACKUP=true;;
+  h) HELP=true;;
+!) NO_BACKUP=true;;
   esac
 done
 
 if ($ALL); then
-	XMONAD=true;
-	VIM=true;
-	GIT=true;
-	ZSH=true;
+  XMONAD=true;
+  VIM=true;
+  GIT=true;
+  ZSH=true;
   XORG=true;
   IRSSI=true;
   YI=true;
 fi
 
 if ($HELP); then
-	echo -e "$BOLD
-Options:$NORMAL
+  echo -e "$BOLD
+  Options:$NORMAL
 
-    a) Installs everything, has to be followed by one of -l or -d
-    d) Installs desktop specific stuff (xmobarrc mainly)
-    g) Intalls gitconfig
-    h) Shows this help page
-    i) Installs irssi config
-    l) Installs laptop specific stuff (xmobarrc mainly)
-    t) Installs Xorg resources, mainly used by URxvt
-    v) Installs vimrc and plugins
-    x) Installs xmonad base, has to be followed by one of -l or -d
-    y) Installs yi config
-    z) Installs zshrc and oh-my-zsh
-    !) Skip backup of conflicting files (use with caution)
-$BOLD
-Examples:$NORMAL
+  a) Installs everything, has to be followed by one of -l or -d
+  d) Installs desktop specific stuff (xmobarrc mainly)
+  g) Intalls gitconfig
+  h) Shows this help page
+  i) Installs irssi config
+  l) Installs laptop specific stuff (xmobarrc mainly)
+  t) Installs Xorg resources, mainly used by URxvt
+  v) Installs vimrc and plugins
+  x) Installs xmonad base, has to be followed by one of -l or -d
+  y) Installs yi config
+  z) Installs zshrc and oh-my-zsh
+  !) Skip backup of conflicting files (use with caution)
+  $BOLD
+  Examples:$NORMAL
 
-    ./install -vzg # Will install vim + plugins, zsh + oh-my-zsh and gitconfig
-    ./install -xlv # Will install xmonad base, xmonad laptop and vim + plugins 
-    ./install -ad  # Will install everything for desktop
-    "
+  ./install -vzg # Will install vim + plugins, zsh + oh-my-zsh and gitconfig
+  ./install -xlv # Will install xmonad base, xmonad laptop and vim + plugins 
+  ./install -ad  # Will install everything for desktop
+  "
 else
 
-	if ($LAPTOP && $DESKTOP); then
-		error_message "You can't install both the laptop and desktop version!";
-	elif ($XMONAD && !($LAPTOP) && !($DESKTOP)); then
-		info_message "You must install either the laptop or desktop version!";
-	else
-		if ($XMONAD); then
-			install_xmonad_base;
-			if ($LAPTOP); then
-				install_xmonad_laptop;
-			elif ($DESKTOP); then
-				install_xmonad_desktop;
-			fi
-		fi
-		if ($VIM); then
-			install_vim;
-		fi
-		if ($GIT); then
-			install_git;
-		fi
-		if ($ZSH); then
-			install_zsh;
-		fi
+  if ($LAPTOP && $DESKTOP); then
+    error_message "You can't install both the laptop and desktop version!";
+  elif ($XMONAD && !($LAPTOP) && !($DESKTOP)); then
+    info_message "You must install either the laptop or desktop version!";
+  else
+    if ($XMONAD); then
+      install_xmonad_base;
+      if ($LAPTOP); then
+        install_xmonad_laptop;
+      elif ($DESKTOP); then
+        install_xmonad_desktop;
+      fi
+    fi
+    if ($VIM); then
+      install_vim;
+    fi
+    if ($GIT); then
+      install_git;
+    fi
+    if ($ZSH); then
+      install_zsh;
+    fi
     if ($XORG); then
       install_xorg;
     fi
@@ -278,6 +278,6 @@ else
     else
       warning_message "Nothing was installed. Try ./install -h?"
     fi
-	fi
+  fi
 fi
 
