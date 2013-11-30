@@ -5,8 +5,21 @@ NORMAL="\033[0m"
 RED="\033[31m"
 GREEN="\033[32m"
 YELLOW="\033[33m"
+BLUE="\033[34m"
 
 LOCAL_PATH=$(pwd)
+
+function info_message {
+  echo -e $BLUE"Info: " $NORMAL"$1" 
+}
+
+function warning_message {
+  echo -e $YELLOW"Warning: " $NORMAL"$1" 
+}
+
+function error_message {
+  echo -e $RED"Error: " $NORMAL"$1" 
+}
 
 function fix_dependency {
     if [ -z "$1" ]; then
@@ -40,25 +53,15 @@ function backup_if_needed {
 function remove_if_needed {
     if [ -e $1 ]; then
         echo "Removing: $1"
-        sudo rm -rf $1
+        sudo rm -r $1
     fi
-}
-
-function test_link {
-  if [ $2 ]; then
-    echo $1 $2
-  fi
 }
 
 function create_link {
     CMD="ln -fsn"
     echo "Creating link from $1 to $2"
     if [ $2 ]; then
-        if [ $3 ];then
-            $3 $CMD $1 $2
-        else
-            $CMD $1 $2
-        fi
+        $3 $CMD $1 $2
     fi
 }
 
@@ -81,6 +84,7 @@ function install_git {
 
 function install_vim {
   print_start vim
+  fix_dependency vim
 	backup_if_needed $HOME/.vimrc .vimrc
 	backup_if_needed $HOME/.vim .vim
 	create_link $LOCAL_PATH/vim/vimrc $HOME/.vimrc
@@ -90,6 +94,7 @@ function install_vim {
 
 function install_zsh {
   print_start zsh
+  fix_dependency zsh
   backup_if_needed $HOME/.zshrc .zshrc
   backup_if_needed $HOME/.oh-my-zsh .oh-my-zsh
   create_link $LOCAL_PATH/zsh/zshrc $HOME/.zshrc
@@ -99,13 +104,17 @@ function install_zsh {
 
 function install_xmonad_base {
   print_start xmonad
+  fix_dependency xmonad
+  fix_dependency xmobar
+  fix_dependency dmenu
+
   remove_if_needed /usr/share/xsessions/xmonad.desktop
   remove_if_needed /usr/local/bin/xmonad-startup
   
   backup_if_needed $HOME/.xmonad .xmonad
   create_link $LOCAL_PATH/xmonad $HOME/.xmonad
-  create_link $LOCAL_PATH/xmonad/xmonad.desktop /usr/share/xsessions/xmonad.desktop true
-  create_link $LOCAL_PATH/xmonad/xmonad-startup /usr/local/bin/xmonad-startup true
+  create_link $LOCAL_PATH/xmonad/xmonad.desktop /usr/share/xsessions/xmonad.desktop sudo 
+  create_link $LOCAL_PATH/xmonad/xmonad-startup /usr/local/bin/xmonad-startup sudo
   print_done xmonad
 }
 
@@ -125,6 +134,7 @@ function install_xmonad_desktop {
 
 function install_xorg {
   print_start xorg
+  fix_dependency urxvt rxvt-unicode-256color
   backup_if_needed $HOME/.Xresources .Xresources
   create_link $LOCAL_PATH/xorg/Xresources $HOME/.Xresources 
   print_done xorg
@@ -132,16 +142,31 @@ function install_xorg {
 
 function install_irssi {
   print_start irssi
+  fix_dependency irssi
+  # Since we don't want to version control our real irssi config (which could 
+  # contain your password and what not) we'll begin with copying the example 
+  # config.
   if [ ! -e $LOCAL_PATH/irssi/config ]; then
     cp $LOCAL_PATH/irssi/config{.example,}
   fi
+
   backup_if_needed $HOME/.irssi .irssi
   create_link $LOCAL_PATH/irssi $HOME/.irssi
   print_done irssi
 }
 
 function install_yi {
+
   print_start yi
+  hash yi 2>/dev/null || echo -e "$RED
+***************************************************************$NORMAL
+
+The yi editor is not available in the main repositaries, 
+you'll have to install it manually (try cabal install).
+$RED
+***************************************************************$NORMAL
+  "
+
   backup_if_needed $HOME/.config/yi .config/yi
   create_link $LOCAL_PATH/yi $HOME/.config/yi
   print_done yi
@@ -218,9 +243,9 @@ Examples:$NORMAL
 else
 
 	if ($LAPTOP && $DESKTOP); then
-		echo "You can\'t install both the laptop and desktop version!";
+		error_message "You can't install both the laptop and desktop version!";
 	elif ($XMONAD && !($LAPTOP) && !($DESKTOP)); then
-		echo "You must install either the laptop or desktop version!";
+		info_message "You must install either the laptop or desktop version!";
 	else
 		if ($XMONAD); then
 			install_xmonad_base;
@@ -247,6 +272,11 @@ else
     fi
     if ($YI); then
       install_yi;
+    fi
+    if ($XMONAD || $XORG || $VIM || $GIT || $YI || $ZSH || $IRSSI); then
+      info_message "Done!"
+    else
+      warning_message "Nothing was installed. Try ./install -h?"
     fi
 	fi
 fi
