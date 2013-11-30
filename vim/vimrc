@@ -28,6 +28,9 @@ set nowb
 "============ Auto completion ============"
 set wildmenu
 set wildmode=list:longest,full
+set wildignorecase
+set ignorecase
+set smartcase
 
 "============ Cursor ============"
 if has("autocmd")
@@ -41,7 +44,6 @@ set nocompatible
 call pathogen#infect()
 call pathogen#helptags()
  
-set statusline=%<\ %n:%f\ %m%r%y%=%-35.(line:\ %l\ of\ %L,\ col:\ %c%V\ (%P)%)
 filetype plugin indent on
  
 "========== Theme ============"
@@ -78,11 +80,16 @@ nmap <silent> ,/ :nohlsearch<CR>
 map ,s :w<CR>
 map ,q :q<CR>
 map ,e :e 
+map ,p :CtrlP<CR>
 imap öö <Esc><Esc>
 
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
 
-set statusline=%F%=\ [%Y,%{&ff}%R%M]\ [L=%04l/%04L\ (%p%%)\ c=%04v]
+"Status line
+set statusline=%F\ %y%m\ %=\ %c:(%l/%L)
 set laststatus=2
 
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
