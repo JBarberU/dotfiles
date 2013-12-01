@@ -1,0 +1,58 @@
+# Noise Linux
+*~
+
+*.ui.autosave
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.dll
+*.dylib
+*.obj
+
+
+# Qt-es
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+qrc_*.cpp
+*-build-*
+*build*
+
+# Visual Studio
+qtclient/project/GeneratedFiles/
+qtclient/project/x64/
+*.sdf
+*.v11.suo
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# OS X
+*.DS_Store
+*xcuserdata*
+*xcworkspace*
+
+# Yesod
+dist*
+static/tmp/
+config/client_session_key.aes
+*.hi
+*.o
+*.sqlite3
+.hsenv*
+cabal-dev/
+yesod-devel/
+.cabal-sandbox
+cabal.sandbox.config
+
+# Rails
+/.bundle
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/log/*.log
+/tmp

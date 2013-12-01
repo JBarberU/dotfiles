@@ -78,7 +78,10 @@ function install_git {
 print_start git
 fix_dependency git
 backup_if_needed $HOME/.gitconfig gitconfig
+backup_if_needed $HOME/.gitignore gitignore
+
 create_link $LOCAL_PATH/git/gitconfig $HOME/.gitconfig
+create_link $LOCAL_PATH/git/gitignore $HOME/.gitignore
 print_done git
 }
 

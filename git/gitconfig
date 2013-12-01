@@ -7,7 +7,7 @@
 #	email = user@server
 [core]
 	editor = vim
-	excludesfile = /Users/Barber/.gitignore
+	excludesfile = ~/.gitignore
 	
 [alias]
 	br = branch
