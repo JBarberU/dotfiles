@@ -105,7 +105,8 @@ chatnets = {
   Freenode = {
     type = "IRC";
 # CHANGE_ME enter your own password here :)
-    autosendcmd = "/msg nickserv identify your_password ;wait 2000";
+    autosendcmd = "/msg nickserv identify your_password;wait 2000;/win c 2";
+# The /win c 2 is for closing the authentication screen 
   };
 };
 
