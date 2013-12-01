@@ -80,8 +80,11 @@ nmap <silent> ,/ :nohlsearch<CR>
 map ,s :w<CR>
 map ,q :q<CR>
 map ,e :e 
+map ,rp :CtrlPClearAllCaches<CR>
 map ,p :CtrlP<CR>
 imap öö <Esc><Esc>
+set timeoutlen=400
+set ttimeoutlen=400
 
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
