@@ -12,6 +12,7 @@ import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 import System.Exit
 import XMonad.Util.NamedScratchpad
+import XMonad.Layout.Spiral
 
 myTerminal :: String
 myTerminal = "rxvt-unicode"
@@ -153,7 +154,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 		| (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
 		, (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-myLayoutHook = avoidStruts (smartBorders (tiled ||| Mirror tiled) ||| noBorders Full)
+myLayoutHook = avoidStruts (smartBorders (tiled ||| Mirror tiled) ||| noBorders Full ||| spiral (1 % 1))
                 where
                     tiled   =   Tall nmaster delta ratio
                     nmaster =   1       -- Number of windows in the master panel
@@ -163,7 +164,8 @@ myLayoutHook = avoidStruts (smartBorders (tiled ||| Mirror tiled) ||| noBorders 
 myLayout = avoidStruts (
 	Tall 1 (3/100) (1/2) |||
 	Mirror (Tall 1 (3/100) (1/2)) |||
-	noBorders (fullscreenFull Full))
+	noBorders (fullscreenFull Full) |||
+  spiral (4 / 3))
 
 myStartupHook = setWMName "LG3D"
 
