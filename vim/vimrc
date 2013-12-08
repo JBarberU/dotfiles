@@ -73,6 +73,8 @@ map <up>	<nop>
 map <down>	<nop>
 map <left>	<nop>
 map <right> <nop>
+
+"== Navigate with htns =="
 noremap s l
 noremap t j
 noremap n k
@@ -81,7 +83,7 @@ let mapleader=","
 nmap <silent> ,/ :nohlsearch<CR>
 
 map ,s :w<CR>
-map ,q :q<CR>
+map ,w :q<CR>
 map ,e :e 
 map ,rp :CtrlPClearAllCaches<CR>
 map ,p :CtrlP<CR>
