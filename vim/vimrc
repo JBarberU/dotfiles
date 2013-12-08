@@ -44,7 +44,8 @@ set nocompatible
 call pathogen#infect()
 call pathogen#helptags()
  
-filetype plugin indent on
+filetype plugin on
+filetype indent off
  
 "========== Theme ============"
 if has('unnamedplus')
@@ -75,6 +76,7 @@ map <left>	<nop>
 map <right> <nop>
 
 "== Navigate with htns =="
+noremap ,n n
 noremap s l
 noremap t j
 noremap n k
