@@ -101,7 +101,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm, xK_n), namedScratchpadAction myScratchpads "Trello")
 	, ((modm, xK_m), namedScratchpadAction myScratchpads "Mail")
 	, ((modm, xK_g), namedScratchpadAction myScratchpads "Chromium")
-	, ((modm, xK_s), namedScratchpadAction myScratchpads "Spotify")
+	, ((modm .|. shiftMask, xK_s), namedScratchpadAction myScratchpads "Spotify")
 
 	-- Spawn gnome-control-center
 	, ((modm .|. shiftMask, xK_g), spawn "gnome-control-center")
@@ -125,7 +125,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((modm,               xK_h     ), sendMessage Shrink)
 	
 	-- Expand the master area
-	, ((modm,               xK_l     ), sendMessage Expand)
+	, ((modm,               xK_s     ), sendMessage Expand)
 	
 	-- Push window back into tiling
 	--, ((modm .|. shiftMask, xK_t), withFocused $ windows . W.sink)
