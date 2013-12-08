@@ -93,6 +93,10 @@ imap öö <Esc><Esc>
 set timeoutlen=400
 set ttimeoutlen=400
 
+map ,o :foldopen<CR>
+map ,O :foldclose<CR>
+
+
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
 
