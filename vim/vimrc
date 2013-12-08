@@ -108,6 +108,6 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
-set wildignore+=*/tmp/*,*.o,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/tmp/*,*.o,*.so,*.hi,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
