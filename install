@@ -113,11 +113,14 @@ fix_dependency dmenu
 
 remove_if_needed /usr/share/xsessions/xmonad.desktop
 remove_if_needed /usr/local/bin/xmonad-startup
+remove_if_needed $HOME/.ghci
 
 backup_if_needed $HOME/.xmonad .xmonad
 create_link $LOCAL_PATH/xmonad $HOME/.xmonad
 create_link $LOCAL_PATH/xmonad/xmonad.desktop /usr/share/xsessions/xmonad.desktop sudo 
 create_link $LOCAL_PATH/xmonad/xmonad-startup /usr/local/bin/xmonad-startup sudo
+create_link $LOCAL_PATH/haskell/ghci $HOME/.ghci
+touch $HOME/.dmenu_favourites
 print_done xmonad
 }
 
