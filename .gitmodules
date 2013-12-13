@@ -43,3 +43,6 @@
 [submodule "vim/vim/bundle/html-template-syntax"]
 	path = vim/vim/bundle/html-template-syntax
 	url = https://github.com/pbrisbin/html-template-syntax.git
+[submodule "svn/plugins/svn-color"]
+	path = svn/plugins/svn-color
+	url = https://github.com/philchristensen/svn-color.git

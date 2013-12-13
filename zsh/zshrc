@@ -12,6 +12,7 @@ ZSH_THEME="gianu"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias gs="git status"
+alias sns="svnc status | sort | less -r"
 alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo \"Copied public key to clipboard...\""
 alias natti="sudo shutdown -h now"
 alias dvorak="setxkbmap \"se(svdvorak)\""
