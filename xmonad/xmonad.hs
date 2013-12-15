@@ -145,8 +145,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 		| (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
 		, (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-myLayoutHook :: ModifiedLayout AvoidStruts (Choose Tall (Choose (Mirror Tall) (ModifiedLayout WithBorder Full))) Window
-myLayoutHook = avoidStruts (tiled ||| Mirror tiled ||| noBorders Full)
+myLayoutHook :: ModifiedLayout AvoidStruts (Choose (ModifiedLayout SmartBorder (Choose Tall (Mirror Tall))) (ModifiedLayout WithBorder Full)) Window
+myLayoutHook = avoidStruts $ smartBorders (tiled ||| Mirror tiled) ||| noBorders Full
                 where
                     tiled   =   Tall nmaster delta ratio
                     nmaster =   1       -- Number of windows in the master panel
