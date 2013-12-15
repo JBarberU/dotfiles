@@ -104,7 +104,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [
       (xK_Return, spawn $ XMonad.terminal conf),
       (xK_space,  spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\""),
-	    (xK_l,      spawn "xlock"),
+	    (xK_l,      spawn "slock"),
 	    (xK_q,      io exitSuccess),
 	    (xK_n,      spawn "nvidia-settings"),
 	    (xK_t,      withFocused $ windows . W.sink),
