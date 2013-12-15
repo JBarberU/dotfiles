@@ -1,10 +1,11 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Layout.Fullscreen
+import XMonad.Layout.LayoutModifier (ModifiedLayout)
+import XMonad.Layout.Fullscreen()
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.EZConfig()
 import System.IO
 import Data.Ratio ((%))
 import XMonad.Hooks.SetWMName
@@ -12,7 +13,6 @@ import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 import System.Exit
 import XMonad.Util.NamedScratchpad
-import XMonad.Layout.Spiral
 
 myTerminal :: String
 myTerminal = "rxvt-unicode"
@@ -20,20 +20,27 @@ myTerminal = "rxvt-unicode"
 myNamedTerminal :: String
 myNamedTerminal = myTerminal ++ " -name "
 
+myModMask :: KeyMask
 myModMask = mod4Mask -- Rebind Mod to the windows key
 
+myBorderWidth :: Dimension
 myBorderWidth = 2
 
+myNormalBorderColor :: String
 myNormalBorderColor = "black"
 
+myFocusedBorderColor :: String
 myFocusedBorderColor = "purple"
 
+myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
 
-myWorkspaces = map show [1..9]
+myWorkspaces :: [String]
+myWorkspaces = map show ([1..9] :: [Int])
 
+myScratchpads :: [NamedScratchpad]
 myScratchpads = let 
-    reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
+--    reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
     full = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
     top = customFloating $ W.RationalRect 0.0 0.0 1.0 0.5
     bottom = customFloating $ W.RationalRect 0.0 0.7 1.0 0.3
@@ -65,8 +72,9 @@ myScratchpads = let
     , NS "IrssiTerminal"
     (myNamedTerminal ++ "IrssiTerminal \"irssi\"")
     (appName =? "IrssiTerminal") full 
-                                              ]
+    ]
 
+myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	-- Launch a terminal
 	[ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
@@ -154,25 +162,23 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 		| (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
 		, (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-myLayoutHook = avoidStruts (smartBorders (tiled ||| Mirror tiled) ||| noBorders Full ||| spiral (1 % 1))
+myLayoutHook :: ModifiedLayout AvoidStruts (Choose Tall (Choose (Mirror Tall) (ModifiedLayout WithBorder Full))) Window
+myLayoutHook = avoidStruts (tiled ||| Mirror tiled ||| noBorders Full)
                 where
                     tiled   =   Tall nmaster delta ratio
                     nmaster =   1       -- Number of windows in the master panel
                     ratio   =   2%3     -- Percentage of the screen to increment by when resizing the window
-                    delta   =   5%100   -- Default portion of the screen occupied by the master panel
+                    delta   =   1%100   -- Default portion of the screen occupied by the master panel
 
-myLayout = avoidStruts (
-	Tall 1 (3/100) (1/2) |||
-	Mirror (Tall 1 (3/100) (1/2)) |||
-	noBorders (fullscreenFull Full) |||
-  spiral (4 / 3))
-
+myStartupHook :: X ()
 myStartupHook = setWMName "LG3D"
 
+myManageHook :: ManageHook
 myManageHook = manageDocks
             <+> manageHook defaultConfig
             <+> namedScratchpadManageHook myScratchpads
 
+main :: IO ()
 main = do
     xmproc <- spawnPipe "xmobar"
     xmonad $ defaultConfig {
