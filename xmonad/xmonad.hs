@@ -56,7 +56,8 @@ myScratchpads =
       ("Trello",        chromeApp ++ "https://trello.com", "trello.com"),
       ("Notes",         chromeApp ++ "https://keep.google.com", "keep.google.com"),
       ("Spotify",       chromeApp ++ "https://play.spotify.com", "play.spotify.com"),
-      ("IrssiTerminal", myNamedTerminal ++ "IrssiTerminal -e irssi", "IrssiTerminal")
+      ("IrssiTerminal", myNamedTerminal ++ "IrssiTerminal -e irssi", "IrssiTerminal"),
+      ("AlsaTerminal", myNamedTerminal ++ "AlsaTerminal -e alsamixer", "AlsaTerminal")
     ]
   ]
   ++
@@ -96,7 +97,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_q,      restart "xmonad" True),
 	    (xK_t,      namedScratchpadAction myScratchpads "BottomTerminal"),
       (xK_n,      namedScratchpadAction myScratchpads "TopTerminal"),
-      (xK_i,      namedScratchpadAction myScratchpads "IrssiTerminal")
+      (xK_i,      namedScratchpadAction myScratchpads "IrssiTerminal"),
+      (xK_a,      namedScratchpadAction myScratchpads "AlsaTerminal")
     ]
   ]
   ++
