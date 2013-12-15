@@ -1,6 +1,7 @@
-import XMonad
+import XMonad 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, isDialog, doCenterFloat)
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.Fullscreen()
 import XMonad.Layout.NoBorders
@@ -156,9 +157,16 @@ myStartupHook :: X ()
 myStartupHook = setWMName "LG3D"
 
 myManageHook :: ManageHook
-myManageHook = manageDocks
-            <+> manageHook defaultConfig
-            <+> namedScratchpadManageHook myScratchpads
+myManageHook =  composeAll
+  [
+    (className =? "Xmessage") --> doFloat,
+    (className =? "Nvidia-settings") --> doFloat,
+    isFullscreen --> doFullFloat,
+    isDialog --> doCenterFloat
+  ]
+  <+> manageDocks
+  <+> manageHook defaultConfig
+  <+> namedScratchpadManageHook myScratchpads
 
 main :: IO ()
 main = do
