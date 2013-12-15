@@ -39,125 +39,105 @@ myWorkspaces :: [String]
 myWorkspaces = map show ([1..9] :: [Int])
 
 myScratchpads :: [NamedScratchpad]
-myScratchpads = let 
---    reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
+myScratchpads = 
+  let 
     full = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
     top = customFloating $ W.RationalRect 0.0 0.0 1.0 0.5
     bottom = customFloating $ W.RationalRect 0.0 0.7 1.0 0.3
-    in [
-    NS "Chromium" 
-    "chromium "
-    (appName =? "myChromium") full 
-    , NS "Mail" 
-    "chromium --app=https://mail.google.com"
-    (appName =? "mail.google.com") full 
-    , NS "Calendar" 
-    "chromium --app=https://calendar.google.com"
-    (appName =? "calendar.google.com") full 
-    , NS "Trello" 
-    "chromium --app=https://trello.com"
-    (appName =? "trello.com") full 
-    , NS "Notes" 
-    "chromium --app=https://keep.google.com"
-    (appName =? "keep.google.com") full 
-    , NS "Spotify"
-    "chromium --app=https://play.spotify.com"
-    (appName =? "play.spotify.com") full 
-    , NS "BottomTerminal"
-    (myNamedTerminal ++ "BottomTerminal")
-    (appName =? "BottomTerminal") bottom 
-    , NS "TopTerminal"
-    (myNamedTerminal ++ "TopTerminal")
-    (appName =? "TopTerminal") top 
-    , NS "IrssiTerminal"
-    (myNamedTerminal ++ "IrssiTerminal \"irssi\"")
-    (appName =? "IrssiTerminal") full 
+    chrome = "chromium"
+    chromeApp = "chromium --app="
+    --reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
+  in
+  [NS x y (appName =? z) full | (x,y,z) <-
+    [
+      ("Chromium",      chrome, "myChromium"),
+      ("Mail",          chromeApp ++ "https://mail.google.com", "mail.google.com"),
+      ("Calendar",      chromeApp ++ "https://calendar.google.com", "calendar.google.com"),
+      ("Trello",        chromeApp ++ "https://trello.com", "trello.com"),
+      ("Notes",         chromeApp ++ "https://keep.google.com", "keep.google.com"),
+      ("Spotify",       chromeApp ++ "https://play.spotify.com", "play.spotify.com"),
+      ("IrssiTerminal", myNamedTerminal ++ "IrssiTerminal -e irssi", "IrssiTerminal")
     ]
+  ]
+  ++
+  [NS x y (appName =? z) bottom | (x,y,z) <-
+    [
+      ("BottomTerminal", myNamedTerminal ++ "BottomTerminal", "BottomTerminal")
+    ]
+  ]
+  ++
+  [NS x y (appName =? z) top | (x,y,z) <-
+    [
+      ("TopTerminal", myNamedTerminal ++ "TopTerminal", "TopTerminal")
+    ]
+  ]
 
 myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-	-- Launch a terminal
-	[ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-	, ((modm, xK_t), namedScratchpadAction myScratchpads "BottomTerminal")
-	, ((modm .|. shiftMask, xK_t), namedScratchpadAction myScratchpads "TopTerminal")
-	, ((modm, xK_i), namedScratchpadAction myScratchpads "IrssiTerminal")
-
-	-- Launch dmenu (all)
-    , ((modm .|. shiftMask,		xK_space ), spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\"")
-    , ((modm,					xK_space ), spawn "exe=`cat ~/.dmenu_favourites | dmenu -b ` && eval \"exec $exe\"")
-
-	-- Launch nvidia-settings
-	, ((modm .|. shiftMask, xK_n), spawn "nvidia-settings")
-
-	-- Audio controls
-	, ((0, 0x1008ff11), spawn "amixer -q set Master 10%-")
-	, ((shiftMask, 0x1008ff11), spawn "amixer -q set Master 1%-")
-	, ((0, 0x1008ff13), spawn "amixer -q set Master 10%+")
-	, ((shiftMask, 0x1008ff13), spawn "amixer -q set Master 1%+")
-	, ((0, 0x1008ff12), spawn "amixer -q set Master toggle")
-
-	-- Keyboard brightness control 
-	-- Note that you'll need to make /sys/class/leds/smc::kbd_backlight/brightness writable by xmonad 
-	, ((0, 0x1008ff06), spawn "echo 0 > /sys/class/leds/smc::kbd_backlight/brightness")
-	, ((0, 0x1008ff05), spawn "echo 255 > /sys/class/leds/smc::kbd_backlight/brightness")
-
-	-- Print Screen
-	, ((shiftMask .|. modm, xK_p), spawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~shots/'")
-
-	-- Spawn chromium
-	, ((modm, xK_c), namedScratchpadAction myScratchpads "Calendar")
-	, ((modm, xK_n), namedScratchpadAction myScratchpads "Trello")
-	, ((modm, xK_m), namedScratchpadAction myScratchpads "Mail")
-	, ((modm, xK_g), namedScratchpadAction myScratchpads "Chromium")
-	, ((modm .|. shiftMask, xK_s), namedScratchpadAction myScratchpads "Spotify")
-
-	-- Spawn gnome-control-center
-	, ((modm .|. shiftMask, xK_g), spawn "gnome-control-center")
-	
-	-- Terminate application
-	, ((modm .|. shiftMask, xK_c     ), kill)
-
-	-- Switch layout
-    , ((modm .|. shiftMask, xK_b ), sendMessage NextLayout)
-	
-	-- Move focus to next
-	, ((modm,               xK_Tab   ), windows W.focusDown)
-	
-	-- Move focus to previous
-	, ((modm .|. shiftMask,	xK_Tab   ), windows W.focusUp)
-	
-	-- Swap the focused window and the master window
-	, ((modm,               xK_Return), windows W.swapMaster)
-
-	-- Shrink the master area
-	, ((modm,               xK_h     ), sendMessage Shrink)
-	
-	-- Expand the master area
-	, ((modm,               xK_s     ), sendMessage Expand)
-	
-	-- Push window back into tiling
-	--, ((modm .|. shiftMask, xK_t), withFocused $ windows . W.sink)
-
-	-- toggle the status bar gap (used with avoidStruts from Hooks.ManageDocks)
-	, ((modm , xK_b ), sendMessage ToggleStruts)
-      
-	, ((modm .|. shiftMask, xK_l), spawn "xlock")
-
-	-- Quit xmonad
-	, ((modm .|. shiftMask, xK_q     ), io exitSuccess)
-	
-	-- Restart xmonad
-	, ((modm              , xK_q     ), restart "xmonad" True)
-	]
-	++
-	-- mod-[1..9], Switch to workspace N
-	-- mod-shift-[1..9], Move client to workspace N
+  let 
+    mshift  = modm .|. shiftMask
+    volDown = 0x1008ff11
+    volUp   = 0x1008ff13
+    mute    = 0x1008ff12
+    noMod   = 0
+    shift   = shiftMask
+  in
+  [((modm, x), y) | (x,y) <- 
+    [
+      (xK_Tab,    windows W.focusDown),
+	    (xK_c,      namedScratchpadAction myScratchpads "Calendar"),
+	    (xK_m,      namedScratchpadAction myScratchpads "Mail"),
+	    (xK_g,      namedScratchpadAction myScratchpads "Chromium"),
+	    (xK_Return, windows W.swapMaster),
+	    (xK_h,      sendMessage Shrink),
+	    (xK_s,      sendMessage Expand),
+	    (xK_space,  spawn "exe=`cat ~/.dmenu_favourites | dmenu -b ` && eval \"exec $exe\""),
+	    (xK_b,      sendMessage ToggleStruts),
+      (xK_q,      restart "xmonad" True),
+	    (xK_t,      namedScratchpadAction myScratchpads "BottomTerminal"),
+      (xK_n,      namedScratchpadAction myScratchpads "TopTerminal"),
+      (xK_i,      namedScratchpadAction myScratchpads "IrssiTerminal")
+    ]
+  ]
+  ++
+  [((mshift, x), y) | (x,y) <- 
+    [
+      (xK_Return, spawn $ XMonad.terminal conf),
+      (xK_space,  spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\""),
+	    (xK_l,      spawn "xlock"),
+	    (xK_q,      io exitSuccess),
+	    (xK_n,      spawn "nvidia-settings"),
+	    (xK_t,      withFocused $ windows . W.sink),
+	    (xK_Tab,    windows W.focusUp),
+	    (xK_p,      spawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~shots/'"),
+	    (xK_s,      namedScratchpadAction myScratchpads "Spotify"),
+	    (xK_g,      spawn "gnome-control-center"),
+	    (xK_c,      kill),
+      (xK_b,      sendMessage NextLayout)
+    ]
+  ]
+  ++
+  [((shift, x), y) | (x,y) <- 
+    [
+      (volDown,   spawn "amixer -q set Master 1%-"),
+	    (volUp,     spawn "amixer -q set Master 1%+")
+	  ]
+  ]
+  ++
+  [((noMod, x), y) | (x,y) <- 
+    [
+      (volDown,   spawn "amixer -q set Master 10%-"),
+	    (volUp,     spawn "amixer -q set Master 10%+"),
+	    (mute,      spawn "amixer -q set Master toggle")
+    ]
+  ]
+  ++
+  -- Workspaces 
 	[((m .|. modm, k), windows $ f i)
 		| (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
 	    , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 	++
-	-- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
-	-- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
+  -- Screens
 	[((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
 		| (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
 		, (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
@@ -197,4 +177,4 @@ main = do
         normalBorderColor = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
         focusFollowsMouse = myFocusFollowsMouse
-      }
+    }
