@@ -45,18 +45,12 @@ myScratchpads =
     full = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
     top = customFloating $ W.RationalRect 0.0 0.0 1.0 0.5
     bottom = customFloating $ W.RationalRect 0.0 0.7 1.0 0.3
-    chrome = "chromium"
-    chromeApp = "chromium --app="
+    browser = "iceweasel"
     --reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
   in
   [NS x y (appName =? z) full | (x,y,z) <-
     [
-      ("Chromium",      chrome, "myChromium"),
-      ("Mail",          chromeApp ++ "https://mail.google.com", "mail.google.com"),
-      ("Calendar",      chromeApp ++ "https://calendar.google.com", "calendar.google.com"),
-      ("Trello",        chromeApp ++ "https://trello.com", "trello.com"),
-      ("Notes",         chromeApp ++ "https://keep.google.com", "keep.google.com"),
-      ("Spotify",       chromeApp ++ "https://play.spotify.com", "play.spotify.com"),
+      ("Browser",       browser, "myBrowser"),
       ("IrssiTerminal", myNamedTerminal ++ "IrssiTerminal -e irssi", "IrssiTerminal"),
       ("AlsaTerminal", myNamedTerminal ++ "AlsaTerminal -e alsamixer", "AlsaTerminal")
     ]
@@ -89,7 +83,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_Tab,    windows W.focusDown),
 	    (xK_c,      namedScratchpadAction myScratchpads "Calendar"),
 	    (xK_m,      namedScratchpadAction myScratchpads "Mail"),
-	    (xK_g,      namedScratchpadAction myScratchpads "Chromium"),
+	    (xK_g,      namedScratchpadAction myScratchpads "Browser"),
 	    (xK_Return, windows W.swapMaster),
 	    (xK_h,      sendMessage Shrink),
 	    (xK_s,      sendMessage Expand),
