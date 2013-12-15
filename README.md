@@ -1,11 +1,9 @@
 # My dotfiles
 
-The install script should take care of most of your dependencies by 
-downloading them with apt. If you feel uncertain, look at it and install
-manually.
-
-For more info try:
-
+## Installation
+    
+    $ git clone https://github.com/JBarberU/dotfiles.git ~/dotfiles
+    $ cd ~/dotfiles
     $ ./install -h
 
 ## Inspiration
@@ -13,6 +11,7 @@ For more info try:
 * [odsod](https://github.com/odsod/dotfiles)
 * [sktt](https://github.com/sktt/dotfiles)
 * [danr](https://github.com/danr/dotfiles)
+* [johanbrook](https://github.com/johanbrook/dotfiles)
 
 I've found lots of useful stuff around the web. If you feel that you deserve a 
 mention, don't hesitate to contact me.
