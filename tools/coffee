@@ -1,0 +1,87 @@
+#!/bin/bash
+
+BOLD="\033[1m"
+NORMAL="\033[0m"
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLUE="\033[34m"
+
+COFFEE_FILE=$HOME/.coffee_counter
+COFFEE_COUNTER=0
+
+function print_coffee {
+  if (($COFFEE_COUNTER == 0)); then
+    COLOR=$RED;
+  elif (($COFFEE_COUNTER < 3)); then
+    COLOR=$YELLOW;
+  elif (($COFFEE_COUNTER > 7)); then
+    COLOR=$RED;
+  else
+    COLOR=$GREEN;
+  fi
+    
+  echo -e "Amount of coffee: "$COLOR$COFFEE_COUNTER$NORMAL;
+}
+
+function reset_coffee {
+  echo 0 > $COFFEE_FILE;
+  echo "The amount of coffee was reset";
+  reload_coffee;
+}
+
+function add_coffee {
+  echo $(($COFFEE_COUNTER + $1)) > $COFFEE_FILE;
+  echo "Added a coffee";
+  reload_coffee;
+}
+
+function reload_coffee {
+if [ -e $COFFEE_FILE ]; then
+  COFFEE_COUNTER=$(cat $COFFEE_FILE);
+else
+  reset_coffee;
+fi
+}
+
+OPT_ADD=false;
+OPT_RES=false;
+OPT_HELP=false;
+
+while getopts arh option
+do
+  case "${option}"
+    in
+    a) OPT_ADD=true;;
+    r) OPT_RES=true;;
+    h) OPT_HELP=true;;
+  esac
+done
+
+reload_coffee;
+
+if ($OPT_ADD || $OPT_RES || $OPT_HELP); then
+  if ($OPT_ADD); then
+    NUM_ADD=1
+    if [ -n "$2" ];then
+      NUM_ADD=$2;  
+    fi
+
+    add_coffee $NUM_ADD;
+    print_coffee;
+  elif ($OPT_RES); then
+    reset_coffee;
+    print_coffee;
+  elif ($OPT_HELP); then
+    echo "Coffee - keeps track of your coffee consumption
+
+    Available options:
+      -a Adds a coffee to the counter
+      -r Resets the coffee counter
+      -h You already tried this one ;)
+      ";
+  fi
+else
+  echo "Welcome to coffee counter";
+  print_coffee;
+fi
