@@ -73,12 +73,18 @@ if ($OPT_ADD || $OPT_RES || $OPT_HELP); then
     reset_coffee;
     print_coffee;
   elif ($OPT_HELP); then
-    echo "Coffee - keeps track of your coffee consumption
+    echo -e $BOLD"Coffee - keeps track of your coffee consumption$NORMAL
 
     Available options:
-      -a Adds a coffee to the counter
+      -a Adds the given amount of coffee to the counter (default is one)
       -r Resets the coffee counter
       -h You already tried this one ;)
+
+    Examples:
+      $ coffee -a    # Adds one coffee to the counter
+      $ coffee -a 10 # Adds 10 cups of coffee to the counter
+
+Copyright (C) 2013 John Barbero Unenge
       ";
   fi
 else
