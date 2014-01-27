@@ -103,7 +103,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_space,  spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\""),
 	    (xK_l,      spawn "slock"),
 	    (xK_q,      io exitSuccess),
-	    (xK_n,      spawn "nvidia-settings"),
+	    (xK_n,      spawn "nautilus"),
 	    (xK_t,      withFocused $ windows . W.sink),
 	    (xK_Tab,    windows W.focusUp),
 	    (xK_p,      spawn "scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~shots/'"),
@@ -153,8 +153,9 @@ myStartupHook = setWMName "LG3D"
 myManageHook :: ManageHook
 myManageHook =  composeAll
   [
-    (className =? "Xmessage") --> doFloat,
-    (className =? "Nvidia-settings") --> doFloat,
+    (className =? "Xmessage") --> doCenterFloat,
+    (className =? "Nvidia-settings") --> doCenterFloat,
+    (className =? "Nautilus") --> doCenterFloat,
     isFullscreen --> doFullFloat,
     isDialog --> doCenterFloat
   ]

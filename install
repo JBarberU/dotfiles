@@ -149,7 +149,8 @@ function install_xorg {
 print_start xorg
 fix_dependency urxvt rxvt-unicode-256color
 backup_if_needed $HOME/.Xresources .Xresources
-create_link $LOCAL_PATH/xorg/Xresources $HOME/.Xresources 
+create_link $LOCAL_PATH/Xresources $HOME/.Xresources 
+xrdb
 print_done xorg
 }
 
