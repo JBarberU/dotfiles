@@ -148,9 +148,10 @@ function install_svn {
 function install_xorg {
 print_start xorg
 fix_dependency urxvt rxvt-unicode-256color
-backup_if_needed $HOME/.Xresources .Xresources
-create_link $LOCAL_PATH/Xresources $HOME/.Xresources 
-xrdb
+XRC_NAME=Xresources
+backup_if_needed $HOME/.$XRC_NAME .$XRC_NAME
+create_link $LOCAL_PATH/xorg/$XRC_NAME $HOME/.$XRC_NAME 
+xrdb $HOME/.$XRC_NAME
 print_done xorg
 }
 
