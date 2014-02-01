@@ -150,7 +150,7 @@ print_start xorg
 fix_dependency urxvt rxvt-unicode-256color
 XRC_NAME=Xresources
 backup_if_needed $HOME/.$XRC_NAME .$XRC_NAME
-create_link $LOCAL_PATH/xorg/$XRC_NAME $HOME/.$XRC_NAME 
+create_link $LOCAL_PATH/$XRC_NAME $HOME/.$XRC_NAME 
 xrdb $HOME/.$XRC_NAME
 print_done xorg
 }
