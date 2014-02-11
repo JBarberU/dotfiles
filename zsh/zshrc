@@ -19,6 +19,7 @@ alias dvorak="setxkbmap \"se(svdvorak)\""
 alias se="setxkbmap se"
 alias j="jump"
 alias ag="sudo apt-get"
+alias gmake="make |& grep error"
 
 source $HOME/.aliases
 source $HOME/.paths
@@ -47,5 +48,4 @@ source $HOME/.paths
 plugins=(git jump cabal cp)
 
 source $ZSH/oh-my-zsh.sh
-
 

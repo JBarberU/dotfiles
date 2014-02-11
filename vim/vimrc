@@ -67,7 +67,6 @@ hi ColorColumn ctermfg=Red
 execute "set colorcolumn=" . join(range(81,200), ',')
 
 "========== Map ============"
-command Q q
 
 "== Unmap arrow keys =="
 map <up>	<nop>
@@ -75,27 +74,12 @@ map <down>	<nop>
 map <left>	<nop>
 map <right> <nop>
 
-"== Navigate with htns =="
-noremap ,n n
-noremap s l
-noremap t j
-noremap n k
-
 let mapleader=","
 nmap <silent> ,/ :nohlsearch<CR>
 
-map ,s :w<CR>
-map ,w :q<CR>
-map ,e :e 
-map ,rp :CtrlPClearAllCaches<CR>
 map ,p :CtrlP<CR>
-imap öö <Esc><Esc>
-set timeoutlen=400
-set ttimeoutlen=400
-
-map ,o :foldopen<CR>
-map ,O :foldclose<CR>
-
+set timeoutlen=600
+set ttimeoutlen=600
 
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
