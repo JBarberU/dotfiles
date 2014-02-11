@@ -34,6 +34,16 @@ else
 fi
 }
 
+function install_all_base_programs {
+	fix_dependency "vim";
+	fix_dependency "zsh";
+	fix_dependency "xclip";
+	fix_dependency "git";
+	fix_dependency "xmonad";
+	fix_dependency "xmobar";
+	fix_dependency "dmenu";
+}
+
 function backup_if_needed {
 
 if [ -e $1 ]; then
@@ -138,13 +148,6 @@ create_link $LOCAL_PATH/xmobar/desktop $HOME/.xmobarrc
 print_done "xmobar desktop"
 }
 
-function install_svn {
-
-  print_start svn
-  fix_dependency svn subversion
-  create_link $LOCAL_PATH/svn/plugins/svn-color/svn-color.py /usr/local/bin/svnc sudo
-}
-
 function install_xorg {
 print_start xorg
 fix_dependency urxvt rxvt-unicode-256color
@@ -170,23 +173,6 @@ create_link $LOCAL_PATH/irssi $HOME/.irssi
 print_done irssi
 }
 
-function install_yi {
-
-print_start yi
-hash yi 2>/dev/null || echo -e "$RED
-***************************************************************$NORMAL
-
-The yi editor is not available in the main repositaries, 
-you'll have to install it manually (try cabal install).
-$RED
-***************************************************************$NORMAL
-"
-
-backup_if_needed $HOME/.config/yi .config/yi
-create_link $LOCAL_PATH/yi $HOME/.config/yi
-print_done yi
-}
-
 NO_BACKUP=false
 HELP=false
 
@@ -199,8 +185,6 @@ GIT=false
 ZSH=false
 XORG=false
 IRSSI=false
-YI=false
-SVN=false
 
 ALL=false
 
@@ -216,9 +200,7 @@ a) ALL=true;;
 g) GIT=true;;
     z) ZSH=true;;
   t) XORG=true;;
-  s) SVN=true;;
 i) IRSSI=true;;
-    y) YI=true;;
   h) HELP=true;;
 !) NO_BACKUP=true;;
   esac
@@ -229,10 +211,9 @@ if ($ALL); then
   VIM=true;
   GIT=true;
   ZSH=true;
-  SVN=true;
   XORG=true;
   IRSSI=true;
-  YI=true;
+  install_all_base_programs;
 fi
 
 if ($HELP); then
@@ -245,11 +226,9 @@ if ($HELP); then
   h) Shows this help page
   i) Installs irssi config
   l) Installs laptop specific stuff (xmobarrc mainly)
-  s) Installs svn stuff
   t) Installs Xorg resources, mainly used by URxvt
   v) Installs vimrc and plugins
   x) Installs xmonad base, has to be followed by one of -l or -d
-  y) Installs yi config
   z) Installs zshrc and oh-my-zsh
   !) Skip backup of conflicting files (use with caution)
   $BOLD
@@ -283,17 +262,11 @@ else
     if ($ZSH); then
       install_zsh;
     fi
-    if ($SVN); then
-      install_svn;
-    fi
     if ($XORG); then
       install_xorg;
     fi
     if ($IRSSI); then
       install_irssi;
-    fi
-    if ($YI); then
-      install_yi;
     fi
     if ($XMONAD || $XORG || $VIM || $GIT || $SVN || $YI || $ZSH || $IRSSI); then
       info_message "Done!"
