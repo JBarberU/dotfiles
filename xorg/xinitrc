@@ -8,4 +8,5 @@ export GNOME_KEYRING_PID
 nm-applet &
 
 setxkbmap "se(svdvorak)" &
+xrdb ~/.Xresources
 xmonad

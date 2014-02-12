@@ -112,10 +112,11 @@ backup_if_needed $HOME/.zshrc .zshrc
 backup_if_needed $HOME/.oh-my-zsh .oh-my-zsh
 create_link $LOCAL_PATH/zsh/zshrc $HOME/.zshrc
 create_link $LOCAL_PATH/zsh/oh-my-zsh $HOME/.oh-my-zsh
+touch $HOME/.aliases $HOME/.paths
 print_done zsh
 }
 
-function install_xmonad_base {
+function install_xmonad {
 print_start xmonad
 fix_dependency xmonad
 fix_dependency xmobar
@@ -131,30 +132,26 @@ create_link $LOCAL_PATH/xmonad/xmonad.desktop /usr/share/xsessions/xmonad.deskto
 create_link $LOCAL_PATH/xmonad/xmonad-startup /usr/local/bin/xmonad-startup sudo
 create_link $LOCAL_PATH/haskell/ghci $HOME/.ghci
 touch $HOME/.dmenu_favourites
+
+backup_if_needed $HOME/.xmobarrc .xmobarrc
+create_link $LOCAL_PATH/xmonad/xmobarrc $HOME/.xmobarrc
+
+backup_if_needed $HOME/.initrc .xinitrc
+create_link $LOCAL_PATH/xorg/xinitrc $HOME/.xinitrc
+
 print_done xmonad
 }
 
-function install_xmonad_laptop {
-print_start "xmobar laptop"
-backup_if_needed $HOME/.xmobarrc .xmobarrc
-create_link $LOCAL_PATH/xmobar/laptop $HOME/.xmobarrc
-print_done "xmobar laptop"
-}
-
-function install_xmonad_desktop {
-print_start "xmobar desktop"
-backup_if_needed $HOME/.xmobarrc .xmobarrc
-create_link $LOCAL_PATH/xmobar/desktop $HOME/.xmobarrc
-print_done "xmobar desktop"
-}
-
-function install_xorg {
+function install_term {
 print_start xorg
 fix_dependency urxvt rxvt-unicode-256color
 XRC_NAME=Xresources
 backup_if_needed $HOME/.$XRC_NAME .$XRC_NAME
-create_link $LOCAL_PATH/$XRC_NAME $HOME/.$XRC_NAME 
+create_link $LOCAL_PATH/xorg/$XRC_NAME $HOME/.$XRC_NAME 
 xrdb $HOME/.$XRC_NAME
+
+backup_if_needed $HOME/.xinitrc .xinitrc
+create_link $LOCAL_PATH/xorg/xinitrc $HOME/.xinitrc 
 print_done xorg
 }
 
@@ -176,14 +173,11 @@ print_done irssi
 NO_BACKUP=false
 HELP=false
 
-LAPTOP=false
-DESKTOP=false
-
 XMONAD=false
 VIM=false
 GIT=false
 ZSH=false
-XORG=false
+TERM=false
 IRSSI=false
 
 ALL=false
@@ -192,14 +186,12 @@ while getopts ldaxvgzstiyh! option
 do
   case "${option}"
     in
-    l) LAPTOP=true;;
-  d) DESKTOP=true;;
 a) ALL=true;;
     x) XMONAD=true;;
   v) VIM=true;;
 g) GIT=true;;
     z) ZSH=true;;
-  t) XORG=true;;
+  t) TERM=true;;
 i) IRSSI=true;;
   h) HELP=true;;
 !) NO_BACKUP=true;;
@@ -211,7 +203,7 @@ if ($ALL); then
   VIM=true;
   GIT=true;
   ZSH=true;
-  XORG=true;
+  TERM=true;
   IRSSI=true;
   install_all_base_programs;
 fi
@@ -239,19 +231,8 @@ if ($HELP); then
   ./install -ad  # Will install everything for desktop
   "
 else
-
-  if ($LAPTOP && $DESKTOP); then
-    error_message "You can't install both the laptop and desktop version!";
-  elif ($XMONAD && !($LAPTOP) && !($DESKTOP)); then
-    info_message "You must install either the laptop or desktop version!";
-  else
     if ($XMONAD); then
-      install_xmonad_base;
-      if ($LAPTOP); then
-        install_xmonad_laptop;
-      elif ($DESKTOP); then
-        install_xmonad_desktop;
-      fi
+      install_xmonad;
     fi
     if ($VIM); then
       install_vim;
@@ -262,17 +243,16 @@ else
     if ($ZSH); then
       install_zsh;
     fi
-    if ($XORG); then
-      install_xorg;
+    if ($TERM); then
+      install_term;
     fi
     if ($IRSSI); then
       install_irssi;
     fi
-    if ($XMONAD || $XORG || $VIM || $GIT || $SVN || $YI || $ZSH || $IRSSI); then
+    if ($XMONAD || $TERM || $VIM || $GIT || $YI || $ZSH || $IRSSI); then
       info_message "Done!"
     else
       warning_message "Nothing was installed. Try ./install -h?"
     fi
-  fi
 fi
 
