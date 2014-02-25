@@ -7,6 +7,7 @@ export GNOME_KEYRING_SOCKET
 export GNOME_KEYRING_PID
 nm-applet &
 
+xsetroot -cursor_name left_ptr
 setxkbmap "se(svdvorak)" &
 xrdb ~/.Xresources
 xmonad
