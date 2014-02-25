@@ -42,6 +42,10 @@ function install_all_base_programs {
 	fix_dependency "xmonad";
 	fix_dependency "xmobar";
 	fix_dependency "dmenu";
+	fix_dependency "cmake";
+	fix_dependency "make";
+	fix_dependency "g++";
+	fix_dependency "feh";
 }
 
 function backup_if_needed {
