@@ -1,0 +1,11 @@
+#!/bin/bash
+getlist() {
+	IFS=$'\n'
+	for file in $(ls -1 *.mp3); do
+		echo Starting playback of $file...
+		mpg123 -q $file
+		echo Done with $file
+	done
+}
+
+getlist
