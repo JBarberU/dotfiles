@@ -66,10 +66,10 @@ else
 	fi
 	if ($OPT_BUILDSYS); then
 		if ($OPT_HEADER); then
-			add_to_cmake "\${INCROOT}/$FILE_NAME.h" $FILE_PATH
+			add_to_cmake "$FILE_NAME.h" $FILE_PATH
 		fi
 		if ($OPT_SOURCE); then
-			add_to_cmake "\${SRCROOT}/$FILE_NAME.cpp" $FILE_PATH
+			add_to_cmake "$FILE_NAME.cpp" $FILE_PATH
 		fi
 	fi
 fi
