@@ -45,7 +45,7 @@ myScratchpads =
     full = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
     top = customFloating $ W.RationalRect 0.0 0.0 1.0 0.5
     bottom = customFloating $ W.RationalRect 0.0 0.7 1.0 0.3
-    browser = "iceweasel"
+    browser = "firefox"
     --reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
   in
   [NS x y (appName =? z) full | (x,y,z) <-
