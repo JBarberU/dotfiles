@@ -1,0 +1,3 @@
+# Replace all underscores with spaces
+for FILE in *; do mv $FILE "`echo $FILE | tr '_' ' '`"; done
+
