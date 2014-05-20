@@ -1,3 +1,11 @@
 # Replace all underscores with spaces
 for FILE in *; do mv $FILE "`echo $FILE | tr '_' ' '`"; done
 
+# Export all markdown files to pdf with pandoc 
+# and put them in a zip archive
+OUT_FOLD=/tmp/somefolder
+for FILE in *.md; do
+	pandoc $FILE -o $OUT_FOLD/${FILE%%.*}.pdf;
+done
+zip -r $OUT_FOLD.zip $OUT_FOLD
+
