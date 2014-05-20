@@ -52,7 +52,8 @@ myScratchpads =
     [
       ("Browser",       browser, "myBrowser"),
       ("IrssiTerminal", myNamedTerminal ++ "IrssiTerminal -e irssi", "IrssiTerminal"),
-      ("AlsaTerminal", myNamedTerminal ++ "AlsaTerminal -e alsamixer", "AlsaTerminal")
+      ("AlsaTerminal", myNamedTerminal ++ "AlsaTerminal -e alsamixer", "AlsaTerminal"),
+      ("FullTerminal", myNamedTerminal ++ "FullTerminal", "FullTerminal")
     ]
   ]
   ++
@@ -86,13 +87,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	    (xK_g,      namedScratchpadAction myScratchpads "Browser"),
 	    (xK_Return, windows W.swapMaster),
 	    (xK_h,      sendMessage Shrink),
-	    (xK_s,      sendMessage Expand),
+	    (xK_l,      sendMessage Expand),
 	    (xK_space,  spawn "exe=`cat ~/.dmenu_favourites | dmenu -b ` && eval \"exec $exe\""),
 	    (xK_b,      sendMessage ToggleStruts),
       (xK_q,      restart "xmonad" True),
 	    (xK_t,      namedScratchpadAction myScratchpads "BottomTerminal"),
       (xK_n,      namedScratchpadAction myScratchpads "TopTerminal"),
       (xK_i,      namedScratchpadAction myScratchpads "IrssiTerminal"),
+      (xK_s,      namedScratchpadAction myScratchpads "FullTerminal"),
       (xK_a,      namedScratchpadAction myScratchpads "AlsaTerminal")
     ]
   ]
