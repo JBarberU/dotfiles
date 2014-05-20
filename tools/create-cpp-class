@@ -42,10 +42,15 @@ if ($OPT_BUILDSYS); then
 fi
 
 FILE_NAME=""
+CPP_CLASSNAME=[]
 FILE_PATH=""
 
 if [ $NUM_OPT = 0 ]; then
-	echo "Not doing anything..."	
+	echo "Not doing anything..."
+	echo "Usage: "
+	echo "c) Creates source file"
+	echo "h) Creates header file"
+	echo "b) Adds the created files to CMakeLists"
 else 
 	if [ $NUM_OPT = 1 ]; then
 		FILE_NAME=$2
@@ -59,7 +64,7 @@ else
 	fi
 
 	if ($OPT_HEADER); then
-		create_file "#ifndef CLASS_H\n#define CLASS_H\n\nnamespace dreamler\n{\n\nnamespace some_namespace\n{\n\nclass $FILE_NAME\n{\npublic:\n\n};\n\n}\n}\n\n#endif //CLASS_H" $FILE_PATH/$FILE_NAME.h 
+		create_file "#ifndef CLASS_H\n#define CLASS_H\n\nnamespace dreamler\n{\nnamespace some_namespace\n{\n\nclass $FILE_NAME\n{\npublic:\n\n};\n\n}\n}\n\n#endif //CLASS_H" $FILE_PATH/$FILE_NAME.h 
 	fi
 	if ($OPT_SOURCE); then
 		create_file "#include \"stdafx.h\"\n#include \"$FILE_NAME.h\"\n\nnamespace dreamler\n{\nnamespace some_namespace\n{\n\n\n}\n}\n" $FILE_PATH/$FILE_NAME.cpp
