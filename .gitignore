@@ -21,3 +21,6 @@ xmonad/xmonad.o
 xmonad/xmonad-x86_64-linux
 vim/vim/autoload
 vim/vim/syntax
+
+# No longer track Qt config
+qt/
