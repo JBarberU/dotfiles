@@ -56,3 +56,4 @@ cabal.sandbox.config
 /db/*.sqlite3-journal
 /log/*.log
 /tmp
+CMakeLists.txt.user
