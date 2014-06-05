@@ -84,6 +84,7 @@ set ttimeoutlen=600
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <F4> :A<CR>
 nmap <F3> :AV<CR>
+nmap <C-h> :TagbarToggle<CR>
 
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
