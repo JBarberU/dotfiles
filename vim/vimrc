@@ -82,6 +82,8 @@ set timeoutlen=600
 set ttimeoutlen=600
 
 nmap <C-n> :NERDTreeToggle<CR>
+nmap <F4> :A<CR>
+nmap <F3> :AV<CR>
 
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
