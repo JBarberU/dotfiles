@@ -81,6 +81,8 @@ map ,p :CtrlP<CR>
 set timeoutlen=600
 set ttimeoutlen=600
 
+nmap <C-n> :NERDTreeToggle<CR>
+
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
 
