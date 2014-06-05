@@ -98,3 +98,6 @@ set wildignore+=*/tmp/*,*.o,*.so,*.hi,*.pdf,*.swp,*.zip     " MacOSX/Linux
 "If we ever want to use windows, lolz
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-std=c++0x'
+let g:syntastic_cpp_check_header = 1
