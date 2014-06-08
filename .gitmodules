@@ -1,6 +1,6 @@
 [submodule "vim/vim/bundle/nerdtree"]
 	path = vim/vim/bundle/nerdtree
-	url = https://github.com:scrooloose/nerdtree.git
+	url = https://github.com/scrooloose/nerdtree.git
 [submodule "vim/vim/bundle/vim-easymotion"]
 	path = vim/vim/bundle/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
@@ -43,3 +43,12 @@
 [submodule "vim/vim/bundle/html-template-syntax"]
 	path = vim/vim/bundle/html-template-syntax
 	url = https://github.com/pbrisbin/html-template-syntax.git
+[submodule "vim/vim/bundle/a"]
+	path = vim/vim/bundle/a
+	url = https://github.com/vim-scripts/a.vim
+[submodule "vim/vim/bundle/taglist"]
+	path = vim/vim/bundle/taglist
+	url = https://github.com/vim-scripts/taglist.vim
+[submodule "vim/vim/bundle/supertab"]
+	path = vim/vim/bundle/supertab
+	url = https://github.com/ervandew/supertab
