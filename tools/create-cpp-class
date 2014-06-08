@@ -64,10 +64,10 @@ else
 	fi
 
 	if ($OPT_HEADER); then
-		create_file "#ifndef CLASS_H\n#define CLASS_H\n\nnamespace dreamler\n{\nnamespace some_namespace\n{\n\nclass $FILE_NAME\n{\npublic:\n\n};\n\n}\n}\n\n#endif //CLASS_H" $FILE_PATH/$FILE_NAME.h 
+		create_file "#pragma once\n\nnamespace dreamler\n{\nnamespace \n{\n\nclass $FILE_NAME\n{\npublic:\n\n};\n\n}\n}\n\n" $FILE_PATH/$FILE_NAME.h 
 	fi
 	if ($OPT_SOURCE); then
-		create_file "#include \"stdafx.h\"\n#include \"$FILE_NAME.h\"\n\nnamespace dreamler\n{\nnamespace some_namespace\n{\n\n\n}\n}\n" $FILE_PATH/$FILE_NAME.cpp
+		create_file "#include \"stdafx.h\"\n#include \"$FILE_NAME.h\"\n\nnamespace dreamler\n{\nnamespace \n{\n\n\n}\n}\n" $FILE_PATH/$FILE_NAME.cpp
 	fi
 	if ($OPT_BUILDSYS); then
 		if ($OPT_HEADER); then
