@@ -76,6 +76,10 @@ map <right> <nop>
 
 let mapleader=","
 nmap <silent> ,/ :nohlsearch<CR>
+nmap <C-n><C-n> :NERDTreeToggle<CR>
+nmap <C-n><C-t> :TlistToggle<CR>
+nmap <F4> :A<CR>
+nmap <F3> :AV<CR>
 
 map ,p :CtrlP<CR>
 set timeoutlen=600
@@ -101,6 +105,9 @@ set wildignore+=*/tmp/*,*.o,*.so,*.hi,*.pdf,*.swp,*.zip     " MacOSX/Linux
 "If we ever want to use windows, lolz
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
+"let g:clang_library_path = "/usr/lib/llvm-3.5/lib/"
+
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
 let g:syntastic_cpp_check_header = 1
+
