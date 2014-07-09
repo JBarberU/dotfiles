@@ -38,7 +38,10 @@ if has("autocmd")
   au InsertLeave * set nocul 
 endif
 
-set nocompatible
+" conceal in insert (i), normal (n) and visual (v) modes
+set concealcursor=inv
+" hide concealed text completely unless replacement character is defined
+set conceallevel=2
 
 " Pathogen
 call pathogen#infect()
@@ -105,9 +108,17 @@ set wildignore+=*/tmp/*,*.o,*.so,*.hi,*.pdf,*.swp,*.zip     " MacOSX/Linux
 "If we ever want to use windows, lolz
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-"let g:clang_library_path = "/usr/lib/llvm-3.5/lib/"
-
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++0x'
-let g:syntastic_cpp_check_header = 1
+let g:clang_use_library      = 1
+let g:clang_auto_select      = 0
+let g:clang_complete_auto    = 1
+let g:clang_complete_copen   = 1
+let g:clang_complete_macros  = 1
+let g:clang_complete_patters = 1
+set completeopt=menu,longest
+let g:clang_library_path = "/usr/lib/llvm-3.5/lib/"
+let g:clang_snippets = 1
+let g:clang_snippets_engine = 'clang_complete'
+let g:clang_conceal_snippets = 1
+let g:clang_trailing_placeholder = 1
+let g:clang_close_preview = 1
 
