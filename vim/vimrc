@@ -13,6 +13,8 @@ set smartindent
 set autoindent
 set showbreak=...
 
+set backspace=indent,eol,start
+
 
 "============ Swap files ============"
 "No swap files"
@@ -79,8 +81,8 @@ map <right> <nop>
 
 let mapleader=","
 nmap <silent> ,/ :nohlsearch<CR>
-nmap <C-n><C-n> :NERDTreeToggle<CR>
-nmap <C-n><C-t> :TlistToggle<CR>
+nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-h> :TlistToggle<CR>
 nmap <F4> :A<CR>
 nmap <F3> :AV<CR>
 
@@ -91,7 +93,8 @@ set ttimeoutlen=600
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <F4> :A<CR>
 nmap <F3> :AV<CR>
-nmap <C-h> :TagbarToggle<CR>
+nmap <C-b> :make install<CR>
+nmap do ddO
 
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
