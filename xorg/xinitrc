@@ -10,4 +10,5 @@ nm-applet &
 xsetroot -cursor_name left_ptr
 setxkbmap "se(svdvorak)" &
 xrdb ~/.Xresources
+conky
 xmonad
