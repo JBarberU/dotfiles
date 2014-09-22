@@ -30,7 +30,7 @@ set nowb
 "============ Auto completion ============"
 set wildmenu
 set wildmode=list:longest,full
-set wildignorecase
+set wildignore=*.o,*.obj,*.pdf
 set ignorecase
 set smartcase
 
