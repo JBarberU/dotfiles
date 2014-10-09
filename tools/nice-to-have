@@ -1,0 +1,20 @@
+# Install Spotify
+```bash
+$ cd /tmp
+$ wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl0.9.8_0.9.8o-4squeeze14_amd64.deb
+$ sudo dpkg -i libssl0.9.8_0.9.8o-4squeeze14_amd64.deb
+ 
+```
+
+# Add the following to /etc/apt/sources.list
+```bash
+# Spotify
+deb http://repository.spotify.com stable non-free
+```
+
+# Run 
+```bash
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 94558F59
+$ sudo apt-get update
+$ sudo apt-get install spotify-client
+```
