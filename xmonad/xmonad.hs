@@ -88,7 +88,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	    (xK_Return, windows W.swapMaster),
 	    (xK_h,      sendMessage Shrink),
 	    (xK_l,      sendMessage Expand),
-	    (xK_space,  spawn "exe=`cat ~/.dmenu_favourites | dmenu -b ` && eval \"exec $exe\""),
+	    (xK_space,  spawn "cat ~/.dmenu_favourites | dmenu -b"),
 	    (xK_b,      sendMessage ToggleStruts),
       (xK_q,      restart "xmonad" True),
 	    (xK_t,      namedScratchpadAction myScratchpads "BottomTerminal"),
@@ -102,7 +102,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   [((mshift, x), y) | (x,y) <- 
     [
       (xK_Return, spawn $ XMonad.terminal conf),
-      (xK_space,  spawn "exe=`dmenu_path | dmenu -b ` && eval \"exec $exe\""),
+      (xK_space,  spawn "dmenu_run -b"),
 	    (xK_l,      spawn "slock"),
 	    (xK_q,      io exitSuccess),
 	    (xK_n,      spawn "nautilus"),
