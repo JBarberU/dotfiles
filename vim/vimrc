@@ -45,6 +45,9 @@ set concealcursor=inv
 " hide concealed text completely unless replacement character is defined
 set conceallevel=2
 
+" Auto resource vimrc
+au! BufWritePost .vimrc nested source % 
+
 " Pathogen
 call pathogen#infect()
 call pathogen#helptags()
