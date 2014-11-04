@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Shorthand for finding pid for a process
+function fproc {
+	local MSG="You have to supply a process name"
+	local ARG=""
+	if [ -z "$1" ]; then
+		echo "$MSG (use -e for extended mode)"
+		return;
+	elif [ "$1" = "-e" ]; then
+		if [ -z $2 ]; then
+			echo "$MSG";
+			return;
+		else
+			ARG="$2"
+			ps ax | grep -v grep | grep "$ARG"
+		fi
+	elif [ "$2" = "-e" ]; then
+			ARG="$1"
+			ps ax | grep -v grep | grep "$ARG"
+	else
+		ARG="$1"
+		ps ax | grep -v grep | grep "$ARG" | awk '{print $1}'
+	fi
+}
+

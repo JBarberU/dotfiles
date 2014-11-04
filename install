@@ -117,6 +117,7 @@ backup_if_needed $HOME/.zshrc .zshrc
 backup_if_needed $HOME/.oh-my-zsh .oh-my-zsh
 create_link $LOCAL_PATH/zsh/zshrc $HOME/.zshrc
 create_link $LOCAL_PATH/zsh/oh-my-zsh $HOME/.oh-my-zsh
+create_link $LOCAL_PATH/zsh/sh_functions $HOME/.sh_functions
 touch $HOME/.aliases $HOME/.paths
 print_done zsh
 }

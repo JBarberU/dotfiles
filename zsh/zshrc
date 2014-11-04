@@ -23,6 +23,7 @@ alias gmake="make |& grep error"
 
 source $HOME/.aliases
 source $HOME/.paths
+source $HOME/.sh_functions
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -48,4 +49,3 @@ source $HOME/.paths
 plugins=(git jump cabal cp rails gem bundler)
 
 source $ZSH/oh-my-zsh.sh
-
