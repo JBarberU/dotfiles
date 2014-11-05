@@ -27,4 +27,4 @@
 	ui = true
 
 [help]
-	autocorrect = 1
+	autocorrect = 40
