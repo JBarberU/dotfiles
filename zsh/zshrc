@@ -20,6 +20,7 @@ alias se="setxkbmap se"
 alias j="jump"
 alias ag="sudo apt-get"
 alias gmake="make |& grep error"
+alias sx="startx"
 
 source $HOME/.aliases
 source $HOME/.paths
