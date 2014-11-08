@@ -1,14 +1,16 @@
 #!/bin/bash
 
+# ssh-agent
 eval $(ssh-agent)
-
-eval $(gnome-keyring-daemon --start --components keyring,pkcs11)
-export GNOME_KEYRING_SOCKET
-export GNOME_KEYRING_PID
 nm-applet &
 
-xsetroot -cursor_name left_ptr
+# Set cursor
+xset s offxsetroot -cursor_name left_ptr
+
+# Svdvorak :)
 setxkbmap "se(svdvorak)" &
 xrdb ~/.Xresources
+
+# Start WM
 conky
 xmonad
