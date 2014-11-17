@@ -46,6 +46,6 @@ source $HOME/.sh_functions
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git jump cabal cp rails gem bundler)
+plugins=(bundler cabal cp gem git jump rails tmux web-search)
 
 source $ZSH/oh-my-zsh.sh

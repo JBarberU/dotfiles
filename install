@@ -38,6 +38,7 @@ function install_all_base_programs {
 	fix_dependency "vim";
 	fix_dependency "zsh";
 	fix_dependency "xclip";
+	fix_dependency "tmux";
 	fix_dependency "git";
 	fix_dependency "xmonad";
 	fix_dependency "xmobar";
@@ -115,8 +116,10 @@ print_start zsh
 fix_dependency zsh
 backup_if_needed $HOME/.zshrc .zshrc
 backup_if_needed $HOME/.oh-my-zsh .oh-my-zsh
+backup_if_needed $HOME/.tmux.conf .tmux.conf
 create_link $LOCAL_PATH/zsh/zshrc $HOME/.zshrc
 create_link $LOCAL_PATH/zsh/oh-my-zsh $HOME/.oh-my-zsh
+create_link $LOCAL_PATH/tmux/tmux.conf $HOME/.tmux.conf
 create_link $LOCAL_PATH/zsh/sh_functions $HOME/.sh_functions
 touch $HOME/.aliases $HOME/.paths
 print_done zsh

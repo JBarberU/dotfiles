@@ -96,7 +96,6 @@ set ttimeoutlen=600
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <F4> :A<CR>
 nmap <F3> :AV<CR>
-nmap <C-b> :make install<CR>
 nmap do ddO
 
 "== w!! to sudo write =="
