@@ -21,9 +21,15 @@ alias j="jump"
 alias ag="sudo apt-get"
 alias gmake="make |& grep error"
 
-source $HOME/.aliases
-source $HOME/.paths
-source $HOME/.sh_functions
+function src_if_exists {
+	if [ -e "$1" ]; then
+		source "$1"
+	fi
+}
+src_if_exists $HOME/.aliases
+src_if_exists $HOME/.paths
+src_if_exists $HOME/.env
+src_if_exists $HOME/.sh_functions
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
