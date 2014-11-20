@@ -58,3 +58,6 @@
 [submodule "tools/todo-term"]
 	path = tools/todo-term
 	url = https://github.com/JBarberU/todo-term.git
+[submodule "vim/vim/bundle/vim-diffsaved"]
+	path = vim/vim/bundle/vim-diffsaved
+	url = https://github.com/JBarberU/vim-diffsaved.git
