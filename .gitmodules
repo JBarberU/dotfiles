@@ -55,3 +55,6 @@
 [submodule "vim/vim/bundle/vim-local"]
 	path = vim/vim/bundle/vim-local
 	url = https://github.com/JBarberU/vim-local.git
+[submodule "tools/todo-term"]
+	path = tools/todo-term
+	url = https://github.com/JBarberU/todo-term.git
