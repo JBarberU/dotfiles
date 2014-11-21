@@ -20,6 +20,7 @@ alias j="jump"
 alias ag="sudo apt-get"
 alias zshreload="source ~/.zshrc"
 alias sx="startx"
+alias tmux="tmux -u"
 
 function src_if_exists {
 	if [ -e "$1" ]; then
