@@ -11,7 +11,7 @@ ZSH_THEME="gianu"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias gs="git status &> /dev/null || echo \"Not a git repository, doing ls instead\n\" && ls"
+alias gs="git status 2> /dev/null || (echo \"Not a git repository, doing ls instead\n\" && ls)"
 alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo \"Copied public key to clipboard...\""
 alias natti="echo \"Shutting down $HOST\" && sudo -k && sudo shutdown -h now"
 alias dvorak="setxkbmap \"se(svdvorak)\""
