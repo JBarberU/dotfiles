@@ -61,3 +61,6 @@
 [submodule "vim/vim/bundle/vim-diffsaved"]
 	path = vim/vim/bundle/vim-diffsaved
 	url = https://github.com/JBarberU/vim-diffsaved.git
+[submodule "tools/battery-term"]
+	path = tools/battery-term
+	url = https://github.com/JBarberU/battery-term.git
