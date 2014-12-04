@@ -27,10 +27,18 @@ function src_if_exists {
 		source "$1"
 	fi
 }
+
+function src_if_os {
+	if [ "$(uname)" = "$1" ]; then
+		src_if_exists "$2";
+	fi
+}
+
 src_if_exists $HOME/.aliases
 src_if_exists $HOME/.paths
 src_if_exists $HOME/.env
 src_if_exists $HOME/.sh_functions
+src_if_os "Darwin" ".zshrc_osx"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
