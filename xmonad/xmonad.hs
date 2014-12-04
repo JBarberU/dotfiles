@@ -157,6 +157,8 @@ myManageHook =  composeAll
   [
     (className =? "Xmessage") --> doCenterFloat,
     (className =? "Nvidia-settings") --> doCenterFloat,
+    (className =? "Steam") --> doFloat,
+    (className =? "Friends") --> doCenterFloat,
     (className =? "Nautilus") --> doCenterFloat,
     isFullscreen --> doFullFloat,
     isDialog --> doCenterFloat
