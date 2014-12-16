@@ -37,7 +37,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
 
 myWorkspaces :: [String]
-myWorkspaces = ["Web", "Qt", "Terminal"] ++ map show [4..9]
+myWorkspaces = map show [1..9]
 
 myScratchpads :: [NamedScratchpad]
 myScratchpads = 
