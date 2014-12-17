@@ -184,16 +184,6 @@ create_link $LOCAL_PATH/irssi $HOME/.irssi
 print_done irssi
 }
 
-function install_qt {
-print_start "Qt Creator"
-backup_if_needed $HOME/.config/QtProject/QtCreator.ini .config/QtProject/QtCreator.ini
-backup_if_needed $HOME/.config/QtProject/qtcreator/macros .config/QtProject/qtcreator/macros
-
-create_link $LOCAL_PATH/qt/QtCreator.ini $HOME/.config/QtProject/QtCreator.ini
-create_link $LOCAL_PATH/qt/qtcreator/macros $HOME/.config/QtProject/qtcreator/macros
-print_done "Qt Creator"
-}
-
 NO_BACKUP=false
 HELP=false
 
@@ -203,11 +193,9 @@ GIT=false
 ZSH=false
 TERM=false
 IRSSI=false
-QT=false
-
 ALL=false
 
-while getopts axvgztiqh! option
+while getopts axvgztih! option
 do
   case "${option}"
     in
@@ -218,7 +206,6 @@ g) GIT=true;;
     z) ZSH=true;;
   t) TERM=true;;
 i) IRSSI=true;;
-  q) QT=true;;
 h) HELP=true;;
   !) NO_BACKUP=true;;
   esac
@@ -231,7 +218,6 @@ if ($ALL); then
   ZSH=true;
   TERM=true;
   IRSSI=true;
-  QT=true;
   install_all_base_programs;
 fi
 
@@ -247,7 +233,6 @@ if ($HELP); then
   v) Installs vimrc and plugins
   x) Installs xmonad configs
   z) Installs zshrc and oh-my-zsh
-  q) Installs Qt Creator configs
   !) Skip backup of conflicting files (use with caution)
   $BOLD
   Examples:$NORMAL
@@ -275,10 +260,7 @@ else
     if ($IRSSI); then
       install_irssi;
     fi
-	if ($QT); then
-	  install_qt;
-	fi
-    if ($XMONAD || $TERM || $VIM || $GIT || $YI || $ZSH || $IRSSI || $QT); then
+    if ($XMONAD || $TERM || $VIM || $GIT || $YI || $ZSH || $IRSSI); then
       info_message "Done!"
     else
       warning_message "Nothing was installed. Try ./install -h?"
