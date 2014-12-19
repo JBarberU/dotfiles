@@ -158,3 +158,6 @@ let g:airline_powerline_fonts = 1
 
 " nerdtree
 let NERDTreeIgnore = ["\.pyc", "\.so$", "\.a$"]
+
+" ctags
+nnoremap <silent> <F3> :TlistToggle<CR>
