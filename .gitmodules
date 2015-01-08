@@ -82,3 +82,9 @@
 [submodule "vim/vim/bundle/vim-indent-guides.git"]
 	path = vim/vim/bundle/vim-indent-guides.git
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "vim/vim/bundle/vimshell"]
+	path = vim/vim/bundle/vimshell
+	url = https://github.com/Shougo/vimshell.vim.git
+[submodule "vim/vim/bundle/vimproc"]
+	path = vim/vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim.git
