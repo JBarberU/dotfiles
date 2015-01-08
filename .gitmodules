@@ -73,3 +73,12 @@
 [submodule "tools/timetracker-term"]
 	path = tools/timetracker-term
 	url = https://github.com/JBarberU/timetracker-term.git
+[submodule "vim/vim/bundle/vim-airline"]
+	path = vim/vim/bundle/vim-airline
+	url = https://github.com/bling/vim-airline.git
+[submodule "vim/vim/bundle/nerdcommenter"]
+	path = vim/vim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/vim/bundle/vim-indent-guides.git"]
+	path = vim/vim/bundle/vim-indent-guides.git
+	url = https://github.com/nathanaelkane/vim-indent-guides.git
