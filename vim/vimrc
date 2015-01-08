@@ -136,8 +136,8 @@ let g:cpp_experimental_template_highlight = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=darkgray
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=gray
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=242
 
 " vim-airline
 let g:airline_powerline_fonts = 1
