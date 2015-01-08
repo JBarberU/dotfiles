@@ -91,3 +91,6 @@
 [submodule "vim/vim/additions/powerline-fonts"]
 	path = vim/vim/additions/powerline-fonts
 	url = https://github.com/powerline/fonts.git
+[submodule "vim/vim/bundle/xterm-color-table"]
+	path = vim/vim/bundle/xterm-color-table
+	url = https://github.com/JBarberU/xterm-color-table.vim.git
