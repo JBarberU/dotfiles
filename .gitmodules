@@ -88,3 +88,6 @@
 [submodule "vim/vim/bundle/vimproc"]
 	path = vim/vim/bundle/vimproc
 	url = https://github.com/Shougo/vimproc.vim.git
+[submodule "vim/vim/additions/powerline-fonts"]
+	path = vim/vim/additions/powerline-fonts
+	url = https://github.com/powerline/fonts.git
