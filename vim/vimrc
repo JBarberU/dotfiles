@@ -11,11 +11,10 @@ set expandtab "Makes vim substitute tab character with spaces"
 set smartindent
 set autoindent
 set showbreak=...
-
-set backspace=indent,eol,start
 set modeline
 set modelines=5
 
+set backspace=indent,eol,start
 
 "============ Swap files ============"
 "No swap files"
@@ -26,7 +25,7 @@ set nowb
 "============ Movement ============"
 "Move one row instead of one line"
 " nmap j gj
-" nmap k gk 
+" nmap k gk
 
 "============ Auto completion ============"
 set wildmenu
@@ -38,7 +37,7 @@ set smartcase
 "============ Cursor ============"
 if has("autocmd")
   au InsertEnter * set cul
-  au InsertLeave * set nocul 
+  au InsertLeave * set nocul
 endif
 
 " conceal in insert (i), normal (n) and visual (v) modes
@@ -47,20 +46,20 @@ set concealcursor=inv
 set conceallevel=2
 
 " Auto resource vimrc
-au! BufWritePost .vimrc nested source % 
+au! BufWritePost .vimrc nested source %
 
 " Pathogen
 call pathogen#infect()
 call pathogen#helptags()
- 
+
 filetype plugin on
 filetype indent off
- 
+
 "========== Theme ============"
 if has('unnamedplus')
-	set clipboard=unnamedplus
+    set clipboard=unnamedplus
 else
-	set clipboard=unnamed
+    set clipboard=unnamed
 endif
 
 set number
@@ -78,9 +77,9 @@ execute "set colorcolumn=" . join(range(81,200), ',')
 "========== Map ============"
 
 "== Unmap arrow keys =="
-map <up>	<nop>
-map <down>	<nop>
-map <left>	<nop>
+map <up>    <nop>
+map <down>  <nop>
+map <left>  <nop>
 map <right> <nop>
 
 let mapleader=","
