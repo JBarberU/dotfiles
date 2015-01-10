@@ -7,6 +7,6 @@ URxvt*saveLines:    10000
 URxvt*color4:       royalBlue
 URxvt*color12:      royalBlue
 
-*font:              xft:DejaVu Sans Mono:pixelsize=15:antialias=true:hinting=true
-*boldFont:          xft:DejaVu Sans Mono:bold:pixelsize=15:antialias=true:hinting=true
+*font:              xft:DejaVu Sans Mono for Powerline:pixelsize=15:antialias=true:hinting=true
+*boldFont:          xft:DejaVu Sans Mono for Powerline:bold:pixelsize=15:antialias=true:hinting=true
 
