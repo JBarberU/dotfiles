@@ -56,11 +56,11 @@ filetype plugin on
 filetype indent off
 
 "========== Theme ============"
-if has('unnamedplus')
-    set clipboard=unnamedplus
-else
-    set clipboard=unnamed
-endif
+" if has('unnamedplus')
+"     set clipboard=unnamedplus
+" else
+"     set clipboard=unnamed
+" endif
 
 set number
 syntax enable
