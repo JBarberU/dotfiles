@@ -70,9 +70,8 @@ set t_Co=16
 
 "============ Page width ============"
 "set textwidth=80
-hi ColorColumn ctermbg=None
-hi ColorColumn ctermfg=Red
-execute "set colorcolumn=" . join(range(81,200), ',')
+hi ColorColumn ctermbg=235
+execute "set colorcolumn=" . join(range(81,82), '|')
 
 "========== Map ============"
 
