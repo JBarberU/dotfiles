@@ -72,6 +72,10 @@ set t_Co=16
 "set textwidth=80
 hi ColorColumn ctermbg=235
 execute "set colorcolumn=" . join(range(81,82), '|')
+set listchars=tab:->,eol:$,trail:~
+set list
+hi NonText ctermfg=232
+hi SpecialKey ctermfg=yellow ctermbg=red
 
 "========== Map ============"
 
