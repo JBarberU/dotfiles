@@ -93,8 +93,12 @@ nmap <F4> :A<CR>
 nmap <F3> :AV<CR>
 
 map ,p :CtrlP<CR>
+map ,,p :CtrlPClearAllCaches<CR>
 set timeoutlen=600
 set ttimeoutlen=600
+
+" Romeve trailing whitespace
+map ,s :%s/\s\+$//g<CR><C-O>
 
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <F4> :A<CR>
