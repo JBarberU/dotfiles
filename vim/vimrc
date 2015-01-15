@@ -147,3 +147,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=242
 
 " vim-airline
 let g:airline_powerline_fonts = 1
+
+" nerdtree
+let NERDTreeIgnore = ["\.pyc", "\.so$", "\.a$"]
