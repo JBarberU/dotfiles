@@ -37,6 +37,8 @@ function src_if_os {
 src_if_exists $HOME/.aliases
 src_if_exists $HOME/.paths
 src_if_exists $HOME/.env
+src_if_exists $HOME/.osx_only
+src_if_exists $HOME/.linux_only
 src_if_exists $HOME/.sh_functions
 src_if_os "Darwin" ".zshrc_osx"
 
