@@ -9,7 +9,10 @@ xset s offxsetroot -cursor_name left_ptr
 
 # Svdvorak :)
 setxkbmap "se(svdvorak)"
+# Swap CapsLock for Escape
 echo "clear Lock\nkeycode 0x42 = Escape\n" | xmodmap -
+
+# Set fonts, colors etc for urxvt
 xrdb ~/.Xresources
 
 # Start WM
