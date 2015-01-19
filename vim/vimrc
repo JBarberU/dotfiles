@@ -163,3 +163,8 @@ let NERDTreeIgnore = ["\.pyc", "\.so$", "\.a$"]
 
 " ctags
 nnoremap <silent> <F3> :TlistToggle<CR>
+
+" ack.vim
+let g:ack_default_options = " -s -H --nocolor --nogroup --column"
+noremap ,f :Ack!<space>
+noremap ,F :AckFromSearc!<CR>
