@@ -20,8 +20,7 @@
 *.pro.user.*
 moc_*.cpp
 qrc_*.cpp
-*-build-*
-*build*
+*-?build-?*[Q,q][T,t]
 
 # Visual Studio
 qtclient/project/GeneratedFiles/
