@@ -1,6 +1,8 @@
 from recipe_base import RecipeBase
 
 class TmuxRecipe(RecipeBase):
+
+  name = "tmux"
   
   def __init__(self, platform, path, home):
     RecipeBase.__init__(self, platform, path, home)
