@@ -1,10 +1,17 @@
 # My dotfiles
 
-## Installation
-    
+## Install
+
     $ git clone https://github.com/JBarberU/dotfiles.git ~/dotfiles
     $ cd ~/dotfiles
-    $ ./install -h
+    $ ./install.py --help
+
+    Note that you'll need to have python 2.7 installed to run the installer.
+
+## Uninstall
+
+    $ cd ~/dotfiles
+    $ ./install.py --all --uninstall
 
 ## Inspiration
 
@@ -13,8 +20,8 @@
 * [danr](https://github.com/danr/dotfiles)
 * [johanbrook](https://github.com/johanbrook/dotfiles)
 
-I've found lots of useful stuff around the web. If you feel that you deserve a 
-mention, don't hesitate to contact me.
+I've found lots of useful stuff around the web. If you feel that you deserve a
+ mention, don't hesitate to contact me.
 
 ## License
 
