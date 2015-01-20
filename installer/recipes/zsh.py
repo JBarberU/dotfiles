@@ -1,4 +1,5 @@
 from recipe_base import RecipeBase
+from log import Log
 
 class ZshRecipe(RecipeBase):
 
@@ -15,7 +16,7 @@ class ZshRecipe(RecipeBase):
       self.links += [
             ("{0}/zsh/zshrc_osx".format(self.path), "{0}/.zshrc_osx".format(self.home)),
         ]
-    self.touch_files = [
+    self.touch_list = [
                   "{0}/.aliases".format(self.home),
                   "{0}/.paths".format(self.home),
               ]
