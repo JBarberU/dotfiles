@@ -20,6 +20,10 @@ class Log:
     Log.print_msg("Warning", msg, Colors.YELLOW_FG, new_line)
 
   @classmethod
+  def note(cls, msg, new_line = True):
+    Log.print_msg("Note", msg, Colors.YELLOW_FG, new_line)
+
+  @classmethod
   def err(cls, msg, new_line = True):
     Log.print_msg("Error", msg, Colors.RED_FG, new_line)
 
