@@ -24,6 +24,11 @@ class Log:
     Log.print_msg("Error", msg, Colors.RED_FG, new_line)
 
   @classmethod
+  def fatal(cls, msg, new_line = True):
+    Log.print_msg("Fatal", msg, Colors.RED_FG, new_line)
+    exit(1)
+
+  @classmethod
   def raw(cls, msg, new_line = True):
     if new_line and msg[-1:] != "\n":
       msg += "\n"
