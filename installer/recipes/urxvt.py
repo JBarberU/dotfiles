@@ -5,8 +5,10 @@ class UrxvtRecipe(RecipeBase):
   name = "urxvt"
 
   def __init__(self, platform, path, home):
-    if platform.linux:
-      self.links = [("xorg/Xresources", ".Xresources")]
-
     RecipeBase.__init__(self, platform, path, home)
+    if platform.linux:
+      self.links = [
+          ("{0}/xorg/Xresources".format(self.path), "{0}/.Xresources".format(self.home))
+        ]
+
 

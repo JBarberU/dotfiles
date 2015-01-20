@@ -6,13 +6,12 @@ from log import Log
 class IrssiRecipe(RecipeBase):
 
   name = "irssi"
-  links = [("irssi", ".irssi")]
 
-  def install(self):
-    config = "{0}/irssi/config".format(self.path)
-    if not path.exists(config):
-      copyfile("{0}.example".format(config), config)
-      Log.info("{0} created, tweak it to suit your needs")
+  def __init__(self, platform, path, home):
+    RecipeBase.__init__(self, platform, path, home)
+    self.links = [("{0}/irssi".format(self.path), "{0}/.irssi".format(self.home))]
+    self.copy_list = [
+          ("{0}/irssi/config.example".format(self.path), "{0}/irssi/config".format(self.path))
+      ]
 
-    RecipeBase.install(self)
 

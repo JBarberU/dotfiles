@@ -4,10 +4,8 @@ class ZshRecipe(RecipeBase):
 
   name = "zsh"
 
-  def install(self):
-    print "installing zsh"
+  def __init__(self, platform, path, home):
+    RecipeBase.__init__(self, platform, path, home)
 
-  def uninstall(self):
-    print "uninstalling zsh"
 
 
