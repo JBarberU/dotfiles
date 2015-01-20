@@ -1,3 +1,0 @@
-#!/bin/bash
-
-PATH="$(echo $PATH | sed 's,/usr/bin,usr_bin,g' | sed 's,/usr/local/bin,usr_local_bin,g' | sed 's,usr_bin,/usr/local/bin,g' | sed 's,usr_local_bin,/usr/bin,g')"

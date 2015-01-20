@@ -1,4 +1,12 @@
+#!/bin/bash
+
 export LC_CTYPE="UTF-8"
 export LANG="en_US.UTF-8"
 export LC_ALL="$LANG"
 
+# Swap places of /usr/bin and /usr/local/bin (for brew installs to load before 
+# system provided programs)
+export PATH="$(echo "$PATH" | sed 's,/usr/bin,usr_bin,g' \
+                            | sed 's,/usr/local/bin,usr_local_bin,g' \
+                            | sed 's,usr_bin,/usr/local/bin,g' \
+                            | sed 's,usr_local_bin,/usr/bin,g')"
