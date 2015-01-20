@@ -24,3 +24,5 @@ vim/vim/syntax
 
 # No longer track Qt config
 qt/
+
+*.pyc
