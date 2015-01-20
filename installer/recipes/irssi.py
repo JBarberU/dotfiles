@@ -5,6 +5,7 @@ from log import Log
 
 class IrssiRecipe(RecipeBase):
 
+  name = "irssi"
   links = [("irssi", ".irssi")]
 
   def install(self):

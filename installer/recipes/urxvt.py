@@ -2,6 +2,8 @@ from recipe_base import RecipeBase
 
 class UrxvtRecipe(RecipeBase):
 
+  name = "urxvt"
+
   def __init__(self, platform, path, home):
     if platform.linux:
       self.links = [("xorg/Xresources", ".Xresources")]

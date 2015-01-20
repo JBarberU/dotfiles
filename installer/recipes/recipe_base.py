@@ -1,10 +1,14 @@
 from os import symlink, path, readlink, remove, rename
 from shutil import copyfile
+from output_pipe import OutputPipe
+from command import run_cmd_ret_output
 from log import Log
+
 
 class RecipeBase:
 
   links = []
+  name = ""
 
   def __init__(self, platform, path, home):
     self.platform = platform

@@ -9,6 +9,8 @@ apt_gets = common + ["zsh", "xclip", "xmonad", "xmobar", "conky-all", "dmenu", "
 
 class ToolsRecipe(RecipeBase):
 
+  name = "tools"
+
   def __check_for_root(self):
     if getuser() != "root":
       Log.fatal("In order to use ToolsRecipe, install.py needs to run as root")

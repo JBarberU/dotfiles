@@ -18,6 +18,7 @@ from zsh import ZshRecipe
 from git import GitRecipe
 from urxvt import UrxvtRecipe
 from irssi import IrssiRecipe
+from submodules import SubmodulesRecipe
 from tools import ToolsRecipe
 from linux import LinuxPlatform
 from mac import MacPlatform
@@ -52,6 +53,7 @@ def main():
   recipes = []
   if args.all:
     recipes = [
+        SubmodulesRecipe(platform, path, home),
         ToolsRecipe(platform, path, home),
         XmonadRecipe(platform, path, home),
         VimRecipe(platform, path, home),
@@ -64,7 +66,7 @@ def main():
     if args.xmonad:
       recipes.append(XmonadRecipe(platform, path, home))
     if args.vim:
-      recipes.append(VimRecipe(platform, path, home))
+      recipes += [SubmodulesRecipe(platform, path, home), VimRecipe(platform, path, home)]
     if args.zsh:
       recipes.append(ZshRecipe(platform, path, home))
     if args.git:
@@ -78,8 +80,10 @@ def main():
 
   for r in recipes:
     if args.uninstall:
+      Log.info("Uninstalling {0}".format(r.name))
       r.uninstall()
     else:
+      Log.info("Installing {0}".format(r.name))
       r.install()
 
   Log.msg("Done!")
