@@ -56,3 +56,6 @@ cabal.sandbox.config
 /log/*.log
 /tmp
 CMakeLists.txt.user
+
+# Python
+*.pyc
