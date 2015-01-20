@@ -1,4 +1,4 @@
-from os import symlink, path, readlink, remove, rename
+from os import symlink, path, readlink, remove, rename, mkdir
 from shutil import copyfile
 from output_pipe import OutputPipe
 from command import run_cmd_ret_output
@@ -11,6 +11,7 @@ class RecipeBase:
   links_abs = []
   copy_list = []
   touch_list = []
+  mkdir_list = []
   name = ""
 
   def __init__(self, platform, path, home):
@@ -19,6 +20,7 @@ class RecipeBase:
     self.home = home
 
   def install(self):
+    self.mkdirs(self.mkdir_list)
     self.create_links(self.links)
     self.copy_files(self.copy_list)
     self.touch_files(self.touch_list)
@@ -32,11 +34,12 @@ class RecipeBase:
       if path.exists(d):
         if not path.islink(d):
           Log.info("Backing up {0} ({0}.bak)".format(d))
-          copyfile(d, "{0}.bak".format(d))
+          rename(d, "{0}.bak".format(d))
         elif path.islink(d):
           if readlink(d) != s:
             Log.warn("Removing existing symlink to {0}, which is currently pointing to {1}".format(d, readlink(d)))
-        remove(d)
+          remove(d)
+
       symlink(s, d)
 
   def remove_links(self, links):
@@ -49,6 +52,13 @@ class RecipeBase:
   def touch_files(self, touch_list):
     for f in touch_list:
       open(f, 'a').close()
+
+  def mkdirs(self, dirs):
+    for d in dirs:
+      try:
+        mkdir(d)
+      except OSError:
+        Log.info("{0} already exists".format(d))
 
   def copy_files(self, copy_list):
     for (s, d) in copy_list:
