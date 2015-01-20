@@ -26,19 +26,6 @@ from mac import MacPlatform
 from windows import WindowsPlatform
 
 def main():
-  parser = argparse.ArgumentParser()
-  parser.add_argument("--xmonad", action = "store_true", help = "Installs xmonad stuff")
-  parser.add_argument("--vim", action = "store_true", help = "Installs vim stuff")
-  parser.add_argument("--zsh", action = "store_true", help = "Installs zsh stuff")
-  parser.add_argument("--git", action = "store_true", help = "Installs git stuff")
-  parser.add_argument("--urxvt", action = "store_true", help = "Installs urxvt stuff")
-  parser.add_argument("--tmux", action = "store_true", help = "Installs tmux stuff")
-  parser.add_argument("--irssi", action = "store_true", help = "Installs irssi stuff")
-  parser.add_argument("--tools", action = "store_true", help = "Runs apt-get and installs useful tools")
-  parser.add_argument("--all", action = "store_true", help = "Installs everything")
-  parser.add_argument("--uninstall", action = "store_true", help = "Uninstalls the given arguments")
-  args = parser.parse_args()
-
   if sys.platform == "linux" or sys.platform == "linux2":
     platform = LinuxPlatform()
   elif sys.platform == "darwin":
@@ -48,6 +35,20 @@ def main():
   else:
     print("Unknown platform: {0}".format(sys.platform))
     exit(1)
+
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--xmonad", action = "store_true", help = "Installs xmonad stuff")
+  parser.add_argument("--vim", action = "store_true", help = "Installs vim stuff")
+  parser.add_argument("--zsh", action = "store_true", help = "Installs zsh stuff")
+  parser.add_argument("--git", action = "store_true", help = "Installs git stuff")
+  parser.add_argument("--urxvt", action = "store_true", help = "Installs urxvt stuff")
+  parser.add_argument("--tmux", action = "store_true", help = "Installs tmux stuff")
+  parser.add_argument("--irssi", action = "store_true", help = "Installs irssi stuff")
+  parser.add_argument("--tools", action = "store_true", \
+      help = "Runs {0} to install useful tools".format("apt-get" if platform.linux else "homebrew"))
+  parser.add_argument("--all", action = "store_true", help = "Installs everything")
+  parser.add_argument("--uninstall", action = "store_true", help = "Uninstalls the given arguments")
+  args = parser.parse_args()
 
   path = os.path.abspath(os.path.dirname(__file__))
   home = os.path.expanduser("~")
@@ -91,6 +92,9 @@ def main():
       Log.info("Installing {0}".format(r.name))
       r.install()
 
-  Log.msg("Done!")
+  if not recipes:
+    Log.warn("Nothing to install")
+  else:
+    Log.msg("Done!")
 
 if __name__ == "__main__": main()
