@@ -17,6 +17,7 @@ from vim import VimRecipe
 from zsh import ZshRecipe
 from git import GitRecipe
 from urxvt import UrxvtRecipe
+from tmux import TmuxRecipe
 from irssi import IrssiRecipe
 from submodules import SubmodulesRecipe
 from tools import ToolsRecipe
@@ -31,6 +32,7 @@ def main():
   parser.add_argument("--zsh", action = "store_true", help = "Installs zsh stuff")
   parser.add_argument("--git", action = "store_true", help = "Installs git stuff")
   parser.add_argument("--urxvt", action = "store_true", help = "Installs urxvt stuff")
+  parser.add_argument("--tmux", action = "store_true", help = "Installs tmux stuff")
   parser.add_argument("--irssi", action = "store_true", help = "Installs irssi stuff")
   parser.add_argument("--tools", action = "store_true", help = "Runs apt-get and installs useful tools")
   parser.add_argument("--all", action = "store_true", help = "Installs everything")
@@ -60,6 +62,7 @@ def main():
         ZshRecipe(platform, path, home),
         GitRecipe(platform, path, home),
         UrxvtRecipe(platform, path, home),
+        TmuxRecipe(platform, path, home),
         IrssiRecipe(platform, path, home),
         ]
   else:
@@ -73,6 +76,8 @@ def main():
       recipes.append(GitRecipe(platform, path, home))
     if args.urxvt:
       recipes.append(UrxvtRecipe(platform, path, home))
+    if args.tmux:
+      recipes.append(TmuxRecipe(platform, path, home))
     if args.irssi:
       recipes.append(IrssiRecipe(platform, path, home))
     if args.tools:

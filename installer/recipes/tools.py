@@ -3,7 +3,7 @@ from command import run_cmd_ret_output, run_chained_commands
 from output_pipe import OutputPipe
 from getpass import getuser
 
-common = ["vim", "irssi", "git"]
+common = ["vim", "irssi", "git", "tmux"]
 brews = common + ["python"]
 apt_gets = common + ["zsh", "xclip", "xmonad", "xmobar", "conky-all", "dmenu", "rxvt-unicode-256color", "feh", "build-essential"]
 
