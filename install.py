@@ -46,30 +46,35 @@ def main():
     print("Unknown platform: {0}".format(sys.platform))
     exit(1)
 
+  path = os.path.abspath(os.path.dirname(__file__))
+  home = os.path.expanduser("~")
+
   recipes = []
   if args.all:
-    recipes = [XmonadRecipe(platform),
-              VimRecipe(platform),
-              ZshRecipe(platform),
-              GitRecipe(platform),
-              UrxvtRecipe(platform),
-              IrssiRecipe(platform),
-              ToolsRecipe(platform)]
+    recipes = [
+        ToolsRecipe(platform, path, home),
+        XmonadRecipe(platform, path, home),
+        VimRecipe(platform, path, home),
+        ZshRecipe(platform, path, home),
+        GitRecipe(platform, path, home),
+        UrxvtRecipe(platform, path, home),
+        IrssiRecipe(platform, path, home),
+        ]
   else:
     if args.xmonad:
-      recipes.append(XmonadRecipe(platform))
+      recipes.append(XmonadRecipe(platform, path, home))
     if args.vim:
-      recipes.append(VimRecipe(platform))
+      recipes.append(VimRecipe(platform, path, home))
     if args.zsh:
-      recipes.append(ZshRecipe(platform))
+      recipes.append(ZshRecipe(platform, path, home))
     if args.git:
-      recipes.append(GitRecipe(platform))
+      recipes.append(GitRecipe(platform, path, home))
     if args.urxvt:
-      recipes.append(UrxvtRecipe(platform))
+      recipes.append(UrxvtRecipe(platform, path, home))
     if args.irssi:
-      recipes.append(IrssiRecipe(platform))
+      recipes.append(IrssiRecipe(platform, path, home))
     if args.tools:
-      recipes.append(ToolsRecipe(platform))
+      recipes.append(ToolsRecipe(platform, path, home))
 
   for r in recipes:
     if args.uninstall:
