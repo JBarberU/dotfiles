@@ -23,5 +23,5 @@ class ZshRecipe(RecipeBase):
 
   def install(self):
     RecipeBase.install(self)
-    Log.warn("Run \"chsh -s /bin/zsh\" to set zsh as our default shell")
+    Log.note("Run \"chsh -s $(which zsh)\" to set zsh as our default shell")
 
