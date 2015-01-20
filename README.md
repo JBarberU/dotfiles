@@ -6,7 +6,7 @@
     $ cd ~/dotfiles
     $ ./install.py --help
 
-    Note that you'll need to have python 2.7 installed to run the installer.
+> Note that you'll need to have python 2.7 installed to run the installer.
 
 ## Uninstall
 
