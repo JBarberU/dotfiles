@@ -14,6 +14,7 @@ class ToolsRecipe(RecipeBase):
       Log.fatal("In order to use ToolsRecipe, install.py needs to run as root")
 
   def install(self):
+    return
     pipe = OutputPipe()
     if self.platform.mac:
       if run_chained_commands([(["curl", "-fsSL" ,"https://raw.githubusercontent.com/Homebrew/install/master/install"], []), (["ruby"], [1])], pipe):
