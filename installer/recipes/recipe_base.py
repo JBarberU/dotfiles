@@ -14,10 +14,8 @@ class RecipeBase:
   mkdir_list = []
   name = ""
 
-  def __init__(self, platform, path, home):
-    self.platform = platform
-    self.path = path
-    self.home = home
+  def __init__(self, settings):
+    self.settings = settings
 
   def install(self):
     self.mkdirs(self.mkdir_list)
@@ -31,14 +29,19 @@ class RecipeBase:
 
   def create_links(self, links):
     for (s, d) in links:
-      if path.exists(d):
+      if path.exists(d) and not self.settings.overwrite:
         if not path.islink(d):
           Log.info("Backing up {0} ({0}.bak)".format(d))
           rename(d, "{0}.bak".format(d))
-        elif path.islink(d):
+        else:
           if readlink(d) != s:
             Log.warn("Removing existing symlink to {0}, which is currently pointing to {1}".format(d, readlink(d)))
           remove(d)
+      else:
+        try:
+          remove(d)
+        except OSError:
+          rmdir(d)
 
       symlink(s, d)
 
@@ -65,9 +68,11 @@ class RecipeBase:
       if path.exists(d):
         if path.islink(d):
           Log.warn("Removing symlink {0}, pointing at {1}".format(d, readlink(d)))
-        else:
+        elif not self.settings.overwrite:
           rename(d, "{0}.bak".format(d))
           Log.info("Backed up file {0} ({0}.bak)".format(d))
+        else:
+          remove(d)
 
       copyfile(s, d)
 

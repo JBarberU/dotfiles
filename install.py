@@ -11,6 +11,7 @@ sys.path += [f_path] + [ s.format(f_path) for s in ["{0}/installer",
                                                     "{0}/installer/utils"]]
 
 from log import Log
+from settings import Settings
 
 from xmonad import XmonadRecipe
 from vim import VimRecipe
@@ -47,42 +48,44 @@ def main():
   parser.add_argument("--tools", action = "store_true", \
       help = "Runs {0} to install useful tools".format("apt-get" if platform.linux else "homebrew"))
   parser.add_argument("--all", action = "store_true", help = "Installs everything")
+  parser.add_argument("--overwrite", action = "store_true", help = "Overwrites any existing files (= creates no backups)")
   parser.add_argument("--uninstall", action = "store_true", help = "Uninstalls the given arguments")
   args = parser.parse_args()
 
   path = os.path.abspath(os.path.dirname(__file__))
   home = os.path.expanduser("~")
+  settings = Settings(platform, path, home, args.overwrite)
 
   recipes = []
   if args.all:
     recipes = [
-        SubmodulesRecipe(platform, path, home),
-        ToolsRecipe(platform, path, home),
-        XmonadRecipe(platform, path, home),
-        VimRecipe(platform, path, home),
-        ZshRecipe(platform, path, home),
-        GitRecipe(platform, path, home),
-        UrxvtRecipe(platform, path, home),
-        TmuxRecipe(platform, path, home),
-        IrssiRecipe(platform, path, home),
+        SubmodulesRecipe(settings),
+        ToolsRecipe(settings),
+        XmonadRecipe(settings),
+        VimRecipe(settings),
+        ZshRecipe(settings),
+        GitRecipe(settings),
+        UrxvtRecipe(settings),
+        TmuxRecipe(settings),
+        IrssiRecipe(settings),
         ]
   else:
     if args.xmonad:
-      recipes.append(XmonadRecipe(platform, path, home))
+      recipes.append(XmonadRecipe(settings))
     if args.vim:
-      recipes += [SubmodulesRecipe(platform, path, home), VimRecipe(platform, path, home)]
+      recipes += [SubmodulesRecipe(settings), VimRecipe(settings)]
     if args.zsh:
-      recipes.append(ZshRecipe(platform, path, home))
+      recipes.append(ZshRecipe(settings))
     if args.git:
-      recipes.append(GitRecipe(platform, path, home))
+      recipes.append(GitRecipe(settings))
     if args.urxvt:
-      recipes.append(UrxvtRecipe(platform, path, home))
+      recipes.append(UrxvtRecipe(settings))
     if args.tmux:
-      recipes.append(TmuxRecipe(platform, path, home))
+      recipes.append(TmuxRecipe(settings))
     if args.irssi:
-      recipes.append(IrssiRecipe(platform, path, home))
+      recipes.append(IrssiRecipe(settings))
     if args.tools:
-      recipes.append(ToolsRecipe(platform, path, home))
+      recipes.append(ToolsRecipe(settings))
 
   for r in recipes:
     if args.uninstall:
