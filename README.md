@@ -4,6 +4,10 @@
 
     $ git clone https://github.com/JBarberU/dotfiles.git ~/dotfiles
     $ cd ~/dotfiles
+    $ ./install.py --all
+    $ # Or if you know you don't want to keep any conflicting files:
+    $ ./install.py --all --overwrite
+    $ # Or to see all available options:
     $ ./install.py --help
 
 > Note that you'll need to have python 2.7 installed to run the installer.
