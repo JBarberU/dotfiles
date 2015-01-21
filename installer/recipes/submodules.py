@@ -1,4 +1,4 @@
-from recipe_base import RecipeBase
+from recipe_base import RecipeBase, Path
 from output_pipe import OutputPipe
 from command import run_cmd_ret_output
 from log import Log

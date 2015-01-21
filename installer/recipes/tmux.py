@@ -1,13 +1,10 @@
-from recipe_base import RecipeBase
+from recipe_base import RecipeBase, DPath, HPath
 
 class TmuxRecipe(RecipeBase):
 
   name = "tmux"
+  links = [
+        (DPath("tmux/tmux.conf"), HPath(".tmux.conf"))
+    ]
 
-  def __init__(self, settings):
-    RecipeBase.__init__(self, settings)
-
-    self.links = [
-          ("{0}/tmux/tmux.conf".format(self.settings.path), "{0}/.tmux.conf".format(self.settings.home))
-      ]
 

@@ -1,4 +1,4 @@
-from recipe_base import RecipeBase
+from recipe_base import RecipeBase, DPath, HPath
 
 class UrxvtRecipe(RecipeBase):
 
@@ -8,7 +8,7 @@ class UrxvtRecipe(RecipeBase):
     RecipeBase.__init__(self, settings)
     if self.settings.platform.linux:
       self.links = [
-          ("{0}/xorg/Xresources".format(self.settings.path), "{0}/.Xresources".format(self.settings.home))
+          (DPath("xorg/Xresources"), HPath(".Xresources"))
         ]
 
 

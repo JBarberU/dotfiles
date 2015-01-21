@@ -96,7 +96,7 @@ def main():
       r.install()
 
   if not recipes:
-    Log.warn("Nothing to install")
+    Log.warn("Nothing to install (see -h or --help)")
   else:
     Log.msg("Done!")
 

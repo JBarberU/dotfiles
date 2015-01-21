@@ -1,4 +1,4 @@
-from recipe_base import RecipeBase
+from recipe_base import RecipeBase, Path
 from command import run_cmd_ret_output, run_chained_commands
 from output_pipe import OutputPipe
 from getpass import getuser

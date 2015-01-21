@@ -1,25 +1,25 @@
-from recipe_base import RecipeBase
+from recipe_base import RecipeBase, DPath, HPath
 from log import Log
 
 class ZshRecipe(RecipeBase):
 
   name = "zsh"
+  links = [
+        (DPath("zsh/zshrc"), HPath(".zshrc")),
+        (DPath("zsh/sh_functions"), HPath(".sh_functions")),
+        (DPath("zsh/oh-my-zsh"), HPath(".oh-my-zsh")),
+    ]
+  touch_list = [
+                HPath(".aliases"),
+                HPath(".paths"),
+            ]
 
   def __init__(self, settings):
     RecipeBase.__init__(self, settings)
-    self.links = [
-          ("{0}/zsh/zshrc".format(self.settings.path), "{0}/.zshrc".format(self.settings.home)),
-          ("{0}/zsh/sh_functions".format(self.settings.path), "{0}/.sh_functions".format(self.settings.home)),
-          ("{0}/zsh/oh-my-zsh".format(self.settings.path), "{0}/.oh-my-zsh".format(self.settings.home)),
-      ]
     if self.settings.platform.mac:
       self.links += [
-            ("{0}/zsh/zshrc_osx".format(self.settings.path), "{0}/.zshrc_osx".format(self.settings.home)),
+            (DPath("zsh/zshrc_osx"), HPath(".zshrc_osx")),
         ]
-    self.touch_list = [
-                  "{0}/.aliases".format(self.settings.home),
-                  "{0}/.paths".format(self.settings.home),
-              ]
 
   def install(self):
     RecipeBase.install(self)

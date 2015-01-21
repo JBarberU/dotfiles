@@ -4,6 +4,35 @@ from output_pipe import OutputPipe
 from command import run_cmd_ret_output
 from log import Log
 
+class Path:
+
+  home = 1
+  dot_dir = 2
+
+  def __init__(self, base, path = "", absolute = False):
+    self.base = base
+    self.path = path
+    self.absolute = absolute
+
+  def get_full_path(self, settings):
+    if self.absolute:
+      return self.path
+    else:
+      if self.base == Path.home:
+        base = settings.home
+      elif self.base == Path.dot_dir:
+        base = settings.path
+      else:
+        raise Exception("Invalid base {0}: {1}".format(self.path, self.base))
+      return "{0}/{1}".format(base, self.path)
+
+class HPath(Path):
+  def __init__(self, path = ""):
+    Path.__init__(self, Path.home, path, False)
+
+class DPath(Path):
+  def __init__(self, path = ""):
+    Path.__init__(self, Path.dot_dir, path, False)
 
 class RecipeBase:
 
@@ -29,54 +58,54 @@ class RecipeBase:
 
   def create_links(self, links):
     for (s, d) in links:
-      if path.exists(d) and not self.settings.overwrite:
-        if not path.islink(d):
-          Log.info("Backing up {0} ({0}.bak)".format(d))
-          rename(d, "{0}.bak".format(d))
+      if path.exists(d.get_full_path(self.settings)) and not self.settings.overwrite:
+        if not path.islink(d.get_full_path(self.settings)):
+          Log.info("Backing up {0} ({0}.bak)".format(d.get_full_path(self.settings)))
+          rename(d, "{0}.bak".format(d.get_full_path(self.settings)))
         else:
-          if readlink(d) != s:
-            Log.warn("Removing existing symlink to {0}, which is currently pointing to {1}".format(d, readlink(d)))
-          remove(d)
+          if readlink(d.get_full_path(self.settings)) != s.get_full_path(self.settings):
+            Log.warn("Removing existing symlink to {0}, which is currently pointing to {1}".format(d.get_full_path(self.settings), readlink(d.get_full_path(self.settings))))
+          remove(d.get_full_path(self.settings))
       else:
         try:
-          remove(d)
+          remove(d.get_full_path(self.settings))
         except OSError:
-          rmdir(d)
+          rmdir(d.get_full_path(self.settings))
 
-      symlink(s, d)
+      symlink(s.get_full_path(self.settings), d.get_full_path(self.settings))
 
   def remove_links(self, links):
     for (s, d) in links:
-      remove(d)
-      if path.exists("{0}.bak".format(d)):
-        rename("{0}.bak".format(d), d)
-        Log.info("Old {0} restored".format(d))
+      remove(d.get_full_path(self.settings))
+      if path.exists("{0}.bak".format(d.get_full_path(self.settings))):
+        rename("{0}.bak".format(d.get_full_path(self.settings)), d.get_full_path(self.settings))
+        Log.info("Old {0} restored".format(d.get_full_path(self.settings)))
 
   def touch_files(self, touch_list):
     for f in touch_list:
-      open(f, 'a').close()
+      open(f.get_full_path(self.settings), 'a').close()
 
   def mkdirs(self, dirs):
     for d in dirs:
       try:
-        mkdir(d)
+        mkdir(d.get_full_path(self.settings))
       except OSError:
-        Log.info("{0} already exists".format(d))
+        Log.info("{0} already exists".format(d.get_full_path(self.settings)))
 
   def copy_files(self, copy_list):
     for (s, d) in copy_list:
-      if path.exists(d):
-        if path.islink(d):
-          Log.warn("Removing symlink {0}, pointing at {1}".format(d, readlink(d)))
+      if path.exists(d.get_full_path(self.settings)):
+        if path.islink(d.get_full_path(self.settings)):
+          Log.warn("Removing symlink {0}, pointing at {1}".format(d.get_full_path(self.settings), readlink(d.get_full_path(self.settings))))
         elif not self.settings.overwrite:
-          rename(d, "{0}.bak".format(d))
-          Log.info("Backed up file {0} ({0}.bak)".format(d))
+          rename(d.get_full_path(self.settings), "{0}.bak".format(d.get_full_path(self.settings)))
+          Log.info("Backed up file {0} ({0}.bak)".format(d.get_full_path(self.settings)))
         else:
-          remove(d)
+          remove(d.get_full_path(self.settings))
 
-      copyfile(s, d)
+      copyfile(s.get_full_path(self.settings), d.get_full_path(self.settings))
 
   def remove_files(self, remove_list):
     for f in remove_list:
-      remove(d)
+      remove(f.get_full_path(self.settings))
 
