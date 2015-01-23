@@ -34,13 +34,13 @@ function src_if_os {
 	fi
 }
 
-src_if_exists $HOME/.aliases
-src_if_exists $HOME/.paths
-src_if_exists $HOME/.env
-src_if_exists $HOME/.osx_only
-src_if_exists $HOME/.linux_only
-src_if_exists $HOME/.sh_functions
-src_if_os "Darwin" ".zshrc_osx"
+src_if_exists "$HOME/.aliases"
+src_if_exists "$HOME/.paths"
+src_if_exists "$HOME/.env"
+src_if_exists "$HOME/.osx_only"
+src_if_exists "$HOME/.linux_only"
+src_if_exists "$HOME/.sh_functions"
+src_if_os "Darwin" "$HOME/.zshrc_osx"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
