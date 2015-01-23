@@ -1,5 +1,5 @@
 from os import symlink, path, readlink, remove, rename, mkdir
-from shutil import copyfile
+from shutil import copyfile, rmtree
 from output_pipe import OutputPipe
 from command import run_cmd_ret_output
 from log import Log
@@ -58,19 +58,19 @@ class RecipeBase:
 
   def create_links(self, links):
     for (s, d) in links:
-      if path.exists(d.get_full_path(self.settings)) and not self.settings.overwrite:
-        if not path.islink(d.get_full_path(self.settings)):
+      if path.exists(d.get_full_path(self.settings)):
+        if not path.islink(d.get_full_path(self.settings)) and not self.settings.overwrite:
           Log.info("Backing up {0} ({0}.bak)".format(d.get_full_path(self.settings)))
           rename(d, "{0}.bak".format(d.get_full_path(self.settings)))
-        else:
+        elif not self.settings.overwrite:
           if readlink(d.get_full_path(self.settings)) != s.get_full_path(self.settings):
             Log.warn("Removing existing symlink to {0}, which is currently pointing to {1}".format(d.get_full_path(self.settings), readlink(d.get_full_path(self.settings))))
           remove(d.get_full_path(self.settings))
-      else:
-        try:
-          remove(d.get_full_path(self.settings))
-        except OSError:
-          rmdir(d.get_full_path(self.settings))
+        else:
+          try:
+            remove(d.get_full_path(self.settings))
+          except OSError:
+            rmtree(d.get_full_path(self.settings))
 
       symlink(s.get_full_path(self.settings), d.get_full_path(self.settings))
 
