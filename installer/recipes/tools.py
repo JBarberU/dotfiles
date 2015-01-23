@@ -2,6 +2,7 @@ from recipe_base import RecipeBase, Path
 from command import run_cmd_ret_output, run_chained_commands
 from output_pipe import OutputPipe
 from getpass import getuser
+from log import Log
 
 common = ["vim", "irssi", "git", "tmux"]
 brews = common + ["python, ack"]
@@ -16,9 +17,8 @@ class ToolsRecipe(RecipeBase):
       Log.fatal("In order to use ToolsRecipe, install.py needs to run as root")
 
   def install(self):
-    return
     pipe = OutputPipe()
-    if self.platform.mac:
+    if self.settings.platform.mac:
       if run_chained_commands([(["curl", "-fsSL" ,"https://raw.githubusercontent.com/Homebrew/install/master/install"], []), (["ruby"], [1])], pipe):
         Log.fatal("Failed to install homebrew")
 
@@ -27,9 +27,9 @@ class ToolsRecipe(RecipeBase):
 
       for b in brews:
         if run_cmd_ret_output(["brew", "install", b], pipe):
-          Log.err("Failed to install: {0}".format(a))
+          Log.err("Failed to install: {0}".format(b))
 
-    elif self.platform.linux:
+    elif self.settings.platform.linux:
       self.__check_for_root()
       if run_cmd_ret_output(["apt-get", "update"], pipe):
         Log.fatal("Failed to apt-get update")
@@ -38,14 +38,18 @@ class ToolsRecipe(RecipeBase):
         if run_cmd_ret_output(["apt-get", "install", a], pipe):
           Log.err("Failed to install: {0}".format(a))
 
+    if run_cmd_ret_output(["pip", "install", "jedi"], pipe):
+      Log.err("Failed to install: jedi")
+
+
   def uninstall(self):
-    if self.platform.mac:
+    if self.settings.platform.mac:
       for b in brews:
         ret_code = run_cmd_ret_output(["brew", "uninstall", b], pipe)
 
       Log.warn("Not uninstalling homebrew, check https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md#faq for that")
 
-    elif self.platform.linux:
+    elif self.settings.platform.linux:
       self.__check_for_root()
       for a in apt_gets:
         if run_cmd_ret_output(["apt-get", "remove", a], pipe):
