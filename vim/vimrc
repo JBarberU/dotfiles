@@ -1,3 +1,6 @@
+" Set shell (fixes issue when using the fish shell)
+set shell=/bin/sh
+
 "============ Searching ============"
 "Highlight searches by default"
 set hlsearch
