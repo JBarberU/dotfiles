@@ -59,21 +59,25 @@
 [submodule "tools/todo-term"]
 	path = tools/todo-term
 	url = https://github.com/JBarberU/todo-term.git
+  branch = master
 [submodule "vim/vim/bundle/vim-diffsaved"]
 	path = vim/vim/bundle/vim-diffsaved
 	url = https://github.com/JBarberU/vim-diffsaved.git
 [submodule "tools/battery-term"]
 	path = tools/battery-term
 	url = https://github.com/JBarberU/battery-term.git
+  branch = master
 [submodule "tools/ip-monitor"]
 	path = tools/ip-monitor
 	url = https://github.com/JBarberU/ip-monitor.git
+  branch = master
 [submodule "vim/vim/bundle/vim-cpp-enhanced-highlight"]
 	path = vim/vim/bundle/vim-cpp-enhanced-highlight
 	url = https://github.com/octol/vim-cpp-enhanced-highlight.git
 [submodule "tools/timetracker-term"]
 	path = tools/timetracker-term
 	url = https://github.com/JBarberU/timetracker-term.git
+  branch = master
 [submodule "vim/vim/bundle/vim-airline"]
 	path = vim/vim/bundle/vim-airline
 	url = https://github.com/bling/vim-airline.git
