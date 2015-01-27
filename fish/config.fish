@@ -25,7 +25,7 @@ switch (uname)
 end
 
 function gs; git status; end
-function natti; echo "Shutting down $HOST" and sudo -k and sudo shutdown -h now; end
+function natti; echo Shutting down (hostname); and sudo -k; and sudo shutdown -h now; end
 function j; jump; end
 function fishreload; source ~/.config/fish/config.fish; end
 function tmux; tmux -u; end
