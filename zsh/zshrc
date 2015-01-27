@@ -11,17 +11,6 @@ ZSH_THEME="gianu"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias gs="git status 2> /dev/null || (echo \"Not a git repository, doing ls instead\n\" && ls)"
-alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo \"Copied public key to clipboard...\""
-alias natti="echo \"Shutting down $HOST\" && sudo -k && sudo shutdown -h now"
-alias dvorak="setxkbmap \"se(svdvorak)\" && echo \"clear Lock\\nkeycode 0x42 = Escape\\n\" | xmodmap -"
-alias se="setxkbmap se && echo \"clear Lock\\nkeycode 0x42 = Escape\\n\" | xmodmap -"
-alias j="jump"
-alias ag="sudo apt-get"
-alias zshreload="source ~/.zshrc"
-alias sx="startx"
-alias tmux="tmux -u"
-
 function src_if_exists {
 	if [ -e "$1" ]; then
 		source "$1"
@@ -33,6 +22,24 @@ function src_if_os {
 		src_if_exists "$2";
 	fi
 }
+
+case $(uname) in
+  "Darwin") 
+      alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo \"Copied public key to clipboard...\"";;
+  "Linux")
+      alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo \"Copied public key to clipboard...\"";
+      alias dvorak="setxkbmap \"se(svdvorak)\" && echo \"clear Lock\\nkeycode 0x42 = Escape\\n\" | xmodmap -";
+      alias se="setxkbmap se && echo \"clear Lock\\nkeycode 0x42 = Escape\\n\" | xmodmap -";
+      alias ag="sudo apt-get"
+      alias sx="startx"
+      ;;
+esac
+
+alias gs="git status 2> /dev/null || (echo \"Not a git repository, doing ls instead\n\" && ls)"
+alias natti="echo \"Shutting down $HOST\" && sudo -k && sudo shutdown -h now"
+alias j="jump"
+alias zshreload="source ~/.zshrc"
+alias tmux="tmux -u"
 
 src_if_exists "$HOME/.aliases"
 src_if_exists "$HOME/.paths"
