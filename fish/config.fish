@@ -7,17 +7,17 @@ set fish_theme gianu
 # Aliases
 switch (uname)
   case "Darwin"
-    function pubkey
+    function -d "Copies the public key to clipboard" pubkey
       cat ~/.ssh/id_rsa.pub | pbcopy | echo "Copied public key to clipboard...";
     end
   case "Linux"
-    function pubkey
+    function -d "Copies the public key to clipboard" pubkey
       cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo "Copied public key to clipboard...";
     end
-    function dvorak
+    function -d "Sets the keyboard layout to dvorak" dvorak
       setxkbmap "se(svdvorak)" and echo "clear Lock\nkeycode 0x42 = Escape\n" | xmodmap -;
     end
-    function se
+    function -d "Sets the keyboard layout to se" se
       setxkbmap se and echo "clear Lock\nkeycode 0x42 = Escape\n" | xmodmap -;
     end
     function ag; sudo apt-get; end
@@ -25,10 +25,10 @@ switch (uname)
 end
 
 function gs; git status; end
-function natti; echo Shutting down (hostname); and sudo -k; and sudo shutdown -h now; end
+function -d "Shuts down the computer" natti; echo Shutting down (hostname); and sudo -k; and sudo shutdown -h now; end
 function j; jump; end
 function fishreload; source ~/.config/fish/config.fish; end
-function tmux; tmux -u; end
+function tmux; command tmux -u; end
 
 # Sourcing other files
 function src_if_exists
