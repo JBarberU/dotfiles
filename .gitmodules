@@ -105,3 +105,6 @@
 [submodule "vim/vim/bundle/ack.vim"]
 	path = vim/vim/bundle/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
+[submodule "tools/grace_py"]
+	path = tools/grace_py
+	url = https://github.com/JBarberU/grace_py.git
