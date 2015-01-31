@@ -6,15 +6,11 @@ from log import Log
 
 common = ["vim", "irssi", "git", "tmux"]
 brews = common + ["python, ack"]
-apt_gets = common + ["zsh", "xclip", "xmonad", "xmobar", "conky-all", "dmenu", "rxvt-unicode-256color", "feh", "build-essential, ack-grep"]
+apt_gets = common + ["zsh", "xclip", "xmonad", "xmobar", "conky-all", "dmenu", "rxvt-unicode-256color", "feh", "build-essential", "ack-grep"]
 
 class ToolsRecipe(RecipeBase):
 
   name = "tools"
-
-  def __check_for_root(self):
-    if getuser() != "root":
-      Log.fatal("In order to use ToolsRecipe, install.py needs to run as root")
 
   def install(self):
     pipe = OutputPipe()
@@ -30,13 +26,11 @@ class ToolsRecipe(RecipeBase):
           Log.err("Failed to install: {0}".format(b))
 
     elif self.settings.platform.linux:
-      self.__check_for_root()
-      if run_cmd_ret_output(["apt-get", "update"], pipe):
+      if run_cmd_ret_output(["pkexec", "apt-get", "update"], pipe):
         Log.fatal("Failed to apt-get update")
 
-      for a in apt_gets:
-        if run_cmd_ret_output(["apt-get", "install", a], pipe):
-          Log.err("Failed to install: {0}".format(a))
+      if run_cmd_ret_output(["pkexec", "apt-get", "install", "-y"] + apt_gets, pipe):
+        Log.err("Failed to install: {0}".format(a))
 
     if run_cmd_ret_output(["pip", "install", "jedi"], pipe):
       Log.err("Failed to install: jedi")
@@ -50,9 +44,7 @@ class ToolsRecipe(RecipeBase):
       Log.warn("Not uninstalling homebrew, check https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/FAQ.md#faq for that")
 
     elif self.settings.platform.linux:
-      self.__check_for_root()
-      for a in apt_gets:
-        if run_cmd_ret_output(["apt-get", "remove", a], pipe):
-          Log.err("Failed to remove: {0}".format(a))
+      if run_cmd_ret_output(["pkexec", "apt-get", "remove"] + apt_gets, pipe):
+        Log.err("Failed to remove: {0}".format(a))
 
 
