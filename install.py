@@ -48,6 +48,7 @@ def main():
   parser.add_argument("--tools", action = "store_true", \
       help = "Runs {0} to install useful tools".format("apt-get" if platform.linux else "homebrew"))
   parser.add_argument("-a", "--all", action = "store_true", help = "Installs everything")
+  parser.add_argument("-b", "--but", nargs="+", help = "Not installing the given arguments (can only be used together with --all)")
   parser.add_argument("-o", "--overwrite", action = "store_true", help = "Overwrites any existing files (= creates no backups)")
   parser.add_argument("-u", "--uninstall", action = "store_true", help = "Uninstalls the given arguments")
   args = parser.parse_args()
@@ -69,6 +70,8 @@ def main():
         TmuxRecipe(settings),
         IrssiRecipe(settings),
         ]
+    if args.but:
+      recipes = filter(lambda r: r.name not in args.but, recipes)
   else:
     if args.xmonad:
       recipes.append(XmonadRecipe(settings))
