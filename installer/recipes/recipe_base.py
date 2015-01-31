@@ -58,7 +58,7 @@ class RecipeBase:
 
   def create_links(self, links):
     for (s, d) in links:
-      if path.exists(d.get_full_path(self.settings)):
+      if path.lexists(d.get_full_path(self.settings)):
         if not path.islink(d.get_full_path(self.settings)) and not self.settings.overwrite:
           Log.info("Backing up {0} ({0}.bak)".format(d.get_full_path(self.settings)))
           rename(d, "{0}.bak".format(d.get_full_path(self.settings)))
