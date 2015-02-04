@@ -31,7 +31,7 @@ I've found lots of useful stuff around the web. If you feel that you deserve a
 
     The MIT License (MIT)
 
-    Copyright (c) 2013-2014 John Barbero Unenge
+    Copyright (c) 2013-2015 John Barbero Unenge
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
