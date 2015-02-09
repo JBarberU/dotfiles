@@ -23,8 +23,34 @@ function src_if_os {
 	fi
 }
 
+function backup() {
+  if type backer.py >> /dev/null; then
+    backer.py
+  else
+    echo "backer.py not installed, do: echo \"export PATH=\$HOME/dotfiles/tools/backer_py:\$PATH\" >> \$HOME/.paths (or wherever you store the dotfiles)"
+  fi
+}
+
+function maybe_backup() {
+  printf "Run backups? [Y/N]: "
+  read ans
+
+  case $ans in 
+    "Y"|"y") backup;;
+  esac
+}
+
+function natti() {
+  printf "Shut down $HOST? [Y/N]: "
+  read ans
+
+  case $ans in
+    "Y"|"y") maybe_backup; sudo -k && sudo shutdown -h now;;
+  esac
+}
+
 case $(uname) in
-  "Darwin") 
+  "Darwin")
       alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo \"Copied public key to clipboard...\"";;
   "Linux")
       alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo \"Copied public key to clipboard...\"";
@@ -36,7 +62,6 @@ case $(uname) in
 esac
 
 alias gs="git status 2> /dev/null || (echo \"Not a git repository, doing ls instead\n\" && ls)"
-alias natti="echo \"Shutting down $HOST\" && sudo -k && sudo shutdown -h now"
 alias j="jump"
 alias zshreload="source ~/.zshrc"
 alias tmux="tmux -u"
