@@ -44,8 +44,11 @@ function natti() {
   printf "Shut down $HOST? [Y/N]: "
   read ans
 
+  if sudo -k && sudo echo "Got root permission"; then
+    ;
+  fi
   case $ans in
-    "Y"|"y") maybe_backup; sudo -k && sudo shutdown -h now;;
+    "Y"|"y") maybe_backup; sudo shutdown -h now;;
   esac
 }
 
