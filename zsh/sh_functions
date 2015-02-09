@@ -24,3 +24,13 @@ function fproc {
 	fi
 }
 
+function monitor_sensors() {
+  while true; do
+    clear;
+    sudo sensors;
+    for i in {1..10}; do
+      printf .;
+      sleep 1;
+    done;
+  done
+}
