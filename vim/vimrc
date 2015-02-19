@@ -6,6 +6,7 @@ set shell=/bin/sh
 set hlsearch
 set showmatch
 set incsearch
+set showcmd
 
 "============ Tab width ============"
 set tabstop=2
