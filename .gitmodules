@@ -111,3 +111,6 @@
 [submodule "tools/backer_py"]
 	path = tools/backer_py
 	url = https://github.com/JBarberU/backer_py.git
+[submodule "vim/vim/bundle/tmuxline.vim"]
+	path = vim/vim/bundle/tmuxline.vim
+	url = https://github.com/edkolev/tmuxline.vim
