@@ -4,8 +4,8 @@ from output_pipe import OutputPipe
 from getpass import getuser
 from log import Log
 
-common = ["vim", "irssi", "git", "tmux"]
-brews = common + ["python, ack"]
+common = ["vim", "irssi", "git", "tmux", "exuberant-ctags"]
+brews = common + ["python, ack", "ctags"]
 apt_gets = common + ["zsh", "xclip", "xmonad", "xmobar", "conky-all", "dmenu", "rxvt-unicode-256color", "feh", "build-essential", "ack-grep"]
 
 class ToolsRecipe(RecipeBase):
