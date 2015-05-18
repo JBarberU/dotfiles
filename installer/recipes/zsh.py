@@ -6,6 +6,7 @@ class ZshRecipe(RecipeBase):
   name = "zsh"
   links = [
         (DPath("zsh/zshrc"), HPath(".zshrc")),
+        (DPath("zsh/cheat_sheet"), HPath(".cheat_sheet")),
         (DPath("zsh/sh_functions"), HPath(".sh_functions")),
         (DPath("zsh/oh-my-zsh"), HPath(".oh-my-zsh")),
     ]

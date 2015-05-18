@@ -68,6 +68,7 @@ alias gs="git status 2> /dev/null || (echo \"Not a git repository, doing ls inst
 alias j="jump"
 alias zshreload="source ~/.zshrc"
 alias tmux="tmux -u"
+alias cheat="cat $HOME/.cheat_sheet"
 
 src_if_exists "$HOME/.aliases"
 src_if_exists "$HOME/.paths"

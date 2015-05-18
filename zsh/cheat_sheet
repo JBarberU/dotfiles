@@ -1,0 +1,18 @@
+
+[01;37mReplace all underscores with spaces [22;37m
+
+  for FILE in *; do mv $FILE "`echo $FILE | tr '_' ' '`"; done
+
+[01;37mExport all markdown files to pdf with pandoc 
+and put them in a zip archive [22;37m
+
+  OUT_FOLD=/tmp/somefolder
+  for FILE in *.md; do
+  	pandoc $FILE -o $OUT_FOLD/${FILE%%.*}.pdf;
+  done
+  zip -r $OUT_FOLD.zip $OUT_FOLD
+
+[01;37mCreate ssh tunnel [22;37m
+
+  ssh -f host@some.domain.com -L <local_port>/localhost/<remote_port> -N
+
