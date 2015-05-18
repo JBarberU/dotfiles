@@ -38,11 +38,27 @@ set wildignore=*.o,*.obj,*.pdf
 set ignorecase
 set smartcase
 
+"========== Theme ============"
+set number
+syntax enable
+set background=dark
+colorscheme koehler
+set t_Co=16
+
 "============ Cursor ============"
-if has("autocmd")
-  au InsertEnter * set cul
-  au InsertLeave * set nocul
-endif
+"au InsertEnter * hi CursorLine ctermbg=238
+function! HighlightLine()
+  hi CursorLine ctermbg=237 cterm=NONE
+endfunction
+
+function! UnHighlightLine()
+  hi CursorLine ctermbg=235 cterm=NONE
+endfunction
+
+au InsertEnter * call HighlightLine()
+au InsertLeave * call UnHighlightLine()
+set cul
+call UnHighlightLine()
 
 " conceal in insert (i), normal (n) and visual (v) modes
 set concealcursor=inv
@@ -59,20 +75,13 @@ call pathogen#helptags()
 filetype plugin on
 filetype indent off
 
-"========== Theme ============"
-set number
-syntax enable
-set background=dark
-colorscheme koehler
-set t_Co=16
-
 "============ Page width ============"
 "set textwidth=80
-hi ColorColumn ctermbg=235
-execute "set colorcolumn=" . join(range(81,82), '|')
+" hi ColorColumn ctermbg=235
+" execute "set colorcolumn=" . join(range(81,82), '|')
 set listchars=tab:->,eol:$,trail:~
 set list
-hi NonText ctermfg=232
+hi NonText ctermfg=238
 hi SpecialKey ctermfg=yellow ctermbg=red
 
 "========== Map ============"
