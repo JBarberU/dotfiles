@@ -32,12 +32,34 @@ function backup() {
 }
 
 function maybe_backup() {
-  printf "Run backups? [Y/N]: "
-  read ans
+  if [ -e "$HOME/.backer.json" ]; then
 
-  case $ans in 
-    "Y"|"y") backup;;
-  esac
+    local ANS="n"
+
+    local SETTINGS_FILE="$HOME/.backer-settings"
+    if [ -e "$SETTINGS_FILE" ]; then
+      if cat "$SETTINGS_FILE" | grep -e "[y,Y]" >> /dev/null; then
+        ANS="y";
+      fi
+    else
+      printf "Run backups? [Y/N] (add r for remember): "
+      read read_ans
+      if echo "$read_ans" | grep -e "[y,Y]" >> /dev/null; then
+        ANS="y";
+      else
+        ANS="n"
+      fi
+    fi
+
+    case "$ANS" in
+      "y") backup;;
+    esac
+
+    if echo "$read_ans" | grep "r" >> /dev/null; then
+      echo "$ANS" > "$SETTINGS_FILE";
+    fi
+
+  fi
 }
 
 function natti() {
