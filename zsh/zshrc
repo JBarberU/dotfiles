@@ -91,6 +91,7 @@ alias j="jump"
 alias zshreload="source ~/.zshrc"
 alias tmux="tmux -u"
 alias cheat="cat $HOME/.cheat_sheet"
+alias clip="CLIP=\"\$(xclip -o -selection clipboard)\" && echo Put the contents of clipboard into CLIP :\)"
 
 src_if_exists "$HOME/.aliases"
 src_if_exists "$HOME/.paths"
