@@ -6,7 +6,9 @@ from log import Log
 
 common = ["vim", "irssi", "git", "tmux", "exuberant-ctags"]
 brews = common + ["python, ack", "ctags"]
-apt_gets = common + ["zsh", "xclip", "xmonad", "xmobar", "conky-all", "dmenu", "rxvt-unicode-256color", "feh", "build-essential", "ack-grep"]
+common_apt_gets = common + ["zsh", "xclip", "xmonad", "xmobar", "dmenu", "rxvt-unicode-256color", "feh", "build-essential", "ack-grep", "python-pip"]
+debian_apt_gets = common_apt_gets + ["conky-all"]
+ubuntu_apt_gets = common_apt_gets + ["conky"]
 
 class ToolsRecipe(RecipeBase):
 
@@ -29,10 +31,16 @@ class ToolsRecipe(RecipeBase):
       if run_cmd_ret_output(["pkexec", "apt-get", "update"], pipe):
         Log.fatal("Failed to apt-get update")
 
+      if self.settings.platform.distro_name == "Ubuntu":
+        apt_gets = ubuntu_apt_gets
+      else:
+        Log.warn("Don't know the exact distro, assuming debian")
+        apt_gets = debian_apt_gets
+
       if run_cmd_ret_output(["pkexec", "apt-get", "install", "-y"] + apt_gets, pipe):
         Log.err("Failed to install: {0}".format(a))
 
-    if run_cmd_ret_output(["pip", "install", "jedi"], pipe):
+    if run_cmd_ret_output(["pkexec", "pip", "install", "jedi"], pipe):
       Log.err("Failed to install: jedi")
 
 
