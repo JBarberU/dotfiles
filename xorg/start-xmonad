@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# ssh-agent
+eval $(ssh-agent)
+nm-applet &
+
+# Set cursor
+xset s offxsetroot -cursor_name left_ptr
+
+# Set fonts, colors etc for urxvt
+xrdb ~/.Xresources
+
+# Set primary screen
+xrandr --output DP-4 --primary
+xrandr --output DP-4 --left-of DVI-I-1
+
+# Svdvorak :)
+setxkbmap "se(svdvorak)"
+# Swap CapsLock for Escape
+echo "clear Lock\nkeycode 0x42 = Escape\n" | xmodmap -
+
+# Set BG
+feh /home/john/Pictures/BGs/black-cats-awesomelycute.com-25.jpg --bg-fill
+
+# Start WM
+conky
+xmonad
