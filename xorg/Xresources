@@ -1,6 +1,6 @@
 URxvt*background:   black
 URxvt*transparent:  true
-URxvt*tintColor:    royalRed
+URxvt*tintColor:    #7D0096
 URxvt*foreground:   white
 URxvt*scrollBar:    false
 URxvt*saveLines:    10000
