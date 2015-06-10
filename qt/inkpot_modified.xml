@@ -25,7 +25,7 @@
   <style name="Operator" foreground="#cfbfad"/>
   <style name="Preprocessor" foreground="#409090"/>
   <style name="Label" foreground="#e76000"/>
-  <style name="Comment" foreground="#505068"/>
+  <style name="Comment" foreground="#4c4c64"/>
   <style name="Doxygen.Comment" foreground="#737dd5"/>
   <style name="Doxygen.Tag" foreground="#4e5ab3"/>
   <style name="VisualWhitespace" foreground="#646482"/>
@@ -40,7 +40,7 @@
   <style name="JsGlobalVar" foreground="#8888ff" italic="true"/>
   <style name="QmlStateName" italic="true"/>
   <style name="Binding" foreground="#ff5555"/>
-  <style name="DisabledCode" foreground="#a0a0a4" italic="true"/>
+  <style name="DisabledCode" foreground="#193d3d" italic="true"/>
   <style name="AddedLine" foreground="#00aa00"/>
   <style name="RemovedLine" foreground="#ff0000"/>
   <style name="DiffFile" foreground="#8484f3"/>
