@@ -111,6 +111,7 @@ nmap <C-n> :NERDTreeToggle<CR>
 nmap <F4> :A<CR>
 nmap <F3> :AV<CR>
 nmap do ddO
+nmap <C-c> :q<CR>
 
 "== w!! to sudo write =="
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
