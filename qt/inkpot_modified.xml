@@ -25,7 +25,7 @@
   <style name="Operator" foreground="#cfbfad"/>
   <style name="Preprocessor" foreground="#409090"/>
   <style name="Label" foreground="#e76000"/>
-  <style name="Comment" foreground="#4c4c64"/>
+  <style name="Comment" foreground="#676788"/>
   <style name="Doxygen.Comment" foreground="#737dd5"/>
   <style name="Doxygen.Tag" foreground="#4e5ab3"/>
   <style name="VisualWhitespace" foreground="#646482"/>
