@@ -16,10 +16,6 @@
 [submodule "vim/vim/bundle/ghcmod-vim"]
 	path = vim/vim/bundle/ghcmod-vim
 	url = https://github.com/eagletmt/ghcmod-vim.git
-[submodule "zsh/oh-my-zsh"]
-	path = zsh/oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
-  branch = master
 [submodule "vim/vim/pathogen"]
 	path = vim/vim/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
@@ -114,3 +110,6 @@
 [submodule "vim/vim/bundle/tmuxline.vim"]
 	path = vim/vim/bundle/tmuxline.vim
 	url = https://github.com/edkolev/tmuxline.vim
+[submodule "zsh/oh-my-zsh"]
+	path = zsh/oh-my-zsh
+	url = https://github.com/JBarberU/oh-my-zsh.git
