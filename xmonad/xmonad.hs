@@ -160,6 +160,8 @@ myManageHook =  composeAll
     (className =? "Steam") --> doFloat,
     (className =? "Friends") --> doCenterFloat,
     (className =? "Nautilus") --> doCenterFloat,
+	(className =? "Dreamler") --> doCenterFloat,
+	(className =? "DreamlerDebug") --> doCenterFloat,
     isFullscreen --> doFullFloat,
     isDialog --> doCenterFloat
   ]
