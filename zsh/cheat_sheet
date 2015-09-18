@@ -18,14 +18,15 @@ and put them in a zip archive [22;37m
 
 [01;37mQtCreator[22;37m
 
-  CTRL-E, 2           -> Split
+  CTRL+E, 0           -> Remove current split
+        , 2           -> Split
         , 3           -> Split side by side
         , 4           -> Split into new window
         , O           -> Go to other split
         , F2          -> Follow symbol under cursor in next split
-  ALT-G, ALT-B        -> Git blame
-       , ALT-D        -> Diff current file
-       , ALT-Shift-D  -> Diff current project
+  ALT+G, ALT+B        -> Git blame
+       , ALT+D        -> Diff current file
+       , ALT+Shift+D  -> Diff current project
   F2                  -> Follow symbol under cursor
   Esc                 -> Return to editor
   ALT+Return          -> Trigger refactoring action
