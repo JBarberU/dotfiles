@@ -32,4 +32,5 @@ and put them in a zip archive [22;37m
   ALT+Return          -> Trigger refactoring action
   CTRL+Return         -> Insert line below current
   CTRL+Shift+Return   -> Insert line above current
+  CTRL+ALT+Shift+C    -> Collapse all
 

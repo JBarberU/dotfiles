@@ -1,0 +1,10 @@
+function set_if_exists {
+  which "$2" >> /dev/null && export $1="$(which "$2")"
+}
+
+for e in vim vi nano pico; do
+  if set_if_exists EDITOR "$e"; then
+    break;
+  fi
+done
+
