@@ -181,3 +181,7 @@ nnoremap <silent> <F3> :TlistToggle<CR>
 let g:ack_default_options = " -s -H --nocolor --nogroup --column"
 noremap ,f :Ack!<space>
 noremap ,F :AckFromSearc!<CR>
+
+" c.vim
+let g:C_MapLeader = 'å'
+
