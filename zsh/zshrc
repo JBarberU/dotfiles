@@ -108,6 +108,23 @@ src_if_exists "$HOME/.linux_only"
 src_if_exists "$HOME/.sh_functions"
 src_if_os "Darwin" "$HOME/.zshrc_osx"
 
+function print_random_alias() {
+  local INDEX=$((RANDOM % $(alias | wc -l)))
+  local i=0
+  local TMP_IFS="$IFS"
+IFS="
+"
+  for a in $(alias); do
+    if [[ $i == $INDEX ]]; then
+      echo "Alias of the day: \"$a\""
+    fi
+    i=$(($i+1))
+  done
+  IFS="$TMP_IFS"
+}
+
+print_random_alias;
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
