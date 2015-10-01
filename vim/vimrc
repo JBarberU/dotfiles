@@ -124,7 +124,7 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
-set wildignore+=*/tmp/*,*.o,*.so,*.hi,*.pdf,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*/tmp/*,*.o,*.so,*.hi,*.pdf,*.swp,*.zip,*/build/*,*.git/*,CMakeLists\.txt\.*     " MacOSX/Linux
 "If we ever want to use windows, lolz
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
@@ -172,7 +172,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=242
 let g:airline_powerline_fonts = 1
 
 " nerdtree
-let NERDTreeIgnore = ["\.pyc", "\.so$", "\.a$"]
+let NERDTreeIgnore = ["\.pyc", "\.so$", "\.a$", "build/*", "CMakeLists\.txt\..*"]
 
 " ctags
 nnoremap <silent> <F3> :TlistToggle<CR>
