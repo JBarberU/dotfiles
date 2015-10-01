@@ -23,6 +23,10 @@ function src_if_os {
 	fi
 }
 
+function epgrep() {
+  ps ax -o pid,command | grep "$1";
+}
+
 function backup() {
   if type backer.py >> /dev/null; then
     backer.py
@@ -90,8 +94,9 @@ alias gs="git status 2> /dev/null || (echo \"Not a git repository, doing ls inst
 alias j="jump"
 alias zshreload="source ~/.zshrc"
 alias tmux="tmux -u"
-alias cheat="cat $HOME/.cheat_sheet"
-alias edcheat="$EDITOR $HOME/.cheat_sheet"
+alias cheat="cat \$HOME/.cheat_sheet"
+alias edcheat="\$EDITOR \$HOME/.cheat_sheet"
+alias edzshrc="\$EDITOR \$HOME/.zshrc"
 alias clip="CLIP=\"\$(xclip -o -selection clipboard)\" && echo Put the contents of clipboard into CLIP :\)"
 
 src_if_exists "$HOME/.aliases"
