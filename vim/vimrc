@@ -79,9 +79,12 @@ filetype indent off
 "set textwidth=80
 " hi ColorColumn ctermbg=235
 " execute "set colorcolumn=" . join(range(81,82), '|')
-set listchars=tab:->,eol:$,trail:~
+set listchars=tab:\>\ ,eol:$,trail:~
 set list
-hi NonText ctermfg=238
+hi NonText ctermfg=237
+
+" Set all SpecialKey colors to yellow on red (to get trailing whitespace to
+" really pop). We'll fix prepending SpecialKeys with indent_guides later
 hi SpecialKey ctermfg=yellow ctermbg=red
 
 "========== Map ============"
@@ -165,8 +168,8 @@ let g:cpp_experimental_template_highlight = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=237
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=242
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=234 ctermfg=238
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236 ctermfg=240
 
 " vim-airline
 let g:airline_powerline_fonts = 1
