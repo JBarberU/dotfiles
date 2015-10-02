@@ -85,7 +85,7 @@ hi NonText ctermfg=237
 
 " Set all SpecialKey colors to yellow on red (to get trailing whitespace to
 " really pop). We'll fix prepending SpecialKeys with indent_guides later
-hi SpecialKey ctermfg=yellow ctermbg=red
+hi SpecialKey ctermfg=237
 
 "========== Map ============"
 
