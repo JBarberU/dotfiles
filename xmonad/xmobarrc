@@ -1,5 +1,5 @@
 Config {
-    font = "-*-Fixed-Bold-R-Normal-*-14-*-*-*-*-*-*-*"
+    font = "xft:DejaVu Sans Mono for Powerline:pixelsize=10:antialias=true:hinting=true"
   , bgColor = "#000000"
   , fgColor = "#ffffff"
   , position = TopW L 100
