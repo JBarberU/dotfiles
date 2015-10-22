@@ -15,8 +15,9 @@ import qualified XMonad.StackSet as W
 import System.Exit
 import XMonad.Util.NamedScratchpad
 
-data ScrotMode  = Normal | RectSelect
-data VolumeMode = Up | Down | Mute
+data ScrotMode    = Normal | RectSelect
+data VolumeMode   = Up | Down | Mute
+data RhythmAction = RANext | RAPrev | RAPlayPause
 
 myTerminal :: String
 myTerminal = "rxvt-unicode"
@@ -59,6 +60,13 @@ volume d x   = spawn cmd
   where cmd = "amixer -q set Master " ++ (show x) ++ "%" ++ case d of
                                                               Up -> "+"
                                                               Down -> "-"
+
+rhythmbox :: RhythmAction -> X()
+rhythmbox a = spawn ("rhythmbox-client " ++ action)
+  where action = case a of 
+                  RANext      -> "--next"
+                  RAPrev      -> "--prev"
+                  RAPlayPause -> "--play-pause"
 
 myScratchpads :: [NamedScratchpad]
 myScratchpads =
@@ -134,7 +142,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_s,      namedScratchpadAction myScratchpads "Spotify"),
       (xK_g,      spawn "gnome-control-center"),
       (xK_c,      kill),
-      (xK_b,      sendMessage NextLayout)
+      (xK_b,      sendMessage NextLayout).
+      (volDownBtn rhythmbox RAPrev),
+      (volUpBtn   rhythmbox RANext),
+      (muteBtn    rhythmbox RAPlayPause)
     ]
   ]
   ++
