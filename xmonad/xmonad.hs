@@ -46,7 +46,7 @@ myWorkspaces = map show [1..9]
 
 scrot :: ScrotMode -> X()
 scrot m = spawn fullCmd
-  where fullCmd   = preCmd ++ scrotCmd ++ "'%Y-%m-%d-%H_%M_$wx$h.png' -e 'mv $f ~/shots/'"
+  where fullCmd   = preCmd ++ scrotCmd ++ "'%Y-%m-%d-%H_%M_%S_$wx$h.png' -e 'mv $f ~/shots/'"
         scrotCmd  = "scrot " ++ case m of
                                   RectSelect -> "-s "
                                   otherwise  -> ""
