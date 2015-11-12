@@ -11,3 +11,18 @@ function monitor_sensors() {
   done
 }
 
+function net_slow() {
+  local file="/tmp/net_slow"
+  if [ -f "$file" ]; then
+    local delay=$(cat "$file" | tr -cd '[:digit:]');
+    echo "Deleting network delay $delay""ms";
+    sudo tc qdisc del dev eth0 root netem delay "$delay"ms;
+    rm "$file";
+  fi
+  if [[ "$1" != "" ]]; then
+    echo "Adding network delay $1""ms";
+    printf "$1" > "$file"
+    sudo tc qdisc add dev eth0 root netem delay "$1"ms;
+  fi
+  #sudo tc qdisc del dev eth0 root netem delay 10000ms
+}
