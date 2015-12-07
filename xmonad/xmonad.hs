@@ -131,21 +131,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   ++
   [((mshift, x), y) | (x,y) <-
     [
-      (xK_Return, spawn $ XMonad.terminal conf),
-      (xK_space,  spawn "dmenu_run -b"),
-      (xK_l,      spawn "slock"),
-      (xK_q,      io exitSuccess),
-      (xK_n,      spawn "nautilus"),
-      (xK_t,      withFocused $ windows . W.sink),
-      (xK_Tab,    windows W.focusUp),
-      (xK_p,      scrot RectSelect),
-      (xK_s,      namedScratchpadAction myScratchpads "Spotify"),
-      (xK_g,      spawn "gnome-control-center"),
-      (xK_c,      kill),
-      (xK_b,      sendMessage NextLayout).
-      (volDownBtn rhythmbox RAPrev),
-      (volUpBtn   rhythmbox RANext),
-      (muteBtn    rhythmbox RAPlayPause)
+      (xK_Return,   spawn $ XMonad.terminal conf),
+      (xK_space,    spawn "dmenu_run -b"),
+      (xK_l,        spawn "slock"),
+      (xK_q,        io exitSuccess),
+      (xK_n,        spawn "nautilus"),
+      (xK_t,        withFocused $ windows . W.sink),
+      (xK_Tab,      windows W.focusUp),
+      (xK_p,        scrot RectSelect),
+      (xK_s,        namedScratchpadAction myScratchpads "Spotify"),
+      (xK_g,        spawn "gnome-control-center"),
+      (xK_c,        kill),
+      (xK_b,        sendMessage NextLayout),
+      (volDownBtn,  rhythmbox RAPrev),
+      (volUpBtn,    rhythmbox RANext),
+      (muteBtn,     rhythmbox RAPlayPause)
     ]
   ]
   ++
