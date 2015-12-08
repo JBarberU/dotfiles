@@ -38,8 +38,8 @@ myFocusedBorderColor :: String
 myFocusedBorderColor = "purple"
 
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
---myFocusFollowsMouse = False
+{-myFocusFollowsMouse = True-}
+myFocusFollowsMouse = False
 
 myWorkspaces :: [String]
 myWorkspaces = map show [1..9]
