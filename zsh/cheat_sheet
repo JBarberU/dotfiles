@@ -16,6 +16,9 @@ and put them in a zip archive [22;37m
 
   ssh -f host@some.domain.com -L <local_port>/localhost/<remote_port> -N
 
+[01;37mGet aggregate disk usage for a directory [22;37m
+  du -ch some_dir | grep total
+
 [01;37mQtCreator[22;37m
 
   CTRL+E, 0           -> Remove current split
