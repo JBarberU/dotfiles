@@ -33,7 +33,7 @@ copyFileDir :: String -> String -> IO()
 copyFileDir src dst = runCmd "cp" ["-R", src, dst]
 
 aptInstall :: [String] -> IO()
-aptInstall packages = sudoCmd "apt-get" (["install"] ++ packages)
+aptInstall packages = sudoCmd "apt-get" (["install", "-y"] ++ packages)
 
 aptUpdate :: IO()
 aptUpdate = sudoCmd "apt-get" ["update"]
