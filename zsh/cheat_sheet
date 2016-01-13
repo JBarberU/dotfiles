@@ -33,6 +33,8 @@ and put them in a zip archive [22;37m
   F2                  -> Follow symbol under cursor
   Esc                 -> Return to editor
   ALT+Return          -> Trigger refactoring action
+  ALT+Shift+U         -> Uppercase Selection
+  ALT+U               -> Lowercase Selection
   CTRL+Return         -> Insert line below current
   CTRL+Shift+Return   -> Insert line above current
   CTRL+ALT+Shift+C    -> Collapse all
