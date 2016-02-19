@@ -15,6 +15,7 @@ from settings import Settings
 
 from xmonad import XmonadRecipe
 from vim import VimRecipe
+from vs_code import VSCodeRecipe
 from zsh import ZshRecipe
 from git import GitRecipe
 from urxvt import UrxvtRecipe
@@ -40,6 +41,7 @@ def main():
   parser = argparse.ArgumentParser()
   parser.add_argument("--xmonad", action = "store_true", help = "Installs xmonad stuff")
   parser.add_argument("--vim", action = "store_true", help = "Installs vim stuff")
+  parser.add_argument("--vscode", action = "store_true", help = "Installs Visual Studio Code stuff")
   parser.add_argument("--zsh", action = "store_true", help = "Installs zsh stuff")
   parser.add_argument("--git", action = "store_true", help = "Installs git stuff")
   parser.add_argument("--urxvt", action = "store_true", help = "Installs urxvt stuff")
@@ -64,6 +66,7 @@ def main():
         ToolsRecipe(settings),
         XmonadRecipe(settings),
         VimRecipe(settings),
+        VSCodeRecipe(settings),
         ZshRecipe(settings),
         GitRecipe(settings),
         UrxvtRecipe(settings),
@@ -77,6 +80,8 @@ def main():
       recipes.append(XmonadRecipe(settings))
     if args.vim:
       recipes += [SubmodulesRecipe(settings), VimRecipe(settings)]
+    if args.vscode:
+      recipes.append(VSCodeRecipe(settings))
     if args.zsh:
       recipes.append(ZshRecipe(settings))
     if args.git:
