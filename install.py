@@ -32,7 +32,7 @@ def main():
     platform = LinuxPlatform()
   elif sys.platform == "darwin":
     platform = MacPlatform()
-  elif sys.platform == "win32":
+  elif sys.platform == "cygwin":
     platform = WindowsPlatform()
   else:
     print("Unknown platform: {0}".format(sys.platform))
