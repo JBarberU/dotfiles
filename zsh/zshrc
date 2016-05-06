@@ -99,6 +99,7 @@ alias edcheat="\$EDITOR \$HOME/.cheat_sheet"
 alias edzshrc="\$EDITOR \$HOME/.zshrc"
 alias edvimrc="\$EDITOR \$HOME/.vimrc"
 alias clip="CLIP=\"\$(xclip -o -selection clipboard)\" && echo Put the contents of clipboard into CLIP :\)"
+alias tmuxa="tmux attach || tmux"
 
 src_if_exists "$HOME/.aliases"
 src_if_exists "$HOME/.paths"
