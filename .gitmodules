@@ -113,12 +113,14 @@
 [submodule "vim/vim/bundle/c.vim"]
 	path = vim/vim/bundle/c.vim
 	url = https://github.com/vim-scripts/c.vim.git
+    ignore = dirty
 [submodule "vim/vim/bundle/vim-surround"]
 	path = vim/vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vim/vim/bundle/Vimya"]
 	path = vim/vim/bundle/Vimya
 	url = https://github.com/vim-scripts/Vimya.git
+    ignore = dirty
 [submodule "vim/vim/bundle/upAndDown"]
 	path = vim/vim/bundle/upAndDown
 	url = https://github.com/vim-scripts/upAndDown
