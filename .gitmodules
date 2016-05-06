@@ -43,9 +43,6 @@
 [submodule "vim/vim/bundle/a"]
 	path = vim/vim/bundle/a
 	url = https://github.com/vim-scripts/a.vim
-[submodule "vim/vim/bundle/taglist"]
-	path = vim/vim/bundle/taglist
-	url = https://github.com/JBarberU/taglist.vim
 [submodule "vim/vim/bundle/supertab"]
 	path = vim/vim/bundle/supertab
 	url = https://github.com/ervandew/supertab
@@ -113,3 +110,15 @@
 [submodule "zsh/oh-my-zsh"]
 	path = zsh/oh-my-zsh
 	url = https://github.com/JBarberU/oh-my-zsh.git
+[submodule "vim/vim/bundle/c.vim"]
+	path = vim/vim/bundle/c.vim
+	url = https://github.com/vim-scripts/c.vim.git
+[submodule "vim/vim/bundle/vim-surround"]
+	path = vim/vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "vim/vim/bundle/Vimya"]
+	path = vim/vim/bundle/Vimya
+	url = https://github.com/vim-scripts/Vimya.git
+[submodule "vim/vim/bundle/upAndDown"]
+	path = vim/vim/bundle/upAndDown
+	url = https://github.com/vim-scripts/upAndDown
