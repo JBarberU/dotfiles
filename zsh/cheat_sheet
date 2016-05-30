@@ -11,6 +11,7 @@
     Ctrl-W _ >      - resize N number of "pixels" right
     Ctrl-W s        - Split window horizontally
     Ctrl-W Ctrl-V   - Split window vertically
+    v[nav]y<leader><C-R>0 - Search for visual selection
 
 [01;37mReplace all underscores with spaces [22;37m
 
