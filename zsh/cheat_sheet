@@ -5,12 +5,12 @@
     tmux -L default attach -t 0 || tmux
 
 [01;37mVim [22;37m
-    Ctrl-W K        - Switch windows to horizontal layout
-    Ctrl-W H        - Switch windows to vertical layout
-    Ctrl-W _ <      - resize N number of "pixels" left
-    Ctrl-W _ >      - resize N number of "pixels" right
-    Ctrl-W s        - Split window horizontally
-    Ctrl-W Ctrl-V   - Split window vertically
+    Ctrl-W K              - Switch windows to horizontal layout
+    Ctrl-W H              - Switch windows to vertical layout
+    Ctrl-W _ <            - resize N number of "pixels" left
+    Ctrl-W _ >            - resize N number of "pixels" right
+    Ctrl-W s              - Split window horizontally
+    Ctrl-W Ctrl-V         - Split window vertically
     v[nav]y<leader><C-R>0 - Search for visual selection
 
 [01;37mReplace all underscores with spaces [22;37m
