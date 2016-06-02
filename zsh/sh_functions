@@ -1,5 +1,45 @@
 #!/bin/bash
 
+function todo() {
+    local DIR_NAME="$HOME/.todo";
+    local FILE_NAME="";
+    case $1 in
+        '-d') FILE_NAME="$DIR_NAME/todo_$(date +%F).md";;
+        '-c') echo 'Clearing empty todos';
+              IFS="
+"
+              for f in $(ls -1 "$DIR_NAME"); do
+                  if [[ $(wc -l "$DIR_NAME/$f" | awk '{ print $1 }') == 4 ]]; then
+                      echo "$f appears to be empty. [v]iew [c]lear or [i]gnore?: ";
+                      read ANSWER;
+                      case $ANSWER in
+                        'v'|'V') cat "$DIR_NAME/$f";
+                                 print "[c]lear or [i]gnore?: ";
+                                 read ANSWER;
+                                 case $ANSWER in
+                                    'c'|'C') rm "$DIR_NAME/$f";;
+                                 esac
+                                 ;;
+                        'c'|'C') rm "$DIR_NAME/$f";;
+                      esac
+                  fi
+              done
+              return;;
+        *) FILE_NAME="$DIR_NAME/todo.md";;
+    esac
+
+    if [[ ! -d "$DIR_NAME" ]]; then
+        mkdir "$DIR_NAME";
+    fi
+
+
+    if [[ ! -f "$FILE_NAME" ]]; then
+        echo "# TODO\n\nCreated: $(date +%F)\n" >> "$FILE_NAME"
+    fi
+
+    vim "$FILE_NAME" +;
+}
+
 function monitor_sensors() {
   while true; do
     clear;
