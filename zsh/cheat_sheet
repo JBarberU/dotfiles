@@ -1,6 +1,9 @@
 [01;37mTmux [22;37m
     Ctrl-B D - Exit tmux session
     
+    # In command mode (Ctrl-B :)
+    resize-pane -[D,U,L,R] <N> - Resize current pane
+
     # Join running session if there is one, otherwise create
     tmux -L default attach -t 0 || tmux
 
