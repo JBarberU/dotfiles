@@ -9,6 +9,7 @@ set incsearch
 set showcmd
 
 "============ Tab width ============"
+" Look under vim/vafter/ftplugin for language specific preferences
 set tabstop=4
 set shiftwidth=4
 set expandtab "Makes vim substitute tab character with spaces"
