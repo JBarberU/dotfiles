@@ -124,3 +124,6 @@
 [submodule "vim/vim/bundle/upAndDown"]
 	path = vim/vim/bundle/upAndDown
 	url = https://github.com/vim-scripts/upAndDown
+[submodule "vim/vim/bundle/vim-exchange.git"]
+	path = vim/vim/bundle/vim-exchange.git
+	url = https://github.com/tommcdo/vim-exchange.git
