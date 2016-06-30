@@ -194,7 +194,7 @@ def update_vim_plugins():
 
     class PluginUpdater(threading.Thread):
         """Runner for the update of a plugin"""
-        plugin_path = ''
+        plugin_dir = ''
 
         def __init__(self, plugin_dir):
             self.plugin_dir = plugin_dir
