@@ -1,0 +1,107 @@
+{
+    "git": {
+        "links": {
+            "git/gitignore": ".gitignore",
+            "git/gitconfig": ".gitconfig"
+        },
+        "binaries": [
+            "git"
+        ]
+    },
+    "irssi": {
+        "links": {
+            "irssi": ".irssi"
+        },
+        "copy": {
+            "irssi/config.example": ".irssi/config"
+        },
+        "binaries": [
+            "irssi"
+        ]
+    },
+    "tmux": {
+        "links": {
+            "tmux/tmux.conf": ".tmux.conf",
+            "tmux/tmux_powerline.snap": ".tmux_powerline.snap"
+        },
+        "binaries": [
+            "tmux"
+        ]
+    },
+    "urxvt": {
+        "links": {
+            "xorg/Xresources": ".Xresources"
+        },
+        "platforms": ["linux"],
+        "binaries": [
+            "rxvt-unicode-256color"
+        ]
+    },
+    "vim": {
+        "links": {
+            "vim/vim": ".vim",
+            "vim/vimrc": ".vimrc"
+        },
+        "binaries": [
+            "vim",
+            "exuberant-ctags",
+            "ack-grep"
+        ]
+    },
+    "vscode": {
+        "mkdirs": [
+            ".config/Code"
+        ],
+        "links": {
+            "vs_code": ".config/Code/User"
+        },
+        "binaries": [
+            {
+                "name": "code",
+                "message": "Download vscode from microsoft.com"
+            }
+        ]
+    },
+    "xmonad": {
+        "mkdirs": [
+            ".xmonad",
+            "shots"
+        ],
+        "links": {
+            "haskell/ghci": ".ghci",
+            "xmonad/xmonad.hs": ".xmonad/xmonad.hs",
+            "xmonad/xmobarrc": ".xmobarrc",
+            "conky/conkyrc": ".conkyrc",
+            "xorg/xinitrc": ".xinitrc"
+        },
+        "touch": [
+            ".dmenu_favourites"
+        ],
+        "platforms": ["linux"],
+        "binaries": [
+            "xmonad",
+            "xmobar",
+            "dmenu",
+            "conky-all",
+            "xclip",
+            "feh"
+        ]
+    },
+    "zshs": {
+        "touch": [
+            ".aliases",
+            ".paths"
+        ],
+        "links": {
+            "zsh/zshrc": ".zshrc",
+            "zsh/zsh_env": ".zsh_env",
+            "zsh/cheat_sheet": ".cheat_sheet",
+            "zsh/sh_functions": ".sh_functions",
+            "zsh/oh-my-zsh": ".oh-my-zsh"
+        },
+        "message": "Run \"chsh -s $(which zsh)\" to set zsh as our default shell",
+        "binaries": [
+            "zsh"
+        ]
+    }
+}
