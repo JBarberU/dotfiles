@@ -13,6 +13,7 @@ import stat
 #-------------------------------------------------------------------------------
 
 class Platforms:
+    """Enum class for easily checking agains what platform we are running on."""
     UNDEFINED   = 0
     WINDOWS     = 1
     CYGWIN      = 2
@@ -22,6 +23,7 @@ class Platforms:
 #-------------------------------------------------------------------------------
 
 def get_current_platform():
+    """Return the current platform."""
     for k, v in {
                     Platforms.WINDOWS:  ['win32'],
                     Platforms.CYGWIN:   ['cygwin'],
@@ -35,6 +37,7 @@ def get_current_platform():
 #-------------------------------------------------------------------------------
 
 def is_executable(path):
+    """Return True if the path points to an executable."""
     return os.path.isfile(path) and os.stat(path).st_mode & stat.S_IXOTH
 
 #-------------------------------------------------------------------------------
@@ -47,6 +50,7 @@ PLATFORM = get_current_platform()
 #-------------------------------------------------------------------------------
 
 def install():
+    """Install the dotfiles."""
     recipes = None
     with open('{0}/recipes.json'.format(os.path.dirname(__file__)), 'r') as f:
         recipes = json.load(f)
@@ -183,8 +187,14 @@ def install():
 #-------------------------------------------------------------------------------
 
 def update_vim_plugins():
+    """Update the vim plugins by recursively running:
+            $ git checkout master
+            $ git pull --rebase origin master
+            $ git submodule update --init --recursive
+    """
 
     class PluginUpdater(threading.Thread):
+        """Runner for the update of a plugin"""
         plugin_path = ''
 
         def __init__(self, plugin_dir):
