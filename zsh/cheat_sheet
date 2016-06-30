@@ -16,6 +16,7 @@
     Ctrl-W s              - Split window horizontally
     Ctrl-W Ctrl-V         - Split window vertically
     v[nav]y<leader><C-R>0 - Search for visual selection
+    <leader><leader>W     - Start easymotion
 
     Change indentation:
     :help <
