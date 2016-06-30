@@ -46,7 +46,6 @@ DOTFILES_PATH = os.path.abspath(os.path.dirname(__file__))
 HOME_PATH = os.path.expanduser('~')
 PLATFORM = get_current_platform()
 
-
 #-------------------------------------------------------------------------------
 
 def install():
