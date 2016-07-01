@@ -98,8 +98,6 @@ map <right> <nop>
 
 let mapleader=","
 nmap <silent> ,/ :nohlsearch<CR>
-nmap <C-n> :NERDTreeToggle<CR>
-nmap <C-h> :TlistToggle<CR>
 nmap <F4> :A<CR>
 nmap <F3> :AV<CR>
 
@@ -177,9 +175,6 @@ let g:airline_powerline_fonts = 1
 
 " nerdtree
 let NERDTreeIgnore = ["\.pyc", "\.so$", "\.a$", "build/*", "CMakeLists\.txt\..*"]
-
-" ctags
-nnoremap <silent> <F3> :TlistToggle<CR>
 
 " ack.vim
 let g:ack_default_options = " -s -H --nocolor --nogroup --column"

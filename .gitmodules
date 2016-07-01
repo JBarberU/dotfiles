@@ -43,9 +43,6 @@
 [submodule "vim/vim/bundle/a"]
 	path = vim/vim/bundle/a
 	url = https://github.com/vim-scripts/a.vim
-[submodule "vim/vim/bundle/supertab"]
-	path = vim/vim/bundle/supertab
-	url = https://github.com/ervandew/supertab
 [submodule "vim/vim/bundle/vim-local"]
 	path = vim/vim/bundle/vim-local
 	url = https://github.com/JBarberU/vim-local.git
