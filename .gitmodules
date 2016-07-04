@@ -136,3 +136,6 @@
 [submodule "vim/vim/bundle/vim-fugitive"]
 	path = vim/vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/vim/non-bundle/SimplyFold"]
+	path = vim/vim/non-bundle/SimplyFold
+	url = https://github.com/tmhedberg/SimpylFold

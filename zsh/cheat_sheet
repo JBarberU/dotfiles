@@ -18,6 +18,17 @@
     v[nav]y<leader><C-R>0 - Search for visual selection
     <leader><leader>W     - Start easymotion
 
+    Folds:
+    zi  - Turn folding on/off
+    za  - Toggle fold open/closed
+    zc  - Close current fold
+    zR  - Open all folds
+    zM  - Close all folds
+    zv  - Expand folds to reveal cursor
+    zj  - Navigate one fold down
+    zk  - Navigate one fold up
+
+
     Change indentation:
     :help <
 
