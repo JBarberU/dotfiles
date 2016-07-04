@@ -1,14 +1,20 @@
-" Set shell (fixes issue when using the fish shell)
+" vim: foldmethod=marker
+
+
+" Set shell (fixes issue when using the fish shell) {{{1
 set shell=/bin/sh
 
-"============ Searching ============"
+" Folding {{{1
+set foldcolumn=3
+
+" Searching {{{1
 "Highlight searches by default"
 set hlsearch
 set showmatch
 set incsearch
 set showcmd
 
-"============ Tab width ============"
+" Tab width {{{1
 " Look under vim/vafter/ftplugin for language specific preferences
 set tabstop=4
 set shiftwidth=4
@@ -21,32 +27,27 @@ set modelines=5
 
 set backspace=indent,eol,start
 
-"============ Swap files ============"
+" Swap files {{{1
 "No swap files"
 set noswapfile
 set nobackup
 set nowb
 
-"============ Movement ============"
-"Move one row instead of one line"
-" nmap j gj
-" nmap k gk
-
-"============ Auto completion ============"
+" Auto completion {{{1
 set wildmenu
 set wildmode=list:longest,full
-set wildignore=*.o,*.obj,*.pdf
 set ignorecase
 set smartcase
+set wildignore+=*/tmp/*,*.o,*.obj,*.pdf,*.so,*.hi,*.pdf,*.swp,*.zip,*/build/*,*.git/*,CMakeLists\.txt\.*
 
-"========== Theme ============"
+" Theme {{{1
 set number
 syntax enable
 set background=dark
 colorscheme koehler
 set t_Co=16
 
-"============ Cursor ============"
+" Cursor {{{1
 "au InsertEnter * hi CursorLine ctermbg=238
 function! HighlightLine()
   hi CursorLine ctermbg=237 cterm=NONE
@@ -66,17 +67,18 @@ set concealcursor=inv
 " hide concealed text completely unless replacement character is defined
 set conceallevel=2
 
-" Auto resource vimrc
+" Auto resource vimrc {{{1
 au! BufWritePost .vimrc nested source %
 
-" Pathogen
+" Pathogen {{{1
 call pathogen#infect()
 call pathogen#helptags()
 
+" Turn on filetype-based plugins {{{1
 filetype plugin on
 filetype indent off
 
-"============ Page width ============"
+" Page width {{{1
 "set textwidth=80
 " hi ColorColumn ctermbg=235
 " execute "set colorcolumn=" . join(range(81,82), '|')
@@ -88,9 +90,9 @@ hi NonText ctermfg=237
 " really pop). We'll fix prepending SpecialKeys with indent_guides later
 hi SpecialKey ctermfg=237
 
-"========== Map ============"
+" Map {{{1
 
-"== Unmap arrow keys =="
+" Unmap arrow keys
 map <up>    <nop>
 map <down>  <nop>
 map <left>  <nop>
@@ -115,10 +117,10 @@ nmap <F3> :AV<CR>
 nmap do ddO
 nmap <C-c> :q<CR>
 
-"== w!! to sudo write =="
+" w!! to sudo write
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
 
-"Status line
+" Status line {{{1
 set statusline=%F\ %y%m\ %=\ %c:(%l/%L)
 set laststatus=2
 
@@ -126,10 +128,8 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
-set wildignore+=*/tmp/*,*.o,*.so,*.hi,*.pdf,*.swp,*.zip,*/build/*,*.git/*,CMakeLists\.txt\.*     " MacOSX/Linux
-"If we ever want to use windows, lolz
-"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-
+" Plugins {{{1
+" Clang complete {{{2
 if has("unix")
   let s:uname = system("uname")
   if s:uname == "Darwin\n"
@@ -159,32 +159,32 @@ let g:clang_conceal_snippets = 1
 let g:clang_trailing_placeholder = 1
 let g:clang_close_preview = 1
 
-" vim-cpp-enhanced-highlight
+" vim-cpp-enhanced-highlight {{{2
 let g:cpp_class_scope_highlight = 1
 let g:cpp_experimental_template_highlight = 1
 
-" vim-indent-guides
+" vim-indent-guides {{{2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=234 ctermfg=238
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=236 ctermfg=240
 
-" vim-airline
+" vim-airline {{{2
 let g:airline_powerline_fonts = 1
 
-" nerdtree
+" nerdtree {{{2
 let NERDTreeIgnore = ["\.pyc", "\.so$", "\.a$", "build/*", "CMakeLists\.txt\..*"]
 
-" ack.vim
+" ack.vim {{{2
 let g:ack_default_options = " -s -H --nocolor --nogroup --column"
 noremap ,f :Ack!<space>
 noremap ,F :AckFromSearc!<CR>
 
-" c.vim
+" c.vim {{{2
 let g:C_MapLeader = 'å'
 
-" UltiSnips
+" UltiSnips {{{2
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<C-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
