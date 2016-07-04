@@ -18,6 +18,13 @@
     v[nav]y<leader><C-R>0 - Search for visual selection
     <leader><leader>W     - Start easymotion
 
+    Tabs:
+    :tabedit <filename>   - Edit file in new tab
+    :tabonly              - Close all tabs except active one
+    <C-w><S-t>            - Move current window to a new tab
+    gt                    - Jump to next tab
+    #gt                   - Jump to tab number #
+
     Folds:
     zi  - Turn folding on/off
     za  - Toggle fold open/closed
