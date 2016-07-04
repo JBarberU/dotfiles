@@ -127,3 +127,12 @@
 [submodule "vim/vim/bundle/ultisnips"]
 	path = vim/vim/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
+[submodule "vim/vim/bundle/vim-abolish"]
+	path = vim/vim/bundle/vim-abolish
+	url = https://github.com/tpope/vim-abolish.git
+[submodule "vim/vim/bundle/vim-visual-star-search"]
+	path = vim/vim/bundle/vim-visual-star-search
+	url = https://github.com/nelstrom/vim-visual-star-search.git
+[submodule "vim/vim/bundle/vim-fugitive"]
+	path = vim/vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
