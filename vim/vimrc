@@ -39,6 +39,11 @@ set ignorecase
 set smartcase
 set wildignore+=*/tmp/*,*.o,*.obj,*.pdf,*.so,*.hi,*.pdf,*.swp,*.zip,*/build/*,*.git/*,CMakeLists\.txt\.*
 
+" Auto resource vimrc {{{1
+if has("autocmd")
+  autocmd bufwritepost vimrc source $MYVIMRC
+endif
+
 " Theme {{{1
 set number
 syntax enable
@@ -65,9 +70,6 @@ call UnHighlightLine()
 set concealcursor=inv
 " hide concealed text completely unless replacement character is defined
 set conceallevel=2
-
-" Auto resource vimrc {{{1
-au! BufWritePost .vimrc nested source %
 
 " Pathogen {{{1
 call pathogen#infect()
@@ -122,10 +124,6 @@ command! W execute ':silent w !sudo tee % >/dev/null' | edit!
 " Status line {{{1
 set statusline=%F\ %y%m\ %=\ %c:(%l/%L)
 set laststatus=2
-
-if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
 
 " Plugins {{{1
 " Clang complete {{{2
