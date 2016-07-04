@@ -121,6 +121,9 @@ nmap <C-c> :q<CR>
 " w!! to sudo write
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
 
+" Open vimrc for edit
+nmap <leader>v :tabe $MYVIMRC<CR>
+
 " Status line {{{1
 set statusline=%F\ %y%m\ %=\ %c:(%l/%L)
 set laststatus=2
