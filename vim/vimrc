@@ -1,6 +1,5 @@
 " vim: foldmethod=marker
 
-
 " Set shell (fixes issue when using the fish shell) {{{1
 set shell=/bin/sh
 
@@ -90,7 +89,7 @@ hi NonText ctermfg=237
 " really pop). We'll fix prepending SpecialKeys with indent_guides later
 hi SpecialKey ctermfg=237
 
-" Map {{{1
+" Keymaps {{{1
 
 " Unmap arrow keys
 map <up>    <nop>
@@ -191,5 +190,5 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
-" vim-markdown
+" vim-markdown {{{2
 let g:markdown_folding=1
