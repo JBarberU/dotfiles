@@ -191,3 +191,5 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
+" vim-markdown
+let g:markdown_folding=1
