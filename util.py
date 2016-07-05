@@ -9,6 +9,7 @@ import argparse
 import subprocess
 import threading
 import stat
+import logging
 
 #-------------------------------------------------------------------------------
 
@@ -79,65 +80,93 @@ def install():
             print 'Aborting'
             exit(1)
 
+    def handle_binaries(recipe):
+        if 'binaries' in recipe:
+            bin_l = []
+            man_bin_l = []
+            b_bin_l = []
+            for binary in recipe['binaries']:
+                if type(binary) == dict:
+                    is_exec = is_executable(binary['name'])
+                    if not is_exec:
+                        split_char = ';' if PLATFORM == Platforms.WINDOWS else ':'
+                        for p in os.environ['PATH'].split(split_char):
+                            if is_executable('{0}/{1}'.format(p, binary['name'])):
+                                is_exec = True
+                                break
+                    if not is_exec:
+                        t = binary['type']
+                        if t == 'manual':
+                            man_bin_l.append(binary)
+                        else:
+                            b_bin_l.append(binary)
+                else:
+                    bin_l.append(binary)
+            return (bin_l, man_bin_l, b_bin_l)
     
+    def handle_mkdirs(recipe):
+        if 'mkdirs' in recipe:
+            for dir_ in recipe['mkdirs']:
+                d = '{0}/{1}'.format(HOME_PATH, dir_)
+                if os.path.exists(d):
+                    if not os.path.isdir(d):
+                        sys.stderr.write('Unable to create folder {0}, a file with the same name already exists\n'.format(d))
+                        exit(1)
+                else:
+                    os.makedirs(d)
+    def handle_touch(recipe):
+        if 'touch' in recipe:
+            for file_ in recipe['touch']:
+                f = '{0}/{1}'.format(HOME_PATH, file_)
+                if not os.path.exists(f):
+                    with open(f, 'w'):
+                        pass
+
+    def handle_links(recipe):
+        if 'links' in recipe:
+            for src_n, dst_n in recipe['links'].iteritems():
+                src = '{0}/{1}'.format(DOTFILES_PATH, src_n)
+                dst = '{0}/{1}'.format(HOME_PATH, dst_n)
+                if os.path.exists(dst):
+                    if not os.path.islink(dst):
+                        sys.stderr.write('Unable to create symlink to {0}, a file/directory already exists at that location'.format(dst))
+                    elif os.readlink(dst) != src:
+                        sys.stderr.write('Conflicting symlink on $HOME\n')
+                        exit(1)
+                else:
+                    os.symlink(src, dst)
+
+    def handle_copy(recipe):
+        if 'copy' in recipe:
+            for src_n, dst_n in recipe['copy'].iteritems():
+                src = '{0}/{1}'.format(DOTFILES_PATH, src_n)
+                dst = '{0}/{1}'.format(HOME_PATH, dst_n)
+                if os.path.isdir(src):
+                    shutil.copytree(src, dst)
+                elif os.path.isfile(src):
+                    shutil.copyfile(src, dst)
+                else:
+                    sys.stderr.write('Asked to copy unsupported filetype')
 
     binaries = []
     manual_binaries = []
+    build_binaries = []
     messages = []
     for key, recipe in recipes.iteritems():
         if 'platforms' not in recipe or platform in recipe['platforms']:
-            if 'binaries' in recipe:
-                for binary in recipe['binaries']:
-                    if type(binary) == dict:
-                        is_exec = is_executable(binary['name'])
-                        if not is_exec:
-                            split_char = ';' if PLATFORM == Platforms.WINDOWS else ':'
-                            for p in os.environ['PATH'].split(split_char):
-                                if is_executable('{0}/{1}'.format(p, binary['name'])):
-                                    is_exec = True
-                                    break
-                        if not is_exec:
-                            manual_binaries.append(binary)
-                    else:
-                        binaries.append(binary)
-            if 'mkdirs' in recipe:
-                for dir_ in recipe['mkdirs']:
-                    d = '{0}/{1}'.format(HOME_PATH, dir_)
-                    if os.path.exists(d):
-                        if not os.path.isdir(d):
-                            print os.stat(d)
-                            sys.stderr.write('Unable to create folder {0}, a file with the same name already exists\n'.format(d))
-                            exit(1)
-                    else:
-                        os.makedirs(d)
-            if 'touch' in recipe:
-                for file_ in recipe['touch']:
-                    f = '{0}/{1}'.format(HOME_PATH, file_)
-                    if not os.path.exists(f):
-                        with open(f, 'w'):
-                            pass
-            if 'links' in recipe:
-                for src_n, dst_n in recipe['links'].iteritems():
-                    src = '{0}/{1}'.format(DOTFILES_PATH, src_n)
-                    dst = '{0}/{1}'.format(HOME_PATH, dst_n)
-                    if os.path.exists(dst):
-                        if not os.path.islink(dst):
-                            sys.stderr.write('Unable to create symlink to {0}, a file/directory already exists at that location'.format(dst))
-                        elif os.readlink(dst) != src:
-                            sys.stderr.write('Conflicting symlink on $HOME\n')
-                            exit(1)
-                    else:
-                        os.symlink(src, dst)
-            if 'copy' in recipe:
-                for src_n, dst_n in recipe['copy'].iteritems():
-                    src = '{0}/{1}'.format(DOTFILES_PATH, src_n)
-                    dst = '{0}/{1}'.format(HOME_PATH, dst_n)
-                    if os.path.isdir(src):
-                        shutil.copytree(src, dst)
-                    elif os.path.isfile(src):
-                        shutil.copyfile(src, dst)
-                    else:
-                        sys.stderr.write('Asked to copy unsupported filetype')
+            bin_, man_bin, b_bin = handle_binaries(recipe)
+            if bin_:
+                binaries = binaries + bin_
+            if man_bin:
+                manual_binaries = manual_binaries + man_bin
+            if b_bin:
+                build_binaries = build_binaries + b_bin
+
+
+            handle_mkdirs(recipe)
+            handle_touch(recipe)
+            handle_links(recipe)
+            handle_copy(recipe)
             if 'message' in recipe:
                 messages.append(recipe['message'])
         else:
@@ -176,6 +205,49 @@ def install():
             exit(1)
 
         cleanup()
+
+        for bb in build_binaries:
+            with open(os.devnull, 'wb') as dnull:
+                cwd = '/tmp'
+                url = bb['url']
+                repo_name = url.split('/')[-1]
+                repo = '{0}/{1}'.format(cwd, repo_name)
+                if not os.path.exists(repo):
+                    p = subprocess.Popen(['git', 'clone', url, repo_name], stdout=dnull, stderr=subprocess.PIPE, cwd=cwd)
+                    print 'Fetching code'
+                    while True:
+                        l = p.stderr.readline()
+                        if not l:
+                            break
+                        sys.stdout.write('.')
+                        sys.stdout.flush()
+                    sys.stdout.write('\n')
+
+                    p.wait()
+                    logger = logging.getLogger()
+                    if p.returncode:
+                        logger.error('Failed to clone repo {}'.format(url))
+                        exit(1)
+
+
+                build_cwd = '{0}/{1}'.format(repo, bb['cwd'])
+                if not os.path.exists(build_cwd):
+                    os.makedirs(build_cwd)
+                for cmd in bb['commands']:
+                    p = subprocess.Popen(cmd.split(' '), stdout=subprocess.PIPE, cwd=build_cwd)
+                    print 'Running command: {0}'.format(cmd)
+                    while True:
+                        l = p.stdout.readline()
+                        if not l:
+                            break
+                        sys.stdout.write('.')
+                        sys.stdout.flush()
+                    sys.stdout.write('\n')
+
+                    p.wait()
+                    if p.returncode:
+                        logger.error('Failed to run command {0}'.format(cmd))
+                        exit(1)
 
     if manual_binaries:
         binaries_msg = '\n'.join(['>\t{0}: {1}'.format(mb['name'], mb['message']) for mb in manual_binaries])
