@@ -4,21 +4,26 @@
 
     $ git clone https://github.com/JBarberU/dotfiles.git ~/dotfiles
     $ cd ~/dotfiles
-    $ ./install.py --all
-    $ # Or if you know you don't want to keep any conflicting files:
-    $ ./install.py --all --overwrite
-    $ # Or to see all available options:
-    $ ./install.py --help
+    $ ./util.py --install
 
 > Note that you'll need to have python 2.7 installed to run the installer.
 
 ## Uninstall
 
+Currently you'll have to do this manually, look in recipes.json for hints
+regarding what files have been installed and where.
+
+## Maintainance
+
+Updating the dotfiles:
+
     $ cd ~/dotfiles
-    $ ./install.py --all --uninstall
+    $ git pull --rebase origin master
+    $ ./util.py --update-vim-plugins
 
 ## Inspiration
 
+* [vimcasts](http://vimcasts.org/)
 * [odsod](https://github.com/odsod/dotfiles)
 * [sktt](https://github.com/sktt/dotfiles)
 * [danr](https://github.com/danr/dotfiles)
