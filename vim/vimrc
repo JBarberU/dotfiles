@@ -128,6 +128,11 @@ nmap <leader>v :tabe $MYVIMRC<CR>
 set statusline=%F\ %y%m\ %=\ %c:(%l/%L)
 set laststatus=2
 
+" Custom filetype mappings {{{1
+if has("autocmd")
+  autocmd BufRead,BufNewFile *tmux.conf setfiletype tmux
+endif
+
 " Plugins {{{1
 " Clang complete {{{2
 if has("unix")
