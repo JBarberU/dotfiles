@@ -37,7 +37,7 @@ set wildmenu
 set wildmode=list:longest,full
 set ignorecase
 set smartcase
-set wildignore+=*/tmp/*,*.o,*.obj,*.pdf,*.so,*.hi,*.pdf,*.swp,*.zip,*/build/*,*.git/*,CMakeLists\.txt\.*
+set wildignore+=*/tmp/*,*.o,*.obj,*.pyc,*.pdf,*.so,*.hi,*.pdf,*.swp,*.zip,*/build/*,*.git/*,CMakeLists\.txt\.*
 
 " Auto resource vimrc {{{1
 if has("autocmd")
