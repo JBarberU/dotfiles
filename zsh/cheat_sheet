@@ -18,6 +18,10 @@
     v[nav]y<leader><C-R>0 - Search for visual selection
     <leader><leader>W     - Start easymotion
 
+    Lookup what a keyboard shortcut is mapped to:
+    :map <combo>          - Prints what <combo> is mapped to (if anything)
+                            Also works with any of {,i,n,v}{,ore}map
+
     Tabs:
     :tabedit <filename>   - Edit file in new tab
     :tabonly              - Close all tabs except active one
