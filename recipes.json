@@ -25,7 +25,18 @@
             "tmux/tmux_powerline.snap": ".tmux_powerline.snap"
         },
         "binaries": [
-            "tmux"
+            "tmux",
+            {
+                "type": "build",
+                "name": "tmux-mem-cpu-load",
+                "url": "https://github.com/thewtex/tmux-mem-cpu-load.git",
+                "cwd": "build",
+                "commands": [
+                    "cmake ..",
+                    "make -j",
+                    "sudo make install"
+                ]
+            }
         ]
     },
     "urxvt": {
@@ -57,6 +68,7 @@
         },
         "binaries": [
             {
+                "type": "manual",
                 "name": "code",
                 "message": "Download vscode from microsoft.com"
             }
