@@ -94,35 +94,35 @@ hi SpecialKey ctermfg=237
 " Keymaps {{{1
 
 " Unmap arrow keys
-map <up>    <nop>
-map <down>  <nop>
-map <left>  <nop>
-map <right> <nop>
+noremap <up>    <nop>
+noremap <down>  <nop>
+noremap <left>  <nop>
+noremap <right> <nop>
 
 let mapleader=","
-nmap <silent> ,/ :nohlsearch<CR>
-nmap <F4> :A<CR>
-nmap <F3> :AV<CR>
+nnoremap <silent> ,/ :nohlsearch<CR>
+nnoremap <F4> :A<CR>
+nnoremap <F3> :AV<CR>
 
-map ,p :CtrlP<CR>
-map ,,p :CtrlPClearAllCaches<CR>
+nnoremap ,p :CtrlP<CR>
+nnoremap ,,p :CtrlPClearAllCaches<CR>
 set timeoutlen=600
 set ttimeoutlen=600
 
 " Romeve trailing whitespace
-map ,s :%s/\s\+$//g<CR><C-O>
+nnoremap ,s :%s/\s\+$//g<CR><C-O>
 
-nmap <C-n> :NERDTreeToggle<CR>
-nmap <F4> :A<CR>
-nmap <F3> :AV<CR>
-nmap do ddO
-nmap <C-c> :q<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <F4> :A<CR>
+nnoremap <F3> :AV<CR>
+nnoremap do ddO
+nnoremap <C-c> :q<CR>
 
 " w!! to sudo write
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
 
 " Open vimrc for edit
-nmap <leader>v :tabe $MYVIMRC<CR>
+nnoremap <leader>v :tabe $MYVIMRC<CR>
 
 " Status line {{{1
 set statusline=%F\ %y%m\ %=\ %c:(%l/%L)
