@@ -126,6 +126,7 @@ IFS="
 }
 
 print_random_alias;
+pgrep ssh-agent >> /dev/null || eval `ssh-agent` >> /dev/null
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
