@@ -99,13 +99,14 @@
             "feh"
         ]
     },
-    "zshs": {
+    "zsh": {
         "touch": [
             ".aliases",
             ".paths"
         ],
         "links": {
             "zsh/zshrc": ".zshrc",
+            "zsh/zsh_custom": ".zsh_custom",
             "zsh/zsh_env": ".zsh_env",
             "zsh/cheat_sheet": ".cheat_sheet",
             "zsh/sh_functions": ".sh_functions",
