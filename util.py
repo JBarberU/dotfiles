@@ -63,6 +63,7 @@ def install():
         Platforms.LINUX:     'linux',
         Platforms.OSX:       'osx',
         Platforms.WINDOWS:   'windows',
+        Platforms.CYGWIN:    'windows',
         Platforms.UNDEFINED: None,
     }[PLATFORM]
 
