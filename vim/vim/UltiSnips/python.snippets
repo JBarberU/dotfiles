@@ -21,3 +21,15 @@ $3import argparse
 args = parser.parse_args()
 
 endsnippet
+
+snippet rel "Insert reload statement for module"
+reload(${0:${VISUAL}})
+endsnippet
+
+snippet fst "Create format-string" 
+'${0:String}'.format(${1:Variables})
+endsnippet
+
+snippet pfst "Create format-string" 
+print '${0:String}'.format(${1:Variables})
+endsnippet
