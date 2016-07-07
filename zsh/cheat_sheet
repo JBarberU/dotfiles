@@ -39,6 +39,8 @@
     zj  - Navigate one fold down
     zk  - Navigate one fold up
 
+    NERDTree:
+    m   - Show NERDTree Menu
 
     Change indentation:
     :help <
