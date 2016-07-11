@@ -33,3 +33,14 @@ endsnippet
 snippet pfst "Create format-string" 
 print '${0:String}'.format(${1:Variables})
 endsnippet
+
+snippet asp "Addend relative path to sys.path"
+import sys
+import os
+sys.path.append('{0}/${0:Rlative Path}'.format(os.path.dirname(__file__)))
+endsnippet
+
+snippet iter "Iterate over the given iterable"
+for ${1:Iterator} in ${VISUAL}:
+	${0:Code}
+endsnippet
