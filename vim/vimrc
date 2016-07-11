@@ -128,6 +128,9 @@ nnoremap gs :Gstatus<CR>
 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
+nnoremap pyi :execute "!PYTHONPATH=$PYTHONPATH:%:p:h python -i -c \"import %:t:r\""<CR> 
+nnoremap pyr :execute "!python %"<CR>
+
 " Status line {{{1
 set statusline=%F\ %y%m\ %=\ %c:(%l/%L)
 set laststatus=2
