@@ -29,6 +29,7 @@
             {
                 "type": "build",
                 "name": "tmux-mem-cpu-load",
+                "ignore_platforms": ["windows"],
                 "url": "https://github.com/thewtex/tmux-mem-cpu-load.git",
                 "cwd": "build",
                 "commands": [

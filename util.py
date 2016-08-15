@@ -99,7 +99,7 @@ def install():
                         t = binary['type']
                         if t == 'manual':
                             man_bin_l.append(binary)
-                        else:
+                        elif 'ignore_platforms' in binary and platform not in binary['ignore_platforms']:
                             b_bin_l.append(binary)
                 else:
                     bin_l.append(binary)
