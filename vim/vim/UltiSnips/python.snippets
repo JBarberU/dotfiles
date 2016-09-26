@@ -1,3 +1,8 @@
+snippet #! "Hashbang!"
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+endsnippet
+
 snippet func "Create function"
 def $1($2):
 	${0:${VISUAL}}
@@ -17,30 +22,199 @@ snippet parser "Creates argparse code"
 
 parser = argparse.ArgumentParser()
 parser.add_argument('$1', help='$2')
-$3import argparse
 args = parser.parse_args()
 
 endsnippet
 
 snippet rel "Insert reload statement for module"
-reload(${0:${VISUAL}})
+reload(${1:${VISUAL}})
+endsnippet
+
+snippet imprel "Inserts import and reload statements for module"
+import ${1:${VISUAL}}
+reload($1)
 endsnippet
 
 snippet fst "Create format-string" 
-'${0:String}'.format(${1:Variables})
+'${1:string}'.format(${2:variables})
 endsnippet
 
 snippet pfst "Create format-string" 
-print '${0:String}'.format(${1:Variables})
+print '${1:string}'.format(${2:variables})
 endsnippet
 
 snippet asp "Addend relative path to sys.path"
 import sys
 import os
-sys.path.append('{0}/${0:Rlative Path}'.format(os.path.dirname(__file__)))
+${1:p} = '{0}/${2:relative_path}'.format(os.path.realpath(os.path.dirname(__file__)))
+if $1 not in sys.path:
+	sys.path.append($1)
 endsnippet
 
-snippet iter "Iterate over the given iterable"
-for ${1:Iterator} in ${VISUAL}:
-	${0:Code}
+snippet for "Iterate over the given iterable"
+for ${1:iterator} in ${2:${VISUAL:container}}:
+	${0:pass}
 endsnippet
+
+snippet forr "Iterate over range"
+for ${1:iterator} in range(${2:number}):
+	${0:${VISUAL:pass}}
+endsnippet
+
+snippet comp "Create list comprehension"
+[$1 for ${1:itarator} in ${2:container}${3: if ${4:filter}}]
+endsnippet
+
+snippet ipm "Import pymel.core"
+import pymel.core as pm
+endsnippet
+
+snippet pmw "Create a pymel window"
+$1 = pm.windows.window(w=$2, h=$3, title='$4')
+root_layout = $5
+$0
+$1.show()
+endsnippet
+
+snippet wpmw "Create a pymel window using with syntax"
+with pm.window.window(w=$1, h=$2, title='$3') as ${4:Window}:
+	with pm.${5:root_layout}:
+		$0
+endsnippet
+
+snippet pmb "Create pymel button"
+pm.button(label='$1', command=$2)
+endsnippet
+
+snippet pdir "Print the result of dir with newlines"
+print '\n'.join(dir(${1:${VISUAL}}))
+endsnippet
+
+snippet dbg "Create commented debug block"
+################################################################################
+################################################################################
+################################# DEBUG #######################################
+$1
+################################################################################
+################################################################################
+endsnippet
+
+snippet context "Create context manager methods"
+def __enter__(self):
+	${1:pass}
+	return self
+
+def __exit__(self, exc_typ4e, exc_value, traceback):
+	${2:pass}
+endsnippet
+
+snippet with "Context managed block"
+with ${1:expression} as ${2:variable}:
+	${0:pass}
+endsnippet
+
+snippet imp "Import a pyhton module"
+import ${1:module}${2: as ${3:alias}}
+endsnippet
+
+snippet from "Import from"
+from ${1:package} import ${2:module}
+endsnippet
+
+snippet if "If"
+if ${1:condition}:
+	${2:${VISUAL:pass}}
+endsnippet
+
+snippet ife "If/Else"
+if ${1:condition}:
+	${2:${VISUAL:pass}}
+else:
+	${3:pass}
+endsnippet
+
+snippet ifee "If/Elif/Else"
+if ${1:condition}:
+	${2:${VISUAL:pass}}
+elif ${3:condition}:
+	${4:pass}
+else:
+	${5:pass}
+endsnippet
+
+snippet try "Try / Except"
+try:
+	${1:${VISUAL:pass}}
+except ${2:Exception} as ${3:e}:
+	${4:raise $3}
+endsnippet
+
+snippet trye "Try / Except / Else"
+try:
+	${1:${VISUAL:pass}}
+except ${2:Except} as ${3:e}:
+	${4:raise $3}
+else:
+	${5:pass}
+endsnippet
+
+snippet tryf "Try / Except / Finally"
+try:
+	${1:${VISUAL:pass}}
+except ${2:Except} as ${3:e}:
+	${4:raise $3}
+finally:
+	${5:pass}
+endsnippet
+
+snippet tryef "Try / Except / Else / Finally" b
+try:
+	${1:${VISUAL:pass}}
+except${2: ${3:Exception} as ${4:e}}:
+	${5:raise $4}
+else:
+	${6:pass}
+finally:
+	${7:pass}
+endsnippet
+
+snippet _ "__magic__"
+__${1:init}__
+endsnippet
+
+snippet _i "__init__"
+def __init__(self$1):
+	$0
+endsnippet
+
+snippet pdb "Python debugger"
+pdb.set_trace()
+endsnippet
+
+snippet glog "Get logging.logger"
+import logging
+logging.basicConfig(format='%(asctime)s (%(threadName)s) %(levelname)s: %(message)s')
+logger = logging.getLogger(${0:__name__})
+logger.setLevel(logging.INFO)
+endsnippet
+
+snippet li "Log info"
+logger.info(${0:${VISUAL:msg}})
+endsnippet
+
+snippet lg "Log debug"
+logger.debug(${0:${VISUAL:msg}})
+endsnippet
+
+snippet lw "Log warning"
+logger.warning(${0:${VISUAL:msg}})
+endsnippet
+
+snippet le "Log error"
+logger.error(${0:${VISUAL:msg}})
+endsnippet
+
+snippet lc "Log critical"
+logger.critical(${0:${VISUAL:msg}})
+endsnippet
+
