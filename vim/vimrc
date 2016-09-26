@@ -109,6 +109,9 @@ nnoremap ,,p :CtrlPClearAllCaches<CR>
 set timeoutlen=600
 set ttimeoutlen=600
 
+inoremap <C-H> <C-D>
+inoremap <C-D> <ESC>ddi
+
 " Romeve trailing whitespace
 nnoremap ,s :%s/\s\+$//g<CR><C-O>
 
