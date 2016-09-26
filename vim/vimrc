@@ -201,7 +201,7 @@ let g:C_MapLeader = 'å'
 
 " UltiSnips {{{2
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<C-tab>"
+let g:UltiSnipsListSnippets="<S-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
 let g:UltiSnipsEditSplit="vertical"
