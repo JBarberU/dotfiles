@@ -120,6 +120,7 @@ nnoremap <F4> :A<CR>
 nnoremap <F3> :AV<CR>
 nnoremap do ddO
 nnoremap <C-c> :q<CR>
+nnoremap <C-y> :%y+<CR>
 
 " w!! to sudo write
 command! W execute ':silent w !sudo tee % >/dev/null' | edit!
