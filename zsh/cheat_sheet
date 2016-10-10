@@ -18,6 +18,16 @@
     v[nav]y<leader><C-R>0 - Search for visual selection
     <leader><leader>W     - Start easymotion
 
+    Abolish:
+    crc                   - Convert word under cursor to camelCase
+    crm                   - Convert word under cursor to MixedCase
+    cr{s,_}               - Convert word under cursor to snake_case
+    cr{u,U}               - Convert word under cursor to SNAKE_UPPERCASE
+    cr-                   - Convert word under cursor to dash-case
+    crk                   - Convert word under cursor to kebab-case
+    cr.                   - Convert word under cursor to dot.case
+    :help abolish
+
     Lookup what a keyboard shortcut is mapped to:
     :map <combo>          - Prints what <combo> is mapped to (if anything)
                             Also works with any of {,i,n,v}{,ore}map
