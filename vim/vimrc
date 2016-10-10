@@ -70,6 +70,7 @@ call UnHighlightLine()
 set concealcursor=inv
 " hide concealed text completely unless replacement character is defined
 set conceallevel=2
+set nostartofline
 
 " Pathogen {{{1
 call pathogen#infect()
@@ -98,6 +99,11 @@ noremap <up>    <nop>
 noremap <down>  <nop>
 noremap <left>  <nop>
 noremap <right> <nop>
+
+inoremap <up>    <nop>
+inoremap <down>  <nop>
+inoremap <left>  <nop>
+inoremap <right> <nop>
 
 let mapleader=","
 nnoremap <silent> ,/ :nohlsearch<CR>
@@ -201,7 +207,7 @@ noremap ,F :AckFromSearc!<CR>
 let g:C_MapLeader = 'å'
 
 " UltiSnips {{{2
-let g:UltiSnipsSnippetDirectories=[$HOME."/.UltiSnips", $HOME."/.vim/UltiSnips"]
+let g:UltiSnipsSnippetDirectories=[$HOME."/.vim/UltiSnips", $HOME."/.UltiSnips"]
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsListSnippets="<S-tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
