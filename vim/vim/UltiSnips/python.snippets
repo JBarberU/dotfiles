@@ -3,9 +3,14 @@ snippet #! "Hashbang!"
 # -*- coding: utf-8 -*-
 endsnippet
 
-snippet func "Create function"
+snippet def "Create function"
 def $1($2):
-	${0:${VISUAL}}
+	${0:${VISUAL:pass}}
+endsnippet
+
+snippet defm "Create function"
+def $1(self$2):
+	${0:${VISUAL:pass}}
 endsnippet
 
 snippet ifm "Creates if __name__ == __main__"
@@ -70,15 +75,15 @@ import pymel.core as pm
 endsnippet
 
 snippet pmw "Create a pymel window"
-$1 = pm.windows.window(w=$2, h=$3, title='$4')
+$1 = pm.window(w=$2, h=$3, title='$4')
 root_layout = $5
 $0
 $1.show()
 endsnippet
 
 snippet wpmw "Create a pymel window using with syntax"
-with pm.window.window(w=$1, h=$2, title='$3') as ${4:Window}:
-	with pm.${5:root_layout}:
+with pm.window(w=$1, h=$2, title='$3') ${4:as ${5:w}}:
+	with pm.${6:root_layout}:
 		$0
 endsnippet
 
@@ -111,6 +116,11 @@ endsnippet
 snippet with "Context managed block"
 with ${1:expression} as ${2:variable}:
 	${0:pass}
+endsnippet
+
+snippet open "with open()"
+with open($1, '${2:r}') as ${3:f}:
+	${4:${VISUAL:pass}}
 endsnippet
 
 snippet imp "Import a pyhton module"
@@ -184,7 +194,7 @@ endsnippet
 
 snippet _i "__init__"
 def __init__(self$1):
-	$0
+	${2:${VISUAL:pass}}
 endsnippet
 
 snippet pdb "Python debugger"
@@ -218,3 +228,10 @@ snippet lc "Log critical"
 logger.critical(${0:${VISUAL:msg}})
 endsnippet
 
+snippet pnli "Print list with newlines"
+print '\n'.join(${1:${VISUAL:li}})
+endsnippet
+
+snippet p80 "Print 80 '-' characters"
+print '-' * 80
+endsnippet
