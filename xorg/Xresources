@@ -1,6 +1,9 @@
+URxvt*depth:        32
 URxvt*background:   black
 URxvt*transparent:  true
-URxvt*tintColor:    #7D0096
+URxvt*shading:      10
+!URxvt*tintColor:    #7D0096
+!URxvt*tintColor:    #5D0076
 URxvt*foreground:   white
 URxvt*scrollBar:    false
 URxvt*saveLines:    10000
