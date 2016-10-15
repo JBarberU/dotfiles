@@ -145,3 +145,6 @@
 [submodule "vim/vim/bundle/tabular"]
 	path = vim/vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
+[submodule "tools/devdiary"]
+	path = tools/devdiary
+	url = https://github.com/JBarberU/devdiary.git
