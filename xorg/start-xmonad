@@ -18,6 +18,7 @@ xrandr --output DP-4 --left-of DVI-I-1
 setxkbmap "se(svdvorak)"
 # Swap CapsLock for Escape
 echo "clear Lock\nkeycode 0x42 = Escape\n" | xmodmap -
+synclient TapButton1=1 TapButton2=3 TapButton3=2 PalmDetect=1
 
 # Set BG
 feh /home/john/Pictures/BGs/black-cats-awesomelycute.com-25.jpg --bg-fill
