@@ -115,23 +115,7 @@ src_if_exists "$HOME/.linux_only"
 src_if_exists "$HOME/.sh_functions"
 src_if_os "Darwin" "$HOME/.zshrc_osx"
 
-function print_random_alias() {
-  local INDEX=$((RANDOM % $(alias | wc -l)))
-  local i=0
-  local TMP_IFS="$IFS"
-IFS="
-"
-  for a in $(alias); do
-    if [[ $i == $INDEX ]]; then
-      echo "Alias of the day: \"$a\""
-    fi
-    i=$(($i+1))
-  done
-  IFS="$TMP_IFS"
-}
-
-print_random_alias;
-pgrep ssh-agent >> /dev/null || eval `ssh-agent` >> /dev/null
+which pgrep >> /dev/null && pgrep ssh-agent >> /dev/null || eval `ssh-agent` >> /dev/null
 
 # Colorized man-pages
 # found here: http://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
