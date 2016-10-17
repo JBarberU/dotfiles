@@ -94,15 +94,6 @@ case $(uname) in
       ;;
 esac
 
-src_if_exists "$HOME/.aliases"
-src_if_exists "$HOME/.paths"
-src_if_exists "$HOME/.env"
-src_if_exists "$HOME/.zsh_env"
-src_if_exists "$HOME/.osx_only"
-src_if_exists "$HOME/.linux_only"
-src_if_exists "$HOME/.sh_functions"
-src_if_os "Darwin" "$HOME/.zshrc_osx"
-
 alias gs="git status 2> /dev/null || (echo \"Not a git repository, doing ls instead\n\" && ls)"
 alias j="jump"
 alias zshreload="source ~/.zshrc"
@@ -113,7 +104,16 @@ alias edzshrc="\$EDITOR \$HOME/.zshrc"
 alias edvimrc="\$EDITOR \$HOME/.vimrc"
 alias clip="CLIP=\"\$(xclip -o -selection clipboard)\" && echo Put the contents of clipboard into CLIP :\)"
 alias tmuxa="tmux attach || tmux"
-alias devd="vim $(devdiary.py --add --latest)"
+alias devd="vim \$(devdiary.py --add --latest)"
+
+src_if_exists "$HOME/.aliases"
+src_if_exists "$HOME/.paths"
+src_if_exists "$HOME/.env"
+src_if_exists "$HOME/.zsh_env"
+src_if_exists "$HOME/.osx_only"
+src_if_exists "$HOME/.linux_only"
+src_if_exists "$HOME/.sh_functions"
+src_if_os "Darwin" "$HOME/.zshrc_osx"
 
 function print_random_alias() {
   local INDEX=$((RANDOM % $(alias | wc -l)))
