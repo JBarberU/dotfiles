@@ -145,3 +145,6 @@
 [submodule "tools/devdiary"]
 	path = tools/devdiary
 	url = https://github.com/JBarberU/devdiary.git
+[submodule "vim/vim/bundle/rust.vim"]
+	path = vim/vim/bundle/rust.vim
+	url = https://github.com/rust-lang/rust.vim.git
