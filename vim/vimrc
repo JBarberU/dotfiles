@@ -105,6 +105,11 @@ inoremap <down>  <nop>
 inoremap <left>  <nop>
 inoremap <right> <nop>
 
+inoremap <C-H> <C-D>
+inoremap <C-D> <ESC>ddi
+
+inoremap <C-L> <ESC>
+
 let mapleader=","
 nnoremap <silent> ,/ :nohlsearch<CR>
 nnoremap <F4> :A<CR>
@@ -114,9 +119,6 @@ nnoremap ,p :CtrlP<CR>
 nnoremap ,,p :CtrlPClearAllCaches<CR>
 set timeoutlen=600
 set ttimeoutlen=600
-
-inoremap <C-H> <C-D>
-inoremap <C-D> <ESC>ddi
 
 " Romeve trailing whitespace
 nnoremap ,s :%s/\s\+$//g<CR><C-O>
