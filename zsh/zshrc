@@ -105,6 +105,7 @@ alias edvimrc="\$EDITOR \$HOME/.vimrc"
 alias clip="CLIP=\"\$(xclip -o -selection clipboard)\" && echo Put the contents of clipboard into CLIP :\)"
 alias tmuxa="tmux attach || tmux"
 alias devd="vim \$(devdiary.py --add --latest)"
+alias devdsum="devdiary.py --summarize | less"
 
 src_if_exists "$HOME/.aliases"
 src_if_exists "$HOME/.paths"
