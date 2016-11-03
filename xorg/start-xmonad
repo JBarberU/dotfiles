@@ -15,7 +15,7 @@ xrandr --output DP-4 --primary
 xrandr --output DP-4 --left-of DVI-I-1
 
 # Svdvorak :)
-setxkbmap "se(svdvorak)"
+setxkbmap "us(dvorak-intl)"
 # Swap CapsLock for Escape
 echo "clear Lock\nkeycode 0x42 = Escape\n" | xmodmap -
 synclient TapButton1=1 TapButton2=3 TapButton3=2 PalmDetect=1
