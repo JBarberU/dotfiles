@@ -148,3 +148,6 @@
 [submodule "vim/vim/bundle/rust.vim"]
 	path = vim/vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
+[submodule "vim/vim/bundle/python-mode"]
+	path = vim/vim/bundle/python-mode
+	url = https://github.com/klen/python-mode.git
