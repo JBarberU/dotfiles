@@ -82,8 +82,8 @@ filetype indent off
 
 " Page width {{{1
 "set textwidth=80
-" hi ColorColumn ctermbg=235
-" execute "set colorcolumn=" . join(range(81,82), '|')
+hi ColorColumn ctermbg=235
+execute "set colorcolumn=" . join(range(81,82), '|')
 set listchars=tab:\>\ ,eol:$,trail:~
 set list
 hi NonText ctermfg=237
