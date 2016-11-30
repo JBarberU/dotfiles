@@ -15,12 +15,12 @@ endsnippet
 
 snippet ifm "Creates if __name__ == __main__"
 
-def main():
-	${1:${VISUAL:pass}}
+def main(args):
+	${0:${VISUAL:pass}}
 
 if __name__ == '__main__':
-	main()
-
+	import sys
+	sys.exit(main(sys.argv[1:]))
 endsnippet
 
 snippet parser "Creates argparse code"
@@ -235,4 +235,9 @@ endsnippet
 
 snippet p80 "Print 80 '-' characters"
 print '-' * 80
+endsnippet
+
+snippet ifut "Import default stuff from __future__"
+from __future__ import division, generators, nested_scopes, print_function
+from __future__ import unicode_literals, with_statement
 endsnippet
