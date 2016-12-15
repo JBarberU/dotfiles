@@ -1,1 +1,0 @@
-../../../non-bundle/vim-markdown/ftplugin/markdown.vim

@@ -1,24 +1,6 @@
-[submodule "vim/vim/bundle/nerdtree"]
-	path = vim/vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
-[submodule "vim/vim/bundle/vim-easymotion"]
-	path = vim/vim/bundle/vim-easymotion
-	url = https://github.com/Lokaltog/vim-easymotion.git
-[submodule "vim/vim/bundle/clang_complete"]
-	path = vim/vim/bundle/clang_complete
-	url = https://github.com/Rip-Rip/clang_complete.git
-[submodule "vim/vim/bundle/ctrlp"]
-	path = vim/vim/bundle/ctrlp
-	url = https://github.com/ctrlpvim/ctrlp.vim.git
-[submodule "vim/vim/bundle/vimproc.vim"]
-	path = vim/vim/bundle/vimproc.vim
-	url = https://github.com/Shougo/vimproc.vim.git
 [submodule "vim/vim/bundle/ghcmod-vim"]
 	path = vim/vim/bundle/ghcmod-vim
 	url = https://github.com/eagletmt/ghcmod-vim.git
-[submodule "vim/vim/pathogen"]
-	path = vim/vim/pathogen
-	url = https://github.com/tpope/vim-pathogen.git
 [submodule "vim/vim/bundle/vim-haskell"]
 	path = vim/vim/bundle/vim-haskell
 	url = https://github.com/wlangstroth/vim-haskell.git
@@ -28,31 +10,13 @@
 [submodule "vim/vim/bundle/vim2hs"]
 	path = vim/vim/bundle/vim2hs
 	url = https://github.com/dag/vim2hs.git
-[submodule "vim/vim/bundle/vim-markdown"]
-	path = vim/vim/bundle/vim-markdown
-	url = https://github.com/tpope/vim-markdown.git
 [submodule "vim/vim/bundle/haskellmode-vim"]
 	path = vim/vim/bundle/haskellmode-vim
 	url = https://github.com/lukerandall/haskellmode-vim.git
-[submodule "vim/vim/bundle/closetag.vim"]
-	path = vim/vim/bundle/closetag.vim
-	url = https://github.com/docunext/closetag.vim.git
-[submodule "vim/vim/bundle/html-template-syntax"]
-	path = vim/vim/bundle/html-template-syntax
-	url = https://github.com/pbrisbin/html-template-syntax.git
-[submodule "vim/vim/bundle/a"]
-	path = vim/vim/bundle/a
-	url = https://github.com/vim-scripts/a.vim
-[submodule "vim/vim/bundle/vim-local"]
-	path = vim/vim/bundle/vim-local
-	url = https://github.com/JBarberU/vim-local.git
 [submodule "tools/todo-term"]
 	path = tools/todo-term
 	url = https://github.com/JBarberU/todo-term.git
   branch = master
-[submodule "vim/vim/bundle/vim-diffsaved"]
-	path = vim/vim/bundle/vim-diffsaved
-	url = https://github.com/JBarberU/vim-diffsaved.git
 [submodule "tools/battery-term"]
 	path = tools/battery-term
 	url = https://github.com/JBarberU/battery-term.git
@@ -61,40 +25,10 @@
 	path = tools/ip-monitor
 	url = https://github.com/JBarberU/ip-monitor.git
   branch = master
-[submodule "vim/vim/bundle/vim-cpp-enhanced-highlight"]
-	path = vim/vim/bundle/vim-cpp-enhanced-highlight
-	url = https://github.com/octol/vim-cpp-enhanced-highlight.git
 [submodule "tools/timetracker-term"]
 	path = tools/timetracker-term
 	url = https://github.com/JBarberU/timetracker-term.git
   branch = master
-[submodule "vim/vim/bundle/vim-airline"]
-	path = vim/vim/bundle/vim-airline
-	url = https://github.com/bling/vim-airline.git
-[submodule "vim/vim/bundle/nerdcommenter"]
-	path = vim/vim/bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "vim/vim/bundle/vim-indent-guides.git"]
-	path = vim/vim/bundle/vim-indent-guides.git
-	url = https://github.com/nathanaelkane/vim-indent-guides.git
-[submodule "vim/vim/bundle/vimshell"]
-	path = vim/vim/bundle/vimshell
-	url = https://github.com/Shougo/vimshell.vim.git
-[submodule "vim/vim/bundle/vimproc"]
-	path = vim/vim/bundle/vimproc
-	url = https://github.com/Shougo/vimproc.vim.git
-[submodule "vim/vim/additions/powerline-fonts"]
-	path = vim/vim/additions/powerline-fonts
-	url = https://github.com/powerline/fonts.git
-[submodule "vim/vim/bundle/xterm-color-table"]
-	path = vim/vim/bundle/xterm-color-table
-	url = https://github.com/JBarberU/xterm-color-table.vim.git
-[submodule "vim/vim/bundle/jedi-vim"]
-	path = vim/vim/bundle/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
-[submodule "vim/vim/bundle/ack.vim"]
-	path = vim/vim/bundle/ack.vim
-	url = https://github.com/mileszs/ack.vim.git
 [submodule "tools/grace_py"]
 	path = tools/grace_py
 	url = https://github.com/JBarberU/grace_py.git
@@ -108,46 +42,13 @@
 	path = vim/vim/bundle/c.vim
 	url = https://github.com/vim-scripts/c.vim.git
     ignore = dirty
-[submodule "vim/vim/bundle/vim-surround"]
-	path = vim/vim/bundle/vim-surround
-	url = https://github.com/tpope/vim-surround.git
 [submodule "vim/vim/bundle/Vimya"]
 	path = vim/vim/bundle/Vimya
 	url = https://github.com/vim-scripts/Vimya.git
     ignore = dirty
-[submodule "vim/vim/bundle/upAndDown"]
-	path = vim/vim/bundle/upAndDown
-	url = https://github.com/vim-scripts/upAndDown
-[submodule "vim/vim/bundle/vim-exchange.git"]
-	path = vim/vim/bundle/vim-exchange.git
-	url = https://github.com/tommcdo/vim-exchange.git
-[submodule "vim/vim/bundle/ultisnips"]
-	path = vim/vim/bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips.git
-[submodule "vim/vim/bundle/vim-abolish"]
-	path = vim/vim/bundle/vim-abolish
-	url = https://github.com/tpope/vim-abolish.git
-[submodule "vim/vim/bundle/vim-visual-star-search"]
-	path = vim/vim/bundle/vim-visual-star-search
-	url = https://github.com/nelstrom/vim-visual-star-search.git
-[submodule "vim/vim/bundle/vim-fugitive"]
-	path = vim/vim/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/vim/non-bundle/SimplyFold"]
-	path = vim/vim/non-bundle/SimplyFold
-	url = https://github.com/tmhedberg/SimpylFold
-[submodule "vim/vim/non-bundle/vim-markdown"]
-	path = vim/vim/non-bundle/vim-markdown
-	url = https://github.com/tpope/vim-markdown.git
-[submodule "vim/vim/bundle/tabular"]
-	path = vim/vim/bundle/tabular
-	url = https://github.com/godlygeek/tabular.git
 [submodule "tools/devdiary"]
 	path = tools/devdiary
 	url = https://github.com/JBarberU/devdiary.git
-[submodule "vim/vim/bundle/rust.vim"]
-	path = vim/vim/bundle/rust.vim
-	url = https://github.com/rust-lang/rust.vim.git
-[submodule "vim/vim/bundle/python-mode"]
-	path = vim/vim/bundle/python-mode
-	url = https://github.com/klen/python-mode.git
+[submodule "vimfiles"]
+	path = vimfiles
+	url = https://github.com/JBarberU/vimfiles.git
