@@ -17,7 +17,7 @@ ZSH_THEME="jbarberu"
 
 # Function for copying files and stripping off windows style line endings
 function wincp {
-    cat "$1" | tr -d '\r' > "$2"
+    tr -d '\r' < "$1" > "$2"
 }
 
 function src_if_exists {
