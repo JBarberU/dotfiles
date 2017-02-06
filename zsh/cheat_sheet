@@ -1,6 +1,6 @@
 [01;37mTmux [22;37m
     Ctrl-B Space    - Cycle between layouts
-    Ctrl-B D        - Exit tmux session
+    Ctrl-B D        - Detach tmux session
 
     # In command mode (Ctrl-B :)
     resize-pane -[D,U,L,R] <N> - Resize current pane
