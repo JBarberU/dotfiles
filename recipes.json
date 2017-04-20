@@ -51,8 +51,8 @@
     },
     "vim": {
         "links": {
-            "vim/vim": ".vim",
-            "vim/vimrc": ".vimrc"
+            "vimfiles": ".vim",
+            "vimfiles/vimrc": ".vimrc"
         },
         "binaries": [
             "vim",
