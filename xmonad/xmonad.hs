@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Config.Desktop (desktopConfig)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, isDialog, doCenterFloat)
@@ -204,7 +205,7 @@ myManageHook =  composeAll
 main :: IO ()
 main = do
     xmproc <- spawnPipe "xmobar"
-    xmonad $ defaultConfig {
+    xmonad $ desktopConfig {
         manageHook = myManageHook,
         layoutHook = myLayoutHook,
         logHook = dynamicLogWithPP xmobarPP {
