@@ -1,29 +1,26 @@
 [user]
-	 name = John Barbero Unenge
-	 email = john.barbero.unenge@gmail.com
+     name = John Barbero Unenge
+     email = john.barbero.unenge@gmail.com
 
-	# Other authors
-#	name = RepoPusher
-#	email = user@server
 [core]
-	editor = vim
-	excludesfile = ~/.gitignore
-	
+    editor = vim
+    excludesfile = ~/.gitignore
+
 [alias]
-	br = branch
-	co = checkout
-	log = log --topo-order --decorate
-	commiters = shortlog -nse --no-merges
-	puhs = push
+    br = branch
+    co = checkout
+    log = log --topo-order --decorate
+    commiters = shortlog -nse --no-merges
+    puhs = push
 
 [format]
-	pretty = %C(blue)%h %C(red)%ad %C(green)%an: %C(magenta)%s %C(white)%b
+    pretty = %C(blue)%h %C(red)%ad %C(green)%an: %C(magenta)%s %C(white)%b
 
 [log]
-  date = short
+    date = short
+
 [push]
-	default = current
+    default = current
 
 [color]
-	ui = true
-
+    ui = true
