@@ -115,9 +115,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_m,      namedScratchpadAction myScratchpads "Mail"),
       (xK_g,      namedScratchpadAction myScratchpads "Browser"),
       (xK_Return, windows W.swapMaster),
+      (xK_space,    spawn "rofi -show run"),
       (xK_h,      sendMessage Shrink),
       (xK_l,      sendMessage Expand),
-      (xK_space,  spawn "cat ~/.dmenu_favourites | dmenu -b"),
       (xK_p,      scrot Normal),
       (xK_b,      sendMessage ToggleStruts),
       (xK_q,      restart "xmonad" True),
@@ -132,7 +132,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   [((mshift, x), y) | (x,y) <-
     [
       (xK_Return,   spawn $ XMonad.terminal conf),
-      (xK_space,    spawn "dmenu_run -b"),
       (xK_l,        spawn "slock"),
       (xK_q,        io exitSuccess),
       (xK_n,        spawn "nautilus"),
