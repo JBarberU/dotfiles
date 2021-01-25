@@ -121,7 +121,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_l,      sendMessage Expand),
       (xK_p,      scrot Normal),
       (xK_b,      sendMessage ToggleStruts),
-      (xK_q,      restart "xmonad" True),
+      (xK_q,      spawn "xmonad --recompile; xmonad --restart"),
       (xK_t,      namedScratchpadAction myScratchpads "BottomTerminal"),
       (xK_n,      namedScratchpadAction myScratchpads "TopTerminal"),
       (xK_i,      namedScratchpadAction myScratchpads "IrssiTerminal"),
@@ -134,7 +134,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [
       (xK_Return,   spawn $ XMonad.terminal conf),
       (xK_l,        spawn "slock"),
-      (xK_q,        io exitSuccess),
+      (xK_q,        io (exitWith ExitSuccess)),
       (xK_n,        spawn "nautilus"),
       (xK_t,        withFocused $ windows . W.sink),
       (xK_Tab,      windows W.focusUp),
