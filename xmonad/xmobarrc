@@ -5,12 +5,6 @@ Config {
   , position = TopW L 100
   , commands = [
       Run Cpu ["-L","3","-H","50","--low","#6666ff","--high","#ff0000"] 10
-    , Run BatteryP ["BAT0"]
-        ["-t", "<timeleft>min <watts>"
-      , "-L", "10", "-H", "80", "-p", "3"
-      , "--", "-O", "<fc=#859900>On</fc> - "
-      , "-L", "-15", "-H", "-5"
-      , "-l", "#ffffff", "-m", "#ffffff", "-h", "#ffffff"] 10
     , Run Date "%a %d/%m-%y %H:%M" "date" 10
     , Run StdinReader
   ],
