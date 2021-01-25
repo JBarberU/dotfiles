@@ -211,12 +211,12 @@ main = do
           ppOutput = hPutStrLn xmproc,
           ppTitle = xmobarColor "#f00000" "" . shorten 70
         },
-    terminal = myTerminal,
-    modMask = myModMask,
-    workspaces = myWorkspaces,
-    keys = myKeys,
+        terminal = myTerminal,
+        modMask = myModMask,
+        workspaces = myWorkspaces,
+        keys = myKeys,
         borderWidth = myBorderWidth,
-    startupHook = myStartupHook,
+        startupHook = myStartupHook,
         normalBorderColor = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
         focusFollowsMouse = myFocusFollowsMouse
