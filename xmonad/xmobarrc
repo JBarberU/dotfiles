@@ -4,11 +4,25 @@ Config {
   , fgColor = "#ffffff"
   , position = TopW L 100
   , commands = [
-      Run Cpu ["-L","3","-H","50","--low","#6666ff","--high","#ff0000"] 10
-    , Run Date "%a %d/%m-%y %H:%M" "date" 10
+      Run Cpu ["-L","5","-H","50","--low","#aaaaff","--high","#ffaaaa"] 10
+    , Run Date "%Y-%m-%d %H:%M %A"  "date" 10
+    , Run CoreTemp ["-t", "Temps: <core0>:<core1>:<core2>:<core3>C",
+                  "-L", "40", "-H", "60",
+                  "-l", "#aaaaff", "-n", "gray90", "-h", "#ffaaaa"] 50
+    , Run Memory         [ "--template" ,"Mem: <used>B"
+                         , "--Low"      , "5000"        -- units: %
+                         , "--High"     , "25000"        -- units: %
+                         , "--low"      , "#aaffaa"
+                         , "--normal"   , "#ffffff"
+                         , "--high"     , "#ffaaaa"
+                         ] 10
+    , Run Wireless "wlp3s0" [ "-t", "<ssid> <quality>%"
+                            , "--Low", "50", "--low", "#ffaaaa"
+                            , "--High", "90", "--high", "#aaffaa"
+                            ] 50
     , Run StdinReader
   ],
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%StdinReader% }{ %cpu% | <fc=#66ff66>%date%</fc> "
+  , template = "%StdinReader% }{ %wlp3s0wi% | %coretemp% | %cpu% | %memory% | <fc=#aaffaa>%date%</fc> "
 }
