@@ -112,7 +112,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   [((modm, x), y) | (x,y) <-
     [
       (xK_Tab,    windows W.focusDown),
-      (xK_c,      namedScratchpadAction myScratchpads "Calendar"),
+      (xK_c,      spawn "gnome-calculator"),
       (xK_m,      namedScratchpadAction myScratchpads "Mail"),
       (xK_g,      namedScratchpadAction myScratchpads "Browser"),
       (xK_Return, windows W.swapMaster),
@@ -188,6 +188,7 @@ myStartupHook = setWMName "LG3D"
 myManageHook :: ManageHook
 myManageHook =  composeAll
   [
+    (className =? "Gnome-calculator") --> doCenterFloat,
     (className =? "Xmessage") --> doCenterFloat,
     (className =? "Nvidia-settings") --> doCenterFloat,
     (className =? "Steam") --> doFloat,
