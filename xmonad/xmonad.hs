@@ -36,7 +36,7 @@ myNormalBorderColor :: String
 myNormalBorderColor = "black"
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = "purple"
+myFocusedBorderColor = "#ff00ff"
 
 myFocusFollowsMouse :: Bool
 {-myFocusFollowsMouse = True-}
