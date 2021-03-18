@@ -78,6 +78,12 @@ and put them in a zip archive [22;37m
 [01;37mGet aggregate disk usage for a directory [22;37m
   du -ch some_dir | grep total
 
+[01;37mRepair corrupted drive[22;37m
+  # Decrypt any encrypted drives
+  udisksctl unlock -b /dev/sda1
+  # Run fsck for each of the affected partitions
+  fsck -y /dev/sda1
+
 [01;37mQtCreator[22;37m
 
   CTRL+E, 0           -> Remove current split
