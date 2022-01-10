@@ -11,18 +11,18 @@ xset s offxsetroot -cursor_name left_ptr
 xrdb ~/.Xresources
 
 # Set primary screen
-# xrandr --output DP-4 --primary
-# xrandr --output DP-4 --left-of DVI-I-1
+xrandr --output DP-0 --primary
+xrandr --output DP-3 --left-of DP-0
 
-# Svdvorak :)
-# setxkbmap "us(dvorak-intl)"
-# Swap CapsLock for Escape
-# echo "clear Lock\nkeycode 0x42 = Escape\n" | xmodmap -
-# synclient TapButton1=1 TapButton2=3 TapButton3=2 PalmDetect=1
+# Trackman settings
+xinput --set-prop 14 294 0, 0, 1
+xinput --set-prop 14 302 1.0
 
 # Set BG
-feh $(ls /home/john/Pictures/backgrounds/simon/* | shuf -n 1) --bg-fill
+feh $(ls /home/user/some_path/to/backgrounds/* | shuf -n 1) --bg-fill
+
+# Start dunst (show notifications)
+dunst &
 
 # Start WM
-# conky
 xmonad
