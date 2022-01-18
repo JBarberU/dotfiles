@@ -24,5 +24,10 @@ feh $(ls /home/user/some_path/to/backgrounds/* | shuf -n 1) --bg-fill
 # Start dunst (show notifications)
 dunst &
 
+# Start composition manager, to allow transparency
+xcompmgr &
+
+conky
+
 # Start WM
 xmonad

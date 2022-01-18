@@ -181,12 +181,12 @@ function install_xmonad() {
 
     create_link haskell/ghci .ghci
     create_link xmonad/xmonad.hs .xmonad/xmonad.hs
-    create_link xmonad/xmobarrc: .xmobarrc
-    create_link conky/conkyrc: .conkyrc
-    create_link xorg/xinitrc: .xinitrc
+    create_link xmonad/xmobarrc .xmobarrc
+    create_link conky/conkyrc .conkyrc
+    create_link xorg/xinitrc .xinitrc
     create_link xmonad/dunstrc .config/dunst/dunstrc
 
-    install_binaries xmonad xmobar rofi conky-all xclip feh dunst
+    install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr
 }
 
-create_link xmonad/dunstrc .config/dunst/dunstrc
+create_link conky/conkyrc .conkyrc
