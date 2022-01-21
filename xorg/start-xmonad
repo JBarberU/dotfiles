@@ -23,6 +23,9 @@ xinput --set-button-map $DEVICE_ID 1 0 1 4 5 6 7 3 0 10 11 2
 # Remap CapsLock->Escape
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
+# Enable numlock
+numlockx on
+
 # Set BG
 feh $(ls /home/user/some_path/to/backgrounds/* | shuf -n 1) --bg-fill
 

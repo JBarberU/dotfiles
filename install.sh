@@ -186,7 +186,7 @@ function install_xmonad() {
     create_link xorg/xinitrc .xinitrc
     create_link xmonad/dunstrc .config/dunst/dunstrc
 
-    install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr
+    install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr numlockx
 }
 
 create_link conky/conkyrc .conkyrc
