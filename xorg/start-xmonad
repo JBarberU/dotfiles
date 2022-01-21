@@ -14,9 +14,14 @@ xrdb ~/.Xresources
 xrandr --output DP-0 --primary
 xrandr --output DP-3 --left-of DP-0
 
-# Trackman settings
-xinput --set-prop 14 294 0, 0, 1
-xinput --set-prop 14 302 1.0
+# Mouse settings
+DEVICE_ID=`xinput list --id-only "pointer:ELECOM TrackBall Mouse HUGE TrackBall"`
+xinput --set-prop $DEVICE_ID "libinput Scroll Method Enabled" 0, 0, 1
+xinput --set-prop $DEVICE_ID "libinput Button Scrolling Button" 9
+xinput --set-button-map $DEVICE_ID 1 0 1 4 5 6 7 3 0 10 11 2
+
+# Remap CapsLock->Escape
+xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
 # Set BG
 feh $(ls /home/user/some_path/to/backgrounds/* | shuf -n 1) --bg-fill
@@ -27,7 +32,8 @@ dunst &
 # Start composition manager, to allow transparency
 xcompmgr &
 
-conky
+# Start Conky
+conky &
 
 # Start WM
 xmonad
