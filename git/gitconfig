@@ -1,10 +1,13 @@
 [user]
      name = John Barbero Unenge
-     email = john.barbero.unenge@gmail.com
+     email = git@lsrkttn.com
 
 [core]
     editor = vim
     excludesfile = ~/.gitignore
+
+[init]
+    defaultBranch = main
 
 [alias]
     br = branch
