@@ -33,7 +33,29 @@ function create_link() {
     then
         echo "$DOTFILES_PATH/$1" "$TARGET_PATH/$2"
     else
-        ln -s "$DOTFILES_PATH/$1" "$TARGET_PATH/$2"
+        DEST="$TARGET_PATH/$2"
+        DEST_DIR=$(dirname "$DEST")
+        if [[ ! -d "$DEST_DIR" ]]
+        then
+            mkdir -p "$DEST_DIR"
+        fi
+        if [[ -L "$DEST" ]]
+        then
+            LINK_DEST="$(readlink $DEST)"
+            if [[ "$LINK_DEST" = "$DOTFILES_PATH/$1" ]]
+            then
+                echo "Skipped creating link to $DOTFILES_PATH/$1 (already exists)"
+                return
+            else
+                echo "Encounterd link pointing at a different target , aborting"
+                exit 1
+            fi
+        elif [[ -e "$DEST" ]]
+        then
+            echo "A regular file exists at path $DEST, aborting"
+            exit 1
+        fi
+        ln -s "$DOTFILES_PATH/$1" "$DEST"
     fi
 }
 
@@ -99,7 +121,7 @@ function install_binaries() {
     then
         echo "Installing $@"
     else
-        sudo apt-get install $@
+        sudo apt-get install -y $@
     fi
 }
 
@@ -175,18 +197,15 @@ function install_zsh() {
 }
 
 function install_xmonad() {
-    create_dir .xmonad
     create_dir shots
-    create_dir .config/dunst
 
     create_link haskell/ghci .ghci
     create_link xmonad/xmonad.hs .xmonad/xmonad.hs
     create_link xmonad/xmobarrc .xmobarrc
     create_link conky/conkyrc .conkyrc
     create_link xorg/xinitrc .xinitrc
+    create_link rofi/config.rasi .config/rofi/config.rasi
     create_link xmonad/dunstrc .config/dunst/dunstrc
 
     install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr numlockx
 }
-
-create_link conky/conkyrc .conkyrc
