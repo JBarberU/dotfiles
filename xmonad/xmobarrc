@@ -4,18 +4,19 @@ Config {
   , fgColor = "#ffffff"
   , position = TopW L 100
   , commands = [
-      Run Cpu ["-L","5","-H","50","--low","#aaaaff","--high","#ffaaaa"] 10
-    , Run Date "%Y-%m-%d %H:%M %A"  "date" 10
+      Run Cpu ["-L","5","-H","50","--low","#aaaaff","--high","#ffaaaa"] 20
+    , Run Date "%Y-%m-%d %H:%M %A"  "date" 50
     , Run CoreTemp ["-t", "Temps: <core0>C",
-                  "-L", "40", "-H", "60",
-                  "-l", "#aaaaff", "-n", "gray90", "-h", "#ffaaaa"] 50
+                    "-L", "40", "-H", "60",
+                    "-l", "#aaaaff", "-n", "gray90", "-h", "#ffaaaa"
+                  ] 50
     , Run Memory         [ "--template" ,"Mem: <used>B"
                          , "--Low"      , "5000"        -- units: %
                          , "--High"     , "25000"        -- units: %
                          , "--low"      , "#aaffaa"
                          , "--normal"   , "#ffffff"
                          , "--high"     , "#ffaaaa"
-                         ] 10
+                         ] 50
     , Run Wireless "wlp2s0" [ "-t", "<ssid> <quality>%"
                             , "--Low", "50", "--low", "#ffaaaa"
                             , "--High", "90", "--high", "#aaffaa"
@@ -28,7 +29,7 @@ Config {
         "-o", "Bat",
         "-h", "green",
         "-l", "red"
-    ] 10
+    ] 50
     , Run StdinReader
   ],
   , sepChar = "%"
