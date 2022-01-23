@@ -89,9 +89,9 @@ function create_file() {
 
     if [[ -v $DRY_RUN ]]
     then
-        echo "$DOTFILES_PATH/$1"
+        echo "$TARGET_PATH/$1"
     else
-        touch "$DOTFILES_PATH/$1"
+        touch "$TARGET_PATH/$1"
     fi
 }
 
