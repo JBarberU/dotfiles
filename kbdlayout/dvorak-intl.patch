@@ -1,0 +1,20 @@
+--- us.bak	2022-01-24 19:54:51.605676509 +0100
++++ us.new	2022-01-24 20:14:56.221690602 +0100
+@@ -270,7 +270,7 @@
+     include "us(dvorak)"
+     name[Group1]= "English (Dvorak, intl., with dead keys)";
+ 
+-    key <TLDE> { [dead_grave, dead_tilde,         grave,       asciitilde ] };
++    key <TLDE> { [     grave,       asciitilde ] };
+ 
+     key <AE01> { [	   1,     exclam,    exclamdown,      onesuperior ] };
+     key <AE02> { [	   2,         at,   twosuperior, dead_doubleacute ] };
+@@ -285,7 +285,7 @@
+     key <AE11> { [ bracketleft,  braceleft,  guillemotleft, leftdoublequotemark ] };
+     key <AE12> { [bracketright, braceright, guillemotright, rightdoublequotemark ] };
+ 
+-    key <AD01> { [dead_acute, dead_diaeresis, apostrophe,        quotedbl ] };
++    key <AD01> { [     apostrophe,        quotedbl ] };
+     key <AD02> { [     comma,       less,      ccedilla,         Ccedilla ] };
+     key <AD03> { [    period,    greater, dead_abovedot,       dead_caron ] };
+     key <AD04> { [	   p,          P,    odiaeresis,       Odiaeresis ] };

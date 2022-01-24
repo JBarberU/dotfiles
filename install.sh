@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#################### Helpers ##################################################
+
 DOTFILES_PATH=$(pwd)
 TARGET_PATH=$HOME
 #DRY_RUN=1
@@ -121,9 +123,12 @@ function install_binaries() {
     then
         echo "Installing $@"
     else
+        echo "Installing the following: $@"
         sudo apt-get install -y $@
     fi
 }
+
+#################### Installers ###############################################
 
 function install_git() {
     create_link git/gitignore .gitignore
@@ -196,6 +201,11 @@ function install_zsh() {
     echo "Run \"chsh -s $(which zsh)\" to set zsh as our default shell"
 }
 
+function patch_kbd_layout() {
+    echo "Patching dvorak-intl"
+    sudo patch /usr/share/X11/xkb/symbols/us "$DOTFILES_PATH/kbdlayout/dvorak-intl.patch"
+}
+
 function install_xmonad() {
     create_dir shots
 
@@ -209,3 +219,16 @@ function install_xmonad() {
 
     install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr numlockx xinput
 }
+
+#################### Call desired installers ##################################
+
+#install_git
+#install_irssi
+#install_tmux
+#install_urxvt
+#install_vim
+#install_zsh
+#install_xmonad
+#patch_kbd_layout
+
+exit 0
