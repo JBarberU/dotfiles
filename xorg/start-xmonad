@@ -1,76 +1,15 @@
 #!/bin/bash
 
-# Call getopt to validate the provided input. 
-options=$(getopt -o h --long host:,mode: -- "$@")
-[ $? -eq 0 ] || { 
-    echo "Incorrect options provided"
-    exit 1
-}
-eval set -- "$options"
-while true; do
-    case "$1" in
-    -h)
-        echo "Print help"
-        ;;
-    --host)
-        shift; # The arg is next in position args
-        HOST=$1
-        [[ ! $HOST =~ loke|fenrisulven|none ]] && {
-            >&2 echo "Unknown host given: $HOST. Options are loke, fenrisulven and none."
-            exit 1
-        }
-        ;;
-    --mode)
-        shift; # The arg is next in position args
-        MODE=$1
-        [[ ! $MODE =~ portable|stationary ]] && {
-            >&2 echo "Unknown mode given: $HOST. Options are portable and stationary."
-            exit 1
-        }
-        ;;
-    --)
-        shift
-        break
-        ;;
-    esac
-    shift
-done
-
-if [[ -z "$HOST" ]]
-then
-    echo "No host given"
-    exit 1
-fi
-
-function init_peripherals() {
-    # Mouse settings
-    DEVICE_ID=`xinput list --id-only "pointer:ELECOM TrackBall Mouse HUGE TrackBall"`
-    xinput --set-prop $DEVICE_ID "libinput Scroll Method Enabled" 0, 0, 1
-    xinput --set-prop $DEVICE_ID "libinput Button Scrolling Button" 9
-    xinput --set-button-map $DEVICE_ID 1 0 1 4 5 6 7 3 0 10 11 2
+function random_bg() {
+    feh --no-fehbg --bg-fill --randomize /usr/share/dotfiles/backgrounds/*
 }
 
-function init_portable() {
-    # Set primary screen
-    # Do we need to set a resolution?
-    # xrandr --output eDP-1 --left-of DP-2
-    echo
-}
-
-function init_stationary() {
-    # Set primary screen
-    xrandr --output DP-2 --primary
-    xrandr --output eDP-1 --left-of DP-2 --mode 1360x768
-
-    init_peripherals
-}
-
-function init_desktop() {
-    # Set primary screen
-    xrandr --output DP-0 --primary
-    xrandr --output DP-3 --left-of DP-0
-
-    init_peripherals
+function bg_daemon() {
+    while :
+    do
+        random_bg
+        sleep 900
+    done
 }
 
 # ssh-agent
@@ -83,33 +22,43 @@ xset s offxsetroot -cursor_name left_ptr
 # Set fonts, colors etc for urxvt
 xrdb ~/.Xresources
 
-case $HOST in
-    loke)
-        if [[ -z "$MODE" ]]
-        then
-            >&2 echo "No mode given for host loke"
-            exit 1
-        fi
-        case $MODE in
-            portable)
-                init_portable
+# Monitor setup
+case $(hostname) in
+    Loke)
+        case "$(xrandr --listmonitors | wc -l)" in
+            2)
+                # Set primary screen
+                # Do we need to set a resolution?
+                # xrandr --output eDP-1 --left-of DP-2
                 ;;
-            stationary)
-                init_stationary
+            3)
+                # Set primary screen
+                xrandr --output DP-2 --primary
+                xrandr --output eDP-1 --left-of DP-2 --mode 1360x768
                 ;;
+            *)
+                >2& echo "Unhandled number of displays!"
+                exit 1
         esac
         ;;
-    fenrisulven)
-        if [[ ! -z "$MODE" ]]
-        then
-            >&2 echo "Ignoring mode $MODE for host fenrisulven"
-        fi
-        init_desktop
+    Fenrisulven)
+        # Set primary screen
+        xrandr --output DP-0 --primary
+        xrandr --output DP-3 --left-of DP-0
         ;;
-    none)
+    *)
         echo "Skipping host specific initialization"
         ;;
 esac
+
+# Mouse settings
+DEVICE_ID=`xinput list --id-only "pointer:ELECOM TrackBall Mouse HUGE TrackBall" 2> /dev/null`
+if [ "$DEVICE_ID" != "" ]
+then
+    xinput --set-prop $DEVICE_ID "libinput Scroll Method Enabled" 0, 0, 1
+    xinput --set-prop $DEVICE_ID "libinput Button Scrolling Button" 9
+    xinput --set-button-map $DEVICE_ID 1 0 1 4 5 6 7 3 0 10 11 2
+fi
 
 # Set keyboard layout
 setxkbmap "us(dvorak-intl)"
@@ -120,8 +69,8 @@ xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 # Enable numlock
 numlockx on
 
-# Set BG
-feh $(ls /usr/share/dotfiles/backgrounds/* | shuf -n 1) --bg-fill
+# Start BG daemon
+bg_daemon &
 
 # Start dunst (show notifications)
 dunst &
