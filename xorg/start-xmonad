@@ -111,6 +111,9 @@ case $HOST in
         ;;
 esac
 
+# Set keyboard layout
+setxkbmap "us(dvorak-intl)"
+
 # Remap CapsLock->Escape
 xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 
@@ -118,7 +121,7 @@ xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 numlockx on
 
 # Set BG
-feh $(ls /home/user/some_path/to/backgrounds/* | shuf -n 1) --bg-fill
+feh $(ls /usr/share/dotfiles/backgrounds/* | shuf -n 1) --bg-fill
 
 # Start dunst (show notifications)
 dunst &
