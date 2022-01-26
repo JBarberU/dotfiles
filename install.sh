@@ -220,7 +220,7 @@ function install_xmonad() {
     sudo mkdir /usr/share/dotfiles/backgrounds
     sudo cp "$DOTFILES_PATH/xorg/start-xmonad" "/usr/bin/stxmonad"
 
-    install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr numlockx xinput
+    install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr numlockx xinput scrot
 }
 
 #################### Call desired installers ##################################
