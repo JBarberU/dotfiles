@@ -37,7 +37,7 @@ case $(hostname) in
             3)
                 # Set primary screen
                 xrandr --output DP-2 --primary
-                xrandr --output eDP-1 --left-of DP-2 --mode 1360x768
+                xrandr --output eDP-1 --mode 1360x768 --pos 0x432
                 ;;
             *)
                 >2& echo "Unhandled number of displays!"
