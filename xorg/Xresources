@@ -9,6 +9,7 @@ URxvt*scrollBar:    false
 URxvt*saveLines:    10000
 URxvt*color4:       royalBlue
 URxvt*color12:      royalBlue
+URxvt*visualBell:   true
 
 *font:              xft:DejaVu Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
 *boldFont:          xft:DejaVu Sans Mono for Powerline:bold:pixelsize=12:antialias=true:hinting=true

@@ -25,6 +25,9 @@ xrdb ~/.Xresources
 # Monitor setup
 case $(hostname) in
     Loke)
+        # Disable bell
+        xset -b
+
         case "$(xrandr --listmonitors | wc -l)" in
             2)
                 # Set primary screen
