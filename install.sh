@@ -214,6 +214,7 @@ function install_xmonad() {
     create_link xmonad/xmobarrc .xmobarrc
     create_link conky/conkyrc .conkyrc
     create_link xorg/xinitrc .xinitrc
+    create_link xorg/start-xmonad .xmonad/start-xmonad
     create_link rofi/config.rasi .config/rofi/config.rasi
     create_link xmonad/dunstrc .config/dunst/dunstrc
 
