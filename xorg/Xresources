@@ -1,16 +1,37 @@
 URxvt*depth:        32
-URxvt*background:   black
-URxvt*transparent:  true
 URxvt*shading:      10
-!URxvt*tintColor:    #7D0096
-!URxvt*tintColor:    #5D0076
-URxvt*foreground:   white
 URxvt*scrollBar:    false
 URxvt*saveLines:    10000
-URxvt*color4:       royalBlue
-URxvt*color12:      royalBlue
-URxvt*visualBell:   true
 
 *font:              xft:DejaVu Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
 *boldFont:          xft:DejaVu Sans Mono for Powerline:bold:pixelsize=12:antialias=true:hinting=true
 
+! Gruvbox colors
+! hard contrast: *background: #1d2021
+URxvt*background: #282828
+! soft contrast: *background: #32302f
+URxvt*foreground: #ebdbb2
+! Black + DarkGrey
+URxvt*color0:  #282828
+URxvt*color8:  #928374
+! DarkRed + Red
+URxvt*color1:  #cc241d
+URxvt*color9:  #fb4934
+! DarkGreen + Green
+URxvt*color2:  #98971a
+URxvt*color10: #b8bb26
+! DarkYellow + Yellow
+URxvt*color3:  #d79921
+URxvt*color11: #fabd2f
+! DarkBlue + Blue
+URxvt*color4:  #458588
+URxvt*color12: #83a598
+! DarkMagenta + Magenta
+URxvt*color5:  #b16286
+URxvt*color13: #d3869b
+! DarkCyan + Cyan
+URxvt*color6:  #689d6a
+URxvt*color14: #8ec07c
+! LightGrey + White
+URxvt*color7:  #a89984
+URxvt*color15: #ebdbb2
