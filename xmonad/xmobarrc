@@ -1,38 +1,37 @@
 Config {
-    font = "xft:DejaVu Sans Mono for Powerline:pixelsize=14:antialias=true:hinting=true"
-  , bgColor = "#000000"
-  , fgColor = "#ffffff"
-  , position = TopW L 100
-  , commands = [
-      Run Cpu ["-L","5","-H","50","--low","#aaaaff","--high","#ffaaaa"] 20
-    , Run Date "%Y-%m-%d %H:%M %A"  "date" 50
-    , Run CoreTemp ["-t", "Temps: <core0>C",
-                    "-L", "40", "-H", "60",
-                    "-l", "#aaaaff", "-n", "gray90", "-h", "#ffaaaa"
-                  ] 50
-    , Run Memory         [ "--template" ,"Mem: <used>B"
-                         , "--Low"      , "5000"        -- units: %
-                         , "--High"     , "25000"        -- units: %
-                         , "--low"      , "#aaffaa"
-                         , "--normal"   , "#ffffff"
-                         , "--high"     , "#ffaaaa"
-                         ] 50
-    , Run Wireless "wlp2s0" [ "-t", "<ssid> <quality>%"
-                            , "--Low", "50", "--low", "#ffaaaa"
-                            , "--High", "90", "--high", "#aaffaa"
-                            ] 50
-    , Run Battery [
-        "-t", "<acstatus>: <left>% - <timeleft>",
-        "--",
-        --"-c", "charge_full",
-        "-O", "AC",
-        "-o", "Bat",
-        "-h", "green",
-        "-l", "red"
-    ] 50
+    font = "xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true"
+    , bgColor      = "#282828"
+    , fgColor      = "#ebdbb2"
+    , position = TopW L 100
+    , commands = [
+          Run Cpu ["-L","5","-H","50","--low","#83a598","--high","#fb4934"] 20
+        , Run Date "%Y-%m-%d %H:%M %A"  "date" 50
+        , Run CoreTemp ["-t", "Temps: <core0>C",
+                        "-L", "40", "-H", "60",
+                        "-l", "#83a598", "-n", "gray90", "-h", "#fb4934"
+                      ] 50
+        , Run Memory         [ "--template" ,"Mem: <used>B"
+                             , "--Low"      , "5000"        -- units: %
+                             , "--High"     , "25000"        -- units: %
+                             , "--low"      , "#83a598"
+                             , "--high"     , "#fb4934"
+                             ] 50
+        , Run Wireless "wlp2s0" [ "-t", "<ssid> <quality>%"
+                                , "--Low", "50", "--low", "#fb4934"
+                                , "--High", "90", "--high", "#b8bb26"
+                                ] 50
+        , Run Battery [
+            "-t", "<acstatus>: <left>% - <timeleft>",
+            "--",
+            --"-c", "charge_full",
+            "-O", "AC",
+            "-o", "Bat",
+            "-h", "#b8bb26",
+            "-l", "#fb4934"
+        ] 50
     , Run StdinReader
   ],
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%StdinReader% }{ %wlp2s0wi% | %battery% | %coretemp% | %cpu% | %memory% | <fc=#aaffaa>%date%</fc> "
+  , template = "%StdinReader% }{ %wlp2s0wi% | %battery% | %coretemp% | %cpu% | %memory% | <fc=#b8bb26>%date%</fc> "
 }
