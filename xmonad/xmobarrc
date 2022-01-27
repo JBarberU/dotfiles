@@ -1,31 +1,38 @@
 Config {
     font = "xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true"
-    , bgColor      = "#282828"
-    , fgColor      = "#ebdbb2"
+    , additionalFonts = [
+        "xft:Font Awesome 5 Free Solid:pixelsize=12",
+        "xft:Font Awesome 5 Brands:pixelsize=12"
+        ]
+    , bgColor = "#282828"
+    , fgColor = "#ebdbb2"
     , position = TopW L 100
     , commands = [
-          Run Cpu ["-L","5","-H","50","--low","#83a598","--high","#fb4934"] 20
+          Run Cpu ["-t", "<fn=1>\xf2db</fn> <total>%", "-L","5","-H","50","--low","#83a598","--high","#fb4934"] 20
         , Run Date "%Y-%m-%d %H:%M %A"  "date" 50
-        , Run CoreTemp ["-t", "Temps: <core0>C",
-                        "-L", "40", "-H", "60",
-                        "-l", "#83a598", "-n", "gray90", "-h", "#fb4934"
+        , Run CoreTemp ["-t", "<fn=1>\xf2c9</fn> <core0>°C",
+                        "-L", "40",
+                        "-H", "70",
+                        "-l", "#83a598",
+                        "-h", "#fb4934"
                       ] 50
-        , Run Memory         [ "--template" ,"Mem: <used>B"
-                             , "--Low"      , "5000"        -- units: %
-                             , "--High"     , "25000"        -- units: %
-                             , "--low"      , "#83a598"
+        , Run Memory         [ "--template" ,"<fn=1>\xf538</fn> <usedratio>%"
+                             , "--Low"      , "30"        -- units: %
+                             , "--High"     , "70"        -- units: %
+                             , "--low"      , "#b8bb26"
                              , "--high"     , "#fb4934"
                              ] 50
-        , Run Wireless "wlp2s0" [ "-t", "<ssid> <quality>%"
+        , Run Wireless "wlp2s0" [ "-t", "<fn=1>\xf1eb</fn> <ssid> <quality>%"
                                 , "--Low", "50", "--low", "#fb4934"
                                 , "--High", "90", "--high", "#b8bb26"
                                 ] 50
         , Run Battery [
-            "-t", "<acstatus>: <left>% - <timeleft>",
+            "-t", "<acstatus> <left>% (<timeleft>)",
             "--",
             --"-c", "charge_full",
-            "-O", "AC",
-            "-o", "Bat",
+            "-O", "<fc=#fabd2f><fn=1>\xf1e6</fn></fc>",
+            "-o", "<fc=#b8bb26><fn=1>\xf242</fn></fc>",
+            "-i", "<fc=#b8bb26><fn=1>\xf1e6</fn></fc>",
             "-h", "#b8bb26",
             "-l", "#fb4934"
         ] 50
