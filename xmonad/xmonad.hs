@@ -5,6 +5,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, isDialog, doCenterFloat)
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.Fullscreen()
+import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig()
@@ -174,10 +175,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
-myLayoutHook :: ModifiedLayout AvoidStruts (Choose (ModifiedLayout SmartBorder (Choose Tall (Mirror Tall))) (ModifiedLayout WithBorder Full)) Window
-myLayoutHook = avoidStruts $ smartBorders (tiled ||| Mirror tiled) ||| noBorders Full
+myLayoutHook :: ModifiedLayout AvoidStruts (Choose (ModifiedLayout Spacing Tall) (Choose (Mirror (ModifiedLayout Spacing Tall)) (ModifiedLayout WithBorder Full))) Window
+myLayoutHook = avoidStruts $ tiled ||| Mirror tiled ||| noBorders Full
                 where
-                    tiled   =   Tall nmaster delta ratio
+                    tiled   =   smartSpacing 8 (Tall nmaster delta ratio)
                     nmaster =   1       -- Number of windows in the master panel
                     ratio   =   2%3     -- Percentage of the screen to increment by when resizing the window
                     delta   =   1%100   -- Default portion of the screen occupied by the master panel
