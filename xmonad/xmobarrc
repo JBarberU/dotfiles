@@ -4,9 +4,13 @@ Config {
         "xft:Font Awesome 5 Free Solid:pixelsize=12",
         "xft:Font Awesome 5 Brands:pixelsize=12"
         ]
+    , alpha = 180
+    , border = FullB
+    , borderWidth = 1
+    , borderColor = "#a89984"
     , bgColor = "#282828"
     , fgColor = "#ebdbb2"
-    , position = TopW L 100
+    , position = TopW C 100
     , commands = [
           Run Cpu ["-t", "<fn=1>\xf2db</fn> <total>%", "-L","5","-H","50","--low","#83a598","--high","#fb4934"] 20
         , Run Date "%Y-%m-%d %H:%M %A"  "date" 50
