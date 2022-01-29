@@ -12,6 +12,31 @@ function bg_daemon() {
     done
 }
 
+function battery_daemon() {
+    while :
+    do
+        case `upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'state' | awk '{ print $2}'` in
+            discharging)
+                echo 'Discharging'
+                BATT_PERCENT=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'percentage' | awk '{ print $2 }' | sed 's/%//'`
+                BATT_TIME=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'time to empty' | awk '{ print $4 $5 }'`
+                echo $BATT_TIME
+                if [[ $BATT_PERCENT -lt 10 ]]
+                then
+                    notify-send -u 'critical' 'Battery Low' "Current battery level is $BATT_PERCENT% ($BATT_TIME)"
+                fi
+                ;;
+            charging)
+                echo 'Charging'
+                ;;
+            charged)
+                echo 'Fully Charged'
+                ;;
+        esac
+        sleep 60
+    done
+}
+
 # ssh-agent
 eval $(ssh-agent)
 nm-applet &
@@ -27,6 +52,9 @@ case $(hostname) in
     Loke)
         # Disable bell
         xset -b
+
+        # Start battery daemon
+        battery_daemon &
 
         case "$(xrandr --listmonitors | wc -l)" in
             2)
