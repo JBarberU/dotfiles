@@ -91,6 +91,13 @@ then
     xinput --set-button-map $DEVICE_ID 1 0 1 4 5 6 7 3 0 10 11 2
 fi
 
+# Touch pad
+DEVICE_ID=`xinput list --id-only "pointer:AlpsPS/2 ALPS DualPoint TouchPad" 2> /dev/null`
+if [ "$DEVICE_ID" != "" ]
+then
+    xinput --set-prop $DEVICE_ID "libinput Tapping Enabled" 1
+fi
+
 # Set keyboard layout
 setxkbmap "us(dvorak-intl)"
 
