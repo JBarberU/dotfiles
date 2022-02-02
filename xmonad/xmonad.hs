@@ -34,10 +34,10 @@ myBorderWidth :: Dimension
 myBorderWidth = 2
 
 myNormalBorderColor :: String
-myNormalBorderColor = "black"
+myNormalBorderColor = "#1d2021"
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = "#ff00ff"
+myFocusedBorderColor = "#b16286"
 
 myFocusFollowsMouse :: Bool
 {-myFocusFollowsMouse = True-}
@@ -117,7 +117,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_m,      namedScratchpadAction myScratchpads "Mail"),
       (xK_g,      namedScratchpadAction myScratchpads "Browser"),
       (xK_Return, windows W.swapMaster),
-      (xK_space,    spawn "rofi -show run"),
+      (xK_space,  spawn "rofi -show run"),
       (xK_h,      sendMessage Shrink),
       (xK_l,      sendMessage Expand),
       (xK_p,      scrot Normal),
@@ -213,7 +213,7 @@ main = do
         layoutHook = myLayoutHook,
         logHook = dynamicLogWithPP xmobarPP {
           ppOutput = hPutStrLn xmproc,
-          ppTitle = xmobarColor "#ff6666" "" . shorten 70
+          ppTitle = xmobarColor "#d3869b" "" . shorten 70
         },
         terminal = myTerminal,
         modMask = myModMask,
