@@ -224,6 +224,10 @@ function install_xmonad() {
     install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr numlockx xinput scrot
 }
 
+function install_rando_tools() {
+    install_binaries simple-scan
+}
+
 #################### Call desired installers ##################################
 
 #install_git
