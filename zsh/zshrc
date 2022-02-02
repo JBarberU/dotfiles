@@ -76,15 +76,15 @@ function maybe_backup() {
 }
 
 function natti() {
-  printf "Shut down $HOST? [Y/N]: "
-  read ans
-
-  if sudo -k && sudo echo "Got root permission"; then
-    ;
+  echo "Alias natti has not been set for host $HOST"
+  read "ans?Would you like to do so now? [y/n]: "
+  if [[ $ans =~ ^[Yy]$ ]]
+  then
+    echo 'alias natti="echo \"About to shut down host $HOST\" && sudo -k && sudo shutdown -h now"' >> "$HOME/.aliases" && source "$HOME/.aliases"
+    echo 'Alias natti created!'
+  else
+    echo 'Did not create alias'
   fi
-  case $ans in
-    "Y"|"y") maybe_backup; sudo shutdown -h now;;
-  esac
 }
 
 case $(uname) in
