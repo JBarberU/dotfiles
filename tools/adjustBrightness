@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [[ -z $1 ]]
+then
+    >2& echo "No argument given, aborting"
+    exit 1
+fi
+
+DISP="eDP-1"
+
+CURRENT=$(xrandr --verbose --current | grep ^"$DISP" -A5 | tail -n1 | awk '{print $2}')
+NEW_BRIGHTNESS=$(bc <<< "$CURRENT + $1")
+
+if (( $(echo "$NEW_BRIGHTNESS > 1.0" | bc -l) ))
+then
+    NEW_BRIGHTNESS=1
+elif (( $(echo "$NEW_BRIGHTNESS < 0.0" | bc -l) ))
+then
+    NEW_BRIGHTNESS=0
+fi
+
+xrandr --output "$DISP" --brightness $NEW_BRIGHTNESS

@@ -63,6 +63,9 @@ volume d x   = spawn cmd
                                                               Up -> "+"
                                                               Down -> "-"
 
+brightness :: Float -> X()
+brightness m = spawn $ "adjustBrightness " ++ (show m)
+
 rhythmbox :: RhythmAction -> X()
 rhythmbox a = spawn ("rhythmbox-client " ++ action)
   where action = case a of 
@@ -107,6 +110,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     volDownBtn  = 0x1008ff11
     volUpBtn    = 0x1008ff13
     muteBtn     = 0x1008ff12
+    brightUp    = 0x1008ff02
+    brightDown  = 0x1008ff03
     noMod       = 0
     shift       = shiftMask
   in
@@ -161,6 +166,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [
       (volDownBtn,   volume Down 10),
       (volUpBtn,     volume Up   10),
+      (brightUp,     brightness  0.1),
+      (brightDown,   brightness  (-0.1)),
       (muteBtn,      volume Mute 0)
     ]
   ]
