@@ -196,15 +196,13 @@ myStartupHook = setWMName "LG3D"
 myManageHook :: ManageHook
 myManageHook =  composeAll
   [
-    (className =? "zoom") --> doCenterFloat,
+    (appName =? "zoom") --> doCenterFloat,
     (className =? "Gnome-calculator") --> doCenterFloat,
     (className =? "Xmessage") --> doCenterFloat,
     (className =? "Nvidia-settings") --> doCenterFloat,
     (className =? "Steam") --> doFloat,
     (className =? "Friends") --> doCenterFloat,
-    (className =? "Nautilus") --> doCenterFloat,
-    (className =? "Dreamler") --> doCenterFloat,
-    (className =? "DreamlerDebug") --> doCenterFloat,
+    (className =? "Org.gnome.Nautilus") --> doCenterFloat,
     isFullscreen --> doFullFloat,
     isDialog --> doCenterFloat
   ]
