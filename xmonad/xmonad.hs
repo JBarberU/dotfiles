@@ -210,6 +210,10 @@ myManageHook =  composeAll
   <+> manageHook defaultConfig
   <+> namedScratchpadManageHook myScratchpads
 
+myXmobarTitleColor =  "#d3869b"
+
+myXmobarCurrentWorkspaceColor = myXmobarTitleColor
+
 main :: IO ()
 main = do
     xmproc <- spawnPipe "xmobar"
@@ -218,7 +222,10 @@ main = do
         layoutHook = myLayoutHook,
         logHook = dynamicLogWithPP xmobarPP {
           ppOutput = hPutStrLn xmproc,
-          ppTitle = xmobarColor "#d3869b" "" . shorten 70
+          ppTitle = xmobarColor myXmobarTitleColor "" . shorten 70,
+          ppCurrent = xmobarColor myXmobarCurrentWorkspaceColor "" . wrap "[" "]",
+          ppVisible = wrap "(" ")",
+          ppSep = " | "
         },
         terminal = myTerminal,
         modMask = myModMask,

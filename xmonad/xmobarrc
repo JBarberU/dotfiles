@@ -4,7 +4,7 @@ Config {
         "xft:Font Awesome 5 Free Solid:pixelsize=12",
         "xft:Font Awesome 5 Brands:pixelsize=12"
         ]
-    , alpha = 180
+    , alpha = 200
     , border = FullB
     , borderWidth = 1
     , borderColor = "#a89984"
@@ -44,5 +44,5 @@ Config {
   ],
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%StdinReader% }{ %wlp2s0wi% | %battery% | %coretemp% | %cpu% | %memory% | <fc=#b8bb26>%date%</fc> "
+  , template = "%StdinReader% }{ %wlp2s0wi% | %battery% | %coretemp% | %cpu% | %memory% | <fc=#d3869b>%date%</fc> "
 }
