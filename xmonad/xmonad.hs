@@ -20,6 +20,7 @@ import XMonad.Util.NamedScratchpad
 data ScrotMode    = Normal | RectSelect
 data VolumeMode   = Up | Down | Mute
 data RhythmAction = RANext | RAPrev | RAPlayPause
+data Urgency      = ULow | UNormal | UCritical
 
 myTerminal :: String
 myTerminal = "rxvt-unicode"
@@ -102,6 +103,14 @@ myScratchpads =
       ("TopTerminal", myNamedTerminal ++ "TopTerminal", "TopTerminal")
     ]
   ]
+
+doNotify :: Urgency -> String -> String -> X()
+doNotify u t m = do
+    spawn $ ("notify-send -u " ++ urgency ++ " \"" ++ t ++ "\" \""++ m ++"\"")
+    where urgency = case u of
+                        ULow -> "low"
+                        UNormal -> "normal"
+                        UCritical -> "critical"
 
 myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
