@@ -223,8 +223,8 @@ main = do
         logHook = dynamicLogWithPP xmobarPP {
           ppOutput = hPutStrLn xmproc,
           ppTitle = xmobarColor myXmobarTitleColor "" . shorten 70,
-          ppCurrent = xmobarColor myXmobarCurrentWorkspaceColor "" . wrap "[" "]",
-          ppVisible = wrap "(" ")",
+          ppCurrent = xmobarColor myXmobarCurrentWorkspaceColor "" . wrap "[{" "}]",
+          ppVisible = xmobarColor myXmobarCurrentWorkspaceColor "" . wrap "[" "]",
           ppSep = " | "
         },
         terminal = myTerminal,
