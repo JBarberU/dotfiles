@@ -77,7 +77,7 @@ myScratchpads :: [NamedScratchpad]
 myScratchpads =
   let
     full = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
-    top = customFloating $ W.RationalRect 0.0 0.0 1.0 0.5
+    top = customFloating $ W.RationalRect 0.0 0.018 1.0 0.3
     bottom = customFloating $ W.RationalRect 0.0 0.7 1.0 0.3
     browser = "firefox"
     --reallyFull = customFloating $ W.RationalRect 0.025 0.025 0.95 0.95
@@ -87,7 +87,7 @@ myScratchpads =
       ("Browser",       browser, "myBrowser"),
       ("IrssiTerminal", myNamedTerminal ++ "IrssiTerminal -e irssi", "IrssiTerminal"),
       ("AlsaTerminal", myNamedTerminal ++ "AlsaTerminal -e alsamixer", "AlsaTerminal"),
-      ("FullTerminal", myNamedTerminal ++ "FullTerminal", "FullTerminal")
+      ("FullTerminal", myNamedTerminal ++ "FullTerminal -e tmux new-session -A -s main", "FullTerminal")
     ]
   ]
   ++
