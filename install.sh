@@ -216,6 +216,7 @@ function install_xmonad() {
     create_link xorg/xinitrc .xinitrc
     create_link xorg/start-xmonad .xmonad/start-xmonad
     create_link rofi/config.rasi .config/rofi/config.rasi
+    create_link rofi/gruvbox-purple.rasi .config/rofi/gruvbox-purple.rasi
     create_link xmonad/dunstrc .config/dunst/dunstrc
 
     sudo mkdir /usr/share/dotfiles/backgrounds

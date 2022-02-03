@@ -1,4 +1,4 @@
 configuration {
     font: "mono 12";
-    theme: "gruvbox-dark-soft";
+    theme: "gruvbox-purple";
 }
