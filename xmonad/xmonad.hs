@@ -212,6 +212,8 @@ myManageHook =  composeAll
     (className =? "Steam") --> doFloat,
     (className =? "Friends") --> doCenterFloat,
     (className =? "Org.gnome.Nautilus") --> doCenterFloat,
+    (className =? "Cisco AnyConnect Secure Mobility Client") --> doShift "9",
+    (className =? "org.remmina.Remmina") --> doShift "9",
     isFullscreen --> doFullFloat,
     isDialog --> doCenterFloat
   ]
