@@ -68,18 +68,18 @@ conky.config = {
 }
 conky.text = [[
 ${color grey}Host: $color $nodename
+${color grey}Uptime: $color $uptime
+${color grey}OS: $color ${execi 60 lsb_release -d | cut -c 14-60}
 ${color grey}Kernel: $color $kernel
 $hr
-${color grey}CET: $color${tztime Europe/Madrid %H:%M}
-${color grey}EST: $color${tztime US/Eastern %H:%M}
-${color grey}PST: $color${tztime US/Pacific %H:%M}
+${color grey}Time: $color${tztime Europe/Madrid %H:%M} ${color grey}(CET) | $color${tztime US/Eastern %H:%M}${color grey} (EST) | $color${tztime US/Pacific %H:%M}${color grey} (PST)
 $hr
 ${color grey}File systems:
 $color${fs_used} / ${fs_size}
 $hr
 ${color grey}Networking:
-${color grey}Wifi0 $color${addr wlp3s0}
-${color grey}Up:$color ${upspeed wlp3s0} ${color grey} - Down:$color ${downspeed wlp3s0}
+${color grey}Wifi0 $color${addr wlp2s0}
+${color grey}Up:$color ${upspeed wlp2s0} ${color grey} - Down:$color ${downspeed wlp2s0}
 ${color grey}Eth0 $color ${addr eno1}
 Up:$color ${upspeed eno1} ${color grey} - Down:$color ${downspeed eno1}
 $hr
