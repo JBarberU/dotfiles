@@ -114,10 +114,10 @@ function mkcpp() {
     header="$location/$filename.h"
     src="$location/$filename.cpp"
 
-    if [[ -v namespace ]]; then
-        fq_classname="$namespace::$classname"
-    else
+    if [[ "$namespace" == "" ]]; then
         fq_classname="$classname"
+    else
+        fq_classname="$namespace::$classname"
     fi
 
     vared -p "Create $fq_classname in $header and $src? [Y/N]: " -c confirm
@@ -126,11 +126,11 @@ function mkcpp() {
         *) return;;
     esac
 
-    if [[ -v namespace ]]; then
-        echo "$boiler\n#pragma once\n\nnamespace $namespace\n{\nclass $classname\n{\npublic:\n\nprivate:\n\n};\n}" >> "$header"
-        echo "$boiler\n#include \"$filename.h\"\n\nnamespace $namespace\n{\n\n}" >> "$src"
-    else
+    if [[ "$namespace" == "" ]]; then
         echo "$boiler\n#pragma once\n\nclass $classname\n{\npublic:\n\nprivate:\n\n};" >> "$header"
         echo "$boiler\n#include \"$filename.h\"\n" >> "$src"
+    else
+        echo "$boiler\n#pragma once\n\nnamespace $namespace\n{\nclass $classname\n{\npublic:\n\nprivate:\n\n};\n}" >> "$header"
+        echo "$boiler\n#include \"$filename.h\"\n\nnamespace $namespace\n{\n\n}" >> "$src"
     fi
 }
