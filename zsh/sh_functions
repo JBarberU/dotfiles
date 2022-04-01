@@ -114,7 +114,7 @@ function mkcpp() {
     vared -p "Create $fq_classname in $header and $src? [Y/N]: " -c confirm
     case $confirm in
         y|Y) ;;
-        *) echo exit;;
+        *) return;;
     esac
 
     if [[ -v namespace ]]; then
