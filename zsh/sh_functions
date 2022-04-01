@@ -101,7 +101,16 @@ function mkcpp() {
     vared -p "Class Name: " -c classname
     vared -p "Filename: " -c filename
 
-    location=$(pwd)
+    if [[ -v 1 ]]; then
+        if [[ ! -d "$1" ]]; then
+            echo "Directory $1 does not exist, aborting"
+            return
+        fi
+        location="$1"
+    else
+        location=$(pwd)
+    fi
+
     header="$location/$filename.h"
     src="$location/$filename.cpp"
 
