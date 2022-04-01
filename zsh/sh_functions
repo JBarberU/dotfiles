@@ -66,3 +66,62 @@ function net_slow() {
   fi
   #sudo tc qdisc del dev eth0 root netem delay 10000ms
 }
+
+function mkcpp() {
+    name="$(git config user.name)"
+    email="$(git config user.email)"
+    boiler="// The MIT License (MIT)
+
+// Copyright © $(date '+%Y') $name
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the “Software”), to
+// deal in the Software without restriction, including without limitation the
+// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+// sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+//
+//     Author(s):
+//     - $name ($email)
+"
+
+    echo "Creating C++ class"
+    vared -p "Namespace: " -c namespace
+    vared -p "Class Name: " -c classname
+    vared -p "Filename: " -c filename
+
+    location=$(pwd)
+    header="$location/$filename.h"
+    src="$location/$filename.cpp"
+
+    if [[ -v namespace ]]; then
+        fq_classname="$namespace::$classname"
+    else
+        fq_classname="$classname"
+    fi
+
+    vared -p "Create $fq_classname in $header and $src? [Y/N]: " -c confirm
+    case $confirm in
+        y|Y) ;;
+        *) echo exit;;
+    esac
+
+    if [[ -v namespace ]]; then
+        echo "$boiler\n#pragma once\n\nnamespace $namespace\n{\nclass $classname\n{\npublic:\n\nprivate:\n\n};\n}" >> "$header"
+        echo "$boiler\n#include \"$filename.h\"\n\nnamespace $namespace\n{\n\n}" >> "$src"
+    else
+        echo "$boiler\n#pragma once\n\nclass $classname\n{\npublic:\n\nprivate:\n\n};" >> "$header"
+        echo "$boiler\n#include \"$filename.h\"\n" >> "$src"
+    fi
+}
