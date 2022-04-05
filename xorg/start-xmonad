@@ -64,7 +64,8 @@ case $(hostname) in
                 ;;
             3)
                 # Set primary screen
-                xrandr --output DP-2 --primary
+                #xrandr --output DP-2 --primary
+                xrandr --output HDMI-1 --primary
                 xrandr --output eDP-1 --mode 1360x768 --pos 0x432
                 ;;
             *)
