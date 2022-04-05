@@ -52,3 +52,6 @@
 [submodule "vimfiles"]
 	path = vimfiles
 	url = https://github.com/JBarberU/vimfiles.git
+[submodule "tools/mkcpp"]
+	path = tools/mkcpp
+	url = https://github.com/JBarberU/mkcpp.git

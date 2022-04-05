@@ -186,6 +186,7 @@ function install_vim() {
 }
 
 function install_zsh() {
+    create_dir .bin
     create_file .aliases
     create_file .paths
 
@@ -195,6 +196,8 @@ function install_zsh() {
     create_link zsh/cheat_sheet .cheat_sheet
     create_link zsh/sh_functions .sh_functions
     create_link zsh/oh-my-zsh .oh-my-zsh
+    create_link zsh/zsh_paths .zsh_paths
+    create_link bin .bin/dotbin
 
     install_binaries zsh
 
