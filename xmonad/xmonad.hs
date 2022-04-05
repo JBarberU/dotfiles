@@ -205,7 +205,6 @@ myStartupHook = setWMName "LG3D"
 myManageHook :: ManageHook
 myManageHook =  composeAll
   [
-    (appName =? "zoom") --> doCenterFloat,
     (className =? "Gnome-calculator") --> doCenterFloat,
     (className =? "Xmessage") --> doCenterFloat,
     (className =? "Nvidia-settings") --> doCenterFloat,
