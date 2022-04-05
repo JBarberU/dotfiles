@@ -158,6 +158,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_g,        spawn "gnome-control-center"),
       (xK_c,        kill),
       (xK_b,        sendMessage NextLayout),
+      -- (xK_x,        doNotify ULow "A title" "Some Message"),
       (volDownBtn,  rhythmbox RAPrev),
       (volUpBtn,    rhythmbox RANext),
       (muteBtn,     rhythmbox RAPlayPause)
