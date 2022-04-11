@@ -2,7 +2,7 @@ import XMonad
 import XMonad.Config.Desktop (desktopConfig)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, isDialog, doCenterFloat)
+import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat, isDialog, doCenterFloat, isInProperty)
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
 import XMonad.Layout.Fullscreen()
 import XMonad.Layout.Spacing
@@ -206,6 +206,7 @@ myStartupHook = setWMName "LG3D"
 myManageHook :: ManageHook
 myManageHook =  composeAll
   [
+    (className =? "zoom" <&&> isInProperty "_NET_WM_STATE" "_NET_WM_STATE_ABOVE" <||> isInProperty "_NET_WM_STATE" "_NET_WM_STATE_STAYS_ON_TOP") --> doFloat,
     (className =? "Gnome-calculator") --> doCenterFloat,
     (className =? "Xmessage") --> doCenterFloat,
     (className =? "Nvidia-settings") --> doCenterFloat,
