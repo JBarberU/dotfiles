@@ -8,3 +8,4 @@ for e in vim vi nano pico; do
   fi
 done
 
+export PATH="$PATH:$HOME/.bin/dotbin"
