@@ -213,8 +213,9 @@ myManageHook =  composeAll
     (className =? "Steam") --> doFloat,
     (className =? "Friends") --> doCenterFloat,
     (className =? "Org.gnome.Nautilus") --> doCenterFloat,
+    (className =? "org.remmina.Remmina") <&&> (title =? "Remmina Remote Desktop Client") --> doShift "9", -- Put Remmina main window on workspace 9
+    (className =? "org.remmina.Remmina") --> doShift "2", -- Put rest of Remmina windows on workspace 2
     (className =? "Cisco AnyConnect Secure Mobility Client") --> doShift "9",
-    (className =? "org.remmina.Remmina") --> doShift "9",
     isFullscreen --> doFullFloat,
     isDialog --> doCenterFloat
   ]
