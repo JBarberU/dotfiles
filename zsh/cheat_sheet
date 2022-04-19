@@ -11,6 +11,7 @@
 [01;37mVim [22;37m
     Ctrl-W K              - Switch windows to horizontal layout
     Ctrl-W H              - Switch windows to vertical layout
+    Ctrl-O/I              - Go through cursor positions, O -> backwards & I -> forwards
     Ctrl-W _ <            - resize N number of "pixels" left
     Ctrl-W _ >            - resize N number of "pixels" right
     Ctrl-W s              - Split window horizontally
