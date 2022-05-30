@@ -87,6 +87,7 @@ myScratchpads =
     [
       ("Browser",       browser, "myBrowser"),
       ("IrssiTerminal", myNamedTerminal ++ "IrssiTerminal -e irssi", "IrssiTerminal"),
+      ("CmusTerminal", myNamedTerminal ++ "CmusTerminal -e cmus", "CmusTerminal"),
       ("AlsaTerminal", myNamedTerminal ++ "AlsaTerminal -e alsamixer", "AlsaTerminal"),
       ("FullTerminal", myNamedTerminal ++ "FullTerminal -e tmux new-session -A -s main", "FullTerminal")
     ]
@@ -116,19 +117,21 @@ myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   let
     mshift  = modm .|. shiftMask
-    volDownBtn  = 0x1008ff11
-    volUpBtn    = 0x1008ff13
-    muteBtn     = 0x1008ff12
-    brightUp    = 0x1008ff02
-    brightDown  = 0x1008ff03
-    noMod       = 0
-    shift       = shiftMask
+    volDownBtn   = 0x1008ff11
+    volUpBtn     = 0x1008ff13
+    playPauseBtn = 0x1008ff14
+    nextBtn      = 0x1008ff17
+    prevBtn      = 0x1008ff16
+    muteBtn      = 0x1008ff12
+    brightUp     = 0x1008ff02
+    brightDown   = 0x1008ff03
+    noMod        = 0
+    shift        = shiftMask
   in
   [((modm, x), y) | (x,y) <-
     [
       (xK_Tab,    windows W.focusDown),
       (xK_c,      spawn "gnome-calculator"),
-      (xK_m,      namedScratchpadAction myScratchpads "Mail"),
       (xK_g,      namedScratchpadAction myScratchpads "Browser"),
       (xK_Return, windows W.swapMaster),
       (xK_space,  spawn "rofi -show run"),
@@ -141,7 +144,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_n,      namedScratchpadAction myScratchpads "TopTerminal"),
       (xK_i,      namedScratchpadAction myScratchpads "IrssiTerminal"),
       (xK_s,      namedScratchpadAction myScratchpads "FullTerminal"),
-      (xK_a,      namedScratchpadAction myScratchpads "AlsaTerminal")
+      (xK_a,      namedScratchpadAction myScratchpads "AlsaTerminal"),
+      (xK_m,      namedScratchpadAction myScratchpads "CmusTerminal")
     ]
   ]
   ++
@@ -178,7 +182,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (volUpBtn,     volume Up   10),
       (brightUp,     brightness  0.1),
       (brightDown,   brightness  (-0.1)),
-      (muteBtn,      volume Mute 0)
+      (muteBtn,      volume Mute 0),
+      (playPauseBtn, spawn "cmus-remote --pause"),
+      (nextBtn, spawn "cmus-remote --next"),
+      (prevBtn, spawn "cmus-remote --prev")
     ]
   ]
   ++
