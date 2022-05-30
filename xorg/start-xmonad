@@ -121,6 +121,8 @@ xcompmgr &
 # Start Conky
 conky &
 
+autostart &
+
 # Start WM
 xmonad
 
