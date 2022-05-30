@@ -187,6 +187,7 @@ function install_vim() {
 
 function install_zsh() {
     create_dir .bin
+    create_dir .config/boop
     create_file .aliases
     create_file .paths
 
@@ -201,6 +202,7 @@ function install_zsh() {
 
     install_binaries zsh
 
+    echo "Add files/symlinks {good,bad}.wav to .config/boop in order for the boop command to work properly!"
     echo "Run \"chsh -s $(which zsh)\" to set zsh as our default shell"
 }
 
