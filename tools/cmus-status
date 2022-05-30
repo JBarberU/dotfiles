@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function _get_element() {
+    cmus-remote -Q | grep "$1 " | sed -r "s/^.*$1\s+//g"
+}
+
+function _get_status_icon() {
+    case "$1" in
+        "playing") echo "▶";;
+        "paused") echo "⏸";;
+        "stopped") echo "■";;
+    esac
+}
+
+case "$1" in
+    "track") echo "$(_get_element 'tag artist') - $(_get_element 'tag title')";;
+    "status-icon") _get_status_icon $(_get_element "status");;
+esac
+
