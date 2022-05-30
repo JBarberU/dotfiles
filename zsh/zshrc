@@ -80,7 +80,7 @@ function natti() {
   read "ans?Would you like to do so now? [y/n]: "
   if [[ $ans =~ ^[Yy]$ ]]
   then
-    echo 'alias natti="echo \"About to shut down host $HOST\" && sudo -k && sudo shutdown -h now"' >> "$HOME/.aliases" && source "$HOME/.aliases"
+    echo 'alias natti="echo \"About to update and shut down host $HOST\" && sudo -k && sudo apt-get update && sudo apt-get -y upgrade && sudo shutdown -h now"' >> "$HOME/.aliases" && source "$HOME/.aliases"
     echo 'Alias natti created!'
   else
     echo 'Did not create alias'
