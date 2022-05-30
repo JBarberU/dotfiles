@@ -216,6 +216,9 @@ myManageHook =  composeAll
     (className =? "org.remmina.Remmina") <&&> (title =? "Remmina Remote Desktop Client") --> doShift "9", -- Put Remmina main window on workspace 9
     (className =? "org.remmina.Remmina") --> doShift "2", -- Put rest of Remmina windows on workspace 2
     (className =? "Cisco AnyConnect Secure Mobility Client") --> doShift "9",
+    (className =? "Signal") --> doShift "4",
+    (className =? "QtCreator") --> doShift "3",
+    (className =? "Rhythmbox") --> doShift "8",
     isFullscreen --> doFullFloat,
     isDialog --> doCenterFloat
   ]
