@@ -74,3 +74,25 @@ function caps_esc() {
 function caps_caps() {
     xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 }
+
+function _silent_play() {
+    if readlink -e "$1" >> /dev/null;
+    then
+        aplay "$1" 2>/dev/null
+    else
+        spd-say "Silent play couldn't find file $(basename \"$1\")"
+    fi
+}
+
+# Plays a sound effect depending on the exit status of the previously ran command
+# Expects there to be two files/symlinks in ~/.config/boop/{good,bad}.wav
+function boop() {
+    # Inspired by https://gitlab.com/EvanHahn/dotfiles/-/blob/ece393e625bb8254fe05774df33bb5af8a73d7e7/home/zsh/.config/zsh/aliases.zsh#L48-56
+    local last="$?"
+    if [[ "$last" == '0' ]]; then
+        _silent_play "$HOME/.config/boop/good.wav"
+    else
+        _silent_play "$HOME/.config/boop/bad.wav"
+    fi
+    $(exit "$last")
+}
