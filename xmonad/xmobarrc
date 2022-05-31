@@ -40,11 +40,10 @@ Config {
             "-h", "#b8bb26",
             "-l", "#fb4934"
         ] 50
-        , Run Com "cmus-status" ["status-icon"] "cmus_status" 1
-        , Run Com "cmus-status" ["track"] "cmus_track" 1
+        , Run Com "cmus-status" ["status-icon"] "cmus" 1
     , Run StdinReader
   ],
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%StdinReader% }{ %cmus_status% %cmus_track% | %wlp2s0wi% | %battery% | %coretemp% | %cpu% | %memory% | <fc=#d3869b>%date%</fc> "
+  , template = "%StdinReader% }{ %cmus% | %wlp2s0wi% | %battery% | %coretemp% | %cpu% | %memory% | <fc=#d3869b>%date%</fc> "
 }

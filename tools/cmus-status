@@ -4,16 +4,30 @@ function _get_element() {
     cmus-remote -Q | grep "$1 " | sed -r "s/^.*$1\s+//g"
 }
 
-function _get_status_icon() {
-    case "$1" in
-        "playing") echo "▶";;
-        "paused") echo "⏸";;
-        "stopped") echo "■";;
+function _is_stopped() {
+    case "$(_get_element 'status')" in
+        "stopped") return 0;;
+        *) return 1;;
     esac
 }
 
-case "$1" in
-    "track") echo "$(_get_element 'tag artist') - $(_get_element 'tag title')";;
-    "status-icon") _get_status_icon $(_get_element "status");;
-esac
+function _get_status_icon() {
+    case "$1" in
+        "playing") echo "▶";;
+        "paused") echo "❙❙";;
+    esac
+}
+
+
+if cmus-remote -Q >> /dev/null;
+then
+    if _is_stopped;
+    then
+        echo "cmus ready"
+    else
+        echo "$(_get_status_icon $(_get_element 'status')) $(_get_element 'tag artist') - $(_get_element 'tag title')"
+    fi
+else
+    echo "no cmus"
+fi
 
