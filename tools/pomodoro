@@ -1,0 +1,86 @@
+#!/bin/bash
+
+run_file="/tmp/pomodoro.8b3d08768b73dc969f2d14a0.run"
+
+function print_help() {
+    echo "Pomodoro Timer"
+    echo "
+This tool will show a notification when it's time to start working, and when
+it's time to take a break.
+
+Arguments are:
+    --help, -help, -h Prints this help page
+    --stop, -s        Stops the currently running timer
+    --default, -d     Runs the pomodoro timer with default arguments (25/5)
+
+If none of the above arguments are provided you must give two numeric
+positional arguments:
+
+    pomodoro <work> <rest>
+
+For instance, the --default flag is the equivalent to running the following:
+
+    pomodoro 25 5
+"
+}
+
+function stop_pomodoro() {
+    if [ -f "$run_file" ];
+    then
+        kill $(cat "$run_file") 2>/dev/null
+        rm "$run_file"
+    else
+        echo "Pomodoro timer is not currently running"
+    fi
+}
+
+function check_arg() {
+    if [ -z "$1" ];
+    then
+        echo "$2, see --help for usage"
+        exit 1
+    fi
+    if [[ ! "$1" =~ ^[0-9]+$ ]];
+    then
+        echo "$3, see --help for usage"
+        exit 1
+    fi
+}
+
+function min_to_s() {
+    echo $(($1 * 60))
+}
+
+function run_timer() {
+    title="Pomodoro Timer"
+    notify-send -u normal "$title" 'Starting pomodoro timer!' -t 3000
+    echo "$$" > "$run_file"
+    sleep 3
+
+    while [ -f "$run_file" ];
+    do
+        notify-send -u normal "$title" "Time to work for $1 minutes!"
+        sleep $(min_to_s $1)
+        notify-send -u normal "$title" "Time to stretch your legs, see you in $2 minutes!"
+        sleep $(min_to_s $2)
+    done
+}
+
+# Check for --help
+case "$1" in 
+    --help|-help|-h) print_help; exit 0;;
+    --stop|-s) stop_pomodoro; exit 0;;
+    --default|-d) pomodoro 25 5; exit 0;;
+esac
+
+# Check if timer is already running
+if [ -f "$run_file" ];
+then
+    echo "pomodoro timer seems already be running, try using --stop if you want to re-run"
+    exit 1
+fi
+
+check_arg "$1" "No arguments given" "First argument is not a number"
+check_arg "$2" "Only one argument given" "Second argument is not a number"
+
+run_timer "$1" "$2"
