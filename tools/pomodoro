@@ -1,6 +1,7 @@
 #!/bin/bash
 
 run_file="/tmp/pomodoro.8b3d08768b73dc969f2d14a0.run"
+title="Pomodoro Timer"
 
 function print_help() {
     echo "Pomodoro Timer"
@@ -29,8 +30,13 @@ function stop_pomodoro() {
     then
         kill $(cat "$run_file") 2>/dev/null
         rm "$run_file"
+        msg="Pomodoro timer stopped"
+        echo "$msg"
+        notify-send -u normal "$title" "$msg"
     else
-        echo "Pomodoro timer is not currently running"
+        msg="Pomodoro timer is not currently running"
+        echo "$msg"
+        notify-send -u normal "$title" "$msg"
     fi
 }
 
@@ -52,7 +58,6 @@ function min_to_s() {
 }
 
 function run_timer() {
-    title="Pomodoro Timer"
     notify-send -u normal "$title" 'Starting pomodoro timer!' -t 3000
     echo "$$" > "$run_file"
     sleep 3
