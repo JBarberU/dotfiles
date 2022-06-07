@@ -3,6 +3,20 @@
 run_file="/tmp/pomodoro.8b3d08768b73dc969f2d14a0.run"
 title="Pomodoro Timer"
 
+function show_toast() {
+    notify-send -u normal "Pomodoro Timer" "$1"
+}
+
+function toast_and_echo() {
+    echo "$1"
+    show_toast "$1"
+}
+
+function show_dialog() {
+    sfx alert &
+    zenity --info --text "$1"
+}
+
 function print_help() {
     echo "Pomodoro Timer"
     echo "
@@ -30,13 +44,9 @@ function stop_pomodoro() {
     then
         kill $(cat "$run_file") 2>/dev/null
         rm "$run_file"
-        msg="Pomodoro timer stopped"
-        echo "$msg"
-        notify-send -u normal "$title" "$msg"
+        toast_and_echo "Pomodoro timer stopped"
     else
-        msg="Pomodoro timer is not currently running"
-        echo "$msg"
-        notify-send -u normal "$title" "$msg"
+        toast_and_echo "Pomodoro timer is not currently running"
     fi
 }
 
@@ -58,15 +68,15 @@ function min_to_s() {
 }
 
 function run_timer() {
-    notify-send -u normal "$title" 'Starting pomodoro timer!' -t 3000
+    show_toast 'Starting pomodoro timer!' -t 3000
     echo "$$" > "$run_file"
     sleep 3
 
     while [ -f "$run_file" ];
     do
-        notify-send -u normal "$title" "Time to work for $1 minutes!"
+        show_dialog "Time to work for $1 minutes!"
         sleep $(min_to_s $1)
-        notify-send -u normal "$title" "Time to stretch your legs, see you in $2 minutes!"
+        show_dialog "Time to stretch your legs, see you in $2 minutes!"
         sleep $(min_to_s $2)
     done
 }

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function _silent_play() {
+    if readlink -e "$1" >> /dev/null;
+    then
+        aplay "$1" 2>/dev/null
+    else
+        spd-say "Silent play couldn't find file $(basename \"$1\")"
+    fi
+}
+BASE="$HOME/.config/sfx"
+case "$1" in
+    good) _silent_play "$BASE/good.wav";;
+    bad) _silent_play "$BASE/bad.wav";;
+    alert) _silent_play "$BASE/alert.wav";;
+    *) echo "Unknown sound effect \"$1\""; exit 1;;
+esac
