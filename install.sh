@@ -17,7 +17,6 @@ function verify_variable() {
 verify_variable DOTFILES_PATH
 verify_variable TARGET_PATH
 
-
 function create_link() {
     if [[ -z $1 ]]
     then
@@ -239,6 +238,38 @@ function install_rando_tools() {
     install_binaries simple-scan cmus
 }
 
+install_fonts() {
+    FONT_VIEWER="gnome-font-viewer"
+
+    # Font Awesome
+    ZIP_FILE="/tmp/fontawesome5.zip"
+    FOLDER="/tmp/fontawesome5"
+    wget -O "$ZIP_FILE" "https://use.fontawesome.com/releases/v5.15.4/fontawesome-free-5.15.4-desktop.zip"
+    unzip -d "$FOLDER" "$ZIP_FILE"
+    ls "$FOLDER"/fontawesome-free-5.*-desktop/otfs/*.otf | while read line;
+    do
+        $FONT_VIEWER "$line";
+    done
+
+    rm "$ZIP_FILE"
+    rm -r "$FOLDER"
+
+    # DejaVu Sans for Powerline
+    FOLDER="/tmp/dejavu_sans"
+    mkdir $FOLDER
+    wget -O "$FOLDER/1.ttf" "https://github.com/powerline/fonts/blob/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Bold%20Oblique%20for%20Powerline.ttf?raw=true"
+    wget -O "$FOLDER/2.ttf" "https://github.com/powerline/fonts/blob/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Bold%20for%20Powerline.ttf?raw=true"
+    wget -O "$FOLDER/3.ttf" "https://github.com/powerline/fonts/blob/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Oblique%20for%20Powerline.ttf?raw=true"
+    wget -O "$FOLDER/4.ttf" "https://github.com/powerline/fonts/blob/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20for%20Powerline.ttf?raw=true"
+
+    ls "$FOLDER"/* | while read line;
+    do
+        $FONT_VIEWER "$line"
+    done
+
+    rm -r "$FOLDER"
+}
+
 #################### Call desired installers ##################################
 
 install_git
@@ -250,5 +281,6 @@ install_zsh
 install_xmonad
 patch_kbd_layout
 install_rando_tools
+install_fonts
 
 exit 0
