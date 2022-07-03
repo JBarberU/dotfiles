@@ -49,8 +49,13 @@ function create_link() {
                 echo "Skipped creating link to $DOTFILES_PATH/$1 (already exists)"
                 return
             else
-                echo "Encounterd link pointing at a different target , aborting"
-                exit 1
+                echo "Encountered link pointing at a different target ($DEST -> current: $LINK_DEST vs proposed: $DOTFILES_PATH/$1)"
+                read -p "Replace, skip or abort? [R/S/A]: " _ANS
+                case "$_ANS" in
+                    r|R) echo "Replacing link $DEST -> $DOTFILES_PATH/$1"; rm "$DEST";;
+                    s|S) echo "Skipping";;
+                    *) echo "Aborting"; exit 1;;
+                esac
             fi
         elif [[ -e "$DEST" ]]
         then
@@ -231,18 +236,19 @@ function install_xmonad() {
 }
 
 function install_rando_tools() {
-    install_binaries simple-scan
+    install_binaries simple-scan cmus
 }
 
 #################### Call desired installers ##################################
 
-#install_git
-#install_irssi
-#install_tmux
-#install_urxvt
-#install_vim
-#install_zsh
-#install_xmonad
-#patch_kbd_layout
+install_git
+install_irssi
+install_tmux
+install_urxvt
+install_vim
+install_zsh
+install_xmonad
+patch_kbd_layout
+install_rando_tools
 
 exit 0
