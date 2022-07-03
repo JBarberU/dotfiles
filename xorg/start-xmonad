@@ -76,7 +76,8 @@ case $(hostname) in
     Fenrisulven)
         # Set primary screen
         xrandr --output DP-0 --primary
-        xrandr --output DP-3 --left-of DP-0
+        xrandr --output DP-3 --right-of DP-0
+        xrandr --output HDMI-0 --left-of DP-0
         ;;
     *)
         echo "Skipping host specific initialization"
@@ -110,7 +111,7 @@ numlockx on
 
 # Start BG daemon
 #bg_daemon &
-feh --no-fehbg --bg-fill /usr/share/dotfiles/backgrounds/debian.png
+feh --no-fehbg --bg-fill /usr/share/dotfiles/backgrounds/bg.*
 
 # Start dunst (show notifications)
 dunst &
