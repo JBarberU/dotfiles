@@ -134,6 +134,13 @@ function install_binaries() {
 
 #################### Installers ###############################################
 
+function install_cmus() {
+    create_dir .config/cmus
+    create_link cmus/rc .config/cmus/rc
+
+    install_binaries cmus
+}
+
 function install_git() {
     create_link git/gitignore .gitignore
     create_link git/gitconfig .gitconfig
@@ -235,7 +242,7 @@ function install_xmonad() {
 }
 
 function install_rando_tools() {
-    install_binaries simple-scan cmus
+    install_binaries simple-scan
 }
 
 install_fonts() {
@@ -272,6 +279,7 @@ install_fonts() {
 
 #################### Call desired installers ##################################
 
+install_cmus
 install_git
 install_irssi
 install_tmux
