@@ -21,20 +21,18 @@
     selected-active-foreground:  var(active-foreground);
     gruvbox-dark-red-dark:       rgba ( 204, 36, 29, 100 % );
     separatorcolor:              var(border-color);
-    selected-normal-background:  var(gruvbox-dark-purple);
+    selected-normal-background:  var(gruvbox-dark-bg3);
     selected-urgent-background:  var(gruvbox-dark-red-light);
     gruvbox-dark-fg1:            rgba ( 235, 219, 178, 100 % );
     scrollbar:                   true;
     alternate-active-background: var(active-background);
     active-background:           var(gruvbox-dark-yellow-dark);
     gruvbox-dark-yellow-dark:    rgba ( 215, 153, 33, 100 % );
-    normal-background:           var(background);
+    gruvbox-dark-bg0-soft:       rgba ( 50, 48, 47, 100 % );
     gruvbox-dark-yellow-light:   rgba ( 250, 189, 47, 100 % );
     background-color:            var(background);
-    gruvbox-dark-bg0-soft:       rgba ( 50, 48, 47, 100 % );
-    border-color:                var(gruvbox-dark-purple);
-    gruvbox-light-purple:        rgba ( 211, 134, 155, 100 % );
-    gruvbox-dark-purple:         rgba ( 177, 98, 134, 100 % );
+    normal-background:           var(background);
+    border-color:                var(gruvbox-dark-gray);
     gruvbox-dark-gray:           rgba ( 168, 153, 132, 100 % );
     foreground:                  var(gruvbox-dark-fg1);
     alternate-normal-background: var(gruvbox-dark-bg1);
@@ -145,7 +143,7 @@ button selected {
     text-color:       var(selected-normal-foreground);
 }
 textbox-prompt-sep {
-    margin:     0px 0.3000em 0px 0px ;
+    margin:     0px  Tøòþem 0px 0px ;
     expand:     false;
     str:        ":";
     text-color: var(normal-foreground);
