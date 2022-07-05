@@ -1,0 +1,77 @@
+#!/bin/bash
+
+clipcopy () {
+	xclip -in -selection clipboard < "${1:-/dev/stdin}"
+}
+
+add_key() {
+    if [ ! -d "$KEYS_FOLDER" ]
+    then
+        mkdir "$KEYS_FOLDER"
+    fi
+
+    read -p 'Enter name for new key: ' KEY_NAME
+
+    if [ -z "$KEY_NAME" ]
+    then
+        echo "You have to enter a name for the key, aborting"
+        exit 1
+    fi
+
+    zbarimg -q $1 | sed -n "s/.*secret=\(.*\)&issuer.*/\1/p" | gpg -q -o "$KEYS_FOLDER/$KEY_NAME.key" -c
+}
+
+get_key() {
+    KEY_FILE="$KEYS_FOLDER/$1"
+    oathtool --totp --base32  $(gpg -q -d "$KEY_FILE") | clipcopy && echo "TOTP code sent to clipboard!"
+}
+
+print_help() {
+    echo "-a to add a new key, argument should be the path to an image with a QR code"
+}
+
+KEYS_FOLDER="$HOME/.keys"
+BLOB="$KEYS_FOLDER/blob.tar.gz"
+
+while getopts ":ha:" option
+do
+    case $option in
+        a) add_key $OPTARG; exit 0;;
+        h) print_help; exit 0;;
+    esac
+done
+
+if [ ! -d "$KEYS_FOLDER" ]
+then
+    echo "No keys, try adding one with -a"
+    exit 1
+fi
+
+INDEX=1
+KEYS_LIST=$(ls "$KEYS_FOLDER")
+for f in $KEYS_LIST
+do
+    echo "$INDEX $f"
+    INDEX=$(($INDEX+1))
+done
+
+read -p "Select key: " KEY_NUM
+
+INDEX=1
+for f in $KEYS_LIST
+do
+    if [ $INDEX == $KEY_NUM ]
+    then
+        SELECTED_KEY=$f
+        break
+    fi
+    INDEX=$(($INDEX+1))
+done
+
+if [ -z "$SELECTED_KEY" ]
+then
+    echo "Invalid key selected, aborting"
+    exit 1
+fi
+
+get_key "$SELECTED_KEY"
