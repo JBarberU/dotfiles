@@ -22,7 +22,7 @@ add_key() {
 }
 
 clip_totp() {
-    oathtool --totp --base32  $(gpg -q -d "$1") | clipcopy && echo "TOTP code sent to clipboard!"
+    oathtool --totp --base32  $(gpg -q -d "$1") | tr -d '\n' | clipcopy && echo "TOTP code sent to clipboard!"
 }
 
 print_totp() {
