@@ -21,9 +21,12 @@ add_key() {
     zbarimg -q $1 | sed -n "s/.*secret=\(.*\)&issuer.*/\1/p" | gpg -q -o "$KEYS_FOLDER/$KEY_NAME.key" -c
 }
 
-get_key() {
-    KEY_FILE="$KEYS_FOLDER/$1"
-    oathtool --totp --base32  $(gpg -q -d "$KEY_FILE") | clipcopy && echo "TOTP code sent to clipboard!"
+clip_totp() {
+    oathtool --totp --base32  $(gpg -q -d "$1") | clipcopy && echo "TOTP code sent to clipboard!"
+}
+
+print_totp() {
+    oathtool --totp --base32  $(gpg -q -d "$1")
 }
 
 print_help() {
@@ -33,10 +36,11 @@ print_help() {
 KEYS_FOLDER="$HOME/.keys"
 BLOB="$KEYS_FOLDER/blob.tar.gz"
 
-while getopts ":ha:" option
+while getopts ":hpa:" option
 do
     case $option in
         a) add_key $OPTARG; exit 0;;
+        p) DO_PRINT_KEY=1;;
         h) print_help; exit 0;;
     esac
 done
@@ -74,4 +78,11 @@ then
     exit 1
 fi
 
-get_key "$SELECTED_KEY"
+KEY_FILE="$KEYS_FOLDER/$SELECTED_KEY"
+
+if [ -z $DO_PRINT_KEY ]
+then
+    clip_totp "$KEY_FILE"
+else
+    print_totp "$KEY_FILE"
+fi
