@@ -75,9 +75,9 @@ case $(hostname) in
         ;;
     Fenrisulven)
         # Set primary screen
-        xrandr --output DP-0 --primary
-        xrandr --output DP-3 --right-of DP-0
-        xrandr --output HDMI-0 --left-of DP-0
+        xrandr --output DP-1 --primary
+        xrandr --output DP-2 --right-of DP-1
+        xrandr --output HDMI-1 --left-of DP-1
         ;;
     *)
         echo "Skipping host specific initialization"
