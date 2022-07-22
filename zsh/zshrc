@@ -87,6 +87,10 @@ function natti() {
   fi
 }
 
+function grep-less() {
+    grep --color=always $@ | less
+}
+
 case $(uname) in
   "Darwin")
       alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | echo \"Copied public key to clipboard...\"";;
@@ -111,6 +115,7 @@ alias edvimrc="\$EDITOR \$HOME/.vimrc"
 alias edxmonad="\$EDITOR \$HOME/.xmonad/xmonad.hs"
 alias clip="CLIP=\"\$(xclip -o -selection clipboard)\" && echo Put the contents of clipboard into CLIP :\)"
 alias tmuxa="tmux new-session -A -s main"
+alias tmuxs="tmux new-session -A -s"
 alias devd="vim \$(devdiary.py --add --latest)"
 alias devdsum="devdiary.py --summarize | less"
 alias avenv="source venv/bin/activate"
