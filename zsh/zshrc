@@ -75,12 +75,31 @@ function maybe_backup() {
   fi
 }
 
+function has_internet_connection() {
+    echo 'GET https://google.com HTTP/1.0\n\n' | nc google.com 443 > /dev/null 2>&1
+    return $?
+}
+
+function maybe_update() {
+    if has_internet_connection
+    then
+        vared -p 'Would you like to update system? [Y/N]: ' -c update_ans
+        case $update_ans in
+            y|Y) echo 'Updating system' && sudo -k && sudo apt-get update && sudo apt-get -y upgrade;;
+            *) echo 'Skipping updates';;
+        esac
+    else
+        echo 'Unable to update, no internet connection'
+    fi
+    return $?
+}
+
 function natti() {
   echo "Alias natti has not been set for host $HOST"
   read "ans?Would you like to do so now? [y/n]: "
   if [[ $ans =~ ^[Yy]$ ]]
   then
-    echo 'alias natti="echo \"About to update and shut down host $HOST\" && sudo -k && sudo apt-get update && sudo apt-get -y upgrade && sudo shutdown -h now"' >> "$HOME/.aliases" && source "$HOME/.aliases"
+      echo 'alias natti="echo \"About to update and shut down host $HOST\" && maybe_update && sudo shutdown -h now"' >> "$HOME/.aliases" && source "$HOME/.aliases"
     echo 'Alias natti created!'
   else
     echo 'Did not create alias'
