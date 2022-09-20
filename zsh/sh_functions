@@ -67,11 +67,11 @@ function net_slow() {
   #sudo tc qdisc del dev eth0 root netem delay 10000ms
 }
 
-function caps_esc() {
+function cesc() {
     xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 }
 
-function caps_caps() {
+function ccaps() {
     xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 }
 

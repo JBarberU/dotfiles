@@ -138,6 +138,7 @@ alias tmuxs="tmux new-session -A -s"
 alias devd="vim \$(devdiary.py --add --latest)"
 alias devdsum="devdiary.py --summarize | less"
 alias avenv="source venv/bin/activate"
+alias ungrab_mouse="setxkbmap -option grab:break_actions && xdotool key XF86Ungrab"
 
 src_if_exists "$HOME/.aliases"
 src_if_exists "$HOME/.paths"
