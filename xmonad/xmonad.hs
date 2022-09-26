@@ -11,6 +11,7 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig()
 import System.IO
 import Data.Ratio ((%))
+import Data.List as DL
 import XMonad.Hooks.SetWMName
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
@@ -21,6 +22,9 @@ data ScrotMode    = Normal | RectSelect
 data VolumeMode   = Up | Down | Mute
 data RhythmAction = RANext | RAPrev | RAPlayPause
 data Urgency      = ULow | UNormal | UCritical
+
+(~?) :: (Eq a, Functor m) => m[a] -> [a] -> m Bool
+q ~? x = fmap (DL.isInfixOf x) q
 
 myTerminal :: String
 myTerminal = "rxvt-unicode"
@@ -220,14 +224,17 @@ myManageHook =  composeAll
     (className =? "Steam") --> doFloat,
     (className =? "Friends") --> doCenterFloat,
     (className =? "Org.gnome.Nautilus") --> doCenterFloat,
-    (className =? "org.remmina.Remmina") <&&> (title =? "Remmina Remote Desktop Client") --> doShift "9", -- Put Remmina main window on workspace 9
-    (className =? "org.remmina.Remmina") --> doShift "2", -- Put rest of Remmina windows on workspace 2
-    (className =? "Cisco AnyConnect Secure Mobility Client") --> doShift "9",
-    (className =? "Signal") --> doShift "4",
-    (className =? "QtCreator") --> doShift "3",
     (className =? "Rhythmbox") --> doShift "8",
+    (className =? "plasticx") --> doShift "2",
+    (className =? "discord") --> doShift "9",
+    (className =? "Signal") --> doShift "9",
+    (className =? "QtCreator") --> doShift "4",
+    (className =? "GameEditor" <&&> title =? "") --> doShift "3",
+    (className =? "GameEditor" <&&> title ~? "GOALS") --> doShift "3",
+    (className =? "GameEditor") --> doShift "2",
+    (className =? "jetbrains-rider") --> doShift "2",
     isFullscreen --> doFullFloat,
-    isDialog --> doCenterFloat
+    isDialog --> doFloat
   ]
   <+> manageDocks
   <+> manageHook defaultConfig
