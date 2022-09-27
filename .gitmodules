@@ -55,3 +55,6 @@
 [submodule "tools/mkcpp"]
 	path = tools/mkcpp
 	url = https://github.com/JBarberU/mkcpp.git
+[submodule "tools/luxafor_driver"]
+	path = tools/luxafor_driver
+	url = git@github.com:JBarberU/luxafor_driver.git
