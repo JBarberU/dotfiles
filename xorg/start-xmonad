@@ -88,12 +88,26 @@ case $(hostname) in
 esac
 
 # Mouse settings
+#
+# Use xev to find what logical button a physical button maps to
+#
 DEVICE_ID=`xinput list --id-only "pointer:ELECOM TrackBall Mouse HUGE TrackBall" 2> /dev/null`
 if [ "$DEVICE_ID" != "" ]
 then
     xinput --set-prop $DEVICE_ID "libinput Scroll Method Enabled" 0, 0, 1
     xinput --set-prop $DEVICE_ID "libinput Button Scrolling Button" 9
     xinput --set-button-map $DEVICE_ID 1 0 1 4 5 6 7 3 0 10 11 2
+fi
+
+DEVICE_ID=`xinput list --id-only "pointer:Corsair Corsair Gaming M65 Pro RGB Mouse" 2> /dev/null`
+if [ "$DEVICE_ID" != "" ]
+then
+    # Bind RMB to logical MMB, 8MB to RMB
+    xinput --set-button-map $DEVICE_ID 1 2 2 4 5 6 7 3 9
+
+    # enable scrolling pressing RMB and moving cursor
+    xinput --set-prop $DEVICE_ID "libinput Scroll Method Enabled" 0, 0, 1
+    xinput --set-prop $DEVICE_ID "libinput Button Scrolling Button" 3
 fi
 
 # Touch pad
@@ -125,7 +139,7 @@ xcompmgr &
 # Start Conky
 conky &
 
-autostart &
+#autostart &
 
 # Start WM
 xmonad
