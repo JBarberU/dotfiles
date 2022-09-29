@@ -144,11 +144,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_p,      scrot Normal),
       (xK_b,      sendMessage ToggleStruts),
       (xK_q,      spawn "xmonad --recompile; xmonad --restart"),
+      (xK_a,      spawn "pavucontrol"),
       (xK_t,      namedScratchpadAction myScratchpads "BottomTerminal"),
       (xK_n,      namedScratchpadAction myScratchpads "TopTerminal"),
       (xK_i,      namedScratchpadAction myScratchpads "IrssiTerminal"),
       (xK_s,      namedScratchpadAction myScratchpads "FullTerminal"),
-      (xK_a,      namedScratchpadAction myScratchpads "AlsaTerminal"),
       (xK_m,      namedScratchpadAction myScratchpads "CmusTerminal")
     ]
   ]

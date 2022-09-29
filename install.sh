@@ -242,7 +242,7 @@ function install_xmonad() {
 }
 
 function install_rando_tools() {
-    install_binaries simple-scan oathtool
+    install_binaries simple-scan oathtool pavucontrol
 }
 
 install_fonts() {
