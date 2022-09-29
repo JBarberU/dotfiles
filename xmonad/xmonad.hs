@@ -29,6 +29,9 @@ q ~? x = fmap (DL.isInfixOf x) q
 myTerminal :: String
 myTerminal = "rxvt-unicode"
 
+rofiCmd :: String
+rofiCmd = "rofi -show combi -combi-modi \"run,drun\" -modi combi -matching fuzzy"
+
 myNamedTerminal :: String
 myNamedTerminal = myTerminal ++ " -name "
 
@@ -138,7 +141,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_c,      spawn "gnome-calculator"),
       (xK_g,      namedScratchpadAction myScratchpads "Browser"),
       (xK_Return, windows W.swapMaster),
-      (xK_space,  spawn "rofi -show run"),
+      (xK_space,  spawn rofiCmd),
       (xK_h,      sendMessage Shrink),
       (xK_l,      sendMessage Expand),
       (xK_p,      scrot Normal),
