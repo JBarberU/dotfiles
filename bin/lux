@@ -1,0 +1,20 @@
+#!/bin/bash
+
+cd $HOME/dotfiles/tools/luxafor_driver
+source venv/bin/activate
+
+function alert() {
+    lux --command fade --color ff0000 --leds 255 --speed 40
+    sleep 2
+    lux --command strobe --color ff0000 --leds 255 --repeat 10 --speed 10
+    sleep 7
+    lux --command strobe --color ffff00 --leds 255 --repeat 0 --speed 100
+}
+
+case $1 in
+    --free)  lux --command set-color --color 00ff00 --leds 255;;
+    --busy)  lux --command set-color --color ff0000 --leds 255;;
+    --off)   lux --command set-color --color 000000 --leds 255;;
+    --alert) alert;;
+    *)       ./luxafor.py $@
+esac

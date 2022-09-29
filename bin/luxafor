@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cd ../tools/luxafor_driver
-source venv/bin/activate
-pip install -r requirements.txt > /dev/null
-./luxafor.py $@
