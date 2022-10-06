@@ -236,7 +236,8 @@ function install_xmonad() {
     create_link xmonad/dunstrc .config/dunst/dunstrc
 
     sudo mkdir /usr/share/dotfiles/backgrounds
-    sudo cp "$DOTFILES_PATH/xorg/start-xmonad" "/usr/bin/stxmonad"
+    sudo ln -s "$DOTFILES_PATH/xorg/start-xmonad" "/usr/bin/stxmonad"
+    sudo ln -s $DOTFILES_PATH/xorg/keyboard.conf /etc/X11/xorg.conf.d/keyboard.conf
 
     install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr numlockx xinput scrot
 }

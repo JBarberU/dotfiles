@@ -117,12 +117,6 @@ then
     xinput --set-prop $DEVICE_ID "libinput Tapping Enabled" 1
 fi
 
-# Set keyboard layout
-setxkbmap "us(dvorak-intl)"
-
-# Remap CapsLock->Escape
-xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-
 # Enable numlock
 numlockx on
 
