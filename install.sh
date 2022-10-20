@@ -238,6 +238,7 @@ function install_xmonad() {
     sudo mkdir /usr/share/dotfiles/backgrounds
     sudo ln -s "$DOTFILES_PATH/xorg/start-xmonad" "/usr/bin/stxmonad"
     sudo ln -s $DOTFILES_PATH/xorg/keyboard.conf /etc/X11/xorg.conf.d/keyboard.conf
+    sudo ln -s $DOTFILES_PATH/xorg/monitors.fenrisulven.conf /etc/X11/xorg.conf.d/monitors.conf
 
     install_binaries xmonad xmobar rofi conky-all xclip feh dunst xcompmgr numlockx xinput scrot
 }

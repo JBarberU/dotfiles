@@ -73,15 +73,6 @@ case $(hostname) in
                 exit 1
         esac
         ;;
-    Fenrisulven)
-        # Set primary screen
-        MAIN_DISPLAY="DP-2"
-        RIGHT_DISPLAY="DP-1"
-        LEFT_DISPLAY="HDMI-0"
-        xrandr --output "$MAIN_DISPLAY" --primary
-        xrandr --output "$RIGHT_DISPLAY" --right-of "$MAIN_DISPLAY"
-        xrandr --output "$LEFT_DISPLAY" --left-of "$MAIN_DISPLAY"
-        ;;
     *)
         echo "Skipping host specific initialization"
         ;;
