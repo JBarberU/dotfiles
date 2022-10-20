@@ -124,6 +124,7 @@ myKeys :: XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   let
     mshift  = modm .|. shiftMask
+    mctrl   = modm .|. controlMask
     volDownBtn   = 0x1008ff11
     volUpBtn     = 0x1008ff13
     playPauseBtn = 0x1008ff14
@@ -169,10 +170,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       (xK_g,        spawn "gnome-control-center"),
       (xK_c,        kill),
       (xK_b,        sendMessage NextLayout),
-      -- (xK_x,        doNotify ULow "A title" "Some Message"),
+       (xK_x,        doNotify ULow "A title" "Some Message"),
       (volDownBtn,  rhythmbox RAPrev),
       (volUpBtn,    rhythmbox RANext),
       (muteBtn,     rhythmbox RAPlayPause)
+    ]
+  ]
+  ++
+  [((mctrl, x), y) | (x,y) <-
+    [
+      (xK_c, spawn "gnome-clocks")
     ]
   ]
   ++
@@ -221,7 +228,8 @@ myManageHook :: ManageHook
 myManageHook =  composeAll
   [
     (className =? "zoom" <&&> isInProperty "_NET_WM_STATE" "_NET_WM_STATE_ABOVE" <||> isInProperty "_NET_WM_STATE" "_NET_WM_STATE_STAYS_ON_TOP") --> doFloat,
-    (className =? "Gnome-calculator") --> doCenterFloat,
+    (className =? "Gnome-calculator") --> doFloat,
+    (className =? "Org.gnome.clocks") --> doFloat,
     (className =? "Xmessage") --> doCenterFloat,
     (className =? "Nvidia-settings") --> doCenterFloat,
     (className =? "Steam") --> doFloat,
@@ -232,8 +240,8 @@ myManageHook =  composeAll
     (className =? "discord") --> doShift "9",
     (className =? "Signal") --> doShift "9",
     (className =? "QtCreator") --> doShift "4",
-    (className =? "GameEditor" <&&> title =? "") --> doShift "3",
-    (className =? "GameEditor" <&&> title ~? "GOALS") --> doShift "3",
+    (className =? "GameEditor" <&&> title =? "") --> doShift "2",
+    (className =? "GameEditor" <&&> title ~? "GOALS") --> doShift "2",
     (className =? "GameEditor") --> doShift "2",
     (className =? "jetbrains-rider") --> doShift "2",
     isFullscreen --> doFullFloat,
