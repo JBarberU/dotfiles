@@ -306,10 +306,18 @@ def install_xmonad():
 
 
 def patch_kbd_layout():
+    dst = '/usr/share/X11/xkb/symbols/us'
+    patch_file = f'"{REPO_PATH}/kbdlayout/dvorak-intl.patch"'
+    paths = f'{dst} {patch_file}'
+    base_cmd = 'sudo patch --silent -p0'
     r.create_custom_commands([
         'sh', '-c',
-        ('sudo patch /usr/share/X11/xkb/symbols/us '
-         f'"{REPO_PATH}/kbdlayout/dvorak-intl.patch"')
+        (
+            # Test if the patch can be reversed, and if so skip the patch (by
+            # using or between the operations
+            f'{base_cmd} --reverse --force --dry-run {paths} || '
+            f'{base_cmd} {paths}'
+         )
     ])
 
 
@@ -430,6 +438,7 @@ def main(args):
     if args.zsh or args.all:
         install_zsh()
 
+    global VERBOSE
     VERBOSE = args.verbose
 
     if args.dryrun:
