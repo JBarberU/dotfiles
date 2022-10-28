@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+import shutil
+import re
 import subprocess
 from pathlib import Path as pathlib_Path
 import urllib.request
@@ -9,9 +11,37 @@ import zipfile
 import argparse
 
 
+class Distro:
+
+    def __init__(self):
+        self.distro = None
+        self.version = None
+        self.version_name = None
+
+    def __str__(self):
+        return f'{self.distro} {self.version} {self.version_name}'
+
+def get_distro():
+    ret = Distro()
+    rel_file = '/etc/os-release'
+    if not os.path.exists(rel_file):
+        return ret
+    with open(rel_file, 'r') as f:
+        for l in f.readlines():
+            if re.search('^VERSION_ID=', l):
+                ret.version = l[len('VERSION_ID='):].replace('"','').strip()
+            elif re.search('^VERSION_CODENAME=', l):
+                ret.version_name = l[len('VERSION_CODENAME='):].replace('"','').strip()
+            elif re.search('^NAME=', l):
+                ret.distro = l[len('NAME='):].replace('"','').strip()
+
+        return ret
+
+
 REPO_PATH = os.path.realpath(os.path.dirname(__file__))
 HOME_PATH = pathlib_Path.home()
 VERBOSE = False
+DISTRO = get_distro()
 
 
 def find_existing_base_dir(path):
@@ -132,6 +162,12 @@ class Recipe:
         '''Run installation
         '''
 
+        if self.binaries:
+            run_command(
+                cmd=['apt-get', 'install'] + self.binaries,
+                needs_elevation=True
+            )
+
         for target in self.copies:
             run_command(
                 cmd=['cp', target.src, target.dst],
@@ -146,6 +182,17 @@ class Recipe:
 
 
         for link in self.links:
+            dst_path = os.path.dirname(link.dst)
+            if not os.path.exists(dst_path):
+                run_command(
+                        cmd=['mkdir', '-p', dst_path],
+                        needs_elevation=unable_to_write(dst_path)
+                )
+
+            if os.path.islink(link.dst):
+                print(f'{link.dst} already exists, skipping')
+                continue
+
             run_command(
                 cmd=['ln', '-s', link.src, link.dst],
                 needs_elevation=unable_to_write(link.dst)
@@ -248,12 +295,16 @@ def install_tmux():
 
 def install_urxvt():
     r.create_link('xorg/Xresources', '.Xresources')
-    r.install_binaries(['rxvt-unicode-256color'])
+    if DISTRO.distro == 'Ubuntu':
+        r.install_binaries(['rxvt-unicode'])
+    elif DISTRO.distro == 'Debian':
+        r.install_binaries(['rxvt-unicode-256color'])
 
 
 def install_vim():
     r.create_link('vimfiles', '.vim')
     r.create_link('vimfiles/vimrc', '.vimrc')
+    r.create_link('vimfiles/nvim', '.config/nvim/init.vim')
 
     r.install_binaries(['vim', 'exuberant-ctags', 'ack-grep'])
 
@@ -322,7 +373,7 @@ def patch_kbd_layout():
 
 
 def install_rando_tools():
-    r.install_binaries(['cmake', 'simple-scan', 'oathtool', 'pavucontrol'])
+    r.install_binaries(['curl', 'python3-pip', 'cmake', 'simple-scan', 'oathtool', 'pavucontrol'])
 
 def download_file(url, path):
     request = urllib.request.Request(
@@ -352,15 +403,25 @@ def install_fonts():
 
         os.remove(zip_file)
 
+        awesome_out = f'{folder}_fonts'
+        os.makedirs(awesome_out)
+
+        c = 0
         for root, dirs, files in os.walk(folder):
             for f in files:
                 if 'otf' in f:
-                    print( f'{root}/{f}')
-                    run_command(cmd=[
-                        font_viewer, f'"{root}/{f}"'
-                    ], needs_elevation=False)
+                    shutil.copyfile(f'{root}/{f}', f'{awesome_out}/{c}.otf')
+                    c = c + 1
+
+        for file in os.listdir(awesome_out):
+            full_path = f'{awesome_out}/{file}'
+            run_command(
+                cmd=[font_viewer, full_path],
+                needs_elevation=False
+            )
 
         run_command(['rm', '-r', folder], False)
+        run_command(['rm', '-r', awesome_out], False)
 
         folder = '/tmp/dejavu_sans'
         os.makedirs(folder)
@@ -372,8 +433,6 @@ def install_fonts():
 
         for file in os.listdir(folder):
             full_path = f'{folder}/{file}'
-            print(full_path)
-            continue
             run_command(cmd=[
                 font_viewer, full_path
             ], needs_elevation=False)
