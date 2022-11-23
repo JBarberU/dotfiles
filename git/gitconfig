@@ -15,6 +15,7 @@
     log = log --topo-order --decorate
     commiters = shortlog -nse --no-merges
     puhs = push
+    dad = "!sh -c \"curl https://icanhazdadjoke.com/; echo\""
 
 [format]
     pretty = %C(blue)%h %C(red)%ad %C(green)%an: %C(magenta)%s %C(white)%b
