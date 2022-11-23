@@ -373,7 +373,17 @@ def patch_kbd_layout():
 
 
 def install_rando_tools():
-    r.install_binaries(['curl', 'python3-pip', 'cmake', 'simple-scan', 'oathtool', 'pavucontrol'])
+    r.install_binaries([
+        'curl',
+        'python3-pip',
+        'cmake',
+        'valgrind',     # C/C++ profiler
+        'gnome-clocks',
+        'simple-scan',  # scanner application
+        'oathtool',     # oath stuff
+        'pavucontrol',  # audio mixer
+        'fuse',         # needed for running AppImages
+    ])
 
 def download_file(url, path):
     request = urllib.request.Request(
@@ -473,8 +483,8 @@ def main(args):
     if args.git or args.all:
         install_git()
 
-    if args.irssi or args.all:
-        install_irssi()
+#    if args.irssi or args.all:
+#        install_irssi()
 
     if args.kbd or args.all:
         patch_kbd_layout()
