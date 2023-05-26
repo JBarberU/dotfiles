@@ -306,7 +306,7 @@ def install_vim():
     r.create_link('vimfiles/vimrc', '.vimrc')
     r.create_link('vimfiles/nvim', '.config/nvim/init.vim')
 
-    r.install_binaries(['vim', 'exuberant-ctags', 'ack-grep'])
+    r.install_binaries(['vim', 'exuberant-ctags', 'ack-grep', 'fzf'])
 
 
 def install_zsh():
