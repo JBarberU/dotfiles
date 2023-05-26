@@ -38,8 +38,10 @@ function battery_daemon() {
 }
 
 # ssh-agent
-eval $(ssh-agent)
-nm-applet &
+dbus-update-activation-environment --all
+gnome-keyring-daemon --start
+#eval $(ssh-agent)
+#nm-applet &
 
 # Set cursor
 xset s offxsetroot -cursor_name left_ptr
@@ -90,16 +92,16 @@ then
     xinput --set-button-map $DEVICE_ID 1 0 1 4 5 6 7 3 0 10 11 2
 fi
 
-DEVICE_ID=`xinput list --id-only "pointer:Corsair Corsair Gaming M65 Pro RGB Mouse" 2> /dev/null`
-if [ "$DEVICE_ID" != "" ]
-then
-    # Bind RMB to logical MMB, 8MB to RMB
-    xinput --set-button-map $DEVICE_ID 1 2 2 4 5 6 7 3 9
+#DEVICE_ID=`xinput list --id-only "pointer:Corsair Corsair Gaming M65 Pro RGB Mouse" 2> /dev/null`
+#if [ "$DEVICE_ID" != "" ]
+#then
+    ## Bind RMB to logical MMB, 8MB to RMB
+    #xinput --set-button-map $DEVICE_ID 1 2 2 4 5 6 7 3 9
 
-    # enable scrolling pressing RMB and moving cursor
-    xinput --set-prop $DEVICE_ID "libinput Scroll Method Enabled" 0, 0, 1
-    xinput --set-prop $DEVICE_ID "libinput Button Scrolling Button" 3
-fi
+    ## enable scrolling pressing RMB and moving cursor
+    #xinput --set-prop $DEVICE_ID "libinput Scroll Method Enabled" 0, 0, 1
+    #xinput --set-prop $DEVICE_ID "libinput Button Scrolling Button" 3
+#fi
 
 # Touch pad
 DEVICE_ID=`xinput list --id-only "pointer:AlpsPS/2 ALPS DualPoint TouchPad" 2> /dev/null`
