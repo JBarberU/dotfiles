@@ -336,15 +336,14 @@ def install_xmonad():
 
     r.create_link('haskell/ghci', '.ghci')
     r.create_link('xmonad/xmonad.hs', '.xmonad/xmonad.hs')
+    r.create_link('xmonad/xmonad-session-rc', '.xmonad/xmonad-session-rc')
     r.create_link('xmonad/xmobarrc', '.xmobarrc')
     r.create_link('conky/conkyrc', '.conkyrc')
     r.create_link('xorg/xinitrc', '.xinitrc')
-    r.create_link('xorg/start-xmonad', '.xmonad/start-xmonad')
     r.create_link('rofi/config.rasi', '.config/rofi/config.rasi')
     r.create_link('rofi/gruvbox-purple.rasi', '.config/rofi/gruvbox-purple.rasi')
     r.create_link('xmonad/dunstrc', '.config/dunst/dunstrc')
 
-    r.create_link('xorg/start-xmonad', '/usr/bin/stxmonad', absolute=True)
     r.create_link('xorg/keyboard.conf', '/etc/X11/xorg.conf.d/keyboard.conf', absolute=True)
     monitor_option = select_option(
         'Select monitor configuration file to use:',

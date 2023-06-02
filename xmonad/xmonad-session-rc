@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Keyring
+# dbus-update-activation-environment --all
+# gnome-keyring-daemon --start
+
+# Set cursor
+xset s offxsetroot -cursor_name left_ptr
+
+# Set background
+feh --no-fehbg --bg-fill /usr/share/dotfiles/backgrounds/bg.*
+
+# Start dunst (show notifications)
+dunst &
+
+# Start composition manager, to allow transparency
+xcompmgr &
+
+# Start Conky
+conky &
