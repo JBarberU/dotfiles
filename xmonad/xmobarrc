@@ -1,8 +1,8 @@
 Config {
     font = "xft:DejaVu Sans Mono:pixelsize=14:antialias=true:hinting=true"
     , additionalFonts = [
-        "xft:Font Awesome 5 Free Solid:pixelsize=12",
-        "xft:Font Awesome 5 Brands:pixelsize=12"
+        "xft:Font Awesome 6 Free Solid:pixelsize=12",
+        "xft:Font Awesome 6 Brands:pixelsize=12"
         ]
     , alpha = 200
     , border = FullB
