@@ -297,9 +297,10 @@ def install_urxvt():
     r.create_link('xorg/Xresources', '.Xresources')
     if DISTRO.distro == 'Ubuntu':
         r.install_binaries(['rxvt-unicode'])
-    elif DISTRO.distro == 'Debian':
+    elif 'Debian' in DISTRO.distro:
         r.install_binaries(['rxvt-unicode-256color'])
-
+    else:
+        print(f'Unale to determine distro {DISTRO}')
 
 def install_vim():
     r.create_link('vimfiles', '.vim')
