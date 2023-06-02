@@ -58,3 +58,6 @@
 [submodule "tools/luxafor_driver"]
 	path = tools/luxafor_driver
 	url = https://github.com/JBarberU/luxafor_driver.git
+[submodule "fonts"]
+	path = fonts
+	url = https://github.com/JBarberU/dotfile_fonts.git

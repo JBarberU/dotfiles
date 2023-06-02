@@ -396,60 +396,7 @@ def download_file(url, path):
 
 
 def install_fonts():
-    print('installing fonts')
-
-    def inst_fonts():
-        # # Font Awesome
-        zip_file = '/tmp/fontawesome5.zip'
-        folder = '/tmp/fontawesome5'
-        font_viewer = 'gnome-font-viewer'
-        download_file(
-            url='https://use.fontawesome.com/releases/v5.15.4/fontawesome-free-5.15.4-desktop.zip',
-            path=zip_file
-        )
-
-        with zipfile.ZipFile(zip_file, 'r') as f:
-            f.extractall(folder)
-
-        os.remove(zip_file)
-
-        awesome_out = f'{folder}_fonts'
-        os.makedirs(awesome_out)
-
-        c = 0
-        for root, dirs, files in os.walk(folder):
-            for f in files:
-                if 'otf' in f:
-                    shutil.copyfile(f'{root}/{f}', f'{awesome_out}/{c}.otf')
-                    c = c + 1
-
-        for file in os.listdir(awesome_out):
-            full_path = f'{awesome_out}/{file}'
-            run_command(
-                cmd=[font_viewer, full_path],
-                needs_elevation=False
-            )
-
-        run_command(['rm', '-r', folder], False)
-        run_command(['rm', '-r', awesome_out], False)
-
-        folder = '/tmp/dejavu_sans'
-        os.makedirs(folder)
-
-        download_file(url='https://github.com/powerline/fonts/blob/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Bold%20Oblique%20for%20Powerline.ttf?raw=true', path=f'{folder}/1.ttf')
-        download_file(url='https://github.com/powerline/fonts/blob/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Bold%20for%20Powerline.ttf?raw=true', path=f'{folder}/2.ttf')
-        download_file(url='https://github.com/powerline/fonts/blob/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20Oblique%20for%20Powerline.ttf?raw=true', path=f'{folder}/3.ttf')
-        download_file(url='https://github.com/powerline/fonts/blob/master/DejaVuSansMono/DejaVu%20Sans%20Mono%20for%20Powerline.ttf?raw=true', path=f'{folder}/4.ttf')
-
-        for file in os.listdir(folder):
-            full_path = f'{folder}/{file}'
-            run_command(cmd=[
-                font_viewer, full_path
-            ], needs_elevation=False)
-
-        run_command(['rm', '-r', folder], False)
-
-    r.run_code(inst_fonts)
+    r.create_link('fonts', '.fonts')
 
 
 def main(args):
