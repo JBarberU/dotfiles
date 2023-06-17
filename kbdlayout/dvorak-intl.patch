@@ -1,7 +1,13 @@
-289,290c289,290
+273c273
+<     key <TLDE> { [dead_grave, dead_tilde,         grave,       asciitilde ] };
+---
+>     key <TLDE> { [ grave,       asciitilde, dead_grave, dead_tilde ] };
+288,290c288,290
+<     key <AD01> { [dead_acute, dead_diaeresis, apostrophe,        quotedbl ] };
 <     key <AD02> { [     comma,       less,      ccedilla,         Ccedilla ] };
 <     key <AD03> { [    period,    greater, dead_abovedot,       dead_caron ] };
 ---
+>     key <AD01> { [apostrophe,        quotedbl, dead_acute, dead_diaeresis  ] };
 >     key <AD02> { [     comma,       less,      bracketleft,         Ccedilla ] };
 >     key <AD03> { [    period,    greater, bracketright,       dead_caron ] };
 301,304c301,304
