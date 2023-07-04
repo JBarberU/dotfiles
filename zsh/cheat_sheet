@@ -19,6 +19,9 @@
     v[nav]y<leader><C-R>0 - Search for visual selection
     <leader><leader>W     - Start easymotion
 
+    YouCompleteMe:
+    When working with a cross compiled target you might need to set "let g:ycm_clangd_args = ['--query-driver=<path_to_c++>']" (.vimrc.local would be a suitable choice)
+
     Abolish:
     crc                   - Convert word under cursor to camelCase
     crm                   - Convert word under cursor to MixedCase
