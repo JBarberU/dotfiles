@@ -373,6 +373,7 @@ def patch_kbd_layout():
 
 
 def install_rando_tools():
+    r.create_link('tools/adjustBrightness', os.path.join(HOME_PATH, '.local/bin/adjustBrightness'), absolute=True)
     r.install_binaries([
         'curl',
         'python3-pip',
