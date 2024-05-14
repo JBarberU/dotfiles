@@ -114,3 +114,4 @@ and put them in a zip archive [22;37m
 [01;37mGeneral [22;37m
   snap - AKA Ubuntu store (keep forgetting the name of this...)
   ibus-setup - For changing kbd layout in xmonad
+  sudo depmod -a # Reload kernel driver to fix usb bluetooth device
