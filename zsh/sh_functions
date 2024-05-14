@@ -87,3 +87,12 @@ function boop() {
     fi
     $(exit "$last")
 }
+
+function gclone() {
+    case "$1" in
+        --https) REPO="https://github.com/$2";;
+        --ssh) REPO="git@github.com:$2";;
+        *) REPO="https://github.com/$1";;
+    esac
+    git clone "$REPO"
+}
