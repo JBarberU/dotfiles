@@ -295,12 +295,7 @@ def install_tmux():
 
 def install_urxvt():
     r.create_link('xorg/Xresources', '.Xresources')
-    if DISTRO.distro == 'Ubuntu':
-        r.install_binaries(['rxvt-unicode'])
-    elif 'Debian' in DISTRO.distro:
-        r.install_binaries(['rxvt-unicode-256color'])
-    else:
-        print(f'Unale to determine distro {DISTRO}')
+    r.install_binaries(['rxvt-unicode'])
 
 def install_vim():
     r.create_link('vimfiles', '.vim')
