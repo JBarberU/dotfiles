@@ -1,11 +1,21 @@
 #!/bin/bash
 
-function todo() {
-    local DIR_NAME="$HOME/.todo";
+function var_or_default() {
+    if [ -z ${(P)1} ]; then
+        echo $2
+    else
+        echo ${(P)1}
+    fi
+}
+
+function _generic_note() {
+    local NAME="$1"
+    local NAME_UC=`echo "$1" | tr '[:lower:]' '[:upper:]'`
+    local DIR_NAME="`var_or_default XDG_DATA_HOME $HOME/.local/share`/$NAME";
     local FILE_NAME="";
-    case $1 in
-        '-d') FILE_NAME="$DIR_NAME/todo_$(date +%F).md";;
-        '-c') echo 'Clearing empty todos';
+    case $2 in
+        '-d') FILE_NAME="$DIR_NAME/$NAME"_"$(date +%F)".md;;
+        '-c') echo 'Clearing empty files';
               IFS="
 "
               for f in $(ls -1 "$DIR_NAME"); do
@@ -25,7 +35,7 @@ function todo() {
                   fi
               done
               return;;
-        *) FILE_NAME="$DIR_NAME/todo.md";;
+        *) FILE_NAME="$DIR_NAME/$NAME.md";;
     esac
 
     if [[ ! -d "$DIR_NAME" ]]; then
@@ -34,10 +44,18 @@ function todo() {
 
 
     if [[ ! -f "$FILE_NAME" ]]; then
-        echo "# TODO\n\nCreated: $(date +%F)\n" >> "$FILE_NAME"
+        echo "# $NAME_UC\n\nCreated: $(date +%F)\n" >> "$FILE_NAME"
     fi
 
     vim "$FILE_NAME" +;
+}
+
+function todo() {
+    _generic_note todo $@
+}
+
+function notes() {
+    _generic_note note $@
 }
 
 function monitor_sensors() {
