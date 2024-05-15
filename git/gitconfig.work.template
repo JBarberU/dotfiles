@@ -1,0 +1,4 @@
+# vim: syntax=gitconfig
+
+[user]
+    email = employee@workplace.tld

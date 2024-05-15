@@ -1,0 +1,4 @@
+# vim: syntax=gitconfig
+
+[includeIf "gitdir:~/<work_repo_path>/"]
+    path = .gitconfig.work
