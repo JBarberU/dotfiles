@@ -249,7 +249,7 @@ myManageHook =  composeAll
     isDialog --> doFloat
   ]
   <+> manageDocks
-  <+> manageHook defaultConfig
+  <+> manageHook def
   <+> namedScratchpadManageHook myScratchpads
 
 myXmobarTitleColor =  "#d3869b"
