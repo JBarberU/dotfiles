@@ -41,9 +41,13 @@ Config {
             "-l", "#fb4934"
         ] 50
         , Run Com "cmus-status" ["status-icon"] "cmus" 1
+        , Run Com "wh1000-status" [
+            "-c", "#b8bb26",
+            "-d", "#928374"
+        ] "wh1000" 1
     , Run StdinReader
   ],
   , sepChar = "%"
   , alignSep = "}{"
-  , template = "%StdinReader% }{ %cmus% | %wlp2s0wi% | %battery% | %coretemp% | %cpu% | %memory% | <fc=#d3869b>%date%</fc> "
+  , template = "%StdinReader% }{ %cmus% | %wh1000% | %wlp2s0wi% | %battery% | %coretemp% | %cpu% | %memory% | <fc=#d3869b>%date%</fc> "
 }

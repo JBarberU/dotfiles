@@ -369,6 +369,8 @@ def patch_kbd_layout():
 
 def install_rando_tools():
     r.create_link('tools/adjustBrightness', os.path.join(HOME_PATH, '.local/bin/adjustBrightness'), absolute=True)
+    r.create_link('tools/cmus-status', os.path.join(HOME_PATH, '.local/bin/cmus-status'), absolute=True)
+    r.create_link('tools/wh1000-status', os.path.join(HOME_PATH, '.local/bin/wh1000-status'), absolute=True)
     r.install_binaries([
         'curl',
         'python3-pip',

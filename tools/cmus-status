@@ -13,8 +13,8 @@ function _is_stopped() {
 
 function _get_status_icon() {
     case "$1" in
-        "playing") echo "▶";;
-        "paused") echo "❙❙";;
+        "playing") echo -e "\uF04B";;
+        "paused") echo -e "\uF04C";;
     esac
 }
 
@@ -28,6 +28,6 @@ then
         echo "$(_get_status_icon $(_get_element 'status')) $(_get_element 'tag artist') - $(_get_element 'tag title')"
     fi
 else
-    echo "no cmus"
+    echo "cmus not running"
 fi
 

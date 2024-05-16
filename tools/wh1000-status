@@ -1,0 +1,35 @@
+#!/bin/bash
+
+BT_ADDRESS="88:C9:E8:7D:3E:52"
+
+OPTIND=1
+
+color_connected="#00ff00"
+color_disconnected="#ff0000"
+
+while getopts "h?c:d:" opt; do
+    case "$opt" in
+        h|\?)
+            show_help
+            exit 0
+            ;;
+        c)
+            color_connected="$OPTARG"
+            ;;
+        d)
+            color_disconnected="$OPTARG"
+            ;;
+    esac
+done
+
+#shift $((OPTIND-1))
+
+
+
+if bluetoothctl devices Connected | grep "$BT_ADDRESS" >> /dev/null; then
+    color="$color_connected"
+else
+    color="$color_disconnected"
+fi
+
+echo -e "<fc=$color>\uf025</fc>"
