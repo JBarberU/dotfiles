@@ -1,0 +1,118 @@
+#!/bin/bash
+
+function choice() {
+    echo -n "$1 [Y/N]: "
+    read ans
+    case $ans in
+        y|Y)
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+function bd_data_dir() {
+    if [ -z $XDG_DATA_HOME ]; then
+        BASE_DIR="$HOME/.local/share"
+    else
+        BASE_DIR="$XDG_DATA_HOME"
+    fi
+    echo -n "$BASE_DIR/braindump"
+}
+
+function bd_get_path() {
+    DIR="`bd_data_dir`/$1"
+    if [ ! -d "`dirname $DIR`" ]; then
+        mkdir -p "`dirname $DIR`"
+    fi
+    echo -n "$DIR"
+}
+
+function print_help() {
+    echo help
+}
+
+function bd_new() {
+    if [ -f "`bd_get_path $1`" ]; then
+        choice "A braindump named \"$1\" already exists, would you like to edit the existing one?" || exit 1
+    fi
+    _bd_edit "$1"
+}
+
+function bd_search() {
+    grep --color=always -R -C 10 "$1" `bd_data_dir`
+}
+
+function _bd_edit() {
+    $EDITOR "`bd_get_path $1`"
+}
+
+function bd_edit() {
+    if [ ! -f "`bd_get_path $1`" ]; then
+        choice "Unable to find a braindump named \"$1\", would you like to create one?" || exit 1
+    fi
+    _bd_edit "$1"
+}
+
+function bd_delete() {
+    FILE="`bd_get_path $1`"
+    if [ ! -f "$FILE" ]; then
+        echo "Unable to find \"$1\""
+        exit 1
+    fi
+
+    choice "Are you sure you want to delete \"$1\"?" && rm "$FILE"
+}
+
+function bd_rename() {
+    FILE1="`bd_get_path $1`"
+    FILE2="`bd_get_path $2`"
+
+    if [ ! -f "$FILE1" ]; then
+        echo "Unable to find \"$1\""
+        exit 1
+    fi
+    if [ -f "$FILE2" ]; then
+        echo "Braindump \"$2\" already exists"
+        exit 1
+    fi
+
+    mv "$FILE1" "$FILE2"
+}
+
+function bd_list() {
+    DIR="`bd_data_dir`"
+    sh -c "cd $DIR; find . -type f | sed 's/^\.\///g'"
+}
+
+find "`bd_data_dir`" -type d -empty -delete
+
+if [ ! -d "`bd_data_dir`" ]; then
+    mkdir -p "`bd_data_dir`"
+fi
+
+case $1 in
+    --new)
+        bd_new "$2"
+        ;;
+    --edit)
+        bd_edit "$2"
+        ;;
+    --search)
+        bd_search "$2"
+        ;;
+    --list)
+        bd_list
+        ;;
+    --delete)
+        bd_delete "$2"
+        ;;
+    --rename)
+        bd_rename "$2" "$3"
+        ;;
+    *)
+        print_help
+        ;;
+esac
