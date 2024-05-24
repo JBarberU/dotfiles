@@ -60,3 +60,5 @@ CMakeLists.txt.user
 # Python
 *.pyc
 .ropeproject
+compile_commands.json
+build/
