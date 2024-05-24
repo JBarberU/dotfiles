@@ -302,7 +302,15 @@ def install_vim():
     r.create_link('vimfiles/vimrc', '.vimrc')
     r.create_link('vimfiles/nvim', '.config/nvim/init.vim')
 
-    r.install_binaries(['vim', 'exuberant-ctags', 'ack-grep', 'fzf'])
+    r.install_binaries(['vim', 'exuberant-ctags', 'ack-grep', 'fzf', 'golang', 'clangd'])
+
+    # install vim plugins
+    r.create_custom_commands(['sh', '-c', '''
+        vim -c :PlugInstall -c :q -c :q
+        cd $HOME/.vim/plugged/YouCompleteMe
+        ./install.py --clangd-completer --rust-completer
+    '''])
+
 
 
 def install_zsh():
