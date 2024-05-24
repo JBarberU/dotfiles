@@ -114,3 +114,34 @@ function gclone() {
     esac
     git clone "$REPO"
 }
+
+function choice() {
+    echo -n "$1 [Y/N]: "
+    read _ans
+    case "$_ans" in
+        Y|y|yes)
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+function regen_authkeys() {
+    AUTH_KEYS="$HOME/.ssh/authorized_keys"
+    AUTH_KEYS_D="$HOME/.ssh/authorized_keys.d"
+    mkdir -p "`dirname $AUTH_KEYS`"
+    mkdir -p "`dirname $AUTH_KEYS_D`"
+
+    echo "# Generated on `date`" > "$AUTH_KEYS"
+    echo "#" >> "$AUTH_KEYS"
+    echo "# Put public keys in authorized_keys.d and run regen_authkeys" >> "$AUTH_KEYS"
+
+    for f in `find "$AUTH_KEYS_D" -type f`; do
+        echo "" >> "$AUTH_KEYS"
+        echo "# $f" >> "$AUTH_KEYS"
+        cat "$f" >> "$AUTH_KEYS"
+    done
+    echo "Regenerated ~/.ssh/authorized_keys!"
+}
