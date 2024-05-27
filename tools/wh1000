@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+
+
+import subprocess
+import sys
+
+
+BT_ADDRESS = "88:C9:E8:7D:3E:52"
+
+
+class Colors:
+
+    def __init__(self, connected, disconnected):
+        self.connected = connected
+        self.disconnected = disconnected
+
+    @classmethod
+    def default(cls):
+        return Colors("#00ff00", "#ff0000")
+
+
+def is_connected():
+    res = subprocess.Popen(
+        ['bluetoothctl', 'devices', 'Connected'],
+        stdout=subprocess.PIPE
+    )
+    res.wait()
+    return len(
+        [line for line in res.stdout.readlines()
+         if BT_ADDRESS in line.decode('utf-8')]
+    ) > 0
+
+
+def get_status_human():
+    if is_connected():
+        print('Connected!')
+    else:
+        print('Not connected!')
+
+
+def get_status(colors: Colors):
+    if is_connected():
+        color = colors.connected
+    else:
+        color = colors.disconnected
+
+    sys.stdout.write(f'<fc={color}>\uf025</fc>')
+
+
+def manage_bt(cmd, success_msg, error_msg):
+    res = subprocess.Popen(
+        ['bluetoothctl', cmd, BT_ADDRESS], stdout=subprocess.PIPE
+    )
+    if res.wait():
+        sys.stderr.write(f'{error_msg}\n')
+    else:
+        sys.stdout.write(f'{success_msg}\n')
+
+
+def bt_connect():
+    manage_bt('connect', 'Connected!', 'Connection failed, is the device on?')
+
+
+def bt_disconnect():
+    manage_bt('disconnect', 'Disconnected', 'Failed to disconnect')
+
+
+def main(args):
+
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--status', action='store_true', help='')
+    parser.add_argument('--human', action='store_true', help='')
+    parser.add_argument('--color-connected', help='')
+    parser.add_argument('--color-disconnected', help='')
+    parser.add_argument('--connect', action='store_true', help='')
+    parser.add_argument('--disconnect', action='store_true', help='')
+    args = parser.parse_args()
+
+    if sum([args.status, args.connect, args.disconnect]) != 1:
+        parser.print_help()
+        exit(1)
+
+    if args.status:
+        if args.human:
+            get_status_human()
+        else:
+            get_status(
+                Colors(args.color_connected, args.color_disconnected)
+                if args.color_connected and args.color_disconnected
+                else Colors.default()
+            )
+    elif args.connect:
+        bt_connect()
+    elif args.disconnect:
+        bt_disconnect()
+
+
+if __name__ == '__main__':
+    import sys
+    sys.exit(main(sys.argv[1:]))

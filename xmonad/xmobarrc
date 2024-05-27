@@ -41,9 +41,10 @@ Config {
             "-l", "#fb4934"
         ] 50
         , Run Com "cmus-status" ["status-icon"] "cmus" 1
-        , Run Com "wh1000-status" [
-            "-c", "#b8bb26",
-            "-d", "#928374"
+        , Run Com "wh1000" [
+            "--status",
+            "--color-connected", "#b8bb26",
+            "--color-disconnected", "#928374"
         ] "wh1000" 1
     , Run StdinReader
   ],
