@@ -229,22 +229,17 @@ myManageHook :: ManageHook
 myManageHook =  composeAll
   [
     (className =? "zoom" <&&> isInProperty "_NET_WM_STATE" "_NET_WM_STATE_ABOVE" <||> isInProperty "_NET_WM_STATE" "_NET_WM_STATE_STAYS_ON_TOP") --> doFloat,
-    (className =? "Gnome-calculator") --> doFloat,
-    (className =? "Org.gnome.clocks") --> doFloat,
+    (className =? "gnome-calculator") --> doCenterFloat,
+    (className =? "org.gnome.clocks") --> doFloat,
     (className =? "Xmessage") --> doCenterFloat,
     (className =? "Nvidia-settings") --> doCenterFloat,
     (className =? "Steam") --> doFloat,
     (className =? "Friends") --> doCenterFloat,
-    (className =? "Org.gnome.Nautilus") --> doCenterFloat,
+    (className =? "org.gnome.Nautilus") --> doCenterFloat,
     (className =? "Rhythmbox") --> doShift "8",
-    (className =? "plasticx") --> doShift "2",
     (className =? "discord") --> doShift "9",
-    (className =? "Signal") --> doShift "9",
     (className =? "QtCreator") --> doShift "4",
-    (className =? "GameEditor" <&&> title =? "") --> doShift "2",
-    (className =? "GameEditor" <&&> title ~? "GOALS") --> doShift "2",
-    (className =? "GameEditor") --> doShift "2",
-    (className =? "jetbrains-rider") --> doShift "2",
+    (className =? "FortiClient") --> doShift "8",
     isFullscreen --> doFullFloat,
     isDialog --> doFloat
   ]
