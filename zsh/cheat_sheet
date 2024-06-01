@@ -115,3 +115,23 @@ and put them in a zip archive [22;37m
   snap - AKA Ubuntu store (keep forgetting the name of this...)
   ibus-setup - For changing kbd layout in xmonad
   sudo depmod -a # Reload kernel driver to fix usb bluetooth device
+
+[01;37mEncrypted drives [22;37m
+  - Partition the drives using luks.
+  - Install dropbear to enable remotely unlocking main drive
+    - sudo apt-get install dropbear-initramfs
+  - Add your public keys to /etc/dropbear/initramfs/authorized_keys
+    - sudo cp ~/.ssh/authorized_keys /etc/dropbear/initramfs/authorized_keys
+  - Setup IP and hostname by editing /etc/initramfs-tools/initramfs.conf
+    - vim /etc/initramfs-tools/initramfs.conf
+    - add a line with:
+      - IP=ip<client-IP-number>:[<server-id>]:<gateway-IP-number>:<netmask>:<client-hostname>:<interface>:{dhcp|dhcp6|auto6|on|any|none|off}
+      For example:
+      - IP=::::host-name:en0:on
+  - Create an unlock key for any secondary drives with:
+    - dd if=/dev/urandom of=/some/path/secret bs=512 count=4
+  - Assign the new key to secondary drive:
+    - cryptsetup luksAddKey /dev/<drive_to_be_setup> /some/path/secret
+  - Update /etc/crypttab to contain /some/path/secret instead of none for the
+    secondary drive
+  - Run sudo update-initramfs -u -v
