@@ -330,6 +330,10 @@ def install_zsh():
 
     r.install_binaries(['zsh'])
 
+    r.create_custom_commands(['sh', '-c', '''
+        git clone https://github.com/antznin/zsh-bitbake ~/.oh-my-zsh/custom/plugins/zsh-bitbake
+            '''])
+
     # echo "Add files/symlinks {good,bad}.wav to .config/boop in order for the boop command to work properly!"
     # echo "Run \"chsh -s $(which zsh)\" to set zsh as our default shell"
 

@@ -61,3 +61,6 @@
 [submodule "fonts"]
 	path = fonts
 	url = https://github.com/JBarberU/dotfile_fonts.git
+[submodule "zsh/zsh_custom/plugins/zsh-bitbake"]
+	path = zsh/zsh_custom/plugins/zsh-bitbake
+	url = https://github.com/antznin/zsh-bitbake
