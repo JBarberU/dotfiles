@@ -16,6 +16,7 @@
     commiters = shortlog -nse --no-merges
     puhs = push
     dad = "!sh -c \"curl https://icanhazdadjoke.com/; echo\""
+    a = add -p
 
 [format]
     pretty = %C(blue)%h %C(red)%ad %C(green)%an: %C(magenta)%s %C(white)%b
