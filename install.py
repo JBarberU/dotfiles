@@ -44,6 +44,14 @@ VERBOSE = False
 DISTRO = get_distro()
 
 
+def has_binary(binary):
+    return shutil.which(binary) is not None
+
+
+def hasnt_binary(binary):
+    return not has_binary(binary)
+
+
 def find_existing_base_dir(path):
     '''Finds the parth of a given path that exists
     '''
@@ -210,6 +218,9 @@ class Recipe:
         for callback in self.callbacks:
             callback()
 
+    def do_if(self, condition):
+        return self if condition else Recipe()
+
 
 r = Recipe()
 
@@ -328,10 +339,19 @@ def install_zsh():
     r.create_link('zsh/zsh_paths', '.zsh_paths')
     r.create_link('bin', '.bin/dotbin')
 
-    r.install_binaries(['zsh'])
+    r.install_binaries(['zsh', 'curl'])
 
-    r.create_custom_commands(['sh', '-c', '''
+    r.do_if(
+        not os.path.isdir(os.path.join(HOME_PATH, '.oh-my-zsh/custom/plugins/zsh-bitbake'))
+    ).create_custom_commands(['sh', '-c', '''
         git clone https://github.com/antznin/zsh-bitbake ~/.oh-my-zsh/custom/plugins/zsh-bitbake
+            '''])
+
+    # Install atuin
+    r.do_if(hasnt_binary("atuin")).create_custom_commands(['sh', '-c', '''
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        rustup update
+        cargo install atuin
             '''])
 
     # echo "Add files/symlinks {good,bad}.wav to .config/boop in order for the boop command to work properly!"

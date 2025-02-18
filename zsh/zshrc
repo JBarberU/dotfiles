@@ -192,3 +192,4 @@ case "$(uname)" in
 esac
 
 source $ZSH/oh-my-zsh.sh
+eval "$(atuin init zsh)"
