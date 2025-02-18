@@ -148,6 +148,7 @@ src_if_exists "$HOME/.osx_only"
 src_if_exists "$HOME/.linux_only"
 src_if_exists "$HOME/.sh_functions"
 src_if_os "Darwin" "$HOME/.zshrc_osx"
+src_if_exists "$HOME/.profile"
 
 which pgrep >> /dev/null && pgrep ssh-agent >> /dev/null || eval `ssh-agent` >> /dev/null
 
