@@ -186,7 +186,22 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bundler cabal cp gem git jump rails web-search pip)
+plugins=(
+    bundler
+    cabal
+    cargo
+    cp
+    gem
+    git
+    jump
+    pip
+    rails
+    rust
+    rustup
+    tmux
+    web-search
+    zsh-bitbake
+)
 case "$(uname)" in
   "Darwin") plugins=($plugins brew);;
 esac
