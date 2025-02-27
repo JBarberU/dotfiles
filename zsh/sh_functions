@@ -145,3 +145,11 @@ function regen_authkeys() {
     done
     echo "Regenerated ~/.ssh/authorized_keys!"
 }
+
+function countdown() {
+    for i in $(seq $1 -1 1); do
+        echo -n "$i "
+        sleep 1
+    done
+    echo ""
+}
