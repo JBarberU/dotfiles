@@ -153,3 +153,21 @@ function countdown() {
     done
     echo ""
 }
+
+function set-compcmd() {
+    if [ -e "$1" ]; then
+        if [ -e compile_commands.json ]; then
+            echo -n "Replace existing compile_commands.json? [Y/N]: "
+            read ans
+            case $ans in
+                y|Y) rm compile_commands.json;;
+                *) echo "Aborting"; return -1;;
+            esac
+        elif [ -L compile_commands.json ]; then # Remove broken symlink
+            rm compile_commands.json
+        fi
+        ln -s "$1" compile_commands.json
+    else
+        >&2 echo "File \"$1\" doesn't exist"
+    fi
+}
