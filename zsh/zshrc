@@ -142,9 +142,19 @@ alias tmuxa="tmux new-session -A -s main"
 alias tmuxs="tmux new-session -A -s"
 alias devd="vim \$(devdiary.py --add --latest)"
 alias devdsum="devdiary.py --summarize | less"
-alias avenv='src_if_exists .env/bin/activate || src_if_exists .env/bin/activate || echo "Unable to find venv or .env"'
 alias venv-setup="virtualenv -p python3 .env"
 alias ungrab_mouse="setxkbmap -option grab:break_actions && xdotool key XF86Ungrab"
+
+function avenv() {
+    if src_if_exists .env/bin/activate || src_if_exists .env/bin/activate; then
+        # Load tab completion for west
+        if type -p west >> /dev/null; then
+            source <(west completion zsh)
+        fi
+    else
+        echo "Unable to find an .env/venv directory"
+    fi
+}
 
 src_if_exists "$HOME/.aliases"
 src_if_exists "$HOME/.paths"
