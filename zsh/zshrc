@@ -1,3 +1,6 @@
+# Constants
+CLOUDFLARE_DNS=1.1.1.1
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -78,7 +81,7 @@ function maybe_backup() {
 }
 
 function has_internet_connection() {
-    echo 'GET https://google.com HTTP/1.0\n\n' | nc google.com 443 > /dev/null 2>&1
+    ping -c 1 $CLOUDFLARE_DNS >> /dev/null
     return $?
 }
 
