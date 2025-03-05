@@ -1,6 +1,8 @@
 [01;37mTmux [22;37m
     Ctrl            - Default Prefix
 
+    Prefix-?        - List keybindings
+
     Prefix-B Space  - Cycle between layouts
     Prefix-B D      - Detach tmux session
     Prefix-B 0-9    - Switch to numbered window
