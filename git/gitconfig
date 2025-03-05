@@ -17,6 +17,9 @@
     puhs = push
     dad = "!sh -c \"curl https://icanhazdadjoke.com/; echo\""
     a = add -p
+    d = diff
+    dc = diff --cached
+    pom = push origin main
 
 [format]
     pretty = %C(blue)%h %C(red)%ad %C(green)%an: %C(magenta)%s %C(white)%b
