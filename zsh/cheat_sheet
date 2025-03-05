@@ -1,6 +1,15 @@
 [01;37mTmux [22;37m
-    Ctrl-B Space    - Cycle between layouts
-    Ctrl-B D        - Detach tmux session
+    Ctrl            - Default Prefix
+
+    Prefix-B Space  - Cycle between layouts
+    Prefix-B D      - Detach tmux session
+    Prefix-B 0-9    - Switch to numbered window
+    Prefix-B ,      - Rename existing window
+    Prefix-B %      - Split window in two vertical panes
+    Prefix-B "      - Split window in two horizontal panes
+    Prefix-B q      - Show pane numbers for current window
+    Prefix-B q, 0-9 - Switch to one of the numbered panes
+    Prefix-B z      - Zoom in on pane
 
     # In command mode (Ctrl-B :)
     resize-pane -[D,U,L,R] <N> - Resize current pane
