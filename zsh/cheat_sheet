@@ -145,4 +145,6 @@ and put them in a zip archive [22;37m
     - cryptsetup luksAddKey /dev/<drive_to_be_setup> /some/path/secret
   - Update /etc/crypttab to contain /some/path/secret instead of none for the
     secondary drive
+  - Add dropboar config settings to /etc/dropbear/initramfs/dropbear.conf, like:
+    - DROPBEAR_OPTIONS="-I 180 -j -k -p 2222 -s -c cryptroot-unlock"
   - Run sudo update-initramfs -u -v
