@@ -1,0 +1,265 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import os
+from pathlib import Path as pathlib_Path
+import urllib.request
+import argparse
+
+from installer.recipe import (Recipe)
+from installer.util import hasnt_binary, select_option
+
+
+REPO_PATH = os.path.realpath(os.path.dirname(__file__))
+HOME_PATH = pathlib_Path.home()
+VERBOSE = False
+
+
+class Args:
+
+    def __init__(self):
+        self.args = []
+
+    def arg(self, name):
+        '''Function decorator that will look at args to determine
+        if the given function should run
+        '''
+        self.args.append(name)
+
+        def wrapper(func):
+            def wrapper_inner(a, *args, **kwargs):
+                if a.all or getattr(a, name):
+                    func(*args, **kwargs)
+            return wrapper_inner
+        return wrapper
+
+
+a = Args()
+
+
+def arg(name):
+    '''Function decorator that will look at args to determine
+    if the given function should run
+    '''
+    def wrapper(func):
+        def wrapper_inner(a, *args, **kwargs):
+            if a.all or getattr(a, name):
+                func(*args, **kwargs)
+        return wrapper_inner
+    return wrapper
+
+
+@a.arg('cmus')
+def install_cmus(r: Recipe):
+    r.create_dir('.config/cmus')
+    r.create_link('cmus/rc', '.config/cmus/rc')
+
+    r.install_binaries(['cmus'])
+
+
+@a.arg('git')
+def install_git(r: Recipe):
+    r.create_link('git/gitignore', '.gitignore')
+    r.create_link('git/gitconfig', '.gitconfig')
+
+    r.install_binaries(['git'])
+
+
+@a.arg('tmux')
+def install_tmux(r: Recipe):
+    r.create_link('tmux/tmux.conf', '.tmux.conf')
+    r.create_link('tmux/tmux_powerline.snap', '.tmux_powerline.snap')
+
+    r.install_binaries(['tmux'])
+
+    return
+    r.create_custom_commands([
+        'sh', '-c', '''
+        cd /tmp &&
+        git clone "https://github.com/thewtex/tmux-mem-cpu-load.git" &&
+        cd /tmp/tmux-mem-cpu-load &&
+        mkdir build &&
+        cd build &&
+        cmake .. &&
+        make -j &&
+        sudo make install
+        '''
+    ])
+
+
+@a.arg('urxvt')
+def install_urxvt(r: Recipe):
+    r.create_link('xorg/Xresources', '.Xresources')
+    r.install_binaries(['rxvt-unicode'])
+
+
+@a.arg('vim')
+def install_vim(r: Recipe):
+    r.create_link('vimfiles', '.vim')
+    r.create_link('vimfiles/vimrc', '.vimrc')
+    r.create_link('vimfiles/nvim', '.config/nvim/init.vim')
+
+    r.install_binaries([
+        'vim', 'exuberant-ctags', 'ack-grep', 'fzf', 'golang', 'clangd'
+    ])
+
+    # install vim plugins
+    r.create_custom_commands(['sh', '-c', '''
+        vim -c :PlugInstall -c :q -c :q
+        cd $HOME/.vim/plugged/YouCompleteMe
+        ./install.py --clangd-completer --rust-completer
+    '''])
+
+
+@a.arg('zsh')
+def install_zsh(r: Recipe):
+    r.create_dir('.bin')
+    r.create_dir('.config/boop')
+    r.create_file('.aliases')
+    r.create_file('.paths')
+
+    r.create_link('zsh/zshrc', '.zshrc')
+    r.create_link('zsh/zsh_custom', '.zsh_custom')
+    r.create_link('zsh/zsh_env', '.zsh_env')
+    r.create_link('zsh/cheat_sheet', '.cheat_sheet')
+    r.create_link('zsh/sh_functions''', '.sh_functions')
+    r.create_link('zsh/oh-my-zsh', '.oh-my-zsh')
+    r.create_link('zsh/zsh_paths', '.zsh_paths')
+    r.create_link('bin', '.bin/dotbin')
+
+    r.install_binaries(['zsh', 'curl'])
+
+    bb_dir = os.path.join(HOME_PATH, '.oh-my-zsh/custom/plugins/zsh-bitbake')
+    r.do_if(
+        not os.path.isdir(bb_dir)
+    ).clone('https://github.com/antznin/zsh-bitbake', bb_dir)
+
+    # Install atuin
+    r.do_if(hasnt_binary("atuin")).create_custom_commands(['sh', '-c', '''
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        rustup update
+        cargo install atuin
+            '''])
+
+    # echo "Add files/symlinks {good,bad}.wav to .config/boop in order for the boop command to work properly!"
+    # echo "Run \"chsh -s $(which zsh)\" to set zsh as our default shell"
+
+
+@a.arg('xmonad')
+def install_xmonad(r: Recipe):
+    r.create_dir('shots')
+
+    r.create_link('haskell/ghci', '.ghci')
+    r.create_link('xmonad/xmonad.hs', '.xmonad/xmonad.hs')
+    r.create_link('xmonad/xmonad-session-rc', '.xmonad/xmonad-session-rc')
+    r.create_link('xmonad/xmobarrc', '.xmobarrc')
+    r.create_link('conky/conkyrc', '.conkyrc')
+    r.create_link('xorg/xinitrc', '.xinitrc')
+    r.create_link('rofi/config.rasi', '.config/rofi/config.rasi')
+    r.create_link('rofi/gruvbox-purple.rasi', '.config/rofi/gruvbox-purple.rasi')
+    r.create_link('xmonad/dunstrc', '.config/dunst/dunstrc')
+
+    r.create_link('xorg/keyboard.conf', '/etc/X11/xorg.conf.d/keyboard.conf', absolute=True)
+    monitor_option = select_option(
+        'Select monitor configuration file to use:',
+        [f'xorg/{f}' for f in os.listdir(f'{REPO_PATH}/xorg') if 'monitor' in f]
+    )
+    r.create_link(monitor_option, '/etc/X11/xorg.conf.d/monitors.conf', absolute=True)
+
+    r.create_dir('/usr/share/dotfiles/backgrounds', absolute=True)
+
+    r.install_binaries(['xmonad', 'xmobar', 'rofi', 'conky-all', 'xclip', 'feh', 'dunst', 'xcompmgr', 'numlockx', 'xinput', 'scrot'])
+
+
+@a.arg('kbd')
+def patch_kbd_layout(r: Recipe):
+    dst = '/usr/share/X11/xkb/symbols/us'
+    patch_file = f'"{REPO_PATH}/kbdlayout/dvorak-intl.patch"'
+    paths = f'{dst} {patch_file}'
+    base_cmd = 'sudo patch --silent -p0'
+    r.create_custom_commands([
+        'sh', '-c',
+        (
+            # Test if the patch can be reversed, and if so skip the patch (by
+            # using or between the operations
+            f'{base_cmd} --reverse --force --dry-run {paths} || '
+            f'{base_cmd} {paths}'
+         )
+    ])
+
+
+@a.arg('tools')
+def install_rando_tools(r: Recipe):
+    r.create_link('tools/adjustBrightness', os.path.join(HOME_PATH, '.local/bin/adjustBrightness'), absolute=True)
+    r.create_link('tools/cmus-status', os.path.join(HOME_PATH, '.local/bin/cmus-status'), absolute=True)
+    r.create_link('tools/wh1000', os.path.join(HOME_PATH, '.local/bin/wh1000'), absolute=True)
+    r.create_link('tools/braindump', os.path.join(HOME_PATH, '.local/bin/braindump'), absolute=True)
+    r.install_binaries([
+        'curl',
+        'python3-pip',
+        'cmake',
+        'valgrind',     # C/C++ profiler
+        'gnome-clocks',
+        'simple-scan',  # scanner application
+        'oathtool',     # oath stuff
+        'pavucontrol',  # audio mixer
+        'fuse',         # needed for running AppImages
+        'nala',         # apt frontend
+    ])
+
+def download_file(url, path):
+    request = urllib.request.Request(
+        url=url,
+        headers={'User-Agent': 'Mozilla/5.0'}
+    )
+    with urllib.request.urlopen(request) as req:
+        with open(path, 'wb') as file:
+            file.write(req.read())
+
+
+@a.arg('fonts')
+def install_fonts(r: Recipe):
+    r.create_link('fonts', '.fonts')
+
+
+def do_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--all', action='store_true',
+                        help='Installs everything')
+    parser.add_argument('--dryrun', action='store_true', help=(
+        'Prints all ''that will be done without making any changes'
+    ))
+    parser.add_argument('--verbose', action='store_true', help=(
+        'Prints more stuff'
+    ))
+
+    for arg in a.args:
+        parser.add_argument(f'--{arg}', action='store_true',
+                            help=f'Installs {arg}')
+    return parser.parse_args()
+
+
+def main(args):
+    args = do_args()
+    r = Recipe(REPO_PATH, HOME_PATH, args.verbose)
+
+    install_cmus(args, r)
+    install_fonts(args, r)
+    install_git(args, r)
+    patch_kbd_layout(args, r)
+    install_tmux(args, r)
+    install_rando_tools(args, r)
+    install_urxvt(args, r)
+    install_vim(args, r)
+    install_xmonad(args, r)
+    install_zsh(args, r)
+
+    if args.dryrun:
+        r.dryrun()
+    else:
+        r.run()
+
+
+if __name__ == '__main__':
+    import sys
+    sys.exit(main(sys.argv[1:]))
