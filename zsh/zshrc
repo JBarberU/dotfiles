@@ -122,7 +122,7 @@ case $(uname) in
       alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection clipboard | echo \"Copied public key to clipboard...\"";
       alias dvorak="ibus exit &> /dev/null; setxkbmap \"se(svdvorak)\" && echo \"clear Lock\\nkeycode 0x42 = Escape\\n\" | xmodmap -";
       alias se="setxkbmap se && echo \"clear Lock\\nkeycode 0x42 = Escape\\n\" | xmodmap -";
-      alias ag="sudo apt-get"
+      alias ag="sudo nala"
       alias sx="startx"
       ;;
 esac
@@ -225,3 +225,7 @@ esac
 
 source $ZSH/oh-my-zsh.sh
 eval "$(atuin init zsh)"
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc

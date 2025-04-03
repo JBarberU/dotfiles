@@ -1,0 +1,75 @@
+# vim: syntax=zsh
+
+function cesc() {
+    xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+}
+
+function ccaps() {
+    xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+}
+
+# Plays a sound effect depending on the exit status of the previously ran command
+# Expects there to be two files/symlinks in ~/.config/boop/{good,bad}.wav
+function boop() {
+    # Inspired by https://gitlab.com/EvanHahn/dotfiles/-/blob/ece393e625bb8254fe05774df33bb5af8a73d7e7/home/zsh/.config/zsh/aliases.zsh#L48-56
+    local last="$?"
+    if [[ "$last" == '0' ]]; then
+        sfx good
+    else
+        sfx bad
+    fi
+    $(exit "$last")
+}
+
+function gclone() {
+    case "$1" in
+        --https) REPO="https://github.com/$2";;
+        --ssh) REPO="git@github.com:$2";;
+        *) REPO="https://github.com/$1";;
+    esac
+    git clone "$REPO"
+}
+
+function regen_authkeys() {
+    AUTH_KEYS="$HOME/.ssh/authorized_keys"
+    AUTH_KEYS_D="$HOME/.ssh/authorized_keys.d"
+    mkdir -p "`dirname $AUTH_KEYS`"
+    mkdir -p "`dirname $AUTH_KEYS_D`"
+
+    echo "# Generated on `date`" > "$AUTH_KEYS"
+    echo "#" >> "$AUTH_KEYS"
+    echo "# Put public keys in authorized_keys.d and run regen_authkeys" >> "$AUTH_KEYS"
+
+    for f in `find "$AUTH_KEYS_D" -type f`; do
+        echo "" >> "$AUTH_KEYS"
+        echo "# $f" >> "$AUTH_KEYS"
+        cat "$f" >> "$AUTH_KEYS"
+    done
+    echo "Regenerated ~/.ssh/authorized_keys!"
+}
+
+function countdown() {
+    for i in $(seq $1 -1 1); do
+        echo -n "$i "
+        sleep 1
+    done
+    echo ""
+}
+
+function set-compcmd() {
+    if [ -e "$1" ]; then
+        if [ -e compile_commands.json ]; then
+            echo -n "Replace existing compile_commands.json? [Y/N]: "
+            read ans
+            case $ans in
+                y|Y) rm compile_commands.json;;
+                *) echo "Aborting"; return -1;;
+            esac
+        elif [ -L compile_commands.json ]; then # Remove broken symlink
+            rm compile_commands.json
+        fi
+        ln -s "$1" compile_commands.json
+    else
+        >&2 echo "File \"$1\" doesn't exist"
+    fi
+}

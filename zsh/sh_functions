@@ -85,36 +85,6 @@ function net_slow() {
   #sudo tc qdisc del dev eth0 root netem delay 10000ms
 }
 
-function cesc() {
-    xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-}
-
-function ccaps() {
-    xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
-}
-
-# Plays a sound effect depending on the exit status of the previously ran command
-# Expects there to be two files/symlinks in ~/.config/boop/{good,bad}.wav
-function boop() {
-    # Inspired by https://gitlab.com/EvanHahn/dotfiles/-/blob/ece393e625bb8254fe05774df33bb5af8a73d7e7/home/zsh/.config/zsh/aliases.zsh#L48-56
-    local last="$?"
-    if [[ "$last" == '0' ]]; then
-        sfx good
-    else
-        sfx bad
-    fi
-    $(exit "$last")
-}
-
-function gclone() {
-    case "$1" in
-        --https) REPO="https://github.com/$2";;
-        --ssh) REPO="git@github.com:$2";;
-        *) REPO="https://github.com/$1";;
-    esac
-    git clone "$REPO"
-}
-
 function choice() {
     echo -n "$1 [Y/N]: "
     read _ans
@@ -128,30 +98,6 @@ function choice() {
     esac
 }
 
-function regen_authkeys() {
-    AUTH_KEYS="$HOME/.ssh/authorized_keys"
-    AUTH_KEYS_D="$HOME/.ssh/authorized_keys.d"
-    mkdir -p "`dirname $AUTH_KEYS`"
-    mkdir -p "`dirname $AUTH_KEYS_D`"
-
-    echo "# Generated on `date`" > "$AUTH_KEYS"
-    echo "#" >> "$AUTH_KEYS"
-    echo "# Put public keys in authorized_keys.d and run regen_authkeys" >> "$AUTH_KEYS"
-
-    for f in `find "$AUTH_KEYS_D" -type f`; do
-        echo "" >> "$AUTH_KEYS"
-        echo "# $f" >> "$AUTH_KEYS"
-        cat "$f" >> "$AUTH_KEYS"
-    done
-    echo "Regenerated ~/.ssh/authorized_keys!"
-}
-
-function countdown() {
-    for i in $(seq $1 -1 1); do
-        echo -n "$i "
-        sleep 1
-    done
-    echo ""
 }
 
 function set-compcmd() {
