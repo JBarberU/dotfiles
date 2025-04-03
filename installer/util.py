@@ -46,10 +46,10 @@ def unable_to_write(path):
     return not can_write(path)
 
 
-def run_command(cmd, needs_elevation):
+def run_command(cmd, needs_elevation, verbose=False):
     '''Runs the given command through subprocess
     '''
-    if VERBOSE:
+    if verbose:
         cmd_str = ' '.join(cmd)
         msg = (
             'Running command as root' if needs_elevation
