@@ -37,3 +37,6 @@
 # gitconfig, for instance with a work email for certain repos
 [include]
     path = .gitconfig.custom
+
+[commit]
+    gpgsign = true
