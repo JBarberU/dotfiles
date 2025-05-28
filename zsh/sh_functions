@@ -98,8 +98,6 @@ function choice() {
     esac
 }
 
-}
-
 function set-compcmd() {
     if [ -e "$1" ]; then
         if [ -e compile_commands.json ]; then
