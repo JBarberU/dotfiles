@@ -73,6 +73,16 @@
     Swap two visual selections:
     :help exchange
 
+    Norm command:
+    :.,$ norm A/append/some/text/to/all/lines
+    :.,$ norm I/insert/some/text/to/all/lines
+    :'<,'> norm A/append/some/text/to/visual/selection
+    :'<,'> norm I/insert/some/text/to/visual/selection
+
+    Neat things:
+    :'<,'> !shuf        <- Shuffles lines in visual selection
+    :13,37 !shuf        <- Shuffles lines 13-37
+
 [01;37mReplace all underscores with spaces [22;37m
 
   for FILE in *; do mv $FILE "`echo $FILE | tr '_' ' '`"; done
