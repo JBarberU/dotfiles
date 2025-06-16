@@ -219,6 +219,7 @@ plugins=(
     web-search
     zsh-bitbake
     zsh-justfile
+    zsh-tio
 )
 case "$(uname)" in
   "Darwin") plugins=($plugins brew);;

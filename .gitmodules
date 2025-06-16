@@ -67,3 +67,6 @@
 [submodule "zsh/zsh_custom/plugins/zsh-justfile"]
 	path = zsh/zsh_custom/plugins/zsh-justfile
 	url = https://github.com/jbarberu/zsh-justfile.git
+[submodule "zsh/zsh_custom/plugins/zsh-tio"]
+	path = zsh/zsh_custom/plugins/zsh-tio
+	url = https://github.com/jbarberu/zsh-tio.git
