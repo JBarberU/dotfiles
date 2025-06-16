@@ -64,3 +64,6 @@
 [submodule "zsh/zsh_custom/plugins/zsh-bitbake"]
 	path = zsh/zsh_custom/plugins/zsh-bitbake
 	url = https://github.com/antznin/zsh-bitbake
+[submodule "zsh/zsh_custom/plugins/zsh-justfile"]
+	path = zsh/zsh_custom/plugins/zsh-justfile
+	url = https://github.com/jbarberu/zsh-justfile.git

@@ -218,6 +218,7 @@ plugins=(
     tmux
     web-search
     zsh-bitbake
+    zsh-justfile
 )
 case "$(uname)" in
   "Darwin") plugins=($plugins brew);;
