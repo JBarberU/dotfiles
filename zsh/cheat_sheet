@@ -1,4 +1,8 @@
-[01;37mTmux [22;37m
+.\" John's Cheat Sheet
+.TH "John's Cheat Sheet"
+
+.SH Tmux
+
     Ctrl            - Default Prefix
 
     Prefix-?        - List keybindings
@@ -19,7 +23,9 @@
     # Join running session if there is one, otherwise create
     tmux -L default attach -t 0 || tmux
 
-[01;37mVim [22;37m
+.SH Vim
+
+.B  Key bindings
     Ctrl-W K              - Switch windows to horizontal layout
     Ctrl-W H              - Switch windows to vertical layout
     Ctrl-O/I              - Go through cursor positions, O -> backwards & I -> forwards
@@ -30,10 +36,10 @@
     v[nav]y<leader><C-R>0 - Search for visual selection
     <leader><leader>W     - Start easymotion
 
-    YouCompleteMe:
+.B  YouCompleteMe:
     When working with a cross compiled target you might need to set "let g:ycm_clangd_args = ['--query-driver=<path_to_c++>']" (.vimrc.local would be a suitable choice)
 
-    Abolish:
+.B  Abolish:
     crc                   - Convert word under cursor to camelCase
     crm                   - Convert word under cursor to MixedCase
     cr{s,_}               - Convert word under cursor to snake_case
@@ -43,18 +49,18 @@
     cr.                   - Convert word under cursor to dot.case
     :help abolish
 
-    Lookup what a keyboard shortcut is mapped to:
+.B  Lookup what a keyboard shortcut is mapped to:
     :map <combo>          - Prints what <combo> is mapped to (if anything)
                             Also works with any of {,i,n,v}{,ore}map
 
-    Tabs:
+.B  Tabs:
     :tabedit <filename>   - Edit file in new tab
     :tabonly              - Close all tabs except active one
     <C-w><S-t>            - Move current window to a new tab
     gt                    - Jump to next tab
     #gt                   - Jump to tab number #
 
-    Folds:
+.B  Folds:
     zi  - Turn folding on/off
     za  - Toggle fold open/closed
     zc  - Close current fold
@@ -64,31 +70,33 @@
     zj  - Navigate one fold down
     zk  - Navigate one fold up
 
-    NERDTree:
+.B  NERDTree:
     m   - Show NERDTree Menu
 
-    Change indentation:
+.B  Change indentation:
     :help <
 
-    Swap two visual selections:
+.B  Swap two visual selections:
     :help exchange
 
-    Norm command:
+.B  Norm command:
     :.,$ norm A/append/some/text/to/all/lines
     :.,$ norm I/insert/some/text/to/all/lines
     :'<,'> norm A/append/some/text/to/visual/selection
     :'<,'> norm I/insert/some/text/to/visual/selection
 
-    Neat things:
+.B  Neat things:
     :'<,'> !shuf        <- Shuffles lines in visual selection
     :13,37 !shuf        <- Shuffles lines 13-37
+    :'<,'> !tac         <- Reverses lines in visual selection
+    :13,37 !tac         <- Reverses lines 13-37
 
-[01;37mReplace all underscores with spaces [22;37m
+
+.SH Replace all underscores with spaces
 
   for FILE in *; do mv $FILE "`echo $FILE | tr '_' ' '`"; done
 
-[01;37mExport all markdown files to pdf with pandoc
-and put them in a zip archive [22;37m
+.SH Export all markdown files to pdf with pandoc and put them in a zip archive
 
   OUT_FOLD=/tmp/somefolder
   for FILE in *.md; do
@@ -96,20 +104,20 @@ and put them in a zip archive [22;37m
   done
   zip -r $OUT_FOLD.zip $OUT_FOLD
 
-[01;37mCreate ssh tunnel [22;37m
+.SH Create ssh tunnel
 
   ssh -f host@some.domain.com -L <local_port>/localhost/<remote_port> -N
 
-[01;37mGet aggregate disk usage for a directory [22;37m
+.SH Get aggregate disk usage for a directory
   du -ch some_dir | grep total
 
-[01;37mRepair corrupted drive[22;37m
+.SH Repair corrupted drive
   # Decrypt any encrypted drives
   udisksctl unlock -b /dev/sda1
   # Run fsck for each of the affected partitions
   fsck -y /dev/sda1
 
-[01;37mQtCreator[22;37m
+.SH QtCreator
 
   CTRL+E, 0           -> Remove current split
         , 2           -> Split
@@ -129,15 +137,15 @@ and put them in a zip archive [22;37m
   CTRL+Shift+Return   -> Insert line above current
   CTRL+ALT+Shift+C    -> Collapse all
 
-[01;37mMerge multiple PDFs into one [22;37m
-  pdftk doc1.pdf doc2.pdf cat output doc12.pdf 
+.SH Merge multiple PDFs into one
+  pdftk doc1.pdf doc2.pdf cat output doc12.pdf
 
-[01;37mGeneral [22;37m
+.SH General
   snap - AKA Ubuntu store (keep forgetting the name of this...)
   ibus-setup - For changing kbd layout in xmonad
   sudo depmod -a # Reload kernel driver to fix usb bluetooth device
 
-[01;37mEncrypted drives [22;37m
+.SH Encrypted drives
   - Partition the drives using luks.
   - Install dropbear to enable remotely unlocking main drive
     - sudo apt-get install dropbear-initramfs
