@@ -156,6 +156,21 @@ function avenv() {
     fi
 }
 
+function gavenv() {
+    GLOBAL_PY_ENV="${XDG_DATA_HOME:-$HOME/.local/share/python-env}"
+    if [ ! -d $GLOBAL_PY_ENV ]; then
+        echo "Unable to detect installed global python-env. Looking in: $GLOBAL_PY_ENV"
+        echo "Would you like to create it? [Y/N]: "
+        read ans
+        case $ans in
+            y|Y) virtualenv -p python3 "$GLOBAL_PY_ENV";;
+            *) echo "Aborting!"; return;;
+        esac
+    fi
+
+    source "$GLOBAL_PY_ENV/bin/activate"
+}
+
 src_if_exists "$HOME/.aliases"
 src_if_exists "$HOME/.paths"
 src_if_exists "$HOME/.env"
