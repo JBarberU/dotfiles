@@ -1,7 +1,7 @@
 # Noise Linux
 *~
-
 *.ui.autosave
+
 # C++ objects and libs
 *.slo
 *.lo
@@ -21,6 +21,7 @@
 moc_*.cpp
 qrc_*.cpp
 *-?build-?*[Q,q][T,t]
+CMakeLists.txt.user*
 
 # Visual Studio
 qtclient/project/GeneratedFiles/
@@ -55,11 +56,18 @@ cabal.sandbox.config
 /db/*.sqlite3-journal
 /log/*.log
 /tmp
-CMakeLists.txt.user
 
 # Python
 *.pyc
 .ropeproject
+
+# C/C++, build systems
 compile_commands.json
 build/
 .cache
+
+# GDB
+my_breaks
+.gdb_history
+
+# New Additions, need to get organized before committing
