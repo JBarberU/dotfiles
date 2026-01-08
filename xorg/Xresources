@@ -6,6 +6,9 @@ URxvt*saveLines:    10000
 URxvt*font:              xft:DejaVu Sans Mono for Powerline:pixelsize=12:antialias=true:hinting=true
 URxvt*boldFont:          xft:DejaVu Sans Mono for Powerline:bold:pixelsize=12:antialias=true:hinting=true
 
+! Hide dead-key XIM pre-edit text
+URxvt*preeditType: none
+
 ! Gruvbox colors
 ! hard contrast: *background: #1d2021
 URxvt*background: #282828
