@@ -231,6 +231,7 @@ plugins=(
     rust
     rustup
     tmux
+    vi-mode
     web-search
     zsh-bitbake
     zsh-justfile
