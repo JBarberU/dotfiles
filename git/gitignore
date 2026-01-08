@@ -70,4 +70,7 @@ build/
 my_breaks
 .gdb_history
 
+# Rust
+target/
+
 # New Additions, need to get organized before committing
