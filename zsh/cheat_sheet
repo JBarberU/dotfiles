@@ -166,3 +166,21 @@
   - Add dropboar config settings to /etc/dropbear/initramfs/dropbear.conf, like:
     - DROPBEAR_OPTIONS="-I 180 -j -k -p 2222 -s -c cryptroot-unlock"
   - Run sudo update-initramfs -u -v
+
+.SH General Terminal
+
+.B  Movement
+    Ctrl-F     - Move forwards
+    Ctrl-B     - Move backwards
+    Alt-F      - Move forwards one word
+    Alt-B      - Move backwards one word
+    Ctrl-A     - Move to beginning of line
+    Ctrl-E     - Move to end of line
+
+.B  Delete text
+    Ctrl-K     - Delete from cursor to end of line
+    Alt-D      - Delete from cursor to end of the word
+    Ctrl-W     - Delete from cursor to previous whitespace
+
+.B  Paste text
+    Ctrl-y     - Yank the most recently removed text back into buffer at cursor
