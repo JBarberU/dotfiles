@@ -241,6 +241,10 @@ case "$(uname)" in
   "Darwin") plugins=($plugins brew);;
 esac
 
+# vi-mode
+# Add <ESC> . to insert last argument (default in emacs_mode)
+bindkey -M viins '\e.' insert-last-word
+
 source $ZSH/oh-my-zsh.sh
 eval "$(atuin init zsh)"
 
