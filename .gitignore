@@ -23,3 +23,5 @@ vim/vim/autoload
 vim/vim/syntax
 
 *.pyc
+
+hypr/per_host.lua
