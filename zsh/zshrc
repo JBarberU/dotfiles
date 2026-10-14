@@ -230,6 +230,7 @@ plugins=(
     rails
     rust
     rustup
+    ssh-agent
     tmux
     vi-mode
     web-search
