@@ -20,6 +20,8 @@ hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(p.menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + B", hl.dsp.layout("togglesplit"))    -- dwindle only
 
+hl.bind(mainMod .. " + TAB", hl.dsp.window.cycle_next())
+
 -- Copy/pasta
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
