@@ -16,7 +16,7 @@ hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/de
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(p.fileManager))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd(p.lock))
-hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(p.menu))
+hl.bind(mainMod .. " + SHIFT + space", hl.dsp.exec_cmd(p.menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + B", hl.dsp.layout("togglesplit"))    -- dwindle only
 

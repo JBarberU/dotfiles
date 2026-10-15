@@ -4,10 +4,10 @@
 
 hl.config({
     input = {
-        kb_layout  = "us",
-        kb_variant = "dvorak-intl",
+        kb_layout  = "us,us",
+        kb_variant = "dvorak,dvorak-intl",
         kb_model   = "",
-        kb_options = "",
+        kb_options = "grp:win_space_toggle",
         kb_rules   = "",
 
         follow_mouse = 1,
