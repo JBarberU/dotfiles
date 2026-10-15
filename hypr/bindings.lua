@@ -6,6 +6,7 @@ local p = require "programs"
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
+-- Curated
 -- Example binds, see https://wiki.hypr.land/configuring/core/binds/ for more
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(p.terminal))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd(p.browser))
@@ -13,11 +14,13 @@ local closeWindowBind = hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close()
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(p.fileManager))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd(p.lock))
 hl.bind(mainMod .. " + space", hl.dsp.exec_cmd(p.menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mainMod .. " + B", hl.dsp.layout("togglesplit"))    -- dwindle only
 
+-- Copy/pasta
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))

@@ -8,5 +8,6 @@ M.terminal    = "urxvt"
 M.fileManager = "nautilus"
 M.menu        = "rofi -show combi -combi-modi \"run,drun\" -modi combi -matching fuzzy"
 M.browser     = "firefox"
+M.lock        = "hyprlock"
 
 return M
