@@ -26,6 +26,7 @@ class Recipe:
         self.verbose = verbose
 
         self.binaries = []
+        self.cargo_binaries = []
         self.callbacks = []
         self.copies = []
         self.custom_commands = []
@@ -69,6 +70,14 @@ class Recipe:
         else:
             raise Exception('Expected list or string')
 
+    def install_cargo_binary(self, binaries):
+        if isinstance(binaries, str):
+            self.rust_binaries.append(binaries)
+        elif isinstance(binaries, list):
+            self.rust_binaries + binaries
+        else:
+            raise Exception('Expected list or string')
+
     def clone(self, repo, path):
         self.create_custom_commands([
             'sh', '-c', f'git clone {repo} {path}'
@@ -84,6 +93,7 @@ class Recipe:
         '''Print what would be done
         '''
         print('Installing binaries:\n'  + ''.join('- ' + str(v) + '\n' for v in self.binaries))
+        print('Installing cargo binaries:\n'  + ''.join('- ' + str(v) + '\n' for v in self.cargo_binaries))
         print('Copying:\n'              + ''.join('- ' + str(v) + '\n' for v in self.copies))
         print(f'Running {len(self.callbacks)} callbacks')
         print('Running commands:\n'              + ''.join('- ' + str(v) + '\n' for v in self.custom_commands))
@@ -99,6 +109,20 @@ class Recipe:
             run_command(
                 cmd=['apt-get', 'install'] + self.binaries,
                 needs_elevation=True,
+                verbose=self.verbose
+            )
+
+        if self.cargo_binaries:
+            if hasnt_binary('cargo'):
+                run_command(
+                    cmd=['sh', '-c', '''
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+            rustup update''']
+                )
+
+            run_command(
+                cmd=['cargo', 'install'] + self.cargo_binaries,
+                needs_elevation=false,
                 verbose=self.verbose
             )
 
