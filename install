@@ -207,6 +207,7 @@ def install_rando_tools(r: Recipe):
         'fuse',         # needed for running AppImages
         'nala',         # apt frontend
     ])
+    r.cargo_binaries(['bottom'])
 
 def download_file(url, path):
     request = urllib.request.Request(
