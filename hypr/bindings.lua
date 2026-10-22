@@ -14,10 +14,12 @@ local closeWindowBind = hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close()
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(p.fileManager))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(p.screenshot.all_windows))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd(p.screenshot.rectangle))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd(p.lock))
 hl.bind(mainMod .. " + SHIFT + space", hl.dsp.exec_cmd(p.menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+--hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + B", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 hl.bind(mainMod .. " + TAB", hl.dsp.window.cycle_next())
