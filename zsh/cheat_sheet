@@ -79,6 +79,15 @@
 .B  Swap two visual selections:
     :help exchange
 
+.B  Substitute with captures
+    Pose you have a the following sprinkled in a file:
+        some_thing: var(foo_bar);
+    Which you want to instead be:
+        some_thing: @foo_bar;
+
+    Then you could use:
+    :s;\\(var(\\)\\(.*\\)\\()\\);@\\2;g
+
 .B  Norm command:
     :.,$ norm A/append/some/text/to/all/lines
     :.,$ norm I/insert/some/text/to/all/lines
