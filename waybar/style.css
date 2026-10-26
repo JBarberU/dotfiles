@@ -84,6 +84,15 @@ M.gruvbox_dark = {
     background-color: #3c3836;
 }
 
+tooltip {
+    background-color: #3c3836;
+    color: #fbf1c7;
+}
+
+tooltip label {
+    color: #fbf1c7;
+}
+
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
     background-color: #f53c3c;
