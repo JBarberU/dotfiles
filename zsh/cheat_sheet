@@ -154,6 +154,14 @@
   ibus-setup - For changing kbd layout in xmonad
   sudo depmod -a # Reload kernel driver to fix usb bluetooth device
 
+.SH bluetoothctl primer
+  > scan on
+    # bluetoothctl starts spitting out BT-MAC addresses of discovered devices
+  > scan off
+  > pair <BT-MAC>     # start pairing "some device"
+  > connect <BT-MAC>  # connect to "some device"
+  > trust <BT-MAC>    # allow automatic reconnect when "some device" powers on
+
 .SH Encrypted drives
   - Partition the drives using luks.
   - Install dropbear to enable remotely unlocking main drive
