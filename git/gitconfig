@@ -20,6 +20,7 @@
     d = diff
     dc = diff --cached
     pom = push origin main
+    release = "!f() { [ -n \"$1\" ] || { echo \"usage: git release <version>\"; return 1; }; v=\"${1#v}\"; git tag -a \"v$v\" -m \"Release v$v\" && echo \"Created tag v$v\"; }; f"
 
 [format]
     pretty = %C(blue)%h %C(red)%ad %C(green)%an: %C(magenta)%s %C(white)%b
